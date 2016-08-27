@@ -1,0 +1,85 @@
+
+.right .content  .img {
+	width: 800px;
+	padding: 30px;
+	height: 200px;
+	display: block;
+}
+
+.right .content {
+	width: 900px;
+	height: auto;
+}
+
+.right .content .span {
+	width: 800px;
+	display: block;
+	height: 30px;
+	opacity: 0.4;
+	position: relative;
+	top: -90px;
+	left: 30px;
+}
+
+.right .content  img {
+	display: block;
+	width: 120px;
+	height: 150px
+}
+
+.right .content  .text {
+	width:260px;
+	float:right;
+	display: block;
+	font-size: 14px;
+	line-height: 26px;
+	margin-left: 26px;
+}
+
+.right .content .text em {
+	font-size: 16px;
+}
+
+.right .content .tcon {
+	width: 560px;
+	float: left;
+}
+
+.right .content .tcons1, .right .content .tcons2 {
+	margin: 10px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	float: left;
+}
+
+.right .content .tcons2 {
+	display: block;
+	position: relative;
+	top: 40px;
+}
+
+.right .content .nright {
+	width: 260px;
+	float: left;
+	margin-left: 10px;
+}
+
+.right .content .nright img {
+	width: 90px;
+	height: 100px;
+}
+
+.right .content .nright em {
+	font-size: 14px;
+	color: blue;
+}
+
+.right .content .nright span {
+	font-size: 13px;
+	line-height: 20px;
+	color: #999;
+}
+
+.right .content .nright a {
+	margin: 10px 20px;
+}

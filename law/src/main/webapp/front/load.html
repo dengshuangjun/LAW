@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户登录</title>
+<link rel="shortcut icon" href="images/logo_ .png">
+<link href="css/load.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.9.1.js" charset="utf-8"></script>
+<style>
+	.content{
+		height:380px;
+	}
+	.content .span{
+		display:inline-block;
+        position:relative;
+        width:137px;
+        height: 36px;
+		line-height:36px;
+		text-align:center;
+        border-radius:3px;
+        background:#006699;
+		color:#FFF;
+    }
+	.content .span:hover{
+		cursor:pointer;
+	}
+    .content .span:before{
+        content: ""; 
+        display: block;
+        position: absolute; 
+        top:36px;
+		right:48px;
+        border:6px transparent solid;
+        border-top-color:#006699;
+        z-index:1
+	}
+	.content .span2 a{
+		color:#333;
+		line-height:36px;
+		height: 36px;
+		line-height:36px;
+		width:137px;
+		text-decoration:none;
+		text-align:center;
+		display:inline-block;
+	}
+
+</style>
+<script type="text/javascript">
+$(function(){
+	 $('body').keypress(function(event){
+		 if(event.which==13){
+			generalLogin();
+		 }
+	 });
+});
+
+//base64加密开始
+var keyStr = "ABCDEFGHIJKLMNOP" + "QRSTUVWXYZabcdef" + "ghijklmnopqrstuv"
+		+ "wxyz0123456789+/" + "=";		
+function encode64(input) {
+	var output = "";
+	var chr1, chr2, chr3 = "";
+	var enc1, enc2, enc3, enc4 = "";
+	var i = 0;
+	do {
+		chr1 = input.charCodeAt(i++);
+		chr2 = input.charCodeAt(i++);
+		chr3 = input.charCodeAt(i++);
+		enc1 = chr1 >> 2;
+		enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+		enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+		enc4 = chr3 & 63;
+		if (isNaN(chr2)) {
+			enc3 = enc4 = 64;
+		} else if (isNaN(chr3)) {
+			enc4 = 64;
+		}
+		output = output + keyStr.charAt(enc1) + keyStr.charAt(enc2)
+				+ keyStr.charAt(enc3) + keyStr.charAt(enc4);
+		chr1 = chr2 = chr3 = "";
+		enc1 = enc2 = enc3 = enc4 = "";
+	} while (i < input.length);
+
+	return output;
+}
+</script>
+</head>
+<body>
+    <div class="content">
+    	<div class="qiehuan">
+            <span class="span">用户登录</span><span class="span2"><a href="submit.html">用户注册</a></span>
+        </div>
+        <form action="###" method="post">
+        	<p>用户名:</p>
+    		<input id="usname" type="text" placeholder="请输入用户名/邮箱/">  
+        	<p>密码:</p>
+        	<input id="upwd" type="password" placeholder="请输入密码" id="psd"/><br>
+            <input type="button" value="登录"  class="btn" id="btn"/>
+        </form> 
+    </div>
+</body>
+</html>
