@@ -109,7 +109,7 @@
 					<li><a href="###"><img src="images/schoolDynamic.jpg"
 							width="130px" height="80px" style="margin: 10px;"></a> <span
 						class="span1"><a href="#">生活设施不安全致害学生的侵...</a></span> <span
-						class="span2">&nbsp;裁判要旨：校园伤害案件涉及到未成年人、监护人、学校等多方主体，如何确定这类案件的...<a
+						class="span2">&nbsp;校园伤害案件涉及到未成年人、监护人、学校等多方主体，如何确定这类案件的...<a
 							href="#">[详情]</a></span></li>
 				</ul>
 				<ul class="info">
