@@ -44,7 +44,7 @@
 	<div id="nav">
 		<div class="nav_page">
 			<ul>
-				<li><a href="#">首页</a></li>
+				<li><a href="index.jsp">首页</a></li>
 				<li><a href="wave/wave.jsp">智慧电波</a>
 					<ul class="ull">
 						<li><a href="wave/wave.jsp">校园动态</a></li>
