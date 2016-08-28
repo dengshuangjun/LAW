@@ -11,7 +11,6 @@
 }
 
 .model .lan p {
-	font-size: 14px;
 	margin: 10px 5px;
 }
 
@@ -201,7 +200,7 @@
 	font-size: 22px;
 	width: 866px;
 	display: block;
-	margin: 40px 0 60px 0;
+	margin: 20px 0 60px 0;
 	color: #00F;
 }
 
@@ -299,11 +298,23 @@
 	margin: 0 15px 10px 35px;
 }
 .model .content .right .new .people_panel{
+	margin-top:20px;
+	min-height:180px;
 	width: 90%;
 	border-radius:4px;
 	padding:15px;
-	border: 1px solid #00f; 
+	border: 1px solid #eee; 
+	
 }
+.model .content .right .new .people_panel img{
+	border-radius:4px;
+	width:18%; height: 180px;display:inline; float:  left;
+}
+.model .content .right .new .people_panel .peopleInfo{
+	width:70% ;display: inline-block; padding:0 20px; height: 100%; clear:both;
+}
+
+
 .model .content .right .new ul li b, .model .content .right .newss ul li b
 	{
 	font-size: 18px;

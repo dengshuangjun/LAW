@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>法治名人</title>
+<title>社会聚焦</title>
 <meta name="keywords"
 	content="法律智慧网,法律咨询,法律咨询网,法律在线,法律知识,法律援助,律师在线,中国法律,中法网">
 <meta name="description"
@@ -14,8 +14,13 @@
 <link rel="stylesheet" type="text/css" href="../css/CssReset.css">
 <link rel="stylesheet" type="text/css" href="../css/index.css">
 <link rel="stylesheet" type="text/css" href="../css/model.css">
-<link rel="stylesheet" type="text/css" href="../css/pageCode.css" />
-<link rel="stylesheet" type="text/css" href="../css/art.css">
+<link rel="stylesheet" type="text/css" href="../css/wavePageCode.css">
+<link rel="stylesheet" type="text/css" href="../css/art.css" />
+
+<script src="../js/time.js"></script>
+<script src="../js/jquery-1.9.1.js"></script>
+
+
 </head>
 
 <body>
@@ -48,11 +53,11 @@
 		<div class="nav_page">
 			<ul>
 				<li><a href="../index.jsp">首页</a></li>
-				<li><a href="../wave/wave.jsp">智慧电波</a>
+				<li><a href="wave.jsp">智慧电波</a>
 					<ul class="ull">
-						<li><a href="../wave/wave.jsp">校园动态</a></li>
-						<li><a href="../wave/wave2.jsp">社会聚焦</a></li>
-						<li><a href="../wave/wave3.jsp">新闻调查</a></li>
+						<li><a href="wave.jsp">校园动态</a></li>
+						<li><a href="wave2.jsp">社会聚焦</a></li>
+						<li><a href="wave3.jsp">新闻调查</a></li>
 					</ul></li>
 				<li><a href="../art/art.jsp">智慧艺苑</a>
 					<ul class="ull">
@@ -62,14 +67,14 @@
 						<li><a href="../art/art4.jsp">法治书画</a></li>
 						<li><a href="../art/art5.jsp">法治小说</a></li>
 					</ul></li>
-				<li><a href="people.jsp">智慧私塾</a>
+				<li><a href="../school/people.jsp">智慧私塾</a>
 					<ul class="ull">
-						<li><a href="people.jsp">法治名人</a></li>
-						<li><a href="story.jsp">法治故事</a></li>
-						<li><a href="story2.jsp">法治典故</a></li>
-						<li><a href="saying.jsp">法治名言</a></li>
-						<li><a href="secret.jsp">法治灯谜</a></li>
-						<li><a href="words.jsp">法治楹联</a></li>
+						<li><a href="../school/people.jsp">法治名人</a></li>
+						<li><a href="../school/story.jsp">法治故事</a></li>
+						<li><a href="../school/story2.jsp">法治典故</a></li>
+						<li><a href="../school/saying.jsp">法治名言</a></li>
+						<li><a href="../school/secret.jsp">法治灯谜</a></li>
+						<li><a href="../school/words.jsp">法治楹联</a></li>
 					</ul></li>
 				<li><a href="../wisdom/wisdom.jsp">智慧讲堂</a>
 					<ul class="ull">
@@ -89,21 +94,18 @@
 	</div>
 	<div class="model">
 		<div class="lan">
-			<p>您现在正在浏览:智慧私塾 > 法治名人</p>
+			<p>您现在正在浏览:智慧电波 >> 社会聚焦</p>
 		</div>
 		<div class="content">
 			<div class="left">
 				<div class="title">
-					<p>智慧私塾</p>
+					<p>智慧电波</p>
 				</div>
 				<div class="classify">
 					<ul>
-						<li class="target"><a href="people.jsp">法治名人</a></li>
-						<li><a href="story.jsp">法治故事</a></li>
-						<li><a href="story2.jsp">法治典故</a></li>
-						<li><a href="saying.jsp">法治名言</a></li>
-						<li><a href="secret.jsp">法治灯谜</a></li>
-						<li><a href="words.jsp">法治楹联</a></li>
+						<li><a href="wave.jsp">校园动态</a></li>
+						<li><a href="wave2.jsp">社会聚焦</a></li>
+						<li class="target"><a href="wave3.jsp">新闻调查</a></li>
 					</ul>
 					<ul class="ad">
 						<li><img src="../images/ad.png"></li>
@@ -114,36 +116,34 @@
 				</div>
 			</div>
 			<div class="right">
-				<div class="head"></div>
-				<div class="new">
-					<span>法治名人 </span>
-					<div class="people_panel">
-						<img src="../../../pics/147089490767420268.jpg"/>
-						<div class="peopleInfo">
-							<h2>名字叫什么</h2>
-							<p>的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
-								的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
-								的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
-								
-							</p>
-							<a href="#" style="margin:80%;">查看更多>></a>
+				<div class="head">
+					<span style="color: white; margin-left: 5px; padding-top: 10px;">校园动态</span>
+				</div>
+				<div class="news">
+					<div class="newsbox">
+						<div class="new_left">
+							<ul>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li>此处空一行</li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+								<li><a href="javascript:newsMore(1159)">生活设施不安全致害学生的侵权案件</a></li>
+							</ul>
+							<p style="text-align: center; margin-top: 10px;">
+							<div class="tcdPageCode"></div>
 						</div>
-					</div>
-					
-					<div class="people_panel">
-						<img src="../../../pics/147089490767420268.jpg"/>
-						<div class="peopleInfo">
-							<h2>名字叫什么</h2>
-							<p>的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
-								的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
-								的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
-								
-							</p>
-							<a href="#" style="margin:80%;">查看更多>></a>
+						<div class="new_right">
+							<img src="../images/cui.png" class="img1"> <img
+								src="../images/icon.jpg" class="img2">
 						</div>
 					</div>
 				</div>
-				<div class="tcdPageCode"></div>
 			</div>
 		</div>
 	</div>
@@ -176,7 +176,6 @@
 						src="../images/table_time.jpg" title="时代报告"></a></td>
 			</tr>
 		</table>
-	</div>
 	</div>
 	<!--E=内容-->
 	<!--S=友情链接-->
@@ -216,10 +215,7 @@
 		<p>业务信箱： 电话：010-110120023 传真：010-63394466</p>
 		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015 制作单位：源辰信息有限公司</p>
 	</div>
-	<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
 	<script src="../js/jquery.page.js"></script>
-	<script src="../js/schoolindex.js"></script>
-	<script src="../js/time.js"></script>
-
+	<script src="../js/wave.js"></script>
 </body>
 </html>
