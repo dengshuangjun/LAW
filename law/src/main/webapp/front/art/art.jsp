@@ -114,6 +114,57 @@
 			<div class="right">
 				<div class="head"></div>
 				<div class="news" id="newsContent">
+					<div class="special">
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1024)"><img title="点击播放详情"
+							src="../../../pics//147046909158628934.jpg" /></a>
+						<p>测试测试嘛</p>
+					</div>
 					<div>
 						<a href="javascript:showMore(1024)"><img title="点击播放详情"
 							src="../../../pics//147046909158628934.jpg" /></a>

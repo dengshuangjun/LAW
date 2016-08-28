@@ -137,6 +137,36 @@
 							src="../../../pics/147089437004718586.jpg" /></a>
 						<p>法制视频测试4</p>
 					</div>
+					<div class="special">
+						<a href="javascript:showMore(1078)"><img title="点击播放详情"
+							src="../../../pics/147089437004718586.jpg" /></a>
+						<p>法制视频测试4</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1078)"><img title="点击播放详情"
+							src="../../../pics/147089437004718586.jpg" /></a>
+						<p>法制视频测试4</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1078)"><img title="点击播放详情"
+							src="../../../pics/147089437004718586.jpg" /></a>
+						<p>法制视频测试4</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1078)"><img title="点击播放详情"
+							src="../../../pics/147089437004718586.jpg" /></a>
+						<p>法制视频测试4</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1078)"><img title="点击播放详情"
+							src="../../../pics/147089437004718586.jpg" /></a>
+						<p>法制视频测试4</p>
+					</div>
+					<div>
+						<a href="javascript:showMore(1078)"><img title="点击播放详情"
+							src="../../../pics/147089437004718586.jpg" /></a>
+						<p>法制视频测试4</p>
+					</div>
 				</div>
 				<div class="pageDiv">
 					<div class="tcdPageCode"></div>

@@ -90,7 +90,6 @@
 	border:#CCC 1px dashed;
 	border-radius:5px;
 	width:850px;
-	height:590px;
 	float:left;
 	margin-left:7px;
 }
@@ -152,15 +151,21 @@
 /* deng修改的部分页面css */
 
 .model .content .right .news div{
-	margin-left:33px;
-	margin-top:40px;
+	margin-left:15px;
+	margin-top:20px;
 	float:left;
-	width:380px;
+}
+
+.model .content .right .news .special{
+	width:45%;
+	height:240px;
+}
+.model .content .right .news .special img{
 	height:240px;
 }
 .model .content .right .news div img{
-	width:380px;
-	height:240px;
+	width:100%;
+	height:120px;
 }
 .model .content .right .pageDiv{
 	display:block;

@@ -117,29 +117,16 @@
 				<div class="head"></div>
 				<div class="new">
 					<span>法治名人 </span>
-					<ul id="newsContent">
-						<li><a style="color: black;" href="javascript:showMore(1201)"><b>sfasfsdaf</b>
-								<div>
-									<p>
-										fdsafdlkfjsdlkafds;f dslf df的撒发送快捷方式的分厘卡圣诞节方法就是打开房间都顺利康复的身份第三方<br />
-									</p>
-								</div></a></li>
-						<img src="../../../pics/147219604761962707.jpg ">
-						<li><a style="color: black;" href="javascript:showMore(1201)"><b>sfasfsdaf</b>
-								<div>
-									<p>
-										fdsafdlkfjsdlkafds;f dslf df的撒发送快捷方式的分厘卡圣诞节方法就是打开房间都顺利康复的身份第三方<br />
-									</p>
-								</div></a></li>
-						<img src="../../../pics/147219604761962707.jpg ">
-						<li><a style="color: black;" href="javascript:showMore(1201)"><b>sfasfsdaf</b>
-								<div>
-									<p>
-										fdsafdlkfjsdlkafds;f dslf df的撒发送快捷方式的分厘卡圣诞节方法就是打开房间都顺利康复的身份第三方<br />
-									</p>
-								</div></a></li>
-						<img src="../../../pics/147219604761962707.jpg ">
-					</ul>
+					<div class="people_panel">
+						<img src="../../../pics/147089490767420268.jpg" style="width:20%; height: 200px;display:inline;"/>
+						<div class="peopleInfo" style="width:70% ;display: inline-block; padding: 20px; height: 100%">
+							<h2>名字叫什么</h2>
+							<p>的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
+								的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
+								的萨芬斯蒂芬地方撒反对撒阿凡达岁范德萨分的萨芬的萨芬的萨芬上单肥第三方的身份的萨芬的萨芬的萨芬上单肥是大幅度释放的萨芬的萨芬的萨芬
+							</p>
+						</div>
+					</div>
 				</div>
 				<div class="tcdPageCode"></div>
 			</div>

@@ -150,7 +150,6 @@
 
 .model .content .right .news, .model .content .right .new {
 	width: 866px;
-	height: 850px;
 	float: left;
 }
 
@@ -299,7 +298,12 @@
 	border-bottom: #999 1px dotted;
 	margin: 0 15px 10px 35px;
 }
-
+.model .content .right .new .people_panel{
+	width: 90%;
+	border-radius:4px;
+	padding:15px;
+	border: 1px solid #00f; 
+}
 .model .content .right .new ul li b, .model .content .right .newss ul li b
 	{
 	font-size: 18px;
@@ -320,9 +324,7 @@
 }
 
 .model .content .right .newss ul .lii {
-	width: 800px;
-	margin-left: 40px;
-	margin-bottom: 20px;
+	margin:10px 40px;
 	padding: 5px;
 	border-bottom: #999 1px dotted;
 }
@@ -331,7 +333,8 @@
 	border: #CCC 1px dashed;
 	border-radius: 5px;
 	width: 850px;
-	padding-top: 40px;
+	padding-top: 20px;
+	padding-bottom:20px;
 	float: left;
 	margin: -20px 0 0 7px;
 }

@@ -129,8 +129,9 @@
 						
 					</div> 
 				</div>
+				<div class="pageDiv"><div class="tcdPageCode"></div></div>
 			</div>
-			<div class="pageDiv"><div class="tcdPageCode"></div></div>
+			
 		</div>
 	</div>
 	<div class="content_footer">

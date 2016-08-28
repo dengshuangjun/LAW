@@ -116,7 +116,7 @@
 			<div class="right">
 				<div class="head"></div>
 				<div class="news" id="newsContent">
-					<div>
+					<div  class="special">
 							<a href="javascript:showMore(1112)"><img
 								title="点击查看详情" src="../../../pics/147089490767420268.jpg" /></a>
 							<p>法制视频测试4</p>
