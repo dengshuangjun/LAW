@@ -23,12 +23,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ConnTest {
 	
 	@Autowired
-	//private SqlSessionFactory sqlSessionFactory;
 	private DataSource dataSource;
 
 	@Test
 	public void testConn() {
-		//Connection con=sqlSessionFactory.openSession().getConnection();
 		Connection con=null;
 		try {
 			con = dataSource.getConnection();
