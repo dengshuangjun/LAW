@@ -1,7 +1,7 @@
 $(function() {
 	$('#center_content').tabs('add',{  
 	    title:'欢迎界面',  
-	    href:'welcome.html'
+	    href:'back/manager/welcome.html'
 	});  
 	
 	$('.easyui-tree').tree({
@@ -15,7 +15,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'主题换肤',  
 					    closable:true, 
-					    href:'theme.html'
+					    href:'back/manager/theme.html'
 					});
 				}
 				
@@ -26,7 +26,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'页脚信息',  
 					    closable:true, 
-					    href:'footInfo.html'
+					    href:'back/manager/footInfo.html'
 					});
 				}
 				
@@ -37,7 +37,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'友情链接',  
 					    closable:true, 
-					    href:'friendURL.html'
+					    href:'back/manager/friendURL.html'
 					});
 				}
 				
@@ -48,7 +48,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'主页大图',  
 					    closable:true, 
-					    href:'mainPic.html'
+					    href:'back/manager/mainPic.html'
 					});
 				}
 				
@@ -59,7 +59,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'关于我们',  
 					    closable:true, 
-					    href:'about.html'
+					    href:'back/manager/about.html'
 					});
 				}
 				
@@ -70,7 +70,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'智慧电波',  
 					    closable:true, 
-					    href:'waves.html'
+					    href:'back/manager/waves.html'
 					});
 				}
 				
@@ -81,7 +81,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'智慧艺苑',  
 					    closable:true, 
-					    href:'art.html'
+					    href:'back/manager/art.html'
 					});
 				}
 				
@@ -92,7 +92,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'智慧私塾',  
 					    closable:true, 
-					    href:'privateSchool.html'
+					    href:'back/manager/privateSchool.html'
 					});
 				}
 				
@@ -103,7 +103,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'智慧讲堂',  
 					    closable:true, 
-					    href:'classroom.html'
+					    href:'back/manager/classroom.html'
 					});
 				}
 				
@@ -114,7 +114,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'智慧助手',  
 					    closable:true, 
-					    href:'help.html'
+					    href:'back/manager/help.html'
 					});
 				}
 				
@@ -125,7 +125,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'普通用户管理',  
 					    closable:true, 
-					    href:'generalUser.html'
+					    href:'back/manager/generalUser.html'
 					});
 				}
 				
@@ -136,7 +136,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'管理员管理',  
 					    closable:true, 
-					    href:'admin.html'
+					    href:'back/manager/admin.html'
 					});
 				}
 				
@@ -147,7 +147,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'留言回复',  
 					    closable:true, 
-					    href:'message.html'
+					    href:'back/manager/message.html'
 					});
 				}
 				
@@ -158,7 +158,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'评论审核',  
 					    closable:true, 
-					    href:'reviewAudit.html'
+					    href:'back/manager/reviewAudit.html'
 					});
 				}
 				
