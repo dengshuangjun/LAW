@@ -41,7 +41,7 @@
 	<!-- 动态也页面请求处理类 (响应视图配置) -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/page/" />
+		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 	<!-- 邮件发送处理bean -->
