@@ -28,6 +28,7 @@ input, button {
 	padding:90px 70px 50px 70px;
 	background:rgba(40,57,101,.4);
 }
+.sign-in-htm .error{ color:#f00; text-align:center; clear:both; }
 .login-html .sign-in-htm,
 .login-html .sign-up-htm{
 	top:0;
@@ -42,6 +43,7 @@ input, button {
 	-webkit-transition:all .4s linear;
 	        transition:all .4s linear;
 }
+
 .login-html .sign-in,
 .login-html .sign-up,
 .login-form .group .check{
