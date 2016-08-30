@@ -37,6 +37,7 @@ public class BackUserHandler {
 	}
 
 
+
 	@RequestMapping("/generalUserlist")
 	public void listAll(PrintWriter out){
 		List<User> users = backUserService.findGeneralAll();
@@ -45,4 +46,5 @@ public class BackUserHandler {
 		out.flush();
 		out.close();
 	}
+
 }

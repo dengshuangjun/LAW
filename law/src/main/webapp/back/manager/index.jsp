@@ -6,7 +6,7 @@
 <base href="/law/">
 <meta charset="UTF-8">
 <title>法律网站_后台管理系统</title>
-<link rel="shortcut icon" href="back/images/logo_ .png">
+<link rel="shortcut icon" href="back/images/logo_.png">
 <link rel="stylesheet" type="text/css" href="back/css/easyui.css">
 <link rel="stylesheet" type="text/css" href="back/css/icon.css">
 <link rel="stylesheet" type="text/css" href="back/css/demo.css">
@@ -30,7 +30,7 @@
 			style="line-height: 60px; height: 60px; text-align: center; display: inline; float: left; font-size: 25px; padding-left: 20px;">法律智慧网_后台管理系统</span>
 		<div
 			style="height: 60px; float: right; padding: 0 20px; min-width: 200px;">
-			<span style="font-size: 20px; line-height: 60px;">欢迎您:管理员！！！</span>
+			<span style="font-size: 20px; line-height: 60px;">欢迎您:${user.usname}！！！</span>
 		</div>
 	</div>
 

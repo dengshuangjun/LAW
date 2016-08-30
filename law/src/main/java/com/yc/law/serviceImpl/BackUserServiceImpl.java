@@ -18,7 +18,13 @@ public class BackUserServiceImpl implements BackUserService {
 	
 	@Override
 	public User login(User user) {
-		return backUserMapper.findBackUserByNP(user);
+		try {
+			user.setUpwd(Encrypt.md5AndSha(user.getUpwd()));
+			return backUserMapper.findBackUserByNP(user);
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	@Override
