@@ -7,4 +7,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findBackUserByNP"  parameterType="User" resultType="User">
 		select * from law_user where usname=#{usname} and upwd=#{upwd}
 	</select>
+	
+	<select id="findGeneralUser" resultType="User">
+		select usid,usname,usex,uemail,picpath,tel,law_user_status,law_user_status_explain,area,register_time,birthday,
+		(select log_time from log where log.usid=law_user.usid) recentUseTime from law_user 
+		where role_id=(select role_id from role where role_name='用户')
+	</select>
 </mapper>

@@ -21,21 +21,21 @@
 					name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
 				<div class="login-form">
 					<div class="sign-in-htm">
-						<form method="post"  action="law/back/user/login">
+						<form method="post"  action="back/login">
 							<div class="group">
 								<label for="user" class="label">用户名</label> <input id="user"
-									type="text" class="input" name="usname">
+									type="text" class="input" name="usname" required="required"/>
 							</div>
 							<div class="group">
 								<label for="pass" class="label">密码</label> <input id="pass"
-									type="password" class="input" data-type="password" name="upwd">
+									type="password" class="input" data-type="password" name="upwd" required="required"/>
 							</div>
 							<div class="group">
 								<input id="check" type="checkbox" class="check" checked>
 								<label for="check"><span class="icon"></span>记住密码</label>
 							</div>
 							<div class="group">
-								<input type="submit" class="button" value="登陆">
+								<input type="submit" class="button" value="登陆"/>
 							</div>
 						</form>
 						<div class="error">${errorMsg }</div>

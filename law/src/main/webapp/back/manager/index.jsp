@@ -13,11 +13,19 @@
 <script type="text/javascript" src="back/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="back/js/jquery.min.js"></script>
 <script type="text/javascript" src="back/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="back/js/ajaxfileupload.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8"
+	src="ueditor/lang/zh-cn/zh-cn.js"></script>
 </head>
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false"
 		style="height: 60px; background: #B3DFDA; padding-left: 10px">
-		<img src="../images/logo_ .png" height="60px;" width="60px;"
+		<img src="back/images/logo_.png" height="60px;" width="60px;"
 			style="display: inline-block; float: left;" /> <span
 			style="line-height: 60px; height: 60px; text-align: center; display: inline; float: left; font-size: 25px; padding-left: 20px;">法律智慧网_后台管理系统</span>
 		<div
