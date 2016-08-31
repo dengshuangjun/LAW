@@ -1,5 +1,7 @@
 package com.yc.law.handler;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.yc.law.entity.User;
 import com.yc.law.service.BackUserService;
+import com.yc.law.util.Encrypt;
 
 @Controller
 @RequestMapping("/back")
@@ -15,7 +18,20 @@ import com.yc.law.service.BackUserService;
 public class BackUserHandler {
 	@Autowired
 	private BackUserService backUserService;
-
+	@Autowired
+	private User user;
+	
+	@PostConstruct
+	public void init(){
+		if(backUserService.findInitAdmin("admin")<=0){
+			user.setUsname("admin");
+			user.setUpwd(Encrypt.md5AndSha("admin"));
+			backUserService.insertInitAdmin(user);
+		}
+	}
+	
+	
+	//备注：登陆的日志记录没有写
 	@RequestMapping(value = "/login")
 	public String backLogin(User user, ModelMap map) {
 		System.out.println("backUser login..." + user);

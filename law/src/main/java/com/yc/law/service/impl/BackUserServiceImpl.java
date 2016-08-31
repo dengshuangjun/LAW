@@ -1,4 +1,4 @@
-package com.yc.law.serviceImpl;
+package com.yc.law.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,18 @@ public class BackUserServiceImpl implements BackUserService {
 			return null;
 		}
 		
+	}
+
+	@Override
+	public void insertInitAdmin(User user) {
+		System.out.println(user);
+		backUserMapper.insertInitAdmin(user);
+		
+	}
+
+	@Override
+	public int findInitAdmin(String uname) {
+		return backUserMapper.findInitAdmin(uname);
 	}
 
 }

@@ -6,4 +6,8 @@ public interface BackUserService {
 
 	User login(User user);
 
+	void insertInitAdmin(User user);
+
+	int findInitAdmin(String uname);
+
 }
