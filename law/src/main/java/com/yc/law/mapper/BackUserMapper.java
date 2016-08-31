@@ -8,6 +8,10 @@ public interface BackUserMapper {
 
 	User findBackUserByNP(User user);
 
+	void insertInitAdmin(User user);
+
+	int findInitAdmin(String uname);
+
 	List<User> findGeneralUser();
 
 }

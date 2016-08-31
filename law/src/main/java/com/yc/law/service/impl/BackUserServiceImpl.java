@@ -28,6 +28,18 @@ public class BackUserServiceImpl implements BackUserService {
 	}
 
 	@Override
+	public void insertInitAdmin(User user) {
+		System.out.println(user);
+		backUserMapper.insertInitAdmin(user);
+		
+	}
+
+	@Override
+	public int findInitAdmin(String uname) {
+		return backUserMapper.findInitAdmin(uname);
+	}
+
+	@Override
 	public List<User> findGeneralAll() {
 		return backUserMapper.findGeneralUser();
 	}
