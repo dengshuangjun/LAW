@@ -326,7 +326,7 @@ a:hover{
 	margin-top: 5px;
 }
 #link .contact ul li .weibo{
-	width: 90px;
+	width: 95px;
 	height: 27px;
 	display: inline-block;
 	background:url(../images/img.png);
@@ -370,7 +370,7 @@ a:hover{
 }
 
 .model .content .left  .classify  ul .target{
-	background: url(../images/jiantou.png) no-repeat 20px 5px;
+	background: url(../images/red.png) no-repeat 20px 5px;
 }
 
 /* 新添加 */

@@ -11,9 +11,9 @@
 	<meta name="description" content="法律智慧网是一家在线法律服务门户网站平台，律师在线解答法律咨询，为您提供一站式、便捷、高效的法律服务！">
 	<link rel="shortcut icon" href="../images/logo_ .png">
 	<link rel="stylesheet" type="text/css" href="../css/CssReset.css">
-	<link rel="stylesheet" type="text/css" href="../css/index.css">
 	<link rel="stylesheet" type="text/css" href="../css/model.css">
-	<link rel="stylesheet" type="text/css" href="../css/art.css"/>
+	<link rel="stylesheet" type="text/css" id="devIndexCss">
+	<link rel="stylesheet" type="text/css" id="devArtCss">
     <style>
 		.content .right span{
 			text-align: center;
@@ -247,6 +247,7 @@
 	<script src="../js/time.js"></script>
 	<script src="../js/jquery-1.9.1.js"></script>
 	<script src="../js/waveComment.js"></script>
+	<script type="text/javascript" src="../js/readDevCss.js"></script>
 </body>
 </html>
 

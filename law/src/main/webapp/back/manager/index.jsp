@@ -10,11 +10,13 @@
 <link rel="stylesheet" type="text/css" href="back/css/easyui.css">
 <link rel="stylesheet" type="text/css" href="back/css/icon.css">
 <link rel="stylesheet" type="text/css" href="back/css/demo.css">
+<link rel="stylesheet" type="text/css" href="back/css/theme.css">
 <script type="text/javascript" src="back/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="back/js/jquery.min.js"></script>
 <script type="text/javascript" src="back/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src=""></script>
 <script type="text/javascript" src="back/js/ajaxfileupload.js"></script>
+<script type="text/javascript" src="back/js/theme.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8"
