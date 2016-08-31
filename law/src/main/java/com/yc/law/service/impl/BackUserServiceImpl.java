@@ -1,4 +1,4 @@
-package com.yc.law.serviceImpl;
+package com.yc.law.service.impl;
 
 import java.util.List;
 
