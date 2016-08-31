@@ -12,7 +12,7 @@
 	content="法律智慧网是一家在线法律服务门户网站平台，律师在线解答法律咨询，为您提供一站式、便捷、高效的法律服务！">
 <link rel="shortcut icon" href="images/logo_ .png">
 <link rel="stylesheet" type="text/css" href="css/CssReset.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" id="cssLink">
 </head>
 <body>
 	<!--S=页面-->
@@ -202,6 +202,16 @@
 						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
 					</ul>
 				</div>
+				<div class="ulmain">
+					<ul>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+					</ul>
+				</div>
 				<div class="ulright">
 					<ul>
 						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
@@ -287,5 +297,7 @@
 	<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
 	<script src="js/radio.js" type="text/javascript"></script>
 	<script src="js/time.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/readCss.js"></script>
+	
 </body>
 </html>

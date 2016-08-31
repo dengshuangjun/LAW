@@ -5,10 +5,10 @@
 http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	
-	<context-param>
+	<!-- <context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring.xml</param-value>
-	</context-param>
+	</context-param> -->
 	<!-- 编码集过滤 -->
 	<filter>
 		<filter-name>encoding</filter-name>
@@ -39,8 +39,14 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	</filter-mapping>
 	
 	<listener>
+		<listener-class>com.yc.law.listener.ServletContextListenerImpl</listener-class>
+	</listener>
+	<!-- 
+	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	 -->
+	 
 	
 	<servlet>
 		<servlet-name>DispatcherServlet</servlet-name>
