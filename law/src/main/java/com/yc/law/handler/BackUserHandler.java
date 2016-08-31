@@ -2,12 +2,16 @@ package com.yc.law.handler;
 
 import javax.annotation.PostConstruct;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.gson.Gson;
 import com.yc.law.entity.User;
 import com.yc.law.service.BackUserService;
 import com.yc.law.util.Encrypt;
@@ -48,5 +52,12 @@ public class BackUserHandler {
 		return "back/manager/index";
 	}
 
-
+	@RequestMapping("/generalUserlist")
+	public void listAll(PrintWriter out){
+		List<User> users = backUserService.findGeneralAll();
+		Gson gson = new Gson();
+		out.println(gson.toJson(users));
+		out.flush();
+		out.close();
+	}
 }

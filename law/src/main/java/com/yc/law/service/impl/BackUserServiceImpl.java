@@ -1,5 +1,7 @@
 package com.yc.law.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,4 +39,8 @@ public class BackUserServiceImpl implements BackUserService {
 		return backUserMapper.findInitAdmin(uname);
 	}
 
+	@Override
+	public List<User> findGeneralAll() {
+		return backUserMapper.findGeneralUser();
+	}
 }

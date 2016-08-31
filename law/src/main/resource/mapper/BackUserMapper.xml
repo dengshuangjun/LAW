@@ -14,4 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<selectKey order="BEFORE" keyColumn="currval" keyProperty="role_id" resultType="int">select role_id from role where role_name='管理员'</selectKey>
 		insert into law_user(usid,usname,upwd,role_id) values(seq_law_user_id.nextval,#{usname},#{upwd},#{role_id})
 	</insert>
+	
+	<select id="findGeneralUser" resultType="User">
+		select usid,usname,usex,uemail,picpath,tel,law_user_status,law_user_status_explain,area,register_time,birthday,
+		(select log_time from log where log.usid=law_user.usid) recentUseTime from law_user 
+		where role_id=(select role_id from role where role_name='用户')
+	</select>
 </mapper>

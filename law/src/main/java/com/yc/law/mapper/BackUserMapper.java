@@ -1,5 +1,7 @@
 package com.yc.law.mapper;
 
+import java.util.List;
+
 import com.yc.law.entity.User;
 
 public interface BackUserMapper {
@@ -9,5 +11,7 @@ public interface BackUserMapper {
 	void insertInitAdmin(User user);
 
 	int findInitAdmin(String uname);
+
+	List<User> findGeneralUser();
 
 }
