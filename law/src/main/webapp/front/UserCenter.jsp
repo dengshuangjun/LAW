@@ -7,7 +7,8 @@
 <meta charset="utf-8">
 <title>个人中心</title>
 <link rel="shortcut icon" href="images/logo_ .png">
-<link type="text/css" href="css/index.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" id="devIndexCss">
+<link rel="stylesheet" type="text/css" id="devArtCss">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/offcanvas.css" rel="stylesheet">
 <link href="css/carousel.css" rel="stylesheet">
@@ -19,7 +20,7 @@
 <script src="js/time.js"></script>
 <script src="js/showpic.js"></script>
 <script src="js/ajaxfileupload.js"></script>
-
+<script type="text/javascript" src="../js/readDevCss.js"></script>
 </head>
 <style>
 * {
