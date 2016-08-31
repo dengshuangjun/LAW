@@ -41,6 +41,8 @@ public class BackUserServiceImpl implements BackUserService {
 
 	@Override
 	public List<User> findGeneralAll() {
+		
 		return backUserMapper.findGeneralUser();
 	}
+
 }

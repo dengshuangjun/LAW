@@ -1,9 +1,9 @@
 package com.yc.law.handler;
 
-import javax.annotation.PostConstruct;
-
 import java.io.PrintWriter;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,9 +36,8 @@ public class BackUserHandler {
 	
 	
 	//备注：登陆的日志记录没有写
-	@RequestMapping(value = "/login")
-	public String backLogin(User user, ModelMap map) {
-		System.out.println("backUser login..." + user);
+	@RequestMapping(value = "/loginSuccess")
+	public String loginSuccess(User user, ModelMap map) {
 		if(user.getUsid()!=0){
 			return "back/manager/index";
 		}
@@ -59,5 +58,14 @@ public class BackUserHandler {
 		out.println(gson.toJson(users));
 		out.flush();
 		out.close();
+	}
+	
+	@RequestMapping("/login")
+	public String backLogin(){
+		return "back/login";
+	}
+	@RequestMapping("/404")
+	public String request404(){
+		return "back/error404";
 	}
 }
