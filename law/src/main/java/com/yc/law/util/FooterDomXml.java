@@ -1,6 +1,8 @@
 package com.yc.law.util;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,9 +16,36 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import com.yc.law.entity.Footer;
 import com.yc.law.entity.Style;
+import com.yc.law.listener.ServletContextListenerImpl;
 
-public class StyleDomXml {
+public class FooterDomXml {
+
+	/**
+	 * 获取节点信息
+	 * @return
+	 */
+	public Footer getFootInfo() {
+		Footer footer=new Footer();
+		try {
+			//1.得到DOM工厂解析实例
+			DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+			//2.从工厂中得到解析器
+			DocumentBuilder builder=factory.newDocumentBuilder();
+			//3.把要解析的xml放入解析器中
+			Document doc=builder.parse(new File(ServletContextListenerImpl.footerXmlPath));
+			//4.开始解析根据节点来获取里面的内容
+			NodeList nl=doc.getElementsByTagName("footer");
+			Element e=(Element) nl.item(0);
+			footer.setInfo(e.getElementsByTagName("info").item(0).getFirstChild().getNodeValue().trim());
+			footer.setPhone(e.getElementsByTagName("phone").item(0).getFirstChild().getNodeValue().trim());
+			footer.setEmail(e.getElementsByTagName("email").item(0).getFirstChild().getNodeValue().trim());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return footer;
+	}
 
 	/**
 	 * doc转换成xml
@@ -36,7 +65,7 @@ public class StyleDomXml {
 			tf.setOutputProperty(OutputKeys.INDENT, "yes");
 			//输出xml
 			DOMSource domSource=new DOMSource(doc);
-			
+
 			StreamResult sr=new StreamResult(new File(fileName));
 			tf.transform(domSource, sr);
 			flag=true;
