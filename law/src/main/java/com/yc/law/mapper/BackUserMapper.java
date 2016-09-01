@@ -8,6 +8,12 @@ public interface BackUserMapper {
 
 	User findBackUserByNP(User user);
 
-	List<User> findGeneralUser();
+	void insertInitAdmin(User user);
+
+	int findInitAdmin(String uname);
+
+	List<User> findGeneralAllByPage(int pageNo,int pageSize);
+
+	int delGeneralUser(String usids);
 
 }

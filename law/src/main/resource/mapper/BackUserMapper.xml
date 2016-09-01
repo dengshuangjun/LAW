@@ -8,9 +8,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from law_user where usname=#{usname} and upwd=#{upwd}
 	</select>
 	
-	<select id="findGeneralUser" resultType="User">
-		select usid,usname,usex,uemail,picpath,tel,law_user_status,law_user_status_explain,area,register_time,birthday,
+	<select id="findGeneralAllByPage" parameterType="Integer" resultType="User">
+		select * from (select a.*,rownum rn from 
+		(select usid,usname,usex,uemail,picpath,tel,law_user_status,law_user_status_explain,area,register_time,birthday,
 		(select log_time from log where log.usid=law_user.usid) recentUseTime from law_user 
-		where role_id=(select role_id from role where role_name='用户')
+		where role_id=(select role_id from role where role_name='用户')) a 
+		where #{0} * #{1} >= rownum) where rn>( #{0} -1) * #{1}
 	</select>
+	
+	<delete id="delGeneralUser" parameterType="String">
+		update law_user set law_user_status='N',law_user_status_explain='此号已废弃' where usid in(#{usid})
+	</delete>
 </mapper>

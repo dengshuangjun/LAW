@@ -8,6 +8,11 @@ public interface BackUserService {
 
 	User login(User user);
 
-	List<User> findGeneralAll();
+	void insertInitAdmin(User user);
+
+	int findInitAdmin(String uname);
+	List<User> findGeneralAllByPage(int pageNo,int pageSize);
+
+	int delGeneralUser(String usid);
 
 }
