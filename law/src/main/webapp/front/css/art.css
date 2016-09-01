@@ -25,7 +25,7 @@
 }
 .model .content .left .title{
 	border-radius:5px 5px 0 0;
-	background:#00F;
+	background:#1A519C;
 	height:30px;
 }
 .model .content .left .title p{
@@ -79,7 +79,7 @@
 }
 .model .content .right .head{
 	border-radius:5px 5px 0 0;
-	background:#00F;
+	background:#1A519C;
 	height:30px;
 }
 .model .content .right .news{
@@ -121,7 +121,7 @@
 }
 .model .content .right .news ul li a:hover{
 	text-decoration:underline;
-	color:#00F;
+	color:#1A519C;
 }
 .model .content .right .news .new_left .img1{
 	width:300px;

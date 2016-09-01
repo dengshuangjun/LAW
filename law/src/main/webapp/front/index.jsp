@@ -12,7 +12,7 @@
 	content="法律智慧网是一家在线法律服务门户网站平台，律师在线解答法律咨询，为您提供一站式、便捷、高效的法律服务！">
 <link rel="shortcut icon" href="images/logo_ .png">
 <link rel="stylesheet" type="text/css" href="css/CssReset.css">
-<link rel="stylesheet" type="text/css" href="css/index.css">
+<link rel="stylesheet" type="text/css" id="cssLink">
 </head>
 <body>
 	<!--S=页面-->
@@ -202,6 +202,16 @@
 						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
 					</ul>
 				</div>
+				<div class="ulmain">
+					<ul>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
+					</ul>
+				</div>
 				<div class="ulright">
 					<ul>
 						<li><a href="javascript:shownew(1189)">生活设施不安全致害学生的侵权案件</a></li>
@@ -279,13 +289,15 @@
 	<!--S=关于我们-->
 	<div id="aboutMe">
 		<p></p>
-		<p>本网站所刊登的各种新闻、信息和专题专栏资料、均为法律智慧网版权所有、未经协议授权，禁止下载使用！</p>
-		<p>业务信箱： 电话：010-110120023 传真：010-63394466</p>
-		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015 制作单位：源辰信息有限公司</p>
+		<p id="footInfo">本网站所刊登的各种新闻、信息和专题专栏资料、均为法律智慧网版权所有、未经协议授权，禁止下载使用！</p>
+		<p>业务信箱：电话： <span id="footPho">010-110120023 </span>&nbsp;&nbsp;邮箱：<span id="footMail">010-63394466</span></p>
+		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015&nbsp;&nbsp; 制作单位：源辰信息有限公司</p>
 	</div>
 	<!--E=关于我们-->
 	<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
 	<script src="js/radio.js" type="text/javascript"></script>
 	<script src="js/time.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/readCss.js"></script>
+	
 </body>
 </html>

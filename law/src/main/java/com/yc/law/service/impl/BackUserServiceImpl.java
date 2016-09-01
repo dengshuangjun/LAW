@@ -15,7 +15,7 @@ public class BackUserServiceImpl implements BackUserService {
 
 	@Autowired
 	private BackUserMapper backUserMapper;
-	
+
 	@Override
 	public User login(User user) {
 		try {
@@ -24,14 +24,14 @@ public class BackUserServiceImpl implements BackUserService {
 		} catch (Exception e) {
 			return null;
 		}
-		
+
 	}
 
 	@Override
 	public void insertInitAdmin(User user) {
 		System.out.println(user);
 		backUserMapper.insertInitAdmin(user);
-		
+
 	}
 
 	@Override
@@ -47,5 +47,9 @@ public class BackUserServiceImpl implements BackUserService {
 	@Override
 	public int delGeneralUser(String usid) {
 		return backUserMapper.delGeneralUser(usid);
+	}
+	
+	public List<User> findGeneralAll() {
+		return backUserMapper.findGeneralUser();
 	}
 }

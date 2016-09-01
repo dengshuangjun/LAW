@@ -5,8 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- 使用映射接口的方式， 命名空间的值必须与映射接口的全限定名一致 -->
 <mapper namespace="com.yc.law.mapper.BackUserMapper">
 	<select id="findBackUserByNP"  parameterType="User" resultType="User">
-		select * from law_user where usname=#{usname} and upwd=#{upwd}
+		select * from role r join law_user l on r.role_id=l.role_id and  usname=#{usname} and upwd=#{upwd} and role_name='管理员'
 	</select>
+	<select id="findInitAdmin" parameterType="String" resultType="int">
+		select count(1) from law_user where  role_id in  (select role_id from role where role_name='管理员') and  usname='admin'
+	</select>
+	<insert id="insertInitAdmin" parameterType="User">
+		<selectKey order="BEFORE" keyColumn="currval" keyProperty="role_id" resultType="int">select role_id from role where role_name='管理员'</selectKey>
+		insert into law_user(usid,usname,upwd,role_id) values(seq_law_user_id.nextval,#{usname},#{upwd},#{role_id})
+	</insert>
 	
 	<select id="findGeneralAllByPage" parameterType="Integer" resultType="User">
 		select * from (select a.*,rownum rn from 

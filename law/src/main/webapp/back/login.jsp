@@ -5,6 +5,7 @@
 <head>
 <base href="/law/">
 <meta charset="UTF-8">
+<link rel="shortcut icon" href="back/images/logo_.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>法律网站_后台登陆</title>
@@ -21,7 +22,7 @@
 					name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
 				<div class="login-form">
 					<div class="sign-in-htm">
-						<form method="post"  action="back/login">
+						<form method="post"  action="back/loginSuccess">
 							<div class="group">
 								<label for="user" class="label">用户名</label> <input id="user"
 									type="text" class="input" name="usname" required="required"/>

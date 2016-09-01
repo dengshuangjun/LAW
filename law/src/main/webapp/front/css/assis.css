@@ -24,11 +24,6 @@
 	float:left;
 	margin-right:30px;
 }
-.model .content .left .title{
-	border-radius:5px 5px 0 0;
-	background:#00F;
-	height:30px;
-}
 .model .content .left .title p,.consult p{
 	font-size:22px;
 	line-height:22px;
@@ -77,11 +72,6 @@
 	height:800px;
 	border-radius:5px;
 	float:left;
-}
-.model .content .right .head{
-	border-radius:5px 5px 0 0;
-	background:#00F;
-	height:30px;
 }
 .model .content .right .news{
 	width: 866px;

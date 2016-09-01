@@ -1,12 +1,12 @@
-drop table message;
-drop table connection;
-drop table mark;
-drop table news;
-drop table part;
-drop table newsType;
-drop table log;
-drop table law_user;
-drop table role;
+delete from  message;
+delete from connection;
+delete from mark;
+delete from news;
+delete from part;
+delete from newsType;
+delete from log;
+delete from law_user;
+delete from role;
 
 commit;
 
@@ -34,7 +34,7 @@ create table law_user(
   usname  varchar2(30),  --用户名
   usex  varchar2(4)    --用户性别
     constraint CK_law_user_usex check( usex in('男','女') ),
-  upwd  varchar2(30),  --密码
+  upwd  varchar2(40),  --密码
   uemail  varchar2(50),  --邮箱
   role_id int       --角色ID
     constraint FK_role_id references role(role_id),
@@ -51,10 +51,12 @@ create table law_user(
   spare_C  varchar2(200)
 )
 
+alter table law_user modify upwd varchar2(40)
+
 --用户id序列
 create sequence seq_law_user_id start with 1001;
-
-insert into law_user values(seq_law_user_id.nextval,'admin','男','a','123@qq.com',1001,null,12345678910,'Y',null,'湖南衡阳',sysdate,to_date('2016/08/29','yyyy/MM/dd'),null,null,null)
+drop sequence seq_law_user_id
+insert into law_user values(seq_law_user_id.nextval,'admin','男','6f9b0a55df8ac28564cb9f63a10be8af6ab3f7c2','123@qq.com',1001,null,12345678910,'Y',null,'湖南衡阳',sysdate,to_date('2016/08/29','yyyy/MM/dd'),null,null,null)
 delete from law_user
 select * from law_user
 
@@ -105,7 +107,6 @@ create table part(
 
 --版块id序列
 create sequence seq_part_id start with 1001;
-
 
 insert into part values(1001,'校园动态','Y',1001,null,null,null);
 insert into part values(1002,'社会聚焦','Y',1001,null,null,null);
@@ -190,7 +191,7 @@ create table connection(
   spare_C  varchar2(200)
 )
 
-create table seq_conn_id start with 1001;
+create sequence seq_conn_id start with 1001;
 
 --留言表
 create table message(
@@ -204,8 +205,8 @@ create table message(
   spare_C  varchar2(200)
 )
 
-create table seq_message_id start with 1001;
-
+create sequence seq_message_id start with 1001;
+commit;
 
 
 
