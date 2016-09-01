@@ -1,7 +1,6 @@
 package com.yc.law.listener;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,6 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.yc.law.entity.User;
 
 public class RequestURLListenerImpl implements Filter {
 
@@ -24,12 +25,13 @@ public class RequestURLListenerImpl implements Filter {
 			FilterChain arg2) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
-		if (request.getRequestURL().toString().contains(".jsp")
-				|| request.getRequestURL().toString().contains(".html")) {
-			response.sendRedirect("/law/back/404");
-		} else {
-			arg2.doFilter(arg0, arg1);
+		User user=(User)request.getSession().getAttribute("user");
+		if(user==null||user.getUsid()==0){
+			request.getRequestDispatcher("/back/login.jsp").forward(arg0, arg1);
+			return;
 		}
+		arg2.doFilter(arg0, arg1);
+		
 	}
 
 	@Override

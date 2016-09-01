@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,25 +29,23 @@ import com.yc.law.util.Encrypt;
 public class BackUserHandler {
 	@Autowired
 	private BackUserService backUserService;
-
 	@Autowired
 	private User user;
-
-	@RequestMapping(value = "/login")
-
+	
 	@PostConstruct
-	public void init() {
-		if (backUserService.findInitAdmin("admin") <= 0) {
+	public void init(){
+		if(backUserService.findInitAdmin("admin")<=0){
 			user.setUsname("admin");
 			user.setUpwd(Encrypt.md5AndSha("admin"));
 			backUserService.insertInitAdmin(user);
 		}
 	}
-
+	
+	
+	//备注：登陆的日志记录没有写
 	@RequestMapping(value = "/loginSuccess")
-	// 备注：登陆的日志记录没有写
 	public String loginSuccess(User user, ModelMap map) {
-		if (user.getUsid() != 0) {
+		if(user.getUsid()!=0){
 			return "back/manager/index";
 		}
 		user = backUserService.login(user);
@@ -54,7 +53,7 @@ public class BackUserHandler {
 			map.put("errorMsg", "用户名或密码错误...");
 			return "back/login";
 		}
-
+		
 		map.addAttribute("user", user);
 		return "back/manager/index";
 	}
@@ -67,7 +66,6 @@ public class BackUserHandler {
 		out.flush();
 		out.close();
 	}
-
 	@RequestMapping("/delGeneralUser")
 	public void delGeneralUser(String usid, PrintWriter out) {
 		int result = backUserService.delGeneralUser(usid);
@@ -92,12 +90,12 @@ public class BackUserHandler {
 	}
 
 	@RequestMapping("/login")
-	public String backLogin() {
+	public String backLogin(){
 		return "back/login";
 	}
-
 	@RequestMapping("/404")
-	public String request404() {
+	public String request404(){
 		return "back/error404";
 	}
+	
 }
