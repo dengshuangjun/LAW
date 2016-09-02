@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findGeneralAllByPage" parameterType="Integer" resultType="User">
 		select * from (select a.*,rownum rn from 
 		(select usid,usname,usex,uemail,picpath,tel,law_user_status,law_user_status_explain,area,register_time,birthday,
-		(select log_time from log where log.usid=law_user.usid) recentUseTime from law_user 
+		(select max(log_time) from log where log.usid=law_user.usid) recentUseTime from law_user 
 		where role_id=(select role_id from role where role_name='用户')) a 
 		where #{0} * #{1} >= rownum) where rn>( #{0} -1) * #{1}
 	</select>

@@ -16,7 +16,6 @@
 <div id="add_user" class="easyui-dialog" title="添加用户" data-options="iconCls:'icon-add',resizable:true,model:true,closed:true,fit:true">
 	<br />
 	<form action="back/addGeneralUser" style="float:left;padding-left:20px;" method="post" enctype="multipart/form-data">
-<<<<<<< HEAD
 		<label>用户名:</label><input type="text" id="user_adname" name="usname" /><br /><br />
 		<label>用户性别:</label><select id="user_adsex" name="usex" ></select><br /><br />
 		<label>密码:</label><input type="text" id="user_adpwd" name="upwd" /><br /><br />
@@ -27,16 +26,6 @@
 		<label>状态说明：</label><input type="text" id="user_addstatusExplain" name="law_user_status_explain" /><br /><br />
 		<label>地址：</label><input type="text" id="user_addarea" name="area" /><br /><br />
 		<label>生日：</label><input type="text" id="user_addbirthday" name="birthday" /><br /><br />
-=======
-		<label>用户名:</label><input type="text" id="user_adname" name="adduname" /><br /><br />
-		<label>用户性别:</label><select id="user_adsex" name="addsex" ></select><br /><br />
-		<label>密码:</label><input type="text" id="user_adpwd" name="addpwd" /><br /><br />
-		<label>邮箱:</label><input type="email" id="user_addemail" name="addemail" /><br /><br />
-		<label>联系方式:</label><input type="text" id="user_addphone" name="addphone" /><br /><br />
-		<label>状态:</label><select id="user_addstatus" name="addstatus" ></select><br /><br />
-		<label>头像：</label><input type="file" id="user_pics" name="pics" required="required" onchange="previewMultipleImage(this,'user_pic_show')"/> <br /><br />
-		<label>状态说明：</label><input type="text" id="user_addstatusExplain" name="statusExplain" /><br /><br />
->>>>>>> branch 'master' of ssh://git@github.com/dengshuangjun/LAW.git
 		
 		<div>
 			<script id="addUserEditor" type="text/plain" style="width:800px;height:300px;"></script>
@@ -285,7 +274,6 @@
 		$("#user_addstatus").append($(opt2));
 		$("#user_upstatus").append($(opt2));
 	});
-<<<<<<< HEAD
 	
 	//设置预览和修改时的图片显示
 	function showPrePic(value){
@@ -296,7 +284,4 @@
 		}
 		return str;
 	}
-=======
->>>>>>> branch 'master' of ssh://git@github.com/dengshuangjun/LAW.git
-	
 </script>
