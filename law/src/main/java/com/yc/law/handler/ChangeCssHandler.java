@@ -1,10 +1,9 @@
 package com.yc.law.handler;
 
-import java.io.PrintWriter;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.law.entity.Style;
 import com.yc.law.listener.ServletContextListenerImpl;
@@ -16,7 +15,8 @@ import com.yc.law.util.StyleDomXml;
 public class ChangeCssHandler {
 
 	@RequestMapping("/changeCss")
-	public void changeCss(@RequestParam("color") String color,PrintWriter out){
+	@ResponseBody
+	public int changeCss(@RequestParam("color") String color){
 		StyleDomXml dom = new StyleDomXml();
 		if(color.equals("blue")){
 			Style style = new Style("css/index.css","../css/index.css","../css/art.css");
@@ -31,8 +31,6 @@ public class ChangeCssHandler {
 			Style style = new Style("css/indexGray.css","../css/indexGray.css","../css/artGray.css");
 			dom.update(style, ServletContextListenerImpl.xmlPath);
 		}
-		out.print(true);
-		out.flush();
-		out.close();
+		return 1;
 	}
 }

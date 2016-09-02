@@ -16,8 +16,8 @@ friConnObj = $('#friendUrl').datagrid({
 	pageNumber : 1,//初始页码
 	pageSize : 10,//分页大小
 	pageList : [ 10, 20, 30, 40, 50 ],//设置属性
-	sortName : 'conid',//定义那个列可以排序.
-	sortOrder : 'asc',
+	sortName : 'conn_weight',//定义那个列可以排序.
+	sortOrder : 'desc',
 	remoteSort : false,//定义是否远程排序.对数据库进行操作
 	columns : [ [ {
 		field : 'cconid',
@@ -26,33 +26,40 @@ friConnObj = $('#friendUrl').datagrid({
 		align : 'center',
 		checkbox : true
 	}, {
-		field : 'conid',
+		field : 'conn_id',
 		title : '链接编号',
-		width : 60,
-		align : 'center',
-		sortable:true
-	}, {
-		field : 'conName',
-		title : '连接名',
 		width : 60,
 		align : 'center'
 	}, {
-		field : 'conAddr',
+		field : 'conn_name',
+		title : '链接名',
+		width : 100,
+		align : 'center'
+	}, {
+		field : 'conn_address',
 		title : '链接地址',
 		width : 240,
 		align : 'center'
 	}, {
-		field : 'conWeight',
+		field : 'conn_weight',
 		title : '链接权重',
+		width : 120,
+		align : 'center',
+		sortable:true,
+		formatter: function(value,row,index){
+			var str="";
+			str+=value+"<a href='javascript:setWeight("+row.conn_id+",1,"+row.conn_weight+")' style='margin-left:4px;'>置顶</a>"+
+			"<a href='javascript:setWeight("+row.conn_id+",2,"+row.conn_weight+")' style='margin-left:4px;'>上移</a>"+
+			"<a href='javascript:setWeight("+row.conn_id+",3,"+row.conn_weight+")' style='margin-left:4px;'>下移</a>"
+			return str; 
+		}
+	}, {
+		field : 'status',
+		title : '链接状态',
 		width : 60,
 		align : 'center'
 	}, {
-		field : 'conStatus',
-		title : '链接状态',
-		width : 200,
-		align : 'center'
-	}, {
-		field : 'conPic',
+		field : 'conn_pic',
 		title : '链接图片',
 		width : 200,
 		align : 'center',
@@ -157,5 +164,26 @@ function showPrePic(value){
 		str+="<img src='../../"+pics[i]+"' width='60px' height='60px'/>&nbsp;";
 	}
 	return str;
+}
+
+//设置权重
+function setWeight(conId,num,weight){
+	$.post("friendUrl/setWeight",{conId:conId,num:num,weight:weight},function(data){
+		if(data==1){
+			friConnObj.datagrid("reload");//刷新表格
+			$.messager.show({
+				title:'成功提示',
+				msg:'权重更新成功！！！',
+				timeout:2000,
+				showType:'slide'
+			});
+		}else if(data==0){
+			$.messager.alert('温馨提示','当前已在最顶部...','warning');
+		}else if(data==2){
+			$.messager.alert('温馨提示','当前已在最底部...','warning');
+		}else if(data==3){
+			$.messager.alert('温馨提示','修改权限失败...','error');
+		}
+	});
 }
 </script>

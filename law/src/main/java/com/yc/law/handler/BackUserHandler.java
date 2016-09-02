@@ -3,9 +3,7 @@ package com.yc.law.handler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +12,10 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,6 +32,11 @@ public class BackUserHandler {
 	private BackUserService backUserService;
 	@Autowired
 	private User user;
+	
+	@ModelAttribute("user")
+	public void getModel(ModelMap map) {
+		map.put("user", new User());
+	}
 	
 	@PostConstruct
 	public void init(){
@@ -110,7 +113,6 @@ public class BackUserHandler {
 		}
 		return "generalUser";//添加失败怎么办
 	}
-
 	@RequestMapping("/login")
 	public String backLogin(){
 		return "back/login";

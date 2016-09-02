@@ -4,9 +4,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 使用映射接口的方式， 命名空间的值必须与映射接口的全限定名一致 -->
 <mapper namespace="com.yc.law.mapper.FriConnMapping">
-	<!-- <select id="findUrlByPage" parameterType="Integer" resultType="FriendUrl"> 
+	<select id="findUrlByPage" resultType="FriendUrl"> 
 		select a.*,rn from
-		(select c.*,rownum rn from connection c where #{pageNo}*#{pageSize} => rownum) a 
-		where rn>=(#{pageNo}-1)*#{pageSize}
-	</select> -->
+		(select conn_id,conn_name,conn_address,conn_pic,conn_weight,status,rownum rn from connection c where (#{0} * #{1}) >= rownum) a 
+		where rn> ( #{0} - 1 ) * #{1} order by conn_weight desc
+	</select>
+	
+	<select id="findFriWeight" resultType="FriendUrl"> 
+		select max(conn_weight) maxWeight,min(conn_weight) minWeight from CONNECTION
+	</select>
+	
+	<update id="setWeight">
+		update CONNECTION set conn_weight=#{0} where conn_id=#{1}
+	</update>
 </mapper>
