@@ -52,11 +52,8 @@ public class BackUserServiceImpl implements BackUserService {
 	public List<User> findGeneralAll() {
 		return backUserMapper.findGeneralUser();
 	}
-<<<<<<< HEAD
 	@Override
 	public boolean addGeneralUser(User user){
 		return backUserMapper.addGeneralUser(user);
 	}
-=======
->>>>>>> branch 'master' of ssh://git@github.com/dengshuangjun/LAW.git
 }

@@ -17,10 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.ResponseBody;
-=======
->>>>>>> branch 'master' of ssh://git@github.com/dengshuangjun/LAW.git
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,7 +78,6 @@ public class BackUserHandler {
 		out.close();
 	}
 
-<<<<<<< HEAD
 	//因为是使用SpringMVC自带的上传，所以图片的不能直接放在对象中获取，就是这个东西MultipartFile
 	//返回的东西就交给组长了
 	@RequestMapping(value = "/addGeneralUser", method = RequestMethod.POST)
@@ -109,20 +105,6 @@ public class BackUserHandler {
 			return "redirectmanager/generalUser.html";  //这边不只是返回什么样的值
 		}
 		return "generalUser";//添加失败怎么办
-=======
-	@RequestMapping(value = "/addGeneralUser", method = RequestMethod.POST)
-	public String addGeneralUser(@RequestParam("pics") MultipartFile file, HttpServletRequest req) throws IOException {
-		if (!file.isEmpty()) {
-			System.out.println(file.getOriginalFilename());
-			String path = req.getSession().getServletContext().getRealPath(""); // 获取到该服务器webapp下面到law这个目录的
-			String realPath = path.substring(0, path.lastIndexOf("\\")) + "\\pics"; // 通过截取获取到Pics
-			String picName = System.currentTimeMillis() + file.getOriginalFilename(); // 获取到文件名
-			String savePath = "../pics/" + picName;// 获取到存放的路径
-			System.out.println(savePath);
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realPath, picName));
-		}
-		return "success";
->>>>>>> branch 'master' of ssh://git@github.com/dengshuangjun/LAW.git
 	}
 
 	@RequestMapping("/login")
