@@ -10,7 +10,7 @@ import com.yc.law.mapper.BackUserMapper;
 import com.yc.law.service.BackUserService;
 import com.yc.law.util.Encrypt;
 
-@Service("userService")
+@Service("backUserService")
 public class BackUserServiceImpl implements BackUserService {
 
 	@Autowired
