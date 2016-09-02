@@ -79,7 +79,7 @@ public class FooterDomXml {
 	/**
 	 * 修改结点
 	 */
-	public void update(Style b,String fileName) {
+	public void update(Footer b,String fileName) {
 		try {
 			//1.dom解析工厂
 			DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
@@ -88,18 +88,18 @@ public class FooterDomXml {
 			//3.xml放到解析器
 			Document doc=builder.parse(new File(fileName));
 			//4.开始解析
-			NodeList nl=doc.getElementsByTagName("style");
+			NodeList nl=doc.getElementsByTagName("footer");
 			//5.找到Style name  (这里不需要)
-			Element e=(Element) nl.item(0);//e代表的是Style這個結點
+			Element e=(Element) nl.item(0);//e代表的是footer這個結點
 			//6.修改值
-			e.getElementsByTagName("main").item(0).getFirstChild().setNodeValue(b.getMain());
-			e.getElementsByTagName("devMain").item(0).getFirstChild().setNodeValue(b.getDevMain());
-			e.getElementsByTagName("dev").item(0).getFirstChild().setNodeValue(b.getDev());
+			e.getElementsByTagName("info").item(0).getFirstChild().setNodeValue(b.getInfo());
+			e.getElementsByTagName("phone").item(0).getFirstChild().setNodeValue(b.getPhone());
+			e.getElementsByTagName("email").item(0).getFirstChild().setNodeValue(b.getEmail());
 			//7.输出xml
 			if(docToXml(doc,fileName)){
-				System.out.println("docToXml修改成功");
+				System.out.println("尾部信息修改成功");
 			}else{
-				System.out.println("docToXml修改失败");
+				System.out.println("尾部信息修改失败");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

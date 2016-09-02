@@ -14,10 +14,16 @@
 		loadMsg : "数据加载中...",//当从远程服务器加载数据的时候,显示的提示消息.
 		fit : true,//满屏
 		remoteSort : false,//定义是否远程排序.对数据库进行操作
-		columns : [ [ {
+		columns : [ [{
+			field : 'inf',
+			title : '',
+			width : 60,
+			align : 'center',
+			checkbox : true
+		}, {
 			field : 'info',
 			title : '尾部信息',
-			width : 240,
+			width : 300,
 			align : 'center',
 			editor : {
 				type : "text",
@@ -47,41 +53,23 @@
 					requires : true
 				}
 			}
-		} ] ]
-	/* toolbar:[{
-		text:"添加",
-		iconCls:"icon-add",
-		handler:function(){
-			currentOP="addAdmin";
-			flag="添加";
-			if(editRow!=undefined){//说明有行正在被编辑
-				obj.datagrid("rejectChanges");//回滚所有数据
-				obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
-				editRow=undefined;
-			}else{
-				obj.datagrid('insertRow',{index:0,row:{}});
-				obj.datagrid('beginEdit',0);
-				editRow=0;//记录当前被编辑的行
-			}
-		}
-	},{
+		} ] ],
+		toolbar:[{
 		text:"修改",
 		iconCls:"icon-edit",
 		handler:function(){
-			currentOP="updateAdmin";
 			flag="修改";
-			var rows=obj.datagrid("getChecked")[0];
-			//console.info(rows);
+			var rows=changeFooter.datagrid("getChecked")[0];
 			if(rows!=undefined){
 				if(editRow!=undefined){//说明有行正在被编辑
-					obj.datagrid("rejectChanges");//回滚所有数据
-					obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+					changeFooter.datagrid("rejectChanges");//回滚所有数据
+					changeFooter.datagrid("endEdit",editRow);//关闭正在被编辑的行
 					editRow=undefined;
 				}else{
 					//获取当前行索引
-					var index=obj.datagrid('getRowIndex',rows);
-					obj.datagrid('updateRow',{index:index,row:rows});
-					obj.datagrid('beginEdit',index);
+					var index=changeFooter.datagrid('getRowIndex',rows);
+					changeFooter.datagrid('updateRow',{index:index,row:rows});
+					changeFooter.datagrid('beginEdit',index);
 					editRow=index;//记录当前被编辑的行
 				}
 			}else{
@@ -94,84 +82,37 @@
 			}
 		}
 	},{
-		text:"删除",
-		iconCls:"icon-remove",
-		handler:function(){
-			//获取选中的行
-			var rows=obj.datagrid("getChecked");
-			if(rows!=undefined  && rows!=""){
-				$.messager.confirm('信息确认','您确定要删除选定的数据吗？',function(rs){  
-				    if (rs){  
-				        var aids="";
-				        for(var i=0;i<rows.length-1;i++){
-				        	aids+=rows[i].aid+",";
-				        }
-				        aids+=rows[i].aid;
-				        
-				        //发请求到数据库删除
-				        $.post("../../AdminServlet",{op:"delAdmin",aid:aids},function(data){
-				        	if(data>0){
-				        		$.messager.show({
-									title:'成功提示',
-									msg:'管理员删除成功！！！',
-									timeout:2000,
-									showType:'slide'
-								});
-				        		rows=null;
-				        		obj.datagrid("reload");//刷新表格
-				        	}else{
-				        		$.messager.alert('失败提示','管理员删除失败！！！','error');
-				        	}
-				        });
-				    }else{
-				    	return;
-				    }
-				});
-			}else{
-				$.messager.show({
-					title:'温馨提示',
-					msg:'请选中您要删除的数据...',
-					timeout:2000,
-					showType:'slide'
-				});
-			}
-		}
-	},{
 		text:"保存",
 		iconCls:"icon-save",
 		handler:function(){
 			//先关闭编辑
-			obj.datagrid("endEdit",editRow);
+			changeFooter.datagrid("endEdit",editRow);
 			
 			//获取正在被编辑的数据
-			var rows=obj.datagrid("getChanges")[0];//只有一行在添加   添加修改删除之类的操作都可以获取到
-			
+			var rows=changeFooter.datagrid("getChanges")[0];//只有一行在添加   添加修改删除之类的操作都可以获取到
 			if(rows==undefined){//说明没有数据需要保存
-				obj.datagrid("rejectChanges");//回滚所有数据
-				obj.datagrid("endEdit",0);//关闭正在被编辑的行
+				changeFooter.datagrid("rejectChanges");//回滚所有数据
+				changeFooter.datagrid("endEdit",0);//关闭正在被编辑的行
 				editRow=undefined;
-			}else if(rows.tname==""){
-				editRow=undefined;
-				obj.datagrid("rejectChanges");//回滚所有数据					
 			}else{
-				//保存到数据库
-				//js  也可以是  rows.op
-				rows["op"]=currentOP;
-				
-				$.post("../../AdminServlet",rows,function(data){
-					if(data>0){//添加成功
+				//保存到xml
+				var info=rows.info;
+				var phone=rows.phone;
+				var email=rows.email;
+				$.post("footer/updateFooter?info="+info+"&phone="+phone+"&email="+email,function(data){
+					if(data){//添加成功
 						$.messager.show({
 							title:'成功提示',
-							msg:'管理员'+flag+'成功！！！请重新登陆。',
+							msg:'尾部信息'+flag+'成功！！！刷新前台页面可查看最新信息。',
 							timeout:2000,
 							showType:'slide'
 						});
 						rows=null;
-						obj.datagrid("reload");//刷新表格
+						changeFooter.datagrid("reload");//刷新表格
 						editRow=undefined;
-						obj.datagrid("endEdit",0);//关闭正在被编辑的行
+						changeFooter.datagrid("endEdit",0);//关闭正在被编辑的行
 					}else{
-						$.messager.alert('失败提示','管理员'+flag+'失败！！！','error');
+						$.messager.alert('失败提示','尾部信息'+flag+'失败！！！','error');
 					}
 				});
 			}
@@ -180,10 +121,10 @@
 		text:"撤销",
 		iconCls:"icon-redo",
 		handler:function(){
-			obj.datagrid("rejectChanges");//回滚所有数据
-			obj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+			changeFooter.datagrid("rejectChanges");//回滚所有数据
+			changeFooter.datagrid("endEdit",editRow);//关闭正在被编辑的行
 			editRow=undefined;
 		}
-	}] */
+	}] 
 	});
 </script>

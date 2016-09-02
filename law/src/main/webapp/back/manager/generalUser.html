@@ -15,7 +15,7 @@
 <!-- 添加用户 add_user -->
 <div id="add_user" class="easyui-dialog" title="添加用户" data-options="iconCls:'icon-add',resizable:true,model:true,closed:true,fit:true">
 	<br />
-	<form  onsubmit="checkInfo()" action="back/addGeneralUser" style="float:left;padding-left:20px;" method="post" enctype="multipart/form-data">
+	<form action="back/addGeneralUser" style="float:left;padding-left:20px;" method="post" enctype="multipart/form-data">
 		<label>用户名:</label><input type="text" id="user_adname" name="usname" /><br /><br />
 		<label>用户性别:</label><select id="user_adsex" name="usex" ></select><br /><br />
 		<label>密码:</label><input type="text" id="user_adpwd" name="upwd" /><br /><br />
@@ -274,5 +274,15 @@
 		$("#user_addstatus").append($(opt2));
 		$("#user_upstatus").append($(opt2));
 	});
+	
+	//设置预览和修改时的图片显示
+	function showPrePic(value){
+		var str="";
+		var pics=value.split(",");
+		for(var i=0;i<pics.length;i++){
+			str+="<img src='../../"+pics[i]+"' width='60px' height='60px'/>&nbsp;";
+		}
+		return str;
+	}
 	
 </script>
