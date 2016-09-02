@@ -15,13 +15,16 @@ public class FriendUrl implements Serializable{
 	private String conn_pic;
 	private int conn_weight;
 	private String status;
+	private int maxWeight;
+	private int minWeight;
 	
 	public FriendUrl() {
 		super();
 	}
 
 	public FriendUrl(int conn_id, String conn_name, String conn_address,
-			String conn_pic, int conn_weight, String status) {
+			String conn_pic, int conn_weight, String status, int maxWeight,
+			int minWeight) {
 		super();
 		this.conn_id = conn_id;
 		this.conn_name = conn_name;
@@ -29,6 +32,8 @@ public class FriendUrl implements Serializable{
 		this.conn_pic = conn_pic;
 		this.conn_weight = conn_weight;
 		this.status = status;
+		this.maxWeight = maxWeight;
+		this.minWeight = minWeight;
 	}
 
 	public int getConn_id() {
@@ -83,10 +88,28 @@ public class FriendUrl implements Serializable{
 		return serialVersionUID;
 	}
 
+	public int getMaxWeight() {
+		return maxWeight;
+	}
+
+	public void setMaxWeight(int maxWeight) {
+		this.maxWeight = maxWeight;
+	}
+
+	public int getMinWeight() {
+		return minWeight;
+	}
+
+	public void setMinWeight(int minWeight) {
+		this.minWeight = minWeight;
+	}
+
 	@Override
 	public String toString() {
 		return "FriendUrl [conn_id=" + conn_id + ", conn_name=" + conn_name
 				+ ", conn_address=" + conn_address + ", conn_pic=" + conn_pic
-				+ ", conn_weight=" + conn_weight + ", status=" + status + "]";
+				+ ", conn_weight=" + conn_weight + ", status=" + status
+				+ ", maxWeight=" + maxWeight + ", minWeight=" + minWeight + "]";
 	}
+
 }

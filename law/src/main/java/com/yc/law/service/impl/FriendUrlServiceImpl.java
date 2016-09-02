@@ -16,9 +16,18 @@ public class FriendUrlServiceImpl implements FriendUrlService {
 	private FriConnMapping friConnMapping;
 	
 	@Override
-	public List<FriendUrl> findUrlByPage(int pageNo, int pageSize) {
-		System.out.println(friConnMapping.findUrlByPage(pageNo, pageSize));
+	public List<FriendUrl> findUrlByPage(int pageNo,int pageSize) {
 		return friConnMapping.findUrlByPage(pageNo, pageSize);
+	}
+
+	@Override
+	public FriendUrl findFriWeight() {
+		return friConnMapping.findFriWeight();
+	}
+
+	@Override
+	public int setWeight(int weight,int conId) {
+		return friConnMapping.setWeight(weight,conId);
 	}
 
 }
