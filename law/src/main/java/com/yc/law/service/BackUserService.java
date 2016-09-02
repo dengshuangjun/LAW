@@ -11,6 +11,11 @@ public interface BackUserService {
 	void insertInitAdmin(User user);
 
 	int findInitAdmin(String uname);
+	
+	List<User> findGeneralAllByPage(int pageNo,int pageSize);
+
+	int delGeneralUser(String usid);
+	
 	List<User> findGeneralAll();
 
 }

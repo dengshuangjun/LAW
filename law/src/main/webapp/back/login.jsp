@@ -5,10 +5,10 @@
 <head>
 <base href="/law/">
 <meta charset="UTF-8">
-<link rel="shortcut icon" href="back/images/logo_.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>法律网站_后台登陆</title>
+<link rel="shortcut icon" href="back/images/logo_.png">
 <link rel="shortcut icon" href="back/images/logo_ .png">
 <link rel="stylesheet" type="text/css" href="back/css/styles.css">
 <script src="back/js/jquery-1.9.1.min.js"></script>
