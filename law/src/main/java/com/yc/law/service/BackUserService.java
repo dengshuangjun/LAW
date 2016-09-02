@@ -18,4 +18,5 @@ public interface BackUserService {
 	
 	List<User> findGeneralAll();
 
+	boolean addGeneralUser(User user);
 }

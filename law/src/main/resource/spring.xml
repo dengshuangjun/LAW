@@ -39,8 +39,7 @@
 		p:sqlSessionFactoryBeanName="sqlSessionFactory" p:basePackage="com.yc.law.mapper" />
 
 	<!-- 动态也页面请求处理类 (响应视图配置) -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
 	</bean>

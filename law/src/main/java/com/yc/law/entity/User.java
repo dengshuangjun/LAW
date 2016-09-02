@@ -18,7 +18,8 @@ public class User implements Serializable {
 	private String area;
 	private String register_time;
 	private String birthday;
-
+	private int code;//用于存放验证码
+	private int emailCode;
 	public User() {
 
 	}
@@ -26,6 +27,33 @@ public class User implements Serializable {
 	public User(String usname, String upwd) {
 		this.usname = usname;
 		this.upwd = upwd;
+	}
+	
+	public User(String usname, String usex, String upwd, String uemail, String picpath, String tel,
+			String law_user_status, String law_user_status_explain, String area,String birthday) {
+		this.usname = usname;
+		this.usex = usex;
+		this.upwd = upwd;
+		this.uemail = uemail;
+		this.picpath = picpath;
+		this.tel = tel;
+		this.law_user_status = law_user_status;
+		this.law_user_status_explain = law_user_status_explain;
+		this.area = area;
+		this.birthday = birthday;
+	}
+	
+	public User(String usname, String usex, String upwd, String uemail, String tel,
+			String law_user_status, String law_user_status_explain, String area,String birthday) {
+		this.usname = usname;
+		this.usex = usex;
+		this.upwd = upwd;
+		this.uemail = uemail;
+		this.tel = tel;
+		this.law_user_status = law_user_status;
+		this.law_user_status_explain = law_user_status_explain;
+		this.area = area;
+		this.birthday = birthday;
 	}
 
 	public int getUsid() {
@@ -144,6 +172,29 @@ public class User implements Serializable {
 		return serialVersionUID;
 	}
 
+	
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	
+	public void setEmailCode(int emailCode) {
+		this.emailCode = emailCode;
+	}
+	
+	
+	public boolean getCheckCodeStatus(){
+		if(this.code==this.emailCode){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
 	@Override
 	public String toString() {
 		return "User [usid=" + usid + ", usname=" + usname + ", usex=" + usex
@@ -152,7 +203,7 @@ public class User implements Serializable {
 				+ ", tel=" + tel + ", law_user_status=" + law_user_status
 				+ ", law_user_status_explain=" + law_user_status_explain
 				+ ", area=" + area + ", register_time=" + register_time
-				+ ", birthday=" + birthday + "]";
+				+ ", birthday=" + birthday + ", code=" + code + "]";
 	}
 
 	@Override
