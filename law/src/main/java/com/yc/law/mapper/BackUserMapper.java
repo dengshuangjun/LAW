@@ -19,4 +19,6 @@ public interface BackUserMapper {
 	List<User> findGeneralUser();
 
 	boolean addGeneralUser(User user);
+
+	int addLoginRecord(int usid, String localAddr);
 }

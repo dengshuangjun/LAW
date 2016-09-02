@@ -3,9 +3,7 @@ package com.yc.law.handler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -14,10 +12,10 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +33,11 @@ public class BackUserHandler {
 	@Autowired
 	private User user;
 	
+	@ModelAttribute("user")
+	public void getModel(ModelMap map) {
+		map.put("user", new User());
+	}
+	
 	@PostConstruct
 	public void init(){
 		if(backUserService.findInitAdmin("admin")<=0){
@@ -47,7 +50,7 @@ public class BackUserHandler {
 	
 	//备注：登陆的日志记录没有写
 	@RequestMapping(value = "/loginSuccess")
-	public String loginSuccess(User user, ModelMap map) {
+	public String loginSuccess(User user, ModelMap map,HttpServletRequest request) {
 		if(user.getUsid()!=0){
 			return "back/manager/index";
 		}
@@ -55,8 +58,12 @@ public class BackUserHandler {
 		if (user == null) {
 			map.put("errorMsg", "用户名或密码错误...");
 			return "back/login";
+		}else{
+			int result = backUserService.addLoginRecord(user.getUsid(),request.getLocalAddr());//填写日志
+			if(result<=0){
+				map.put("errorMsg", "日志写入错误，请与管理员联系...");
+			}
 		}
-		
 		map.addAttribute("user", user);
 		return "back/manager/index";
 	}
@@ -106,7 +113,6 @@ public class BackUserHandler {
 		}
 		return "generalUser";//添加失败怎么办
 	}
-
 	@RequestMapping("/login")
 	public String backLogin(){
 		return "back/login";

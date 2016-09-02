@@ -56,4 +56,9 @@ public class BackUserServiceImpl implements BackUserService {
 	public boolean addGeneralUser(User user){
 		return backUserMapper.addGeneralUser(user);
 	}
+
+	@Override
+	public int addLoginRecord(int usid, String localAddr) {
+		return backUserMapper.addLoginRecord(usid,localAddr);
+	}
 }

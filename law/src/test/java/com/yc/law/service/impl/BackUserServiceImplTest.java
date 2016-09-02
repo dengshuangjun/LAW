@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.yc.law.entity.User;
 import com.yc.law.service.BackUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,8 +18,9 @@ public class BackUserServiceImplTest {
 	private BackUserService backUserService;
 
 	@Test
-	public void testAddGeneralUser() {
-		boolean result = backUserService.addGeneralUser(new User("aaa", "男", "a", "123@163.com", " ","12345678910", "aaa", "aaa", "aaa", "2014-04-08"));
-		assertEquals(result,true);
+	public void testAddLoginRecord() {
+		int result = backUserService.addLoginRecord(1021, "127.0.0.1");
+		assertEquals(result,1);
 	}
+
 }

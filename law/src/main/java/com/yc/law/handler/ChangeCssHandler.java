@@ -18,7 +18,7 @@ public class ChangeCssHandler {
 
 	@RequestMapping("/changeCss")
 	@ResponseBody
-	public boolean changeCss(@RequestParam("color") String color){
+	public int changeCss(@RequestParam("color") String color){
 		StyleDomXml dom = new StyleDomXml();
 		if(color.equals("blue")){
 			Style style = new Style("css/index.css","../css/index.css","../css/art.css");
@@ -33,6 +33,6 @@ public class ChangeCssHandler {
 			Style style = new Style("css/indexGray.css","../css/indexGray.css","../css/artGray.css");
 			dom.update(style, ServletContextListenerImpl.xmlPath);
 		}
-		return true;
+		return 1;
 	}
 }

@@ -1,6 +1,5 @@
 package com.yc.law.handler;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import net.sf.json.JSONArray;
@@ -24,8 +23,9 @@ public class FriendUrlHandler {
 
 	@RequestMapping("findUrl")
 	@ResponseBody
-	public JSONObject findUrl(@RequestParam("page") int page,@RequestParam("rows") int rows){
-		List<FriendUrl> flist= friendUrlService.findUrlByPage(page, rows);
+	public JSONObject findUrl(@RequestParam("page") int page,
+			@RequestParam("rows") int rows) {
+		List<FriendUrl> flist = friendUrlService.findUrlByPage(page, rows);
 		JSONArray json = JSONArray.fromObject(flist);
 		JSONObject jb = new JSONObject();
 		jb.put("rows", json);
@@ -35,23 +35,24 @@ public class FriendUrlHandler {
 
 	@RequestMapping("setWeight")
 	@ResponseBody
-	public int setWeight( int conId,int num ,int weight){
-		//先查找一下当前的最高权重和最低权重
+	public int setWeight(int conId, int num, int weight) {
+		// 先查找一下当前的最高权重和最低权重
 		FriendUrl mmWeight = friendUrlService.findFriWeight();
 
-		//1置顶 2上移 3下移
-		if(num==1){
-			if(weight>=mmWeight.getMaxWeight()){
+		// 1置顶 2上移 3下移
+		if (num == 1) {
+			if (weight >= mmWeight.getMaxWeight()) {
 				return 0;
 			}
-			return friendUrlService.setWeight(mmWeight.getMaxWeight()+1,conId);
-		}else if(num==2){
-			return friendUrlService.setWeight(weight+1,conId);
-		}else if(num==3){
-			if(weight<=0){
+			return friendUrlService.setWeight(mmWeight.getMaxWeight() + 1,
+					conId);
+		} else if (num == 2) {
+			return friendUrlService.setWeight(weight + 1, conId);
+		} else if (num == 3) {
+			if (weight <= 0) {
 				return 2;
 			}
-			return friendUrlService.setWeight(weight-1,conId);
+			return friendUrlService.setWeight(weight - 1, conId);
 		}
 		return 3;
 	}

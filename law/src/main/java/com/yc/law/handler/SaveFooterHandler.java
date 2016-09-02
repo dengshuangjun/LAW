@@ -28,10 +28,11 @@ public class SaveFooterHandler {
 	}
 	
 	@RequestMapping("/updateFooter")
-	public boolean updateFooter(@RequestParam("info") String info,@RequestParam("email") String email,@RequestParam("phone") String phone){
+	@ResponseBody
+	public int updateFooter(@RequestParam("info") String info,@RequestParam("email") String email,@RequestParam("phone") String phone){
 		FooterDomXml fdx = new FooterDomXml();
 		Footer footer = new Footer(info, phone, email);
 		fdx.update(footer, ServletContextListenerImpl.footerXmlPath);
-		return true;
+		return 1;
 	}
 }
