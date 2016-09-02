@@ -3,7 +3,9 @@ package com.yc.law.handler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -75,18 +78,33 @@ public class BackUserHandler {
 		out.close();
 	}
 
+	//因为是使用SpringMVC自带的上传，所以图片的不能直接放在对象中获取，就是这个东西MultipartFile
+	//返回的东西就交给组长了
 	@RequestMapping(value = "/addGeneralUser", method = RequestMethod.POST)
-	public String addGeneralUser(@RequestParam("pics") MultipartFile file, HttpServletRequest req) throws IOException {
-		if (!file.isEmpty()) {
-			System.out.println(file.getOriginalFilename());
+	public String addGeneralUser(@RequestParam("picpath") MultipartFile picpaths,
+								 @RequestParam("usname") String usname,
+								 @RequestParam("usex") String usex,
+								 @RequestParam("upwd") String upwd,
+								 @RequestParam("uemail") String uemail,
+								 @RequestParam("tel") String tel,
+								 @RequestParam("law_user_status") String law_user_status,
+								 @RequestParam("law_user_status_explain") String law_user_status_explain,
+								 @RequestParam("area") String area,
+								 @RequestParam("birthday") String birthday,
+								 HttpServletRequest req) throws IOException {
+		//确保每个内容都有填写了数据
+		if (!picpaths.isEmpty()) {
+			//使用SpringMVC实现图片的上传
 			String path = req.getSession().getServletContext().getRealPath(""); // 获取到该服务器webapp下面到law这个目录的
 			String realPath = path.substring(0, path.lastIndexOf("\\")) + "\\pics"; // 通过截取获取到Pics
-			String picName = System.currentTimeMillis() + file.getOriginalFilename(); // 获取到文件名
-			String savePath = "../pics/" + picName;// 获取到存放的路径
-			System.out.println(savePath);
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realPath, picName));
+			String picName = System.currentTimeMillis() + picpaths.getOriginalFilename(); // 获取到文件名
+			String picpath = "../pics/" + picName;// 获取到存放的路径，及存放到数据库的数据
+			FileUtils.copyInputStreamToFile(picpaths.getInputStream(), new File(realPath, picName));
+			User user =new User(usname,usex,upwd,uemail,picpath,tel,law_user_status,law_user_status_explain,area,birthday);
+			boolean result=backUserService.addGeneralUser(user);
+			return "redirectmanager/generalUser.html";  //这边不只是返回什么样的值
 		}
-		return "success";
+		return "generalUser";//添加失败怎么办
 	}
 
 	@RequestMapping("/login")

@@ -27,6 +27,33 @@ public class User implements Serializable {
 		this.usname = usname;
 		this.upwd = upwd;
 	}
+	
+	public User(String usname, String usex, String upwd, String uemail, String picpath, String tel,
+			String law_user_status, String law_user_status_explain, String area,String birthday) {
+		this.usname = usname;
+		this.usex = usex;
+		this.upwd = upwd;
+		this.uemail = uemail;
+		this.picpath = picpath;
+		this.tel = tel;
+		this.law_user_status = law_user_status;
+		this.law_user_status_explain = law_user_status_explain;
+		this.area = area;
+		this.birthday = birthday;
+	}
+	
+	public User(String usname, String usex, String upwd, String uemail, String tel,
+			String law_user_status, String law_user_status_explain, String area,String birthday) {
+		this.usname = usname;
+		this.usex = usex;
+		this.upwd = upwd;
+		this.uemail = uemail;
+		this.tel = tel;
+		this.law_user_status = law_user_status;
+		this.law_user_status_explain = law_user_status_explain;
+		this.area = area;
+		this.birthday = birthday;
+	}
 
 	public int getUsid() {
 		return usid;
