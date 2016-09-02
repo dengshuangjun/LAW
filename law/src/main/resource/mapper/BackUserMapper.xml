@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<delete id="delGeneralUser" parameterType="String">
+		update law_user set law_user_status='N',law_user_status_explain='此号已废弃' where usid in(#{usid})
 	</delete>
 	
 	<insert id="addGeneralUser" parameterType="User">
