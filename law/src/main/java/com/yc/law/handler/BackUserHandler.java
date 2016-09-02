@@ -47,7 +47,7 @@ public class BackUserHandler {
 	
 	//备注：登陆的日志记录没有写
 	@RequestMapping(value = "/loginSuccess")
-	public String loginSuccess(User user, ModelMap map) {
+	public String loginSuccess(User user, ModelMap map,HttpServletRequest request) {
 		if(user.getUsid()!=0){
 			return "back/manager/index";
 		}
@@ -55,8 +55,12 @@ public class BackUserHandler {
 		if (user == null) {
 			map.put("errorMsg", "用户名或密码错误...");
 			return "back/login";
+		}else{
+			int result = backUserService.addLoginRecord(user.getUsid(),request.getLocalAddr());//填写日志
+			if(result<=0){
+				map.put("errorMsg", "日志写入错误，请与管理员联系...");
+			}
 		}
-		
 		map.addAttribute("user", user);
 		return "back/manager/index";
 	}

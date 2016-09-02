@@ -19,4 +19,6 @@ public interface BackUserService {
 	List<User> findGeneralAll();
 
 	boolean addGeneralUser(User user);
+
+	int addLoginRecord(int usid, String localAddr);
 }

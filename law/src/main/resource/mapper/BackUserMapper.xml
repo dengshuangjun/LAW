@@ -31,4 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select role_id from role where role_name='用户'),#{picpath},#{tel},#{law_user_status},
 		#{law_user_status_explain},#{area},sysdate,to_date(#{birthday},'yyyy-mm-dd'),null,null,null)
 	</insert>
+	
+	<insert id="addLoginRecord">
+		insert into log values(seq_log_id.nextval,#{0},#{1},sysdate,null,null,null)
+	</insert>
 </mapper>
