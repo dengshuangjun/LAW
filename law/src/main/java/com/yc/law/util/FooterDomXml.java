@@ -1,8 +1,6 @@
 package com.yc.law.util;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,7 +15,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.yc.law.entity.Footer;
-import com.yc.law.entity.Style;
 import com.yc.law.listener.ServletContextListenerImpl;
 
 public class FooterDomXml {

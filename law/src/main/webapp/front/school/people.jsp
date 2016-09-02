@@ -212,9 +212,9 @@
 	<!--S=关于我们-->
 	<div id="aboutMe">
 		<p></p>
-		<p>本网站所刊登的各种新闻、信息和专题专栏资料、均为法律智慧网版权所有、未经协议授权，禁止下载使用！</p>
-		<p>业务信箱： 电话：010-110120023 传真：010-63394466</p>
-		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015 制作单位：源辰信息有限公司</p>
+		<p id="footInfo"></p>
+		<p>业务信箱：电话： <span id="footPho"> </span>&nbsp;&nbsp;邮箱：<span id="footMail"></span></p>
+		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015&nbsp;&nbsp; 制作单位：源辰信息有限公司</p>
 	</div>
 	<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
 	<script src="../js/jquery.page.js"></script>

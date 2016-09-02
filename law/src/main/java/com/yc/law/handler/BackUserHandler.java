@@ -3,9 +3,7 @@ package com.yc.law.handler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -83,7 +80,6 @@ public class BackUserHandler {
 		out.flush();
 		out.close();
 	}
-
 
 	//因为是使用SpringMVC自带的上传，所以图片的不能直接放在对象中获取，就是这个东西MultipartFile
 	//返回的东西就交给组长了
