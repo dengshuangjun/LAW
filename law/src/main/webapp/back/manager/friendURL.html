@@ -57,7 +57,13 @@ friConnObj = $('#friendUrl').datagrid({
 		field : 'status',
 		title : '链接状态',
 		width : 60,
-		align : 'center'
+		align : 'center',
+		formatter: function(value,rowData,index){
+			if(rowData.status == "Y"){
+				return '<select><option onclick="changeFriStatus('+'\'Y\','+rowData.conn_id+')">Y</option></select>';
+			}else if(rowData.status == "N"){
+			}
+		}
 	}, {
 		field : 'conn_pic',
 		title : '链接图片',
@@ -186,4 +192,22 @@ function setWeight(conId,num,weight){
 		}
 	});
 }
+
+//修改友情链接状态
+function changeFriStatus(status,fid){
+	$.post("friendUrl/setStatus",{status:status,fid:fid},function(data){
+		if(data){
+			//friConnObj.datagrid("reload");//刷新表格
+			$.messager.show({
+				title:'成功提示',
+				msg:'状态更新成功！！！',
+				timeout:2000,
+				showType:'slide'
+			});
+		}else {
+			$.messager.alert('温馨提示','修改状态失败...','error');
+		}
+	});
+}
+
 </script>

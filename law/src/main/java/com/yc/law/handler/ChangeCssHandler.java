@@ -18,7 +18,7 @@ public class ChangeCssHandler {
 
 	@RequestMapping("/changeCss")
 	@ResponseBody
-	public boolean changeCss(@RequestParam("color") String color,PrintWriter out){
+	public boolean changeCss(@RequestParam("color") String color){
 		StyleDomXml dom = new StyleDomXml();
 		if(color.equals("blue")){
 			Style style = new Style("css/index.css","../css/index.css","../css/art.css");

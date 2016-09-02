@@ -55,4 +55,10 @@ public class FriendUrlHandler {
 		}
 		return 3;
 	}
+	
+	@RequestMapping("setStatus")
+	@ResponseBody
+	public boolean setStatus( String status,int fid){
+		return true;
+	}
 }
