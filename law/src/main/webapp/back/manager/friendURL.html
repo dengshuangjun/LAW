@@ -179,7 +179,7 @@ function showPrePic(value){
 		var str="";
 		var pics=value.split(",");
 		for(var i=0;i<pics.length;i++){
-			str+="<img src='../../"+pics[i]+"' width='60px' height='60px'/>&nbsp;";
+			str+="<img src='../../"+pics[i]+"' width='450px' height='170px'/>&nbsp;";
 		}
 		return str;
 	}
@@ -225,6 +225,12 @@ function changeFriStatus(status,fid){
 
 //添加友情链接
 function addFriconInfo(){
+	//清空预览的值
+	var file = $("#conn_pic")
+	file.after(file.clone().val(""));
+	file.remove();
+	$("#fricon_pic_show").val("");
+	
 	var conn_name = $.trim($("#fricon_name").val());
 	var conn_address = $.trim($("#fricon_addr").val());
 	var conn_weight = $.trim($("#fricon_weight").val());
@@ -256,12 +262,14 @@ function addFriconInfo(){
 
 //修改友情链接
 function updateFriconInfo(){
+	//清空预览的值
+	$("#upfricon_pic_show").val("");
 	var conn_name = $.trim($("#upfricon_name").val());
 	var conn_address = $.trim($("#upfricon_addr").val());
 	var conn_weight = $.trim($("#upfricon_addr").val());
 	var status = $.trim($("#upfricon_status").val());
 	var conn_pic=$.trim($("#upconn_pic").val());
-	
+	//$("#upfricon_pic_show").val(conn_pic);  被修改的图预览
 	if(conn_pic == "" ||conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
 		$.messager.alert("友情提示","信息不能为空\n","error");
 	}else{
