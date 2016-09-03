@@ -7,17 +7,16 @@ import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.yc.law.entity.FriendUrl;
 import com.yc.law.service.FriendUrlService;
 
 @Controller
 @RequestMapping("/friendUrl")
-@SessionAttributes("friendUrl")
 public class FriendUrlHandler {
 
 	@Autowired
@@ -66,8 +65,8 @@ public class FriendUrlHandler {
 	
 	@RequestMapping("/addFriConn")
 	@ResponseBody
-	public int addFriConn(){
-		System.out.println("dfnajsdfhasjd ");
+	public int addFriConn(@RequestBody String uri ){
+		System.out.println("结果是==>"+uri);
 		return 0;
 		//怎么传值
 	}
