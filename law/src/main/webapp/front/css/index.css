@@ -258,7 +258,7 @@ a:hover{
 }
 .content_mid .right .ulleft,.content_mid .right .ulright,.content_mid .right .ulmain{
 	float:left;
-	margin:0 6px;
+	margin:0 12px;
 }
 .content_mid .right .ulleft ul,.content_mid .right .ulright ul,.content_mid .right .ulmain ul{
 	list-style:none;
