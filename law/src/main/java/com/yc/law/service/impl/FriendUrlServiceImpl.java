@@ -30,4 +30,9 @@ public class FriendUrlServiceImpl implements FriendUrlService {
 		return friConnMapping.setWeight(weight,conId);
 	}
 
+	@Override
+	public int setStatus(String status, int fid) {
+		return friConnMapping.setStatus(status, fid);
+	}
+
 }

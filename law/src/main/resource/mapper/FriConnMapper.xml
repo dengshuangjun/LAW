@@ -17,4 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="setWeight">
 		update CONNECTION set conn_weight=#{0} where conn_id=#{1}
 	</update>
+	
+	<update id="setStatus">
+		update CONNECTION set status=#{0} where conn_id=#{1}
+	</update>
 </mapper>

@@ -1,6 +1,27 @@
 <!-- 友情链接 -->
 <table id="friendUrl"></table>
 
+<!-- 添加友情链接 -->
+<div id="add_FriConn" class="easyui-dialog" title="添加友情链接" data-options="iconCls:'icon-add',resizable:true,modal:true,closed:true">
+	<form>
+		<div style="height:200px; width:250px;margin:20px auto;">
+			<label class="friConnlab">友情链接名字:</label><input type="text" id="fricon_name" name="conn_name" /><br /><br />
+			<label class="friConnlab">友情链接地址:</label><input type="text" id="fricon_addr" name="conn_address" /><br /><br />
+			<label class="friConnlab">友情链接权重:</label><input type="number" id="fricon_weight" name="conn_weight" min="0" required="required" value="0"><br /><br />
+			<label class="friConnlab">友情链接状态:</label><select id="fricon_status" name="status" ></select><br /><br />
+			<label class="friConnlab">友情链接图片:</label><input type="file" id="conn_pic" name="conn_pic" onchange="previewMultipleImage(this,'fricon_pic_show')"><br /><br />
+		</div>
+	</form>
+	
+	<div style="width:500px; height:200px; margin:0px auto;">
+		<fieldset id="fricon_pic_show">
+			<legend>图片预览</legend>
+		</fieldset>
+	</div>
+	
+	<a href="javascript:addFriconInfo()" class="easyui-linkbutton" data-options="iconCls:'icon-add'" style="display:block; margin:10px auto;width:80px;">添加</a>
+</div>
+
 <script> 
 var editRow=undefined; //记录当期正在编辑的行
 var friConnObj;
@@ -60,8 +81,9 @@ friConnObj = $('#friendUrl').datagrid({
 		align : 'center',
 		formatter: function(value,rowData,index){
 			if(rowData.status == "Y"){
-				return '<select><option onclick="changeFriStatus('+'\'Y\','+rowData.conn_id+')">Y</option></select>';
+				return '<select><option onclick="changeFriStatus('+'\'Y\','+rowData.conn_id+')">可用</option><option onclick="changeFriStatus('+'\'N\','+rowData.conn_id+')">不可用</option></select>';
 			}else if(rowData.status == "N"){
+				return '<select><option onclick="changeFriStatus('+'\'N\','+rowData.conn_id+')">不可用</option><option onclick="changeFriStatus('+'\'Y\','+rowData.conn_id+')">可用</option></select>';
 			}
 		}
 	}, {
@@ -76,14 +98,14 @@ friConnObj = $('#friendUrl').datagrid({
 				return;
 			}
 		}
-	} ] ]/* ,
+	} ] ],
 	toolbar:[{
 		text:"添加",
 		iconCls:"icon-add",
 		handler:function(){
-			$('#add_group').dialog('open');
+			$('#add_FriConn').dialog('open');
 		}
-	},{
+	}/* ,{
 		text:"修改",
 		iconCls:"icon-edit",
 		handler:function(){
@@ -158,18 +180,28 @@ friConnObj = $('#friendUrl').datagrid({
 		handler:function(){
 			friConnObj.datagrid("rejectChanges");//回滚所有数据
 		}
-	}] */
+	} */]
+});
+
+//初始化
+$(function(){
+	var friStus=$("#fricon_status");
+	var opt;
+	opt= '<select><option value="Y">可用</option><option value="N">不可用</option></select>';
+	friStus.append(opt);
 });
 
 
 //设置预览和修改时的图片显示
 function showPrePic(value){
-	var str="";
-	var pics=value.split(",");
-	for(var i=0;i<pics.length;i++){
-		str+="<img src='../../"+pics[i]+"' width='60px' height='60px'/>&nbsp;";
+	if(value!=undefined){
+		var str="";
+		var pics=value.split(",");
+		for(var i=0;i<pics.length;i++){
+			str+="<img src='../../"+pics[i]+"' width='60px' height='60px'/>&nbsp;";
+		}
+		return str;
 	}
-	return str;
 }
 
 //设置权重
@@ -196,7 +228,7 @@ function setWeight(conId,num,weight){
 //修改友情链接状态
 function changeFriStatus(status,fid){
 	$.post("friendUrl/setStatus",{status:status,fid:fid},function(data){
-		if(data){
+		if(data>0){
 			//friConnObj.datagrid("reload");//刷新表格
 			$.messager.show({
 				title:'成功提示',
@@ -210,4 +242,43 @@ function changeFriStatus(status,fid){
 	});
 }
 
+//添加友情链接
+function addFriconInfo(){
+	var conn_name = $.trim($("#fricon_name").val());
+	var conn_address = $.trim($("#fricon_addr").val());
+	var conn_weight = $.trim($("#fricon_weight").val());
+	var status = $.trim($("#fricon_status").val());
+	
+	$.ajaxFileUpload({
+		url:"friendUrl/addFriConn",
+		secureuri:false,
+		fileElementId:"conn_pic",
+		dataType:"json",
+		data:{conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
+		success:function(data,status){
+			if(data>0){
+				
+			}else{
+				$.messager.alert("错误提示","友情链接添加失败\n","error");
+			}
+		},
+		error:function(data,status,e){
+			$.messager.alert("错误提示","友情链接添加失败\n"+e,"error");
+		}
+	});
+	
+	/* $.post("friendUrl/addFriConn",{status:status,fid:fid},function(data){
+		if(data>0){
+			//friConnObj.datagrid("reload");//刷新表格
+			$.messager.show({
+				title:'成功提示',
+				msg:'状态更新成功！！！',
+				timeout:2000,
+				showType:'slide'
+			});
+		}else {
+			$.messager.alert('温馨提示','修改状态失败...','error');
+		}
+	}); */
+}
 </script>

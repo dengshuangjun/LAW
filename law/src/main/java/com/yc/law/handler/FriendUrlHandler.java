@@ -10,21 +10,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.yc.law.entity.FriendUrl;
 import com.yc.law.service.FriendUrlService;
 
 @Controller
-@RequestMapping("friendUrl")
+@RequestMapping("/friendUrl")
+@SessionAttributes("friendUrl")
 public class FriendUrlHandler {
 
 	@Autowired
 	FriendUrlService friendUrlService;
 
-	@RequestMapping("findUrl")
+	@RequestMapping("/findUrl")
 	@ResponseBody
-	public JSONObject findUrl(@RequestParam("page") int page,
-			@RequestParam("rows") int rows) {
+	public JSONObject findUrl(@RequestParam("page") int page,@RequestParam("rows") int rows) {
 		List<FriendUrl> flist = friendUrlService.findUrlByPage(page, rows);
 		JSONArray json = JSONArray.fromObject(flist);
 		JSONObject jb = new JSONObject();
@@ -33,7 +34,7 @@ public class FriendUrlHandler {
 		return jb;
 	}
 
-	@RequestMapping("setWeight")
+	@RequestMapping("/setWeight")
 	@ResponseBody
 	public int setWeight(int conId, int num, int weight) {
 		// 先查找一下当前的最高权重和最低权重
@@ -57,9 +58,17 @@ public class FriendUrlHandler {
 		return 3;
 	}
 	
-	@RequestMapping("setStatus")
+	@RequestMapping("/setStatus")
 	@ResponseBody
-	public boolean setStatus( String status,int fid){
-		return true;
+	public int setStatus( String status,int fid){
+		return friendUrlService.setStatus(status,fid);
+	}
+	
+	@RequestMapping("/addFriConn")
+	@ResponseBody
+	public int addFriConn(){
+		System.out.println("dfnajsdfhasjd ");
+		return 0;
+		//怎么传值
 	}
 }

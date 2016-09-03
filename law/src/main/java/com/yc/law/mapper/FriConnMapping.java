@@ -30,4 +30,12 @@ public interface FriConnMapping {
 	 * @return
 	 */
 	int setWeight(int weight,int conId);
+	
+	/**
+	 * 设置友情链接的状态
+	 * @param status：状态
+	 * @param fid：id
+	 * @return 
+	 */
+	int setStatus(String status, int fid);
 }
