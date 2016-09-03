@@ -3,6 +3,7 @@ package com.yc.law.service;
 import java.util.List;
 
 import com.yc.law.entity.User;
+import com.yc.law.entity.UserPage;
 
 public interface BackUserService {
 
@@ -11,8 +12,6 @@ public interface BackUserService {
 	void insertInitAdmin(User user);
 
 	int findInitAdmin(String uname);
-	
-	List<User> findGeneralAllByPage(int pageNo,int pageSize);
 
 	int delGeneralUser(String usid);
 	
@@ -21,4 +20,8 @@ public interface BackUserService {
 	boolean addGeneralUser(User user);
 
 	int addLoginRecord(int usid, String localAddr);
+
+	UserPage findGeneralAllByPage(UserPage users);
+
+	int updateGeneralUser(User user);
 }

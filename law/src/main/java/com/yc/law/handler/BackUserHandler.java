@@ -3,9 +3,13 @@ package com.yc.law.handler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +18,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.google.gson.Gson;
 import com.yc.law.entity.User;
+import com.yc.law.entity.UserPage;
 import com.yc.law.service.BackUserService;
 import com.yc.law.util.Encrypt;
 
@@ -64,15 +71,40 @@ public class BackUserHandler {
 		map.addAttribute("user", user);
 		return "back/manager/index";
 	}
-
+	/**
+	 * 获取普通用户数据
+	 * @param users
+	 * @return
+	 */
 	@RequestMapping("/generalUserlistByPage")
-	public void generalUserListAll(int pageNo, int pageSize, PrintWriter out) {
-		List<User> users = backUserService.findGeneralAllByPage(pageNo, pageSize);
-		Gson gson = new Gson();
-		out.println(gson.toJson(users));
-		out.flush();
-		out.close();
+	@ResponseBody
+	public Map<String,Object> getGeneralUserListAll(UserPage users) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		try {
+			users = backUserService.findGeneralAllByPage(users);
+			map.put("total", users.getTotal());
+			map.put("rows", users.getUsers());
+		} catch (Exception e) {
+			System.out.println("generalUserListAll出错啦");
+			e.printStackTrace();
+		}
+		return map;
 	}
+	/**
+	 * 修改用户状态
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/updateGeneralUser")
+	@ResponseBody
+	public boolean updateGeneralUser(User user){
+		if(backUserService.updateGeneralUser(user)>0){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	@RequestMapping("/delGeneralUser")
 	public void delGeneralUser(String usid, PrintWriter out) {
 		int result = backUserService.delGeneralUser(usid);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yc.law.entity.User;
+import com.yc.law.entity.UserPage;
 import com.yc.law.mapper.BackUserMapper;
 import com.yc.law.service.BackUserService;
 import com.yc.law.util.Encrypt;
@@ -39,10 +40,6 @@ public class BackUserServiceImpl implements BackUserService {
 		return backUserMapper.findInitAdmin(uname);
 	}
 
-	@Override
-	public List<User> findGeneralAllByPage(int pageNo,int pageSize) {
-		return backUserMapper.findGeneralAllByPage(pageNo,pageSize);
-	}
 
 	@Override
 	public int delGeneralUser(String usid) {
@@ -60,5 +57,16 @@ public class BackUserServiceImpl implements BackUserService {
 	@Override
 	public int addLoginRecord(int usid, String localAddr) {
 		return backUserMapper.addLoginRecord(usid,localAddr);
+	}
+
+	@Override
+	public UserPage findGeneralAllByPage(UserPage users) {
+		return backUserMapper.findGeneralAllByPage(users);
+	}
+
+	@Override
+	public int updateGeneralUser(User user) {
+		
+		return backUserMapper.updateGeneralUserStatus(user);
 	}
 }
