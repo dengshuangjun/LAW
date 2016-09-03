@@ -3,6 +3,7 @@ package com.yc.law.mapper;
 import java.util.List;
 
 import com.yc.law.entity.User;
+import com.yc.law.entity.UserPage;
 
 public interface BackUserMapper {
 
@@ -12,8 +13,6 @@ public interface BackUserMapper {
 
 	int findInitAdmin(String uname);
 
-	List<User> findGeneralAllByPage(int pageNo,int pageSize);
-
 	int delGeneralUser(String usids);
 	
 	List<User> findGeneralUser();
@@ -21,4 +20,8 @@ public interface BackUserMapper {
 	boolean addGeneralUser(User user);
 
 	int addLoginRecord(int usid, String localAddr);
+
+	UserPage findGeneralAllByPage(UserPage users);
+
+	int updateGeneralUserStatus(User user);
 }

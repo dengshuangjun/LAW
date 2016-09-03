@@ -27,7 +27,7 @@ public class RequestURLListenerImpl implements Filter {
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		User user=(User)request.getSession().getAttribute("user");
 		if(user==null||user.getUsid()==0){
-			request.getRequestDispatcher("/back/login.jsp").forward(arg0, arg1);
+			request.getRequestDispatcher("back/login.jsp").forward(arg0, arg1);
 			return;
 		}
 		arg2.doFilter(arg0, arg1);
