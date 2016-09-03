@@ -161,52 +161,7 @@ friConnObj = $('#friendUrl').datagrid({
 				}
 			}
 		}
-	}/* ,{
-		text:"删除",
-		iconCls:"icon-remove",
-		handler:function(){
-			//获取选中的行   可以删除多行
-			var rows=friConnObj.datagrid("getChecked");
-			if(rows.length>=1){
-				$.messager.confirm('信息确认','您确定要删除选中的社团吗？',function(rs){  
-				    if (rs){  
-				        var gids="";
-				        for(var i=0;i<rows.length-1;i++){
-				        	gids+=rows[i].law_group_id+",";
-				        }
-				        gids+=rows[i].law_group_id;
-				        
-				        //发请求到数据库删除
-				        $.post("../../GroupServlet",{op:"delGroup",gid:gids},function(data){
-				        	if(data>0){
-				        		$.messager.show({
-									title:'成功提示',
-									msg:'社团删除成功！！！',
-									timeout:2000,
-									showType:'slide'
-								});
-				        		rows=null;
-				        		friConnObj.datagrid("reload");//刷新表格
-				        	}else{
-				        		$.messager.alert('失败提示','社团删除失败！！！','error');
-				        	}
-				        });
-				    }else{
-				    	return;
-				    }
-				});
-				
-			}else{
-				$.messager.alert('友情提示','请至少选择一行数据进行删除操作','error');
-			}
-		}
-	},{
-		text:"撤销",
-		iconCls:"icon-redo",
-		handler:function(){
-			friConnObj.datagrid("rejectChanges");//回滚所有数据
-		}
-	} */]
+	}]
 });
 
 //初始化
