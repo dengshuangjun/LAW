@@ -144,7 +144,7 @@ friConnObj = $('#friendUrl').datagrid({
 					var str;
 					if(row.status == "Y"){
 						str= '<select><option onclick="changeFriStatus('+'\'Y\','+row.conn_id+')">可用</option><option onclick="changeFriStatus('+'\'N\','+row.conn_id+')">不可用</option></select>';
-					}else if(rowData.status == "N"){
+					}else if(row.status == "N"){
 						str= '<select><option onclick="changeFriStatus('+'\'N\','+row.conn_id+')">不可用</option><option onclick="changeFriStatus('+'\'Y\','+row.conn_id+')">可用</option></select>';
 					}
 					
@@ -210,7 +210,7 @@ function setWeight(conId,num,weight){
 function changeFriStatus(status,fid){
 	$.post("friendUrl/setStatus",{status:status,fid:fid},function(data){
 		if(data>0){
-			//friConnObj.datagrid("reload");//刷新表格
+			friConnObj.datagrid("reload");//刷新表格
 			$.messager.show({
 				title:'成功提示',
 				msg:'状态更新成功！！！',
