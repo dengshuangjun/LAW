@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="back/css/icon.css">
 <link rel="stylesheet" type="text/css" href="back/css/demo.css">
 <link rel="stylesheet" type="text/css" href="back/css/theme.css">
+<link rel="stylesheet" type="text/css" href="back/css/mainFivePic.css">
 <script type="text/javascript" src="back/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="back/js/jquery.min.js"></script>
 <script type="text/javascript" src="back/js/jquery.easyui.min.js"></script>

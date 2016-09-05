@@ -96,10 +96,7 @@
 				editRow=undefined;
 			}else{
 				//保存到xml
-				var info=rows.info;
-				var phone=rows.phone;
-				var email=rows.email;
-				$.post("footer/updateFooter?info="+info+"&phone="+phone+"&email="+email,function(data){
+				$.post("footer/updateFooter",rows,function(data){
 					if(data>0){//添加成功
 						$.messager.show({
 							title:'成功提示',
