@@ -24,4 +24,6 @@ public interface BackUserMapper {
 	UserPage findGeneralAllByPage(UserPage users);
 
 	int updateGeneralUserStatus(User user);
+
+	int updateAdminInfo(int usid, String usname, String usex, String upwd,String uemail, String tel, String area, String birthday);
 }

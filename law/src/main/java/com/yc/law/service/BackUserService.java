@@ -24,4 +24,6 @@ public interface BackUserService {
 	UserPage findGeneralAllByPage(UserPage users);
 
 	int updateGeneralUser(User user);
+
+	int updateAdminInfo(int usid, String usname, String usex, String upwd,String uemail, String tel, String area, String birthday);
 }

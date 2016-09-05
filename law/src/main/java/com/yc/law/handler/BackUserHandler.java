@@ -151,4 +151,24 @@ public class BackUserHandler {
 		return "back/error404";
 	}
 	
+	/**
+	 * 修改用户状态
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/updateAdminInfo")
+	@ResponseBody
+	public boolean updateAdminInfo(@RequestParam("usid") int usid,
+								   @RequestParam("usname") String usname,
+								   @RequestParam("usex") String usex,
+								   @RequestParam("upwd") String upwd,
+								   @RequestParam("uemail") String uemail,
+								   @RequestParam("tel") String tel,
+								   @RequestParam("area") String area,
+								   @RequestParam("birthday") String birthday){
+		if(backUserService.updateAdminInfo(usid,usname,usex,upwd,uemail,tel,area,birthday)>0){
+			return true;
+		}
+		return false;
+	}
 }
