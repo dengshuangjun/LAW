@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class FriendUrls implements Serializable{
+public class UploadFriendUrl implements Serializable{
 
 	/**
-	 *友情链接的实体 
+	 *友情链接上传图片的实体 
 	 */
 	private static final long serialVersionUID = -8647969052686794358L;
 	private MultipartFile conn_pics;
