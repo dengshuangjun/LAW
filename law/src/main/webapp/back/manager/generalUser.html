@@ -6,7 +6,7 @@
 		    		<tr>
 		    			<td>
 			    			<div>
-						     	<fieldset id="userPhoto"  style="width:80px; height:100px;">
+						     	<fieldset id="userPhoto"  style="width:60px; height:80px;">
 						     		<legend>头像预览</legend>
 						     	</fieldset>
 	     					</div>
@@ -215,6 +215,8 @@ function myformatter(date){
 	return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
 }
 function submitForm(){
+	var usname=$("input[name='usname']").val();
+	
 	$.ajaxFileUpload({
 		url:"back/addGeneralUser",
 		secureuri:false,
@@ -230,15 +232,17 @@ function submitForm(){
 			area:$("input[name='area']").val(),
 			birthday:$('#birthday').datebox('getValue')},
 		success:function(data,status){
-			if(data>0){
+			if(data==1){
 				$.messager.show({title:'成功提示',msg:'添加成功',timeout:2000,showType:'silde'});
 				userObj.datagrid("reload");
-			}else{
-				$.messager.alert('错误提示1','添加失败。。。\n'+e,'error');
+			}else if(data==2){
+				$.messager.alert('错误提示','添加失败。。。\n','error');
+			}else if(data==3){
+				$.messager.alert('错误提示','添加失败。。。\n','error');
 			}
 		},
 		error:function(data,status,e){
-			$.messager.alert('错误提示','添加失败。。。\n'+e,'error');
+			$.messager.alert('错误提示','添加失败。。。\n','error');
 		}
 	});
 }

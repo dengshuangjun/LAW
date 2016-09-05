@@ -18,7 +18,7 @@ public interface BackUserService {
 	
 	List<User> findGeneralAll();
 
-	boolean addGeneralUser(UploadUser uploadUser);
+	int addGeneralUser(UploadUser uploadUser);
 
 
 	UserPage findGeneralAllByPage(UserPage users);

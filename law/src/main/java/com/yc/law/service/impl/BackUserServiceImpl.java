@@ -47,7 +47,7 @@ public class BackUserServiceImpl implements BackUserService {
 		return backUserMapper.findGeneralUser();
 	}
 	@Override
-	public boolean addGeneralUser(UploadUser uploadUser){
+	public int addGeneralUser(UploadUser uploadUser){
 		return backUserMapper.addGeneralUser(uploadUser);
 	}
 

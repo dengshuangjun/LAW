@@ -17,7 +17,7 @@ public interface BackUserMapper {
 
 	List<User> findGeneralUser();
 
-	boolean addGeneralUser(UploadUser uploadUser);
+	int addGeneralUser(UploadUser uploadUser);
 
 
 	UserPage findGeneralAllByPage(UserPage users);
