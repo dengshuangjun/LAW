@@ -17,5 +17,4 @@ public class ServletContextListenerImpl implements ServletContextListener{
 		xmlPath = arg0.getServletContext().getRealPath("xml/style.xml");
 		footerXmlPath = arg0.getServletContext().getRealPath("xml/footer.xml");
 	}
-
 }

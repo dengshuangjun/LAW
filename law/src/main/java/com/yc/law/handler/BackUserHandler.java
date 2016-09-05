@@ -3,11 +3,19 @@ package com.yc.law.handler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+
+
+
+
+
 
 
 import org.apache.commons.io.FileUtils;
@@ -23,6 +31,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.yc.law.entity.Role;
+import com.yc.law.entity.UploadUser;
 import com.yc.law.entity.User;
 import com.yc.law.entity.UserPage;
 import com.yc.law.service.BackUserService;
@@ -54,7 +64,7 @@ public class BackUserHandler {
 	
 	//备注：登陆的日志记录没有写
 	@RequestMapping(value = "/loginSuccess")
-	public String loginSuccess(User user, ModelMap map,HttpServletRequest request) {
+	public String loginSuccess(User user, ModelMap map) {
 		if(user.getUsid()!=0){
 			return "back/manager/index";
 		}
@@ -62,11 +72,6 @@ public class BackUserHandler {
 		if (user == null) {
 			map.put("errorMsg", "用户名或密码错误...");
 			return "back/login";
-		}else{
-			int result = backUserService.addLoginRecord(user.getUsid(),request.getLocalAddr());//填写日志
-			if(result<=0){
-				map.put("errorMsg", "日志写入错误，请与管理员联系...");
-			}
 		}
 		map.addAttribute("user", user);
 		return "back/manager/index";
@@ -104,44 +109,43 @@ public class BackUserHandler {
 		return false;
 	}
 	
-	
-	@RequestMapping("/delGeneralUser")
-	public void delGeneralUser(String usid, PrintWriter out) {
-		int result = backUserService.delGeneralUser(usid);
-		Gson gson = new Gson();
-		out.println(gson.toJson(result));
-		out.flush();
-		out.close();
+	@RequestMapping("/getRoleInfo")
+	@ResponseBody
+	public List<Role> getRoleInfo(){
+		
+		return backUserService.getRoleInfo();
 	}
 
 	//因为是使用SpringMVC自带的上传，所以图片的不能直接放在对象中获取，就是这个东西MultipartFile
 	//返回的东西就交给组长了
 	@RequestMapping(value = "/addGeneralUser", method = RequestMethod.POST)
-	public String addGeneralUser(@RequestParam("picpath") MultipartFile picpaths,
-								 @RequestParam("usname") String usname,
-								 @RequestParam("usex") String usex,
-								 @RequestParam("upwd") String upwd,
-								 @RequestParam("uemail") String uemail,
-								 @RequestParam("tel") String tel,
-								 @RequestParam("law_user_status") String law_user_status,
-								 @RequestParam("law_user_status_explain") String law_user_status_explain,
-								 @RequestParam("area") String area,
-								 @RequestParam("birthday") String birthday,
-								 HttpServletRequest req) throws IOException {
-		//确保每个内容都有填写了数据
-		if (!picpaths.isEmpty()) {
-			//使用SpringMVC实现图片的上传
-			String path = req.getSession().getServletContext().getRealPath(""); // 获取到该服务器webapp下面到law这个目录的
-			String realPath = path.substring(0, path.lastIndexOf("\\")) + "\\pics"; // 通过截取获取到Pics
-			String picName = System.currentTimeMillis() + picpaths.getOriginalFilename(); // 获取到文件名
-			String picpath = "../pics/" + picName;// 获取到存放的路径，及存放到数据库的数据
-			FileUtils.copyInputStreamToFile(picpaths.getInputStream(), new File(realPath, picName));
-			User user =new User(usname,usex,upwd,uemail,picpath,tel,law_user_status,law_user_status_explain,area,birthday);
-			boolean result=backUserService.addGeneralUser(user);
-			return "redirectmanager/generalUser.html";  //这边不只是返回什么样的值
+	public int addGeneralUser(UploadUser uploadUser){
+		System.out.println(uploadUser);
+		if (!uploadUser.getImageFile().isEmpty()) {
+			String paths=System.getProperty("evan.webapp");
+			paths=paths.substring(0,paths.lastIndexOf("\\"));
+			String realPath =paths.substring(0,paths.lastIndexOf("\\"))+ "\\pics";//获取到服务器存放文件的目录
+			String picName ="../pics/"+picSting()+new Date().getTime();
+			try {
+				FileUtils.copyInputStreamToFile(uploadUser.getImageFile().getInputStream(), new File(realPath, picName));
+				uploadUser.setPicpath(picName);//将图片名字存放到上传对象
+				if(backUserService.addGeneralUser(uploadUser)){
+					return 1;
+				}else{
+					return 2;
+				}
+			} catch (IOException e) {
+				return 3;//表示上传的文件不合法
+			}
+		}else{
+			if(backUserService.addGeneralUser(uploadUser)){
+				return 1;
+			}else{
+				return 2;
+			}
 		}
-		return "generalUser";//添加失败怎么办
 	}
+	
 	@RequestMapping("/login")
 	public String backLogin(){
 		return "back/login";
@@ -150,5 +154,26 @@ public class BackUserHandler {
 	public String request404(){
 		return "back/error404";
 	}
-	
+	/**
+	 * 生成含有字母的验证码
+	 * @return
+	 */
+	public String picSting(){
+		Random ra = new Random();
+		int num1;
+		StringBuffer sbf2 = new StringBuffer();
+		while (sbf2.length() < 8) {
+			if(ra.nextInt(3)==0){
+				num1=ra.nextInt(10);
+				sbf2.append(num1);
+			}else if(ra.nextInt(3)==1){
+				num1=ra.nextInt(26)+97;
+				sbf2.append((char)num1);
+			}else{
+				num1=ra.nextInt(26)+65;
+				sbf2.append((char)num1);
+			}
+		}
+		return sbf2.toString();
+	}
 }
