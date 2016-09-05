@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select ${page} page,${rows} rowss,(select count(1) from law_user) total,nn.* from
 		(select rownum rn,n.* from (select  usid,usname,usex,uemail,role_name,picpath,tel,law_user_status,
 		law_user_status_explain,area,to_char(register_time,'yyyy-MM-dd hh24:mi:ss') register_time,
-		to_char(birthday,'yyyy-MM-dd hh24:mi:ss') birthday from law_user join role
+		to_char(birthday,'yyyy-MM-dd') birthday from law_user join role
 		on law_user.role_id=role.role_id) n where #{page}*#{rows}>=rownum)nn where rn>#{rows}*(#{page}-1)		
 	</select>
 	
@@ -51,6 +51,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="addGeneralUser" parameterType="UploadUser">
-		
+		<selectKey keyColumn="currval" keyProperty="usid" resultType="int" order="BEFORE">
+			select seq_law_user_id.nextval currval from dual
+		</selectKey>
+		insert into law_user(usid,usname,usex,upwd,uemail,role_id
+		<if test="picpath!=null">
+			,picpath
+		</if>
+		<if test="tel!=null">
+			,tel
+		</if>
+		<if test="law_user_status_explain!=null">
+			,law_user_status_explain
+		</if>
+		<if test="area!=null">
+			,area
+		</if>
+		<if test="birthday!=null">
+			,birthday
+		</if>) 
+			values(#{usid},#{usname},#{usex},#{upwd},#{uemail},#{role_id}
+		<if test="picpath!=null">
+			,#{picpath}
+		</if>
+		<if test="tel!=null">
+			,#{tel}
+		</if>
+		<if test="law_user_status_explain!=null">
+			,#{law_user_status_explain}
+		</if>
+		<if test="area!=null">
+			,#{area}
+		</if>
+		<if test="birthday!=null">
+			,to_date(#{birthday},'yyyy-MM-dd')
+		</if>)
 	</insert>
 </mapper>

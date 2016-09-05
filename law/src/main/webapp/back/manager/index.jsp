@@ -24,8 +24,8 @@
 <script type="text/javascript" src="back/js/ajaxfileupload.js"></script>
 <style type="text/css">
 	#userPhoto img{
-	width: 80px;
-	height:100px;
+	width: 6px;
+	height:80px;
 	}
 </style>
 </head>

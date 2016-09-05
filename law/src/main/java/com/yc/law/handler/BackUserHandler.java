@@ -121,15 +121,16 @@ public class BackUserHandler {
 	@RequestMapping(value = "/addGeneralUser", method = RequestMethod.POST)
 	public int addGeneralUser(UploadUser uploadUser){
 		System.out.println(uploadUser);
-		if (!uploadUser.getImageFile().isEmpty()) {
+		MultipartFile imageFile = uploadUser.getImageFile();
+		if (!imageFile.isEmpty()) {
 			String paths=System.getProperty("evan.webapp");
 			paths=paths.substring(0,paths.lastIndexOf("\\"));
 			String realPath =paths.substring(0,paths.lastIndexOf("\\"))+ "\\pics";//获取到服务器存放文件的目录
-			String picName ="../pics/"+picSting()+new Date().getTime();
+			String picName ="../pics/"+picSting()+new Date().getTime()+imageFile.getOriginalFilename().substring(imageFile.getOriginalFilename().indexOf("."));
 			try {
 				FileUtils.copyInputStreamToFile(uploadUser.getImageFile().getInputStream(), new File(realPath, picName));
 				uploadUser.setPicpath(picName);//将图片名字存放到上传对象
-				if(backUserService.addGeneralUser(uploadUser)){
+				if(backUserService.addGeneralUser(uploadUser)>0){
 					return 1;
 				}else{
 					return 2;
@@ -138,7 +139,7 @@ public class BackUserHandler {
 				return 3;//表示上传的文件不合法
 			}
 		}else{
-			if(backUserService.addGeneralUser(uploadUser)){
+			if(backUserService.addGeneralUser(uploadUser)>0){
 				return 1;
 			}else{
 				return 2;
