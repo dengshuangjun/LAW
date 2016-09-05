@@ -5,7 +5,6 @@ import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.law.entity.Footer;
@@ -29,9 +28,8 @@ public class SaveFooterHandler {
 	
 	@RequestMapping("/updateFooter")
 	@ResponseBody
-	public int updateFooter(@RequestParam("info") String info,@RequestParam("email") String email,@RequestParam("phone") String phone){
+	public int updateFooter(Footer footer){
 		FooterDomXml fdx = new FooterDomXml();
-		Footer footer = new Footer(info, phone, email);
 		fdx.update(footer, ServletContextListenerImpl.footerXmlPath);
 		return 1;
 	}

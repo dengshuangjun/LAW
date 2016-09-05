@@ -2,6 +2,8 @@ package com.yc.law.service;
 
 import java.util.List;
 
+import com.yc.law.entity.Role;
+import com.yc.law.entity.UploadUser;
 import com.yc.law.entity.User;
 import com.yc.law.entity.UserPage;
 
@@ -13,17 +15,17 @@ public interface BackUserService {
 
 	int findInitAdmin(String uname);
 
-	int delGeneralUser(String usid);
 	
 	List<User> findGeneralAll();
 
-	boolean addGeneralUser(User user);
+	int addGeneralUser(UploadUser uploadUser);
 
-	int addLoginRecord(int usid, String localAddr);
 
 	UserPage findGeneralAllByPage(UserPage users);
 
 	int updateGeneralUser(User user);
 
 	int updateAdminInfo(int usid, String usname, String usex, String upwd,String uemail, String tel, String area, String birthday);
+	
+	List<Role> getRoleInfo();
 }
