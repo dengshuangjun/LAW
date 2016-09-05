@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yc.law.entity.Role;
+import com.yc.law.entity.UploadUser;
 import com.yc.law.entity.User;
 import com.yc.law.entity.UserPage;
 import com.yc.law.mapper.BackUserMapper;
@@ -41,22 +43,12 @@ public class BackUserServiceImpl implements BackUserService {
 	}
 
 
-	@Override
-	public int delGeneralUser(String usid) {
-		return backUserMapper.delGeneralUser(usid);
-	}
-	
 	public List<User> findGeneralAll() {
 		return backUserMapper.findGeneralUser();
 	}
 	@Override
-	public boolean addGeneralUser(User user){
-		return backUserMapper.addGeneralUser(user);
-	}
-
-	@Override
-	public int addLoginRecord(int usid, String localAddr) {
-		return backUserMapper.addLoginRecord(usid,localAddr);
+	public boolean addGeneralUser(UploadUser uploadUser){
+		return backUserMapper.addGeneralUser(uploadUser);
 	}
 
 	@Override
@@ -68,5 +60,10 @@ public class BackUserServiceImpl implements BackUserService {
 	public int updateGeneralUser(User user) {
 		
 		return backUserMapper.updateGeneralUserStatus(user);
+	}
+
+	@Override
+	public List<Role> getRoleInfo() {
+		return backUserMapper.getRoleInfo();
 	}
 }

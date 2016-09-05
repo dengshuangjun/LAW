@@ -18,7 +18,11 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<!-- 扫描bean包 -->
-	<context:component-scan base-package="com.yc.law" />
+	<context:component-scan base-package="com.yc.law">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
 	<bean id="user" class="com.yc.law.entity.User" />
 	<!-- 引入外部属性文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
@@ -37,41 +41,16 @@
 	<!-- 配制映射接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
 		p:sqlSessionFactoryBeanName="sqlSessionFactory" p:basePackage="com.yc.law.mapper" />
-
-	<!-- 动态也页面请求处理类 (响应视图配置) -->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-	<!-- 邮件发送处理bean -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="${mail.smtp.host}" />
-		<property name="username" value="${mail.smtp.username}" />
-		<property name="password" value="${mail.smtp.password}" />
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
-				<prop key="mail.smtp.timeout">${mail.smtp.timeout}</prop>
-			</props>
-		</property>
-	</bean>
-
-	<!-- 1.配制事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		p:dataSource-ref="dataSource" />
-
-	<!-- 2.配制事务关联 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
 	<!-- 默认静态资源处理请求 -->
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
-	
+
 	<!-- 限制文件为200M，resolveLazily是为了推迟文件解析，已捕获文件大小异常 -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="209715200"/>
-		<property name="defaultEncoding" value="UTF-8"/>
-		<property name="resolveLazily" value="true"/>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="209715200" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="resolveLazily" value="true" />
 	</bean>
-	
+
 </beans>
