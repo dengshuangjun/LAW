@@ -9,13 +9,10 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
 import com.yc.law.entity.Footer;
-import com.yc.law.listener.ServletContextListenerImpl;
 
 public class FooterDomXml {
 
@@ -23,7 +20,7 @@ public class FooterDomXml {
 	 * 获取节点信息
 	 * @return
 	 */
-	public Footer getFootInfo() {
+	public Footer getFootInfo(String paths) {
 		Footer footer=new Footer();
 		try {
 			//1.得到DOM工厂解析实例
@@ -31,7 +28,7 @@ public class FooterDomXml {
 			//2.从工厂中得到解析器
 			DocumentBuilder builder=factory.newDocumentBuilder();
 			//3.把要解析的xml放入解析器中
-			Document doc=builder.parse(new File(ServletContextListenerImpl.footerXmlPath));
+			Document doc=builder.parse(new File(paths));
 			//4.开始解析根据节点来获取里面的内容
 			NodeList nl=doc.getElementsByTagName("footer");
 			Element e=(Element) nl.item(0);

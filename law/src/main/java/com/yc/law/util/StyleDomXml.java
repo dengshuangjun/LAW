@@ -10,6 +10,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.logging.log4j.LogManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -68,9 +69,9 @@ public class StyleDomXml {
 			e.getElementsByTagName("dev").item(0).getFirstChild().setNodeValue(b.getDev());
 			//7.输出xml
 			if(docToXml(doc,fileName)){
-				System.out.println("docToXml修改成功");
+				LogManager.getLogger().debug("前台样式修改成功。");
 			}else{
-				System.out.println("docToXml修改失败");
+				LogManager.getLogger().debug("前台样式修改失败。");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

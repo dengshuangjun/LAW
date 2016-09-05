@@ -9,7 +9,7 @@
 			<label class="friConnlab">友情链接地址:</label><input type="text" id="fricon_addr" name="conn_address" /><br /><br />
 			<label class="friConnlab">友情链接权重:</label><input type="number" id="fricon_weight" name="conn_weight" min="0" required="required" value="0"><br /><br />
 			<label class="friConnlab">友情链接状态:</label><select id="fricon_status" name="status" ></select><br /><br />
-			<label class="friConnlab">友情链接图片:</label><input type="file" id="conn_pic" name="conn_pic" onchange="previewMultipleImage(this,'fricon_pic_show')"><br /><br />
+			<label class="friConnlab">友情链接图片:</label><input type="file" id="conn_pics" name="conn_pics" onchange="previewMultipleImage(this,'fricon_pic_show')"><br /><br />
 		</div>
 	</form>
 	
@@ -29,7 +29,7 @@
 			<label class="friConnlab">友情链接地址:</label><input type="text" id="upfricon_addr" name="conn_address" /><br /><br />
 			<label class="friConnlab">友情链接权重:</label><input type="number" id="upfricon_weight" name="conn_weight" min="0" required="required" value="0"><br /><br />
 			<label class="friConnlab">友情链接状态:</label><select id="upfricon_status" name="status" ></select><br /><br />
-			<label class="friConnlab">友情链接图片:</label><input type="file" id="upconn_pic" name="conn_pic" onchange="previewMultipleImage(this,'upfricon_pic_show')"><br /><br />
+			<label class="friConnlab">友情链接图片:</label><input type="file" id="upconn_pics" name="conn_pics" onchange="previewMultipleImage(this,'upfricon_pic_show')"><br /><br />
 		</div>
 	</form>
 	
@@ -107,7 +107,7 @@ friConnObj = $('#friendUrl').datagrid({
 			}
 		}
 	}, {
-		field : 'conn_pic',
+		field : 'conn_pics',
 		title : '链接图片',
 		width : 200,
 		align : 'center',
@@ -123,6 +123,11 @@ friConnObj = $('#friendUrl').datagrid({
 		text:"添加",
 		iconCls:"icon-add",
 		handler:function(){
+			//清空预览的值
+			var file = $("#conn_pics")
+			file.after(file.clone().val(""));
+			file.remove();
+			$("#fricon_pic_show").val("");
 			$('#add_FriConn').dialog('open');
 		}
 	},{
@@ -153,7 +158,7 @@ friConnObj = $('#friendUrl').datagrid({
 					$('#upfricon_weight').val(row.conn_weight);
 					$('#upfricon_status').html(str);
 					//修改的图片路径
-					picPath = row.conn_pic;
+					picPath = row.conn_pics;
 					if( null != picPath && "" != picPath){
 						$('#upfricon_pic_show').html(showPrePic(picPath));
 					}
@@ -225,30 +230,24 @@ function changeFriStatus(status,fid){
 
 //添加友情链接
 function addFriconInfo(){
-	//清空预览的值
-	var file = $("#conn_pic")
-	file.after(file.clone().val(""));
-	file.remove();
-	$("#fricon_pic_show").val("");
-	
 	var conn_name = $.trim($("#fricon_name").val());
 	var conn_address = $.trim($("#fricon_addr").val());
 	var conn_weight = $.trim($("#fricon_weight").val());
 	var status = $.trim($("#fricon_status").val());
-	var conn_pic=$.trim($("#conn_pic").val());
-	if(conn_pic == "" ||conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
+	var conn_pics=$.trim($("#conn_pics").val());
+	if(conn_pics == "" ||conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
 		$.messager.alert("友情提示","信息不能为空\n","error");
 	}else{
 		$.ajaxFileUpload({
 			url:"friendUrl/addFriConn",
 			secureuri:false,
-			fileElementId:"conn_pic",
-			//dataType:"text",
-			data:{conn_name,conn_address,conn_weight,status},
-			//contentType : "application/json",
+			fileElementId:"conn_pics",
+			dataType:"json",
+			data:{conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
 			success:function(data,status){
 				if(data>0){
-			
+					$.messager.show({title:'成功提示',msg:'友情链接添加成功',timeout:2000,showType:'silde'});
+					friConnObj.datagrid("reload");
 				}else{
 					$.messager.alert("错误提示","友情链接添加失败\n","error");
 				}
@@ -268,9 +267,9 @@ function updateFriconInfo(){
 	var conn_address = $.trim($("#upfricon_addr").val());
 	var conn_weight = $.trim($("#upfricon_addr").val());
 	var status = $.trim($("#upfricon_status").val());
-	var conn_pic=$.trim($("#upconn_pic").val());
-	//$("#upfricon_pic_show").val(conn_pic);  被修改的图预览
-	if(conn_pic == "" ||conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
+	var conn_pics=$.trim($("#upconn_pics").val());
+	//$("#upfricon_pic_show").val(conn_pics);  被修改的图预览
+	if(conn_pics == "" ||conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
 		$.messager.alert("友情提示","信息不能为空\n","error");
 	}else{
 		

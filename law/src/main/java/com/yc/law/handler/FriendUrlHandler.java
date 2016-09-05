@@ -7,12 +7,11 @@ import net.sf.json.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.yc.law.entity.FriendUrl;
+import com.yc.law.entity.FriendUrls;
 import com.yc.law.service.FriendUrlService;
 
 @Controller
@@ -65,9 +64,8 @@ public class FriendUrlHandler {
 	
 	@RequestMapping("/addFriConn")
 	@ResponseBody
-	public int addFriConn(@RequestBody String uri ){
-		System.out.println("结果是==>"+uri);
+	public int addFriConn(FriendUrls friendUrls){
+		System.out.println("结果是==>"+friendUrls);
 		return 0;
-		//怎么传值
 	}
 }
