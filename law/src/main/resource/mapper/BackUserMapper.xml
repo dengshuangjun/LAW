@@ -87,4 +87,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,to_date(#{birthday},'yyyy-MM-dd')
 		</if>)
 	</insert>
+	
+	<update id="updateAdminInfo">
+		update law_user set usname=#{1} , usex=#{2} , upwd=#{3} ,uemail=#{4}, tel=#{5} , area=#{6} , birthday=to_date(#{7},'dd-mm-yyyy') where usid=#{0}
+	</update>
 </mapper>

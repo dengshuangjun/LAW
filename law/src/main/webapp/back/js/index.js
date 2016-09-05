@@ -136,7 +136,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'管理员管理',  
 					    closable:true, 
-					    href:'back/manager/admin.html'
+					    href:'back/manager/admin.jsp'
 					});
 				}
 				
