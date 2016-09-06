@@ -65,6 +65,7 @@ public class BackUserServiceImpl implements BackUserService {
 	@Override
 	public int updateAdminInfo(int usid, String usname, String usex, String upwd,String uemail, String tel, String area,
 			String birthday) {
+		upwd=Encrypt.md5AndSha(upwd);
 		return backUserMapper.updateAdminInfo(usid,usname,usex,upwd,uemail,tel,area,birthday);
 	}
 	
