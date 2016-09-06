@@ -25,6 +25,8 @@ public interface BackUserService {
 
 	int updateGeneralUser(User user);
 
+	int updateAdminInfo(int usid, String usname, String usex, String upwd,String uemail, String tel, String area, String birthday);
+	
 	List<Role> getRoleInfo();
 
 	int delUsers(List<Integer> list);
