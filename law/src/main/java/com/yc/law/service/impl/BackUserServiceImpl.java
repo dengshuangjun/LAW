@@ -72,4 +72,11 @@ public class BackUserServiceImpl implements BackUserService {
 	public List<Role> getRoleInfo() {
 		return backUserMapper.getRoleInfo();
 	}
+
+	@Override
+	public int delUsers(List<Integer> list) {
+		return backUserMapper.delUsers(list);
+	}
+
+	
 }
