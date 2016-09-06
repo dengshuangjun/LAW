@@ -96,20 +96,18 @@
 		    			<td>头像:</td>
 		    			<td>
 		    				<input type="file" name="imageFile" accept="image/*" id="imageFile"  name="picpath" checked="checked"  onchange="previewMultipleImage(this,'userPhoto')"/>
-		    				
 						</td>
-		    		
 		    		<tr>
 		    			<td>用户名:</td>
-		    			<td><input class="easyui-textbox" type="text" id="usname" name="usname" data-options="required:true"></input><span id="usnameResult" style="color:red">*</span></td>
+		    			<td><input class="easyui-textbox" type="text" id="usname" name="usname" data-options="required:true"/><span id="usnameResult" style="color:red">*</span></td>
 		    		</tr>
 		    		<tr>
 		    			<td>密码:</td>
-		    			<td><input class="easyui-textbox" type="password" id="upwd" name="upwd" data-options="required:true"></input><span id="upwdResult" style="color:red">*</span></td>
+		    			<td><input class="easyui-textbox" type="password" id="upwd" name="upwd" data-options="required:true,validType:'length[6,16]'"/><span id="upwdResult" style="color:red">*</span></td>
 		    		</tr>
 		    		<tr>
 		    			<td>邮箱:</td>
-		    			<td><input class="easyui-textbox" type="email" id="uemail" name="uemail" data-options="required:true"></input><span id="uemailResult" style="color:red">*</span></td>
+		    			<td><input class="easyui-textbox" type="email" id="uemail" name="uemail" data-options="required:true"/><span id="uemailResult" style="color:red">*</span></td>
 		    		</tr>
 		    		<tr>
 		    			<td>性别:</td>
@@ -129,34 +127,33 @@
 		    		
 		    		<tr>
 		    			<td>联系方式:</td>
-		    			<td><input class="easyui-textbox" type="text" name="tel"></input></td>
+		    			<td><input class="easyui-textbox" type="text" name="tel"/></td>
 		    		</tr>
 		    		<tr>
 		    			<td>备注:</td>
-		    			<td><input class="easyui-textbox" name="law_user_status_explain" data-options="multiline:true" style="height:60px"></input></td>
+		    			<td><input class="easyui-textbox" name="law_user_status_explain" data-options="multiline:true" style="height:60px"/></td>
 		    		</tr>
 		    		<tr>
 		    			<td>联系地址:</td>
-		    			<td><input class="easyui-textbox" type="text" name="area"></input></td>
+		    			<td><input class="easyui-textbox" type="text" name="area"/></td>
 		    		</tr>
 		    		
 		    		<tr>
 		    			<td>出生日期:</td>
-		    			<td><input class="easyui-datebox" data-options="onSelect:onSelect" id="birthday"></input></td>
+		    			<td><input class="easyui-datebox" data-options="onSelect:onSelect" id="birthday"/></td>
 		    		</tr>
 		    		<tr><td></td><td><span id="birthdayResult" style="color:red">&nbsp;</span></td></tr>
 		    	</table>
 		    </form>
 		    <p id="usnameResult" style="color:red; text-align:center;">请注意：标注为*号的为必填项，否则不能添加或者添加失败...</p>
 		    <div style="text-align:center; margin-bottom: 20px;">
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">确认添加</a>
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">重置</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitUserForm()">确认添加</a>
+		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearUserForm()">重置</a>
 		    </div>
 	    </div>
 	    
 </div>
 <script type="text/javascript">
->>>>>>> branch 'master' of ssh://git@github.com/dengshuangjun/LAW.git
 var userObj;
 var editRowIng=undefined;
 var currentOp;
@@ -238,7 +235,53 @@ userObj=$('#generalUser_data').datagrid({
 				editRowIng=index;
       		}
   		}
-      },{
+      },{//datagrid 顶部的工具栏.
+        	text:'删除',
+          	iconCls:"icon-remove",
+          	handler:function(){
+          		var rows=userObj.datagrid("getSelections");//获取选中的行
+          		if(rows!=undefined){
+					$.messager.confirm('信息确认','您确定要删除选定的数据吗?',function(rs){
+						if(rs){
+							var nids="";
+							for(var i=0;i<rows.length-1;i++){
+								nids+=rows[i].usid+",";
+							}
+							nids+=rows[rows.length-1].usid;
+							$.post("back/delUsers",{usid:nids},function(data){
+								if(data>0){
+									$.messager.show({
+										title:'成功提示',
+										msg:'删除成功',
+										timeout:2000,
+										showType:'slide'
+									});
+									rows=null;
+									userObj.datagrid("reload");//刷新表格
+								}else{
+									$.messager.alert('失败提示','删除失败','error');
+								}
+							});
+						}else{
+							return;
+						}
+					});
+
+          		}
+      		}
+        },{
+      	text:'撤销',
+      	iconCls:"icon-cancel",
+      	handler:function(){
+      		var rows=userObj.datagrid("getSelections")[0];//获取选中的行
+      		if(rows!==undefined){
+      			$('#userstate'+rows.usid).attr('disabled','none');//下拉不能被修改
+          		userObj.datagrid("endEdit",editRowIng);
+          		editRowStatus=undefined;
+    			editRowIng=undefined;
+      		}
+  		}
+    	},{
         	text:'保存',
           	iconCls:"icon-save",
           	handler:function(){
@@ -295,63 +338,97 @@ function myformatter(date){
 	var d = date.getDate();
 	return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
 }
-function submitForm(){
-	$.ajaxFileUpload({
-		url:"back/addGeneralUser",
-		secureuri:false,
-		fileElementId:"imageFile",
-		dataType:"json",
-		data:{usname:$("input[name='usname']").val(),
-			usex:$("input[name='usex']").val(),
-			upwd:$("input[name='upwd']").val(),
-			uemail:$("input[name='uemail']").val(),
-			role_id:$("input[name='role_id']").val(),
-			tel:$("input[name='tel']").val(),
-			law_user_status_explain:$("input[name='law_user_status_explain']").val(),
-			area:$("input[name='area']").val(),
-			birthday:$('#birthday').datebox('getValue')},
-		success:function(data,status){
-			if(data>0){
-				$.messager.show({title:'成功提示',msg:'添加成功',timeout:2000,showType:'silde'});
-				userObj.datagrid("reload");
-			}else{
-				$.messager.alert('错误提示1','添加失败。。。\n'+e,'error');
-			}
-		},
-		error:function(data,status,e){
-			$.messager.alert('错误提示','添加失败。。。\n'+e,'error');
-		}
-	});
+var zcuname=false;
+var zcemail=false;
+function submitUserForm(){
+	checkzcuname() ;
+	checkzcemail() ;
+	if(!zcuname ){
+		$.messager.alert('错误提示','用户名已注册或者长度少于2','error');
+	}else if(!zcemail){
+		$.messager.alert('错误提示','邮箱不合法或者已经注册','error');
+	}else if(usname!=''&&upwd!=''&&uemail!=''&&role_id!=''){
+		var usname=$.trim($("input[name='usname']").val());
+		var upwd=$.trim($("input[name='upwd']").val());
+		var uemail=$.trim($("input[name='uemail']").val());
+		var role_id=$.trim($("input[name='role_id']").val());
+		$.ajaxFileUpload({
+			url:"back/addGeneralUser",//发送的处理类地址
+			secureuri:false,
+			fileElementId:"imageFile",//图片文件的id
+			dataType:"json",//数据类型
+			data:{usname:usname,
+				usex:$.trim($("input[name='usex']").val()),
+				upwd:upwd,
+				uemail:uemail,
+				role_id:role_id,
+				tel:$.trim($("input[name='tel']").val()),
+				law_user_status_explain:$.trim($("input[name='law_user_status_explain']").val()),
+				area:$.trim($("input[name='area']").val()),
+				birthday:$.trim($('#birthday').datebox('getValue'))
+				},//发送的json数据
+			success:function(data,status){//成功的回调函数
+				if(data==1){
+					$.messager.show({title:'成功提示',msg:'添加成功',timeout:2000,showType:'silde'});
+					userObj.datagrid("reload");
+					clearUserForm();
+					$('#addUser').dialog('close');
+				}else if(data==2){
+					$.messager.alert('错误提示','添加失败。。。','error');
+				}else if(data==3){
+					$.messager.alert('错误提示','添加失败。。。','error');
+				}
+			},
+			error:function(data,status,e){//失败的回调函数
+				$.messager.alert('错误提示','添加失败。。。','error');
+
+	}else{
+		$.messager.alert('错误提示','信息填写不完善...','error');
+	}
 }
-	var usname=$("input[name='usname']").val();
-	
-	$.ajaxFileUpload({
-		url:"back/addGeneralUser",
-		secureuri:false,
-		fileElementId:"imageFile",
-		dataType:"json",
-		data:{usname:$("input[name='usname']").val(),
-			usex:$("input[name='usex']").val(),
-			upwd:$("input[name='upwd']").val(),
-			uemail:$("input[name='uemail']").val(),
-			role_id:$("input[name='role_id']").val(),
-			tel:$("input[name='tel']").val(),
-			law_user_status_explain:$("input[name='law_user_status_explain']").val(),
-			area:$("input[name='area']").val(),
-			birthday:$('#birthday').datebox('getValue')},
-		success:function(data,status){
-			if(data==1){
-				$.messager.show({title:'成功提示',msg:'添加成功',timeout:2000,showType:'silde'});
-				userObj.datagrid("reload");
-			}else if(data==2){
-				$.messager.alert('错误提示','添加失败。。。\n','error');
-			}else if(data==3){
-				$.messager.alert('错误提示','添加失败。。。\n','error');
-			}
-		},
-		error:function(data,status,e){
-			$.messager.alert('错误提示','添加失败。。。\n','error');
-		}
-	});
+
+function clearUserForm(){
+	$('#ff').form('clear');
 }
+//验证注册用户名
+function checkzcuname() {
+    var uname = $.trim($("input[name='usname']").val());
+    var reg = /^([a-zA-Z0-9\u4E00-\u9FA5_-]{2,12})/;
+    if (uname.match(reg)) {
+        $.post("front/usnameCheck", {
+            uname:uname
+        },
+        function(data) {
+            if (parseInt(data.result) > 0) {
+            	zcuname=false;
+            } else {
+            	zcuname=true;
+            }
+        },"json");
+    } else {
+    	zcuname=false;
+    }
+}
+
+//验证邮箱
+function checkzcemail() {
+  var email = $.trim($("input[name='uemail']").val());
+  var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+  if (email.match(reg)) {
+      $.post("front/checkEmail", {
+          zcemail: email
+      },
+      function(data) {
+          if (parseInt(data.result) >0) {
+        	  zcemail= false;
+          } else {
+        	  zcemail= true;
+          }
+      });
+  } else {
+	  zcemail= false;
+  }
+}
+
+
 </script>

@@ -3,6 +3,7 @@ package com.yc.law.service;
 import java.util.List;
 
 import com.yc.law.entity.FriendUrl;
+import com.yc.law.entity.UploadFriendUrl;
 
 public interface FriendUrlService {
 	/**
@@ -33,4 +34,31 @@ public interface FriendUrlService {
 	 * @return 
 	 */
 	int setStatus(String status, int fid);
+
+	/**
+	 * 添加友情链接
+	 * @param uploadFriendUrl：图片上传的实体类对象
+	 * @return
+	 */
+	int addFriendUrl(UploadFriendUrl uploadFriendUrl);
+
+	/**
+	 * 不分条件，计算友情链接的总数
+	 * @return
+	 */
+	int findAllUrlCount();
+
+	/**
+	 * 修改友情链接
+	 * @param uploadFriendUrl
+	 * @return
+	 */
+	int updateFriConn(UploadFriendUrl uploadFriendUrl);
+
+	/**
+	 * 修改友情链接，不修改图片
+	 * @param friendUrl
+	 * @return
+	 */
+	int updateFriConnNopic(FriendUrl friendUrl);
 }

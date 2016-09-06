@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yc.law.entity.FriendUrl;
+import com.yc.law.entity.UploadFriendUrl;
 import com.yc.law.mapper.FriConnMapping;
 import com.yc.law.service.FriendUrlService;
 
@@ -33,6 +34,26 @@ public class FriendUrlServiceImpl implements FriendUrlService {
 	@Override
 	public int setStatus(String status, int fid) {
 		return friConnMapping.setStatus(status, fid);
+	}
+
+	@Override
+	public int addFriendUrl(UploadFriendUrl uploadFriendUrl) {
+		return friConnMapping.addFriendUrl(uploadFriendUrl);
+	}
+
+	@Override
+	public int findAllUrlCount() {
+		return friConnMapping.findAllUrlCount();
+	}
+
+	@Override
+	public int updateFriConn(UploadFriendUrl uploadFriendUrl) {
+		return friConnMapping.updateFriConn(uploadFriendUrl);
+	}
+
+	@Override
+	public int updateFriConnNopic(FriendUrl friendUrl) {
+		return friConnMapping.updateFriConnNopic(friendUrl);
 	}
 
 }

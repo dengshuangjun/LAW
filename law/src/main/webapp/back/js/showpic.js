@@ -1,6 +1,6 @@
 function previewMultipleImage(file,id) {
-	var MAXWIDTH = 450;
-	var MAXHEIGHT = 170;
+	var MAXWIDTH = 160;
+	var MAXHEIGHT = 60;
 	var div = document.getElementById(id);
 	div.innerHTML="";
 	if($('#textfield').val()=="" ||file.files.length==0){
