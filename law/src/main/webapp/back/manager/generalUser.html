@@ -22,19 +22,19 @@
 				<tr>
 					<td>用户名:</td>
 					<td><input class="easyui-textbox" type="text" id="usname"
-						name="usname" data-options="required:true"></input><span
-						id="usnameResult" style="color: red">*</span></td>
+						name="usname" data-options="required:true"/><span
+						id="usnameResult" style="color: red" onblur="checkzcuname()" >*</span></td>
 				</tr>
 				<tr>
 					<td>密码:</td>
 					<td><input class="easyui-textbox" type="password" id="upwd"
-						name="upwd" data-options="required:true"></input><span
+						name="upwd" data-options="required:true"/><span
 						id="upwdResult" style="color: red">*</span></td>
 				</tr>
 				<tr>
 					<td>邮箱:</td>
 					<td><input class="easyui-textbox" type="email" id="uemail"
-						name="uemail" data-options="required:true"></input><span
+						name="uemail" data-options="required:true" onblur="checkzcemail()"/><span
 						id="uemailResult" style="color: red">*</span></td>
 				</tr>
 				<tr>
@@ -52,7 +52,7 @@
 
 				<tr>
 					<td>联系方式:</td>
-					<td><input class="easyui-textbox" type="text" name="tel"></input></td>
+					<td><input class="easyui-textbox" type="text" name="tel"/></td>
 				</tr>
 				<tr>
 					<td>备注:</td>
@@ -62,13 +62,13 @@
 				</tr>
 				<tr>
 					<td>联系地址:</td>
-					<td><input class="easyui-textbox" type="text" name="area"></input></td>
+					<td><input class="easyui-textbox" type="text" name="area"/></td>
 				</tr>
 
 				<tr>
 					<td>出生日期:</td>
 					<td><input class="easyui-datebox"
-						data-options="onSelect:onSelect" id="birthday"></input></td>
+						data-options="onSelect:onSelect" id="birthday"/></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -79,79 +79,10 @@
 		<p id="usnameResult" style="color: red; text-align: center;">请注意：标注为*号的为必填项，否则不能添加或者添加失败...</p>
 		<div style="text-align: center; margin-bottom: 20px;">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
-				onclick="submitForm()">确认添加</a> <a href="javascript:void(0)"
+				onclick="submitUserForm()">确认添加</a> <a href="javascript:void(0)"
 				class="easyui-linkbutton" onclick="clearForm()">重置</a>
 		</div>
 	</div>
-
-</div>
-<script type="text/javascript">
-						     	<fieldset id="userPhoto"  style="width:60px; height:80px;">
-						     		<legend>头像预览</legend>
-						     	</fieldset>
-	     					</div>
-     					</td>
-     				</tr>
-		    		 <tr>
-		    			<td>头像:</td>
-		    			<td>
-		    				<input type="file" name="imageFile" accept="image/*" id="imageFile"  name="picpath" checked="checked"  onchange="previewMultipleImage(this,'userPhoto')"/>
-						</td>
-		    		<tr>
-		    			<td>用户名:</td>
-		    			<td><input class="easyui-textbox" type="text" id="usname" name="usname" data-options="required:true"/><span id="usnameResult" style="color:red">*</span></td>
-		    		</tr>
-		    		<tr>
-		    			<td>密码:</td>
-		    			<td><input class="easyui-textbox" type="password" id="upwd" name="upwd" data-options="required:true,validType:'length[6,16]'"/><span id="upwdResult" style="color:red">*</span></td>
-		    		</tr>
-		    		<tr>
-		    			<td>邮箱:</td>
-		    			<td><input class="easyui-textbox" type="email" id="uemail" name="uemail" data-options="required:true"/><span id="uemailResult" style="color:red">*</span></td>
-		    		</tr>
-		    		<tr>
-		    			<td>性别:</td>
-		    			<td>
-		    				<input type="radio"  name="usex" value="男" checked="checked"/>男
-		    				<input type="radio"  name="usex" value="女"/>女
-						</td>
-		    		</tr>
-		    		<tr>
-		    			<td>角色:</td>
-		    			<td>
-		    				<select name="role_id" id="role_id"  data-options="required:true" >
-		    				</select>
-		    				<span id="roleResult" style="color:red">*</span>
-		    			</td>
-		    		</tr>
-		    		
-		    		<tr>
-		    			<td>联系方式:</td>
-		    			<td><input class="easyui-textbox" type="text" name="tel"/></td>
-		    		</tr>
-		    		<tr>
-		    			<td>备注:</td>
-		    			<td><input class="easyui-textbox" name="law_user_status_explain" data-options="multiline:true" style="height:60px"/></td>
-		    		</tr>
-		    		<tr>
-		    			<td>联系地址:</td>
-		    			<td><input class="easyui-textbox" type="text" name="area"/></td>
-		    		</tr>
-		    		
-		    		<tr>
-		    			<td>出生日期:</td>
-		    			<td><input class="easyui-datebox" data-options="onSelect:onSelect" id="birthday"/></td>
-		    		</tr>
-		    		<tr><td></td><td><span id="birthdayResult" style="color:red">&nbsp;</span></td></tr>
-		    	</table>
-		    </form>
-		    <p id="usnameResult" style="color:red; text-align:center;">请注意：标注为*号的为必填项，否则不能添加或者添加失败...</p>
-		    <div style="text-align:center; margin-bottom: 20px;">
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitUserForm()">确认添加</a>
-		    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearUserForm()">重置</a>
-		    </div>
-	    </div>
-	    
 </div>
 <script type="text/javascript">
 var userObj;
@@ -174,7 +105,7 @@ userObj=$('#generalUser_data').datagrid({
 	columns:[[  
 	           {field:'usid',sortable:true,align:'center',checkbox:true}, 
 	           {field:'usname',title:'用户名',width:80,align:'center'},  
-	           {field:'usex',title:'性别',width:50,align:'center',},  
+	           {field:'usex',title:'性别',width:50,align:'center'},  
 	           {field:'uemail',title:'邮箱',width:140,align:'center'},
 	           {field:'role_name',title:'角色',width:60,align:'center'},
 	           {field:'picpath',title:'头像',width:100,align:'center',
@@ -311,11 +242,8 @@ userObj=$('#generalUser_data').datagrid({
           		}          		
 
       		}
-          }
-      
-      ]
-	
-});
+          }]
+          });
 //选择是否的时候设定值
 function setvalue(b){
 	editRowStatus=b;
@@ -338,10 +266,9 @@ function myformatter(date){
 	var d = date.getDate();
 	return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
 }
-var zcuname=false;
-var zcemail=false;
+ var zcuname;
+var zcemail;
 function submitUserForm(){
-	checkzcuname() ;
 	checkzcemail() ;
 	if(!zcuname ){
 		$.messager.alert('错误提示','用户名已注册或者长度少于2','error');
@@ -381,7 +308,8 @@ function submitUserForm(){
 			},
 			error:function(data,status,e){//失败的回调函数
 				$.messager.alert('错误提示','添加失败。。。','error');
-
+			}
+		});
 	}else{
 		$.messager.alert('错误提示','信息填写不完善...','error');
 	}
@@ -390,7 +318,7 @@ function submitUserForm(){
 function clearUserForm(){
 	$('#ff').form('clear');
 }
-//验证注册用户名
+ //验证注册用户名
 function checkzcuname() {
     var uname = $.trim($("input[name='usname']").val());
     var reg = /^([a-zA-Z0-9\u4E00-\u9FA5_-]{2,12})/;
@@ -409,7 +337,7 @@ function checkzcuname() {
     	zcuname=false;
     }
 }
-
+ 
 //验证邮箱
 function checkzcemail() {
   var email = $.trim($("input[name='uemail']").val());
@@ -429,6 +357,4 @@ function checkzcemail() {
 	  zcemail= false;
   }
 }
-
-
 </script>
