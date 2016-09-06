@@ -26,4 +26,6 @@ public interface BackUserService {
 	int updateGeneralUser(User user);
 
 	List<Role> getRoleInfo();
+
+	int delUsers(List<Integer> list);
 }

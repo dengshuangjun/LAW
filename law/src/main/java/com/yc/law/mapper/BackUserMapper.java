@@ -22,7 +22,9 @@ public interface BackUserMapper {
 
 	UserPage findGeneralAllByPage(UserPage users);
 
-	int updateGeneralUserStatus(User user);
+	int updateGeneralUserStatus(User  user);
 
 	List<Role> getRoleInfo();
+
+	int delUsers(List<Integer> usids);
 }

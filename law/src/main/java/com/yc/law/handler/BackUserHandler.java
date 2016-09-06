@@ -3,6 +3,8 @@ package com.yc.law.handler;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.Random;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+
+
+
 
 
 
@@ -116,17 +121,17 @@ public class BackUserHandler {
 		return backUserService.getRoleInfo();
 	}
 
-	//因为是使用SpringMVC自带的上传，所以图片的不能直接放在对象中获取，就是这个东西MultipartFile
-	//返回的东西就交给组长了
 	@RequestMapping(value = "/addGeneralUser", method = RequestMethod.POST)
+	@ResponseBody
 	public int addGeneralUser(UploadUser uploadUser){
-		System.out.println(uploadUser);
 		MultipartFile imageFile = uploadUser.getImageFile();
 		if (!imageFile.isEmpty()) {
-			String paths=System.getProperty("evan.webapp");
+			String paths=System.getProperty("evan.webapp");//获取项目在服务器中的绝对路径，我的图片是存在服务器的webapp的pics目录下面，这个需要一个配置
 			paths=paths.substring(0,paths.lastIndexOf("\\"));
 			String realPath =paths.substring(0,paths.lastIndexOf("\\"))+ "\\pics";//获取到服务器存放文件的目录
-			String picName ="../pics/"+picSting()+new Date().getTime()+imageFile.getOriginalFilename().substring(imageFile.getOriginalFilename().indexOf("."));
+			String picName ="../pics/"+picSting()+new Date().getTime()+
+					imageFile.getOriginalFilename().substring(imageFile.getOriginalFilename().indexOf("."));
+			//图片名字的生成，getOriginalFilename获取上传图片的名字然后截取后缀
 			try {
 				FileUtils.copyInputStreamToFile(uploadUser.getImageFile().getInputStream(), new File(realPath, picName));
 				uploadUser.setPicpath(picName);//将图片名字存放到上传对象
@@ -146,7 +151,29 @@ public class BackUserHandler {
 			}
 		}
 	}
-	
+
+	@RequestMapping(value = "/delUsers", method = RequestMethod.POST)
+	@ResponseBody
+	public int delUsers(String usid){
+		List<Integer> list=new ArrayList<Integer>();
+		if(usid==null){
+			return 0;
+		}else if(usid.contains(",")){
+			String[] result = usid.split(",");
+			for(int i=0,len=result.length;i<len;i++){
+				list.add(Integer.parseInt(result[i]));
+			}
+		}else{
+			list.add(Integer.parseInt(usid));
+		}
+
+		if(backUserService.delUsers(list)>0){
+			return 1;
+		}else{
+			return 0;
+		}
+		
+	}
 	@RequestMapping("/login")
 	public String backLogin(){
 		return "back/login";
