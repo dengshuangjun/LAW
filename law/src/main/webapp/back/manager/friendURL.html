@@ -9,11 +9,11 @@
 			<label class="friConnlab">友情链接地址:</label><input type="text" id="fricon_addr" name="conn_address" /><br /><br />
 			<label class="friConnlab">友情链接权重:</label><input type="number" id="fricon_weight" name="conn_weight" min="0" required="required" value="0"><br /><br />
 			<label class="friConnlab">友情链接状态:</label><select id="fricon_status" name="status" ></select><br /><br />
-			<label class="friConnlab">友情链接图片:</label><input type="file" id="conn_pic" name="conn_pic" onchange="previewMultipleImage(this,'fricon_pic_show')"><br /><br />
+			<label class="friConnlab">友情链接图片:(最佳像素为：160*60)</label><input type="file" id="conn_pics" name="conn_pics" onchange="previewMultipleImage(this,'fricon_pic_show')"><br /><br />
 		</div>
 	</form>
 	
-	<div style="width:500px; height:200px; margin:0px auto;">
+	<div style="width:400px; height:100px; margin:0px auto;">
 		<fieldset id="fricon_pic_show">
 			<legend>图片预览</legend>
 		</fieldset>
@@ -24,16 +24,19 @@
 
 <div id="update_FriConn" class="easyui-dialog" title="修改友情链接" data-options="iconCls:'icon-edit',resizable:true,modal:true,closed:true">
 	<form>
-		<div style="height:200px; width:250px;margin:20px auto;">
+		<div style="height:300px; width:250px;margin:20px auto;">
+			<label class="friConnlab">友情链接ID：<input type="text" id="upfricon_id" name="conn_id" readonly="readonly"/></label><br /><br />
 			<label class="friConnlab">友情链接名字:</label><input type="text" id="upfricon_name" name="conn_name" /><br /><br />
 			<label class="friConnlab">友情链接地址:</label><input type="text" id="upfricon_addr" name="conn_address" /><br /><br />
 			<label class="friConnlab">友情链接权重:</label><input type="number" id="upfricon_weight" name="conn_weight" min="0" required="required" value="0"><br /><br />
 			<label class="friConnlab">友情链接状态:</label><select id="upfricon_status" name="status" ></select><br /><br />
-			<label class="friConnlab">友情链接图片:</label><input type="file" id="upconn_pic" name="conn_pic" onchange="previewMultipleImage(this,'upfricon_pic_show')"><br /><br />
+			<label class="friConnlab">友情链接图片:(最佳像素为：160*60)</label><br /><br />
+			<input type="file" id="upconn_pics" name="conn_pics" onchange="previewMultipleImage(this,'upfricon_pic_show')"><br /><br />
+			<span>（不选择图片即默认为不修改图片。）</span><br /><br />
 		</div>
 	</form>
 	
-	<div style="width:500px; height:200px; margin:0px auto;">
+	<div style="width:400px; height:100px;text-align:center;">
 		<fieldset id="upfricon_pic_show">
 			<legend>图片预览</legend>
 		</fieldset>
@@ -113,7 +116,14 @@ friConnObj = $('#friendUrl').datagrid({
 		align : 'center',
 		formatter: function(value,rowData,index){
 			if(value!=null && value!="" && value!="NULL"){
-				return showPrePic(value);
+				if(value!=undefined){
+					var str="";
+					var pics=value.split(",");
+					for(var i=0;i<pics.length;i++){
+						str+="<img src='../../"+pics[i]+"' width='160px' height='60px'/>&nbsp;";
+					}
+					return str;
+				}
 			}else{
 				return;
 			}
@@ -123,6 +133,12 @@ friConnObj = $('#friendUrl').datagrid({
 		text:"添加",
 		iconCls:"icon-add",
 		handler:function(){
+			//清空预览的值
+			var file = $("#conn_pics")
+			file.after(file.clone().val(""));
+			file.remove();
+			$("#conn_pics").val("");
+			$("#fricon_pic_show").html("");
 			$('#add_FriConn').dialog('open');
 		}
 	},{
@@ -141,13 +157,21 @@ friConnObj = $('#friendUrl').datagrid({
 						editRow=undefined;
 					}
 				}else{
+					//清空预览的值
+					var file = $("#upconn_pics")
+					file.after(file.clone().val(""));
+					file.remove();
+					$("#upconn_pics").val("");
+					$("#upfricon_pic_show").html("");
+					picPath=null;
+					
 					var str;
 					if(row.status == "Y"){
 						str= '<select><option onclick="changeFriStatus('+'\'Y\','+row.conn_id+')">可用</option><option onclick="changeFriStatus('+'\'N\','+row.conn_id+')">不可用</option></select>';
 					}else if(row.status == "N"){
 						str= '<select><option onclick="changeFriStatus('+'\'N\','+row.conn_id+')">不可用</option><option onclick="changeFriStatus('+'\'Y\','+row.conn_id+')">可用</option></select>';
 					}
-					
+					$("#upfricon_id").val(row.conn_id);
 					$("#upfricon_name").val(row.conn_name);
 					$('#upfricon_addr').val(row.conn_address);
 					$('#upfricon_weight').val(row.conn_weight);
@@ -160,6 +184,14 @@ friConnObj = $('#friendUrl').datagrid({
 					$('#update_FriConn').dialog('open');
 				}
 			}
+		}
+	},{
+		text:"撤销",
+		iconCls:"icon-redo",
+		handler:function(){
+			friConnObj.datagrid("rejectChanges");//回滚所有数据
+			friConnObj.datagrid("endEdit",editRow);//关闭正在被编辑的行
+			editRow=undefined;
 		}
 	}]
 });
@@ -179,7 +211,7 @@ function showPrePic(value){
 		var str="";
 		var pics=value.split(",");
 		for(var i=0;i<pics.length;i++){
-			str+="<img src='../../"+pics[i]+"' width='450px' height='170px'/>&nbsp;";
+			str+="<img src='../../"+pics[i]+"' width='160px' height='60px'/>&nbsp;";
 		}
 		return str;
 	}
@@ -225,30 +257,30 @@ function changeFriStatus(status,fid){
 
 //添加友情链接
 function addFriconInfo(){
-	//清空预览的值
-	var file = $("#conn_pic")
-	file.after(file.clone().val(""));
-	file.remove();
-	$("#fricon_pic_show").val("");
-	
 	var conn_name = $.trim($("#fricon_name").val());
 	var conn_address = $.trim($("#fricon_addr").val());
 	var conn_weight = $.trim($("#fricon_weight").val());
 	var status = $.trim($("#fricon_status").val());
-	var conn_pic=$.trim($("#conn_pic").val());
-	if(conn_pic == "" ||conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
+	var conn_pics=$.trim($("#conn_pics").val());
+	if(conn_pics == "" ||conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
 		$.messager.alert("友情提示","信息不能为空\n","error");
 	}else{
 		$.ajaxFileUpload({
 			url:"friendUrl/addFriConn",
 			secureuri:false,
-			fileElementId:"conn_pic",
-			//dataType:"text",
-			data:{conn_name,conn_address,conn_weight,status},
-			//contentType : "application/json",
+			fileElementId:"conn_pics",
+			dataType:"json",
+			data:{conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
 			success:function(data,status){
 				if(data>0){
-			
+					$.messager.show({title:'成功提示',msg:'友情链接添加成功',timeout:2000,showType:'silde'});
+					friConnObj.datagrid("reload");
+					$("#add_FriConn").dialog('close');
+					$("#fricon_name").val("");
+					$("#fricon_addr").val("");
+					$("#fricon_weight").val(0);
+				}else if(data == (-1)){
+					$.messager.alert("错误提示","你选择的图片不合法，请重新选择。\n","error");
 				}else{
 					$.messager.alert("错误提示","友情链接添加失败\n","error");
 				}
@@ -262,18 +294,56 @@ function addFriconInfo(){
 
 //修改友情链接
 function updateFriconInfo(){
-	//清空预览的值
-	$("#upfricon_pic_show").val("");
+	var conn_id =$.trim($("#upfricon_id").val());
 	var conn_name = $.trim($("#upfricon_name").val());
 	var conn_address = $.trim($("#upfricon_addr").val());
 	var conn_weight = $.trim($("#upfricon_addr").val());
 	var status = $.trim($("#upfricon_status").val());
-	var conn_pic=$.trim($("#upconn_pic").val());
-	//$("#upfricon_pic_show").val(conn_pic);  被修改的图预览
-	if(conn_pic == "" ||conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
+	if(conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
 		$.messager.alert("友情提示","信息不能为空\n","error");
+	}else if($("#upconn_pics").val()==""){
+		$.ajaxFileUpload({
+			url:"friendUrl/updateFriConnNopic",
+			secureuri:false,
+			dataType:"json",
+			data:{conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
+			success:function(data,status){
+				if(data>0){
+					$.messager.show({title:'成功提示',msg:'友情链接修改成功',timeout:2000,showType:'silde'});
+					friConnObj.datagrid("reload");
+					$("#update_FriConn").dialog('close');
+				}else if(data == (-1)){
+					$.messager.alert("错误提示","你选择的图片不合法，请重新选择。\n","error");
+				}else{
+					$.messager.alert("错误提示","友情链接修改失败\n","error");
+				}
+			},
+			error:function(data,status,e){
+				$.messager.alert("错误提示","友情链接修改失败\n"+e,"error");
+			}
+		});
 	}else{
-		
+		$.ajaxFileUpload({
+			url:"friendUrl/updateFriConn",
+			secureuri:false,
+			fileElementId:"upconn_pics",
+			dataType:"json",
+			data:{conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
+			success:function(data,status){
+				if(data>0){
+					$.messager.show({title:'成功提示',msg:'友情链接修改成功',timeout:2000,showType:'silde'});
+					friConnObj.datagrid("reload");
+					$("#update_FriConn").dialog('close');
+				}else if(data == (-1)){
+					$.messager.alert("错误提示","你选择的图片不合法，请重新选择。\n","error");
+				}else{
+					$.messager.alert("错误提示","友情链接修改失败\n","error");
+				}
+			},
+			error:function(data,status,e){
+				$.messager.alert("错误提示","友情链接修改失败\n"+e,"error");
+			}
+		});
 	}
 }
 </script>

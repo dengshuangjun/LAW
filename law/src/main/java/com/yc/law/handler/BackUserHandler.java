@@ -2,9 +2,7 @@ package com.yc.law.handler;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,15 +10,6 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-
-
-
-
-
-
-
-
 
 
 import org.apache.commons.io.FileUtils;
@@ -35,7 +24,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
 import com.yc.law.entity.Role;
 import com.yc.law.entity.UploadUser;
 import com.yc.law.entity.User;
@@ -181,6 +169,27 @@ public class BackUserHandler {
 	@RequestMapping("/404")
 	public String request404(){
 		return "back/error404";
+	}
+	
+	/**
+	 * 修改用户状态
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/updateAdminInfo")
+	@ResponseBody
+	public boolean updateAdminInfo(@RequestParam("usid") int usid,
+								   @RequestParam("usname") String usname,
+								   @RequestParam("usex") String usex,
+								   @RequestParam("upwd") String upwd,
+								   @RequestParam("uemail") String uemail,
+								   @RequestParam("tel") String tel,
+								   @RequestParam("area") String area,
+								   @RequestParam("birthday") String birthday){
+		if(backUserService.updateAdminInfo(usid,usname,usex,upwd,uemail,tel,area,birthday)>0){
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * 生成含有字母的验证码
