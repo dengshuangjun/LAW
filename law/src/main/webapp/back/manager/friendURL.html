@@ -167,9 +167,9 @@ friConnObj = $('#friendUrl').datagrid({
 					
 					var str;
 					if(row.status == "Y"){
-						str= '<select><option onclick="changeFriStatus('+'\'Y\','+row.conn_id+')">可用</option><option onclick="changeFriStatus('+'\'N\','+row.conn_id+')">不可用</option></select>';
+						str= '<select><option value="Y" onclick="changeFriStatus('+'\'Y\','+row.conn_id+')">可用</option><option value="N" onclick="changeFriStatus('+'\'N\','+row.conn_id+')">不可用</option></select>';
 					}else if(row.status == "N"){
-						str= '<select><option onclick="changeFriStatus('+'\'N\','+row.conn_id+')">不可用</option><option onclick="changeFriStatus('+'\'Y\','+row.conn_id+')">可用</option></select>';
+						str= '<select><option value="N" onclick="changeFriStatus('+'\'N\','+row.conn_id+')">不可用</option><option value="Y" onclick="changeFriStatus('+'\'Y\','+row.conn_id+')">可用</option></select>';
 					}
 					$("#upfricon_id").val(row.conn_id);
 					$("#upfricon_name").val(row.conn_name);
@@ -297,8 +297,9 @@ function updateFriconInfo(){
 	var conn_id =$.trim($("#upfricon_id").val());
 	var conn_name = $.trim($("#upfricon_name").val());
 	var conn_address = $.trim($("#upfricon_addr").val());
-	var conn_weight = $.trim($("#upfricon_addr").val());
+	var conn_weight = $.trim($("#upfricon_weight").val());
 	var status = $.trim($("#upfricon_status").val());
+	alert(status+"神峨眉")
 	if(conn_name=="" || conn_address=="" || conn_weight =="" || status==""){
 		$.messager.alert("友情提示","信息不能为空\n","error");
 	}else if($("#upconn_pics").val()==""){
@@ -306,7 +307,7 @@ function updateFriconInfo(){
 			url:"friendUrl/updateFriConnNopic",
 			secureuri:false,
 			dataType:"json",
-			data:{conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
+			data:{conn_id:conn_id,conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
 			success:function(data,status){
 				if(data>0){
 					$.messager.show({title:'成功提示',msg:'友情链接修改成功',timeout:2000,showType:'silde'});
@@ -328,7 +329,7 @@ function updateFriconInfo(){
 			secureuri:false,
 			fileElementId:"upconn_pics",
 			dataType:"json",
-			data:{conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
+			data:{conn_id:conn_id,conn_name:conn_name,conn_address:conn_address,conn_weight:conn_weight,status:status},
 			success:function(data,status){
 				if(data>0){
 					$.messager.show({title:'成功提示',msg:'友情链接修改成功',timeout:2000,showType:'silde'});

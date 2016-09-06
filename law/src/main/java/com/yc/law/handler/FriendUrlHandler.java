@@ -106,6 +106,7 @@ public class FriendUrlHandler {
 	@RequestMapping("/updateFriConnNopic")
 	@ResponseBody
 	public int updateFriConnNopic(FriendUrl friendUrl){
+		System.out.println("测试测试"+friendUrl);
 		if(friendUrlService.updateFriConnNopic(friendUrl)>0){
 			LogManager.getLogger().debug("修改友情链接成功2。");
 			return 1;
