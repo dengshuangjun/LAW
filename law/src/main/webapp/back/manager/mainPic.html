@@ -5,7 +5,7 @@
 		<div style="height:50px; width:250px;margin:20px auto;">
 			<span class="friInfo">友情提示:图片最佳像素为&nbsp;&nbsp;1200*300 </span>
 			<br /><br />
-			<label class="friConnlab">请选择您要替换成的图片:</label><input type="file" id="upFiv_pic" name="conn_pic" onchange="previewMultipleImage(this,'upFive_pic_show')"><br /><br />
+			<label class="friConnlab">请选择您要替换成的图片:</label><input type="file" id="upFiv_pic" name="fivePic" onchange="previewMultipleImage2(this,'upFive_pic_show',450,170)"><br /><br />
 		</div>
 	</form>
 	
@@ -21,7 +21,7 @@
 <div class="lunboPic">
 	<div class="mainLunboPic">
 		<div class="lunboTop">
-			<img id="" height="90%" width="100%" src="front/images/lunbo1.jpg"/>
+			<img height="90%" width="100%" src="front/images/lunbo1.jpg"/>
 			<a href="javascript:void(0)" onclick="changePic(1)">点击修改此图片</a>
 		</div>
 		
@@ -59,14 +59,46 @@
 		$('#upFive_pic_show').html(showPrePic(picPath));
 	}
 	
+	//重新加载五张大图
+	function reloadFivePic(){
+		var str='<div class="mainLunboPic">';
+		for(var i=1;i<=3;i++){
+			str+='<div class="lunboTop"><img height="90%" width="100%" src="front/images/lunbo'+i+'.jpg"/><a href="javascript:void(0)" onclick="changePic('+i+')">点击修改此图片</a></div>';
+		}
+		str+='</div>';
+		str+='<div class="mainLunboPic"><div class="lunboBottom1"><img height="90%" width="100%" src="front/images/lunbo4.jpg"/><a href="javascript:void(0)" onclick="changePic(4)">点击修改此图片</a></div>';
+		str+='<div class="lunboBottom2"><img height="90%" width="100%" src="front/images/lunbo5.jpg"/><a href="javascript:void(0)" onclick="changePic(5)">点击修改此图片</a></div></div>';
+		$(".lunboPic").html(str);
+	}
+	
 	//修改主页的五张大图
 	function updateFivePic(){
 		//1.可能为空值，即没有选择图片
-		//2.修改之后记得清空picPath
-		//3.根据count判断是第几张修改，然后就覆盖第几张
-		//4.记得把原来的图片覆盖掉，即将上传的文件名替换成lunboX.jpg
-		//5.修改之后怎么刷新整个页面
-		//console.info($.trim($("#upFiv_pic").val()) );
+		if($("#upFiv_pic").val() == ""){
+			$.messager.alert('温馨提示','您未选择图片...','debug');
+		}else{
+			$.ajaxFileUpload({
+				url:"fivePic/changePic",
+				secureuri:false,
+				fileElementId:"upFiv_pic",
+				dataType:"json",
+				data:{amount:count},
+				success:function(data,status){
+					if(data>0){
+						$("#update_fivPic").dialog('close'); 
+						$.messager.show({title:'成功提示',msg:'图片修改成功',timeout:2000,showType:'silde'});
+						//修改之后怎么刷新整个页面
+						reloadFivePic();
+						/* friConnObj.datagrid("reload");*/
+					}else{
+						$.messager.alert("错误提示","图片修改失败\n","error");
+					}  
+				},
+				error:function(data,status,e){
+					$.messager.alert("错误提示","图片修改失败\n"+e,"error");
+				}
+			});
+		}
 	}
 
 	//设置预览和修改时的图片显示
