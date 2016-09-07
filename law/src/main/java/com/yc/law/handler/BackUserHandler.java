@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -172,7 +173,7 @@ public class BackUserHandler {
 	}
 	
 	/**
-	 * 修改用户状态
+	 * 修改用户信息
 	 * @param user
 	 * @return
 	 */
@@ -185,8 +186,40 @@ public class BackUserHandler {
 								   @RequestParam("uemail") String uemail,
 								   @RequestParam("tel") String tel,
 								   @RequestParam("area") String area,
-								   @RequestParam("birthday") String birthday){
+								   @RequestParam("birthday") String birthday,
+								   @ModelAttribute("user") User user){
 		if(backUserService.updateAdminInfo(usid,usname,usex,upwd,uemail,tel,area,birthday)>0){
+			//更新session中的值
+			user.setUsname(usname);
+			user.setUsex(usex);
+			user.setUpwd(upwd);
+			user.setUemail(uemail);
+			user.setTel(tel);
+			user.setArea(area);
+			user.setBirthday(birthday);
+			return true;
+		}
+		return false;
+	}
+	
+	@RequestMapping("/updateAdminInfoWithoutUpwd")
+	@ResponseBody
+	public boolean updateAdminInfoWithoutUpwd(@RequestParam("usid") int usid,
+								   @RequestParam("usname") String usname,
+								   @RequestParam("usex") String usex,
+								   @RequestParam("uemail") String uemail,
+								   @RequestParam("tel") String tel,
+								   @RequestParam("area") String area,
+								   @RequestParam("birthday") String birthday,
+								   @ModelAttribute("user") User user){
+		if(backUserService.updateAdminInfoWithoutUpwd(usid,usname,usex,uemail,tel,area,birthday)>0){
+			//更新session中的值
+			user.setUsname(usname);
+			user.setUsex(usex);
+			user.setUemail(uemail);
+			user.setTel(tel);
+			user.setArea(area);
+			user.setBirthday(birthday);
 			return true;
 		}
 		return false;
@@ -212,5 +245,16 @@ public class BackUserHandler {
 			}
 		}
 		return sbf2.toString();
+	}
+	
+	@RequestMapping("/checkUemail")
+	@ResponseBody
+	public int backLogin(@RequestParam("uemail") String uemail){
+		Integer result=backUserService.checkUemail(uemail);
+		if( result!=null){
+			return result;
+		}else{
+			return 0;
+		}
 	}
 }
