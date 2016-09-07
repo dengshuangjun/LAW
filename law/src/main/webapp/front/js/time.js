@@ -27,3 +27,8 @@ function userCenter(usid){
 		alert("请先登陆!");
 	}
 }
+function zhuxiao(){
+	$.post("/law/front/zhuxiao",function(data){
+		 location.reload() ;
+	},"json");
+}

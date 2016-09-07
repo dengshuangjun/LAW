@@ -32,7 +32,6 @@ public class BackUserServiceImpl implements BackUserService {
 
 	@Override
 	public void insertInitAdmin(User user) {
-		System.out.println(user);
 		backUserMapper.insertInitAdmin(user);
 
 	}

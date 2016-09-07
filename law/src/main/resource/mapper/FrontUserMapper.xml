@@ -19,5 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into law_user(usid,usname,upwd,uemail,role_id,register_time) 
 		values(seq_law_user_id.nextval,#{usname},#{upwd},#{uemail},#{role_id},sysdate)
 	</insert>
-	
+	<select id="login" parameterType="User" resultType="User">
+		select * from role r join law_user l on r.role_id=l.role_id and  usname=#{usname} and upwd=#{upwd}
+	</select>
 </mapper>

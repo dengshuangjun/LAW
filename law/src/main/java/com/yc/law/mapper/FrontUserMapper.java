@@ -11,4 +11,6 @@ public interface FrontUserMapper {
 
 	int register(User user);
 
+	User login(User user);
+
 }

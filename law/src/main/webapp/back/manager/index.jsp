@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css" href="back/css/theme.css">
 <link rel="stylesheet" type="text/css" href="back/css/mainFivePic.css">
 <script type="text/javascript" src="back/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="back/js/jquery.min.js"></script>
 <script type="text/javascript" src="back/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="back/js/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript" src="back/js/theme.js"></script>
@@ -21,11 +20,12 @@
 <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.js"> </script>
 <script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript" src="back/js/showpic.js"></script>
+<script type="text/javascript" src="back/js/showfivepic.js"></script>
 <script type="text/javascript" src="back/js/ajaxfileupload.js"></script>
 <style type="text/css">
 	#userPhoto img{
-	width: 6px;
-	height:80px;
+	width: 80px;
+	height:100px;
 	}
 </style>
 </head>

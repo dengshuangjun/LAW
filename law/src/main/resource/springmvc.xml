@@ -52,6 +52,9 @@
 
 	<!-- 2.配制事务关联 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	<mvc:interceptors>
+		<bean class="com.yc.law.interceptor.MyFrontInterceptor"/>
+	</mvc:interceptors>
 	<!-- 默认静态资源处理请求 -->
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />

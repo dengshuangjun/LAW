@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.annotation.PostConstruct;
 
 
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -156,10 +157,14 @@ public class BackUserHandler {
 			list.add(Integer.parseInt(usid));
 		}
 
-		if(backUserService.delUsers(list)>0){
-			return 1;
-		}else{
-			return 0;
+		try {
+			if(backUserService.delUsers(list)>0){
+				return 1;
+			}else{
+				return 0;
+			}
+		} catch (Exception e) {
+			return 2;
 		}
 		
 	}

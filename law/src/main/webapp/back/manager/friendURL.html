@@ -9,7 +9,7 @@
 			<label class="friConnlab">友情链接地址:</label><input type="text" id="fricon_addr" name="conn_address" /><br /><br />
 			<label class="friConnlab">友情链接权重:</label><input type="number" id="fricon_weight" name="conn_weight" min="0" required="required" value="0"><br /><br />
 			<label class="friConnlab">友情链接状态:</label><select id="fricon_status" name="status" ></select><br /><br />
-			<label class="friConnlab">友情链接图片:(最佳像素为：160*60)</label><input type="file" id="conn_pics" name="conn_pics" onchange="previewMultipleImage(this,'fricon_pic_show')"><br /><br />
+			<label class="friConnlab">友情链接图片:(最佳像素为：160*60)</label><input type="file" id="conn_pics" name="conn_pics" onchange="previewMultipleImage2(this,'fricon_pic_show',160,60)"><br /><br />
 		</div>
 	</form>
 	
@@ -31,7 +31,7 @@
 			<label class="friConnlab">友情链接权重:</label><input type="number" id="upfricon_weight" name="conn_weight" min="0" required="required" value="0"><br /><br />
 			<label class="friConnlab">友情链接状态:</label><select id="upfricon_status" name="status" ></select><br /><br />
 			<label class="friConnlab">友情链接图片:(最佳像素为：160*60)</label><br /><br />
-			<input type="file" id="upconn_pics" name="conn_pics" onchange="previewMultipleImage(this,'upfricon_pic_show')"><br /><br />
+			<input type="file" id="upconn_pics" name="conn_pics" onchange="previewMultipleImage2(this,'upfricon_pic_show',160,60)"><br /><br />
 			<span>（不选择图片即默认为不修改图片。）</span><br /><br />
 		</div>
 	</form>
