@@ -61,14 +61,22 @@
 	
 	//重新加载五张大图
 	function reloadFivePic(){
-		var str='<div class="mainLunboPic">';
+		/* var str='<div class="mainLunboPic">';
 		for(var i=1;i<=3;i++){
 			str+='<div class="lunboTop"><img height="90%" width="100%" src="front/images/lunbo'+i+'.jpg"/><a href="javascript:void(0)" onclick="changePic('+i+')">点击修改此图片</a></div>';
 		}
 		str+='</div>';
 		str+='<div class="mainLunboPic"><div class="lunboBottom1"><img height="90%" width="100%" src="front/images/lunbo4.jpg"/><a href="javascript:void(0)" onclick="changePic(4)">点击修改此图片</a></div>';
 		str+='<div class="lunboBottom2"><img height="90%" width="100%" src="front/images/lunbo5.jpg"/><a href="javascript:void(0)" onclick="changePic(5)">点击修改此图片</a></div></div>';
-		$(".lunboPic").html(str);
+		$(".lunboPic").html(str); */
+		//location=location;
+		/* easyloader.base = 'back/manager/mainPic.html';    // 设置easyui基础目录
+		easyloader.load('messager', function(){        // 加载特定的模块
+		    $.messager.alert('刷新提示', 'load ok');  
+		}); */
+		$('#center_content').panel({  
+			cache:true 
+		}); 
 	}
 	
 	//修改主页的五张大图
