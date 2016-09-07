@@ -42,6 +42,17 @@
 #updateInfo table tr {
 	height: 30px;
 }
+
+.code{
+	font-family: serif;
+	font-style: italic;
+	color:red;
+	corder:0;
+	padding:2px 3px;
+	letter-spacing:3px;
+	font-weight: bolder;
+}
+
 </style>
 
 <div
@@ -139,6 +150,15 @@
 				<td><span id="birthdayResult" style="color: red">&nbsp;</span></td>
 			</tr>
 			<tr>
+				<td>验证码</td>
+				<td><input id="input1" type="text" onblur="checkCodeInfo()" style="margin-top:10px;"/><br />
+					<input type="text" id="checkCode" class="code" style="width:50px;margin-top:10px;" /> <a href="javascript:createCode()">看不清楚</a></td>
+			</tr>
+			<tr id="codeResultOut" style="display: none;">
+				<td></td>
+				<td><span id="codeResult" style="color: red">&nbsp;</span></td>
+			</tr>
+			<tr>
 				<td></td>
 				<td>
 					<p style="text-align: center;">
@@ -153,6 +173,53 @@
 	var checkPwd=true;
 	var checkBirthday=true;
 	var checkEmail=true;
+	var checkCodes=true;
+	
+	var code;//在全局  定义验证码
+	
+	$(function(){
+		createCode();
+	});
+	
+	function createCode(){
+		code="";
+		var codeLength=4;//验证码的长度
+		var checkCodeNode=document.getElementById("checkCode");
+		checkCodeNode.value = "";
+		var selectChar=new Array(1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','m','n','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','M','N','P','Q','R','S','T','U','V','W','X','Y','Z');
+		
+		for(var i=0;i<codeLength;i++){
+			var charIndex = Math.floor(Math.random()*60);
+			code += selectChar[charIndex];
+		}
+		if(code.length!=codeLength){
+			createCode();
+		}
+		checkCodeNode.value=code;
+	}
+	
+	function checkCodeInfo(){
+		checkCodes=true;
+		$('#codeResultOut').hide();
+		var inputCode=document.getElementById("input1").value.toUpperCase();
+		var codeToUpperCase=code.toUpperCase();
+		if(inputCode.length <=0 ){
+			checkCodes=false;
+			$('#codeResultOut').show();
+			$("#codeResult").html("请输入验证码...").css("color", "#F00");
+		}else if(inputCode != codeToUpperCase){
+			checkCodes=false;
+			createCode();
+			$('#codeResultOut').show();
+	        $("#codeResult").html("验证码输入错误...").css("color", "#F00");
+	        $("#input1").val("");
+		}else{
+			$('#codeResultOut').show();
+	        $("#codeResult").html("验证码输入正确...").css("color", "#0F0");
+		}
+	}
+	
+	//密码查重 
 	function checkpwdagain(){
 		checkPwd=true;
 		$('#checkPwdOut').hide();
@@ -170,7 +237,7 @@
 	}
 
 	function updateAdminInfo() {
-		if(checkPwd && checkBirthday && checkEmail){
+		if(checkPwd && checkBirthday && checkEmail && checkCode){
 			var newPwd=$("#upwd").val();
 			if (newPwd!=null && newPwd!="") {
 				$.post("back/updateAdminInfo", {
@@ -184,6 +251,7 @@
 					birthday : $('#birthday').datebox('getValue')
 				}, function(data) {
 					if (data > 0) {
+						$("#input1").val("");
 						$.messager.show({
 							title : '成功提示',
 							msg : '用户信息修改成功',
@@ -205,6 +273,7 @@
 					birthday : $('#birthday').datebox('getValue')
 				}, function(data) {
 					if (data > 0) {
+						$("#input1").val("");
 						$.messager.show({
 							title : '成功提示',
 							msg : '用户信息修改成功',
