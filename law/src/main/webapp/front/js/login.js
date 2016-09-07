@@ -32,28 +32,34 @@ function AddFavorite(title,url){
 	}
 }
 
-
-
+function checkLogin(){
+	return checkloginuname()&&checkloginpwd();
+}
 
 //登陆用户名验证
 function checkloginuname() {
-    var uname = $("#uname").val();
+    var uname = $("#usname").val();
     if ("" == uname || uname == null) {
         $("#unamep").html("用户名不能为空...").css("color", "#F00");
+    	return false;
     } else {
         $("#unamep").html("用户名格式正确...").css("color", "#0F0");
+        return true;
     }
 }
 
 //登陆密码验证
 function checkloginpwd() {
-    var pwd = $("#pwd").val();
+    var pwd = $("#upwd").val();
     if ("" == pwd || pwd == null) {
         $("#pwdp").html("您的密码不能为空...").css("color", "#F00");
+    	return false;
     } else {
         $("#pwdp").html("密码格式正确...").css("color", "#0F0");
+        return true;
     }
 }
+
 
 //验证注册用户名
 function checkzcuname() {
@@ -157,9 +163,9 @@ function getCode(){
 		 var zcemail=$("#zcemail").val();
 		 if(checkEmail){
 			 curCount=count;
+			 $("#check").attr("disabled", "true");
 		     $.post("/law/front/SendEmailCode",{zcemail:zcemail},function(data){
 		    	 if(data>0){
-		    		 $("#check").attr("disabled", "true");
 				     $("#check").val(curCount + "s");
 		    	     InterValObj = window.setInterval(SetRemainTime, 1000);
 		    	 }else{
@@ -196,18 +202,14 @@ function SetRemainTime(){
         $("#check").val(curCount + "s");
     }
 }
-function zhuxiao(){
-	$.post("../UserServlet",{op:"zhuxiao"},function(data){
-		if(data>0){
-			location.href="../index.html";
-		}
-	});
-}
 
 //设为首页
 //表单信息提交状态
 function status(){
-	if(checkuname&&checkpwd&&checkEmail&&checkCode){
+	if(!checkCode){
+		$.messager.alert('错误提示','验证码超时，请重新获取验证码...','error');
+		return false;
+	}else if(checkuname&&checkpwd&&checkEmail&&checkCode){
 		return true;
 	}else{
 		 $("#bg").css("display","none");

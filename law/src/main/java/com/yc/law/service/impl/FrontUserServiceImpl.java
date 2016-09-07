@@ -27,8 +27,25 @@ public class FrontUserServiceImpl implements FrontUserService {
 
 	@Override
 	public int register(User user) {
-		user.setUpwd(Encrypt.md5AndSha(user.getUpwd()));
-		return frontUserMapper.register(user);
+		
+		try {
+			user.setUpwd(Encrypt.md5AndSha(user.getUpwd()));
+			return frontUserMapper.register(user);
+		} catch (Exception e) {
+			return 0;
+		}
 	}
+
+	@Override
+	public User login(User user) {
+		try {
+			user.setUpwd(Encrypt.md5AndSha(user.getUpwd()));
+			return frontUserMapper.login(user);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	
 
 }
