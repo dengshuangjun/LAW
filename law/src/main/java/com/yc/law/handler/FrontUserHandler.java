@@ -21,15 +21,15 @@ import com.yc.law.entity.User;
 import com.yc.law.service.FrontUserService;
 @Controller
 @RequestMapping("/front")
-@SessionAttributes("user")
+@SessionAttributes("fuser")
 public class FrontUserHandler {
 	
 	@Autowired
 	private  FrontUserService frontUserService;
 	
-	@ModelAttribute("user")
+	@ModelAttribute("fuser")
 	public void getModel(ModelMap map) {
-		map.put("user", new User());
+		map.put("fuser", new User());
 	}
 	
 	@RequestMapping(value="/usnameCheck",method=RequestMethod.POST)
@@ -58,10 +58,10 @@ public class FrontUserHandler {
 	
 	@RequestMapping(value="/SendEmailCode",method=RequestMethod.POST)
 	@ResponseBody
-	public int SendEmailCode(@ModelAttribute("user") User user,String zcemail,ModelMap map){
+	public int SendEmailCode(@ModelAttribute("fuser") User fuser,String zcemail,ModelMap map){
 		String sendContent=getRandomCode();
-		user.setEmailCode(Integer.parseInt(sendContent));
-		map.addAttribute("user", user);
+		fuser.setEmailCode(Integer.parseInt(sendContent));
+		map.addAttribute("fuser", fuser);
 		if(sendRegisterCode("法律智慧网注册验证码",sendContent,"studymail_test@163.com", zcemail)){
 			return 1;
 
@@ -72,9 +72,9 @@ public class FrontUserHandler {
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.POST)
-	public String register(@ModelAttribute("user") User user,ModelMap map){
-		if(((User)map.get("user")).getCheckCodeStatus()){
-			if(frontUserService.register(user)>0){
+	public String register(@ModelAttribute("fuser") User fuser,ModelMap map){
+		if(((User)map.get("fuser")).getCheckCodeStatus()){
+			if(frontUserService.register(fuser)>0){
 				return "redirect:/front/load.html";
 			}else{
 				return "redirect:/front/submit.html";
@@ -90,9 +90,9 @@ public class FrontUserHandler {
 	 */
 	@RequestMapping(value="moveEmailCode",method=RequestMethod.POST)
 	@ResponseBody
-	public int moveEmailCode(@ModelAttribute("user") User user){
+	public int moveEmailCode(@ModelAttribute("fuser") User fuser){
 		try {
-			user.setEmailCode(0);
+			fuser.setEmailCode(0);
 			return 1;
 		} catch (Exception e) {
 			return 0;
@@ -137,21 +137,26 @@ public class FrontUserHandler {
 		}
 	}
 	@RequestMapping("/frontLogin")
-	public String login(User user,ModelMap map){
-		
-			user=frontUserService.login(user);
-			if(user!=null){
-				map.addAttribute("user", user);
+	public String login(User fuser,ModelMap map){
+			User nameLoginUser=frontUserService.login(fuser);
+			if(nameLoginUser!=null){
+				fuser=nameLoginUser;
+				map.addAttribute("fuser", fuser);
 				return "redirect:/front/index.jsp";
 			}else{
-				return "forward:/front/load.html";
+				fuser=frontUserService.emaillogin(fuser);
+				if(fuser!=null){
+					map.addAttribute("fuser", fuser);
+					return "redirect:/front/index.jsp";
+				}else{
+					return "forward:/front/load.html";
+				}
 			}	
 	}
 	@RequestMapping("zhuxiao")
 	@ResponseBody
-	public boolean zhuxiao(User user,ModelMap map){
-		System.out.println(user);
-		map.remove("user");
+	public boolean zhuxiao(User fuser,ModelMap map){
+		map.remove("fuser");
 		return true;
 	}
 }

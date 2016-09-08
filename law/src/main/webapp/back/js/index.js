@@ -162,6 +162,17 @@ $(function() {
 					});
 				}
 				
+			}else if(text=='法律类型'){
+				if(tabs.tabs('exists','法律类型')){
+					tabs.tabs('select',"法律类型");
+				}else{
+					$('#center_content').tabs('add',{  
+					    title:'法律类型',  
+					    closable:true, 
+					    href:'back/manager/newsType.jsp'
+					});
+				}
+				
 			}
 		}
 	});

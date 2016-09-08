@@ -24,14 +24,14 @@
 			<span>今天是<span id="nowtime"></span></span>
 			<ul>
 				<li>
-				<c:if test="${user.usid!=null&&user.usid!=''}">
-						<a>欢迎您</a>: <a>${user.usname }</a>|
+				<c:if test="${fuser.usid!=null&&fuser.usid!=''}">
+						<a>欢迎您</a>: <a>${fuser.usname }</a>|
 						<button onclick="zhuxiao()">注销</button>|
 				</c:if> 
-				<c:if test="${user.usid==null||user.usid==''}">
+				<c:if test="${fuser.usid==null||fuser.usid==''}">
 						<li><a href="load.html">登录</a>| <a href="submit.html">免费注册</a>|
 				</c:if> 
-					<a href="javascript:void(0)" onclick="userCenter(${user.usid})">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
+					<a href="javascript:void(0)" onclick="userCenter(${fuser.usid})">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
 				</li>
 			</ul>
 		</div>

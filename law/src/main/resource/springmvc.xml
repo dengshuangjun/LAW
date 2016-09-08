@@ -22,7 +22,6 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
-	<!-- <bean id="user" class="com.yc.law.entity.User" /> -->
 	<!-- 引入外部属性文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
 
