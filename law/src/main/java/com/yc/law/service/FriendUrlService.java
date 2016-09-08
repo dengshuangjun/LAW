@@ -61,4 +61,11 @@ public interface FriendUrlService {
 	 * @return
 	 */
 	int updateFriConnNopic(FriendUrl friendUrl);
+
+	/**
+	 * 查找前台的八条友情链接数据
+	 * 根据图片、权重 、状态查
+	 * @return
+	 */
+	List<FriendUrl> findEightFriConn();
 }

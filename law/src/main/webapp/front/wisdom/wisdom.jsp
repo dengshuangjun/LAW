@@ -136,33 +136,7 @@
 	</div>
 	<div class="content_footer">
 		<span>友情链接</span>
-		<table>
-			<tr>
-				<td><a
-					href="http://cctv.cntv.cn/lm/falvjiangtang/shenghuobanguanwang/"><img
-						src="../images/table_class.jpg" title="法律讲堂"></a></td>
-				<td><a href="http://www.moj.gov.cn/"><img
-						src="../images/table_sf.jpg" title="中华人民共和国司法部"></a></td>
-				<td><a href="http://www.chinacourt.org/index.shtml"><img
-						src="../images/table_fy.jpg" title="中国法院网"></a></td>
-				<td><a href="http://www.legalinfo.gov.cn/"><img
-						src="../images/table_pf.jpg" title="普法网"></a></td>
-				<td><a href="http://www.people.com.cn/"><img
-						src="../images/table_people.jpg" title="人民网"></a></td>
-			</tr>
-			<tr>
-				<td><a href="http://www.jcrb.com/"><img
-						src="../images/table_zy.jpg" title="正义网"></a></td>
-				<td><a href="http://english.china.com/"><img
-						src="../images/table_zh.jpg" title="中华网"></a></td>
-				<td><a href="http://www.news.cn/"><img
-						src="../images/table_xh.jpg" title="新华网"></a></td>
-				<td><a href="http://www.scio.gov.cn/"><img
-						src="../images/table_ol.jpg" title="国务院办公室"></a></td>
-				<td><a href="http://www.sdbgw.com.cn/"><img
-						src="../images/table_time.jpg" title="时代报告"></a></td>
-			</tr>
-		</table>
+		<table id="friConnEight"></table>
 	</div>
 	<div id="link">
 		<div class="contact fl">

@@ -41,4 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update connection set conn_name=#{conn_name},conn_address=#{conn_address},conn_weight=#{conn_weight},status=#{status}
 		where conn_id=#{conn_id}
 	</update>
+
+	<select id="findEightFriConn" resultType="FriendUrl">
+		select * from 
+		(select a.*,rownum rn from
+		(select conn_id,conn_name,conn_address,conn_pic 
+		from connection c where status='Y' and conn_pic is not null order by conn_weight desc) a  
+		where 8 >= rownum)
+		where rn>0
+	</select>
 </mapper>
