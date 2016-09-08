@@ -76,6 +76,8 @@ public class FrontUserHandler {
 		if(((User)map.get("user")).getCheckCodeStatus()){
 			if(frontUserService.register(user)>0){
 				return "redirect:/front/load.html";
+			}else{
+				return "redirect:/front/submit.html";
 			}
 		}
 		return "redirect:/front/submit.html";
@@ -134,7 +136,23 @@ public class FrontUserHandler {
 			return false;
 		}
 	}
-	
-	
+	@RequestMapping("/frontLogin")
+	public String login(User user,ModelMap map){
+		
+			user=frontUserService.login(user);
+			if(user!=null){
+				map.addAttribute("user", user);
+				return "redirect:/front/index.jsp";
+			}else{
+				return "forward:/front/load.html";
+			}	
+	}
+	@RequestMapping("zhuxiao")
+	@ResponseBody
+	public boolean zhuxiao(User user,ModelMap map){
+		System.out.println(user);
+		map.remove("user");
+		return true;
+	}
 }
 	

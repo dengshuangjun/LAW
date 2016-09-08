@@ -10,4 +10,7 @@ public interface FrontUserService {
 
 	int register(User user);
 
+	User login(User user);
+
+
 }

@@ -22,8 +22,8 @@
 				<tr>
 					<td>用户名:</td>
 					<td><input class="easyui-textbox" type="text" id="usname"
-						name="usname" data-options="required:true"/><span
-						id="usnameResult" style="color: red" onblur="checkzcuname()" >*</span></td>
+						name="usname" data-options="required:true"  onblur="checkzcuname()" /><span
+						id="usnameResult" style="color: red">*</span></td>
 				</tr>
 				<tr>
 					<td>密码:</td>
@@ -80,7 +80,7 @@
 		<div style="text-align: center; margin-bottom: 20px;">
 			<a href="javascript:void(0)" class="easyui-linkbutton"
 				onclick="submitUserForm()">确认添加</a> <a href="javascript:void(0)"
-				class="easyui-linkbutton" onclick="clearForm()">重置</a>
+				class="easyui-linkbutton" onclick="clearUserForm()">重置</a>
 		</div>
 	</div>
 </div>
@@ -180,7 +180,7 @@ userObj=$('#generalUser_data').datagrid({
 							}
 							nids+=rows[rows.length-1].usid;
 							$.post("back/delUsers",{usid:nids},function(data){
-								if(data>0){
+								if(data==1){
 									$.messager.show({
 										title:'成功提示',
 										msg:'删除成功',
@@ -189,8 +189,10 @@ userObj=$('#generalUser_data').datagrid({
 									});
 									rows=null;
 									userObj.datagrid("reload");//刷新表格
-								}else{
+								}else if(data==0){
 									$.messager.alert('失败提示','删除失败','error');
+								}else{
+									$.messager.alert('失败提示','管理员不能删除...','error');
 								}
 							});
 						}else{
@@ -269,6 +271,7 @@ function myformatter(date){
  var zcuname;
 var zcemail;
 function submitUserForm(){
+	checkzcuname();
 	checkzcemail() ;
 	if(!zcuname ){
 		$.messager.alert('错误提示','用户名已注册或者长度少于2','error');

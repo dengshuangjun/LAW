@@ -37,7 +37,7 @@
 	<div id="top">
 		<div id="top_page">
 			<span>今天是<span id="nowtime"></span></span>
-       <ul>
+       	<ul>
 				<li>
 				<c:if test="${user.usid!=null&&user.usid!=''}">
 						<a>欢迎！！</a>： <a>${user.usname }</a>|
