@@ -9,6 +9,10 @@ public class TypePage implements Serializable{
 	private int page;	
 	private int rows;	
 	private List<Type> typeList;
+	
+	public TypePage() {
+		
+	}
 	public int getTotal() {
 		return total;
 	}

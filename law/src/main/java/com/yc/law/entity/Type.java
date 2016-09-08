@@ -9,6 +9,7 @@ public class Type implements Serializable{
 	private String  status;
 	private int usid;
 	private String usname;
+	private String note;
 	public int getNtid() {
 		return ntid;
 	}
@@ -39,14 +40,22 @@ public class Type implements Serializable{
 	public void setUsname(String usname) {
 		this.usname = usname;
 	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	@Override
 	public String toString() {
 		return "Type [ntid=" + ntid + ", ntname=" + ntname + ", status="
-				+ status + ", usid=" + usid + ", usname=" + usname + "]";
+				+ status + ", usid=" + usid + ", usname=" + usname + ", note="
+				+ note + "]";
 	}
+	
 	
 	
 }

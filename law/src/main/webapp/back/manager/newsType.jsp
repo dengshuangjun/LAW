@@ -18,13 +18,23 @@ userObj=$('#Type_data').datagrid({
 	pageList:[2,4,6,8,10],
 	remoteSort:false,
 	sortName:'usid',
-	fitColumns:true,
 	columns:[[  
 	           {field:'ntid',sortable:true,align:'center',checkbox:true}, 
-	           {field:'ntname',title:'类型名',align:'center'},  
-	           {field:'status',title:'状态¨',align:'center'},
-	           {field:'usid',title:'上次修改者id¨',align:'center'},
-	           {field:'usname',title:'上次修改者¨',align:'center'}
+	           {field:'ntname',title:'类型名',width:200,align:'center'},  
+	           {field:'status',title:'是否可用¨',width:60,align:'center',
+	        	   formatter: function(value,row,index){
+		        		  var valueStr= '<select id="userstate'+row.ntid+'" class="easyui-combobox" name="userstate" style="width:40px;"  disabled="none"  onchange="setvalue(this.value)">';
+							if(value=='N'){
+								valueStr+='<option value="N">否</option><option value="Y">是</option></select>';
+							}else{
+								valueStr+='<option value="Y">是</option><option value="N">否</option></select>';
+							}
+							return valueStr;
+						}      
+	           },
+	           {field:'usid',title:'上次修改者id¨',width:200,align:'center'},
+	           {field:'usname',title:'上次修改者¨',width:200,align:'center'},
+	           {field:'note',title:'备注信息¨',width:400,align:'center'}
 	           ]]
 	
 });

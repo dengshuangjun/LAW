@@ -17,9 +17,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</collection>
 	</resultMap>
 	<select id="getTypeByPage" parameterType="TypePage" resultMap="TypePageMap">
-		select ${page} page,${rows} rowss,(select count(1) from newsType) total,nn.*, from
+		select ${page} page,${rows} rowss,(select count(1) from newsType) total,nn.* from
 (select rownum rn,a.* from 
-(select ntid,ntname,status,n.usid,l.usname,n.spare_A note from newsType n left join law_user l on n.usid=l.usid) a where #{page}*#{rows}>=rownum) nn where rn>#({page}-1)*#{rows} 
+(select ntid,ntname,status,n.usid,l.usname,n.spare_A note from newsType n left join law_user l on n.usid=l.usid) a where #{page}*#{rows}>=rownum) nn where rn>(#{page}-1)*#{rows} 
 		
 	</select>
 </mapper>
