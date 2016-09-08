@@ -128,6 +128,7 @@ a:hover{
 	position:relative;
 	display:inline-block;
 	background-image:url(../images/lunbo1.jpg);
+	background-size: 1200px 300px;
 }
 #content #scroll_number{
 	list-style-type:none;
