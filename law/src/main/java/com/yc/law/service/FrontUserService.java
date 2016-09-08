@@ -12,5 +12,7 @@ public interface FrontUserService {
 
 	User login(User user);
 
+	User emaillogin(User fuser);
+
 
 }

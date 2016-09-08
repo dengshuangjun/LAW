@@ -13,4 +13,6 @@ public interface FrontUserMapper {
 
 	User login(User user);
 
+	User emaillogin(User user);
+
 }

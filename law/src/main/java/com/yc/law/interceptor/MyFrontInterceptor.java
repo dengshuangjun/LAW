@@ -13,8 +13,8 @@ public class MyFrontInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		if(request.getRequestURI().toString().contains("zhuxiao")){
-			request.getSession().removeAttribute("user");
+		if(request.getRequestURI().toString().contains("/front/zhuxiao")){
+			request.getSession().removeAttribute("fuser");
 		}
 		return true;
 	}

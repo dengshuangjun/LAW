@@ -53,6 +53,11 @@
 					<li>主页大图</li>
 					<li>关于我们</li>
 				</ul>
+			</div><div title="法律类型 " data-options="iconCls:'icon-ok'"
+				style="padding-left: 10px;">
+				<ul class="easyui-tree">
+					<li>法律类型</li>
+				</ul>
 			</div>
 			<div title="模块管理" data-options="iconCls:'icon-ok'"
 				style="padding-left: 10px;">
@@ -71,13 +76,14 @@
 					<li>管理员管理</li>
 				</ul>
 			</div>
-			<div title="留言管理" data-options="iconCls:'icon-ok',selected:true"
+			<div title="留言管理" data-options="iconCls:'icon-ok'"
 				style="padding-left: 10px;">
 				<ul class="easyui-tree">
 					<li>留言回复</li>
 					<li>评论审核</li>
 				</ul>
 			</div>
+			<div title="" selected></div>
 		</div>
 	</div>
 	<div
