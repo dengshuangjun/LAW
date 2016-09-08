@@ -13,6 +13,9 @@
 <link rel="shortcut icon" href="images/logo_ .png">
 <link rel="stylesheet" type="text/css" href="css/CssReset.css">
 <link rel="stylesheet" type="text/css" id="cssLink">
+<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/readCss.js"></script>
+
 </head>
 <body>
 	<!--S=页面-->
@@ -233,32 +236,34 @@
 		</div>
 		<div class="content_footer">
 			<span>友情链接</span>
-			<table>
-				<tr>
-					<td><a
-						href="http://cctv.cntv.cn/lm/falvjiangtang/shenghuobanguanwang/"><img
-							src="images/table_class.jpg" title="法律讲堂"></a></td>
-					<td><a href="http://www.moj.gov.cn/"><img
-							src="images/table_sf.jpg" title="中华人民共和国司法部"></a></td>
-					<td><a href="http://www.chinacourt.org/index.shtml"><img
-							src="images/table_fy.jpg" title="中国法院网"></a></td>
-					<td><a href="http://www.legalinfo.gov.cn/"><img
-							src="images/table_pf.jpg" title="普法网"></a></td>
-					<td><a href="http://www.people.com.cn/"><img
-							src="images/table_people.jpg" title="人民网"></a></td>
-				</tr>
-				<tr>
-					<td><a href="http://www.jcrb.com/"><img
-							src="images/table_zy.jpg" title="正义网"></a></td>
-					<td><a href="http://english.china.com/"><img
-							src="images/table_zh.jpg" title="中华网"></a></td>
-					<td><a href="http://www.news.cn/"><img
-							src="images/table_xh.jpg" title="新华网"></a></td>
-					<td><a href="http://www.scio.gov.cn/"><img
-							src="images/table_ol.jpg" title="国务院办公室"></a></td>
-					<td><a href="http://www.sdbgw.com.cn/"><img
-							src="images/table_time.jpg" title="时代报告"></a></td>
-				</tr>
+			<table id="friConnEight">
+<%-- 				<c:if test="${friEightConns} != null">
+					<tr>
+						<td><a
+							href="http://cctv.cntv.cn/lm/falvjiangtang/shenghuobanguanwang/"><img
+								src="images/table_class.jpg" title="法律讲堂"></a></td>
+						<td><a href="http://www.moj.gov.cn/"><img
+								src="images/table_sf.jpg" title="中华人民共和国司法部"></a></td>
+						<td><a href="http://www.chinacourt.org/index.shtml"><img
+								src="images/table_fy.jpg" title="中国法院网"></a></td>
+						<td><a href="http://www.legalinfo.gov.cn/"><img
+								src="images/table_pf.jpg" title="普法网"></a></td>
+						<td><a href="http://www.people.com.cn/"><img
+								src="images/table_people.jpg" title="人民网"></a></td>
+					</tr>
+					<tr>
+						<td><a href="http://www.jcrb.com/"><img  ${item.conn_pic }
+								src="images/table_zy.jpg" title="正义网"></a></td>
+						<td><a href="http://english.china.com/"><img
+								src="images/table_zh.jpg" title="中华网"></a></td>
+						<td><a href="http://www.news.cn/"><img
+								src="images/table_xh.jpg" title="新华网"></a></td>
+						<td><a href="http://www.scio.gov.cn/"><img
+								src="images/table_ol.jpg" title="国务院办公室"></a></td>
+						<td><a href="http://www.sdbgw.com.cn/"><img
+								src="images/table_time.jpg" title="时代报告"></a></td>
+					</tr>
+				</c:if> --%>
 			</table>
 		</div>
 	</div>
@@ -301,10 +306,9 @@
 		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015&nbsp;&nbsp; 制作单位：源辰信息有限公司</p>
 	</div>
 	<!--E=关于我们-->
-	<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
 	<script src="js/radio.js" type="text/javascript"></script>
 	<script src="js/time.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/readCss.js"></script>
+	
 	
 </body>
 </html>

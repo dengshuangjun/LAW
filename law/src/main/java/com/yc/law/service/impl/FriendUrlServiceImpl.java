@@ -56,4 +56,9 @@ public class FriendUrlServiceImpl implements FriendUrlService {
 		return friConnMapping.updateFriConnNopic(friendUrl);
 	}
 
+	@Override
+	public List<FriendUrl> findEightFriConn() {
+		return friConnMapping.findEightFriConn();
+	}
+
 }

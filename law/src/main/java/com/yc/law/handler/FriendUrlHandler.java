@@ -12,6 +12,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -149,5 +150,21 @@ public class FriendUrlHandler {
 				return 0;
 			}
 		}
+	}
+	
+	@RequestMapping("/findFriConn")
+	@ResponseBody
+	public List<FriendUrl> findFriConn(){
+		List<FriendUrl> friConns = friendUrlService.findEightFriConn();
+		try {
+			if(null!= friConns){
+				//System.out.println(friConns);
+				return friConns;
+			}
+		} catch (Exception e) {
+			LogManager.getLogger().debug("查询友情链接出错。");
+			return null;
+		}
+		return friConns;
 	}
 }

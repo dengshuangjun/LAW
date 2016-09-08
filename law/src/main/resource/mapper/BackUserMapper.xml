@@ -93,6 +93,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<update id="updateAdminInfo">
-		update law_user set usname=#{1} , usex=#{2} , upwd=#{3} ,uemail=#{4}, tel=#{5} , area=#{6} , birthday=to_date(#{7},'dd-mm-yyyy') where usid=#{0}
+		update law_user set usname=#{1} , usex=#{2} , upwd=#{3} ,uemail=#{4}, tel=#{5} , area=#{6} , birthday=to_date(#{7},'yyyy-mm-dd') where usid=#{0}
+	</update>
+	
+	<select id="checkUemail" parameterType="String" resultType="Integer">
+		select usid from law_user where uemail=#{uemail}
+	</select>
+	
+	<update id="updateAdminInfoWithoutUpwd">
+		update law_user set usname=#{1} , usex=#{2} , uemail=#{3}, tel=#{4} , area=#{5} , birthday=to_date(#{6},'yyyy-mm-dd') where usid=#{0}
 	</update>
 </mapper>

@@ -18,7 +18,7 @@ public class BackUserServiceImpl implements BackUserService {
 
 	@Autowired
 	private BackUserMapper backUserMapper;
-
+	
 	@Override
 	public User login(User user) {
 		try {
@@ -57,13 +57,11 @@ public class BackUserServiceImpl implements BackUserService {
 
 	@Override
 	public int updateGeneralUser(User user) {
-		
 		return backUserMapper.updateGeneralUserStatus(user);
 	}
 
 	@Override
-	public int updateAdminInfo(int usid, String usname, String usex, String upwd,String uemail, String tel, String area,
-			String birthday) {
+	public int updateAdminInfo(int usid,String usname,String usex,String upwd,String uemail,String tel,String area,String birthday) {
 		upwd=Encrypt.md5AndSha(upwd);
 		return backUserMapper.updateAdminInfo(usid,usname,usex,upwd,uemail,tel,area,birthday);
 	}
@@ -76,6 +74,17 @@ public class BackUserServiceImpl implements BackUserService {
 	@Override
 	public int delUsers(List<Integer> list) {
 		return backUserMapper.delUsers(list);
+	}
+
+	@Override
+	public Integer checkUemail(String uemail) {
+		return backUserMapper.checkUemail(uemail);
+	}
+
+	@Override
+	public int updateAdminInfoWithoutUpwd(int usid, String usname, String usex, String uemail, String tel, String area,
+			String birthday) {
+		return backUserMapper.updateAdminInfoWithoutUpwd(usid,usname,usex,uemail,tel,area,birthday);
 	}
 
 	
