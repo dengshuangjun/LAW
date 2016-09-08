@@ -47,10 +47,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 		<url-pattern>/back/manager/*</url-pattern>
 	</filter-mapping>
 
-<!-- 	<listener>
-		<listener-class>com.yc.law.listener.ServletContextListenerImpl</listener-class>
-	</listener> -->
-	
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

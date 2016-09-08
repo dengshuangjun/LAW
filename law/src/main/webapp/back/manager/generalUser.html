@@ -87,8 +87,6 @@
 <script type="text/javascript">
 var userObj;
 var editRowIng=undefined;
-var currentOp;
-var flag;
 var editRowStatus;
 userObj=$('#generalUser_data').datagrid({
 	url:'back/generalUserlistByPage',
@@ -245,7 +243,7 @@ userObj=$('#generalUser_data').datagrid({
 
       		}
           }]
-          });
+ });
 //选择是否的时候设定值
 function setvalue(b){
 	editRowStatus=b;

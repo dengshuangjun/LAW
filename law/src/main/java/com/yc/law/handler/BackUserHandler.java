@@ -38,8 +38,6 @@ import com.yc.law.util.Encrypt;
 public class BackUserHandler {
 	@Autowired
 	private BackUserService backUserService;
-	@Autowired
-	private User user;
 	
 	@ModelAttribute("user")
 	public void getModel(ModelMap map) {
@@ -49,6 +47,7 @@ public class BackUserHandler {
 	@PostConstruct
 	public void init(){
 		if(backUserService.findInitAdmin("admin")<=0){
+			User user=new User();
 			user.setUsname("admin");
 			user.setUpwd(Encrypt.md5AndSha("admin"));
 			backUserService.insertInitAdmin(user);
@@ -84,7 +83,6 @@ public class BackUserHandler {
 			map.put("total", users.getTotal());
 			map.put("rows", users.getUsers());
 		} catch (Exception e) {
-			System.out.println("generalUserListAll出错啦");
 			e.printStackTrace();
 		}
 		return map;

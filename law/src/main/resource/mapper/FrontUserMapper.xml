@@ -20,6 +20,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(seq_law_user_id.nextval,#{usname},#{upwd},#{uemail},#{role_id},sysdate)
 	</insert>
 	<select id="login" parameterType="User" resultType="User">
-		select * from role r join law_user l on r.role_id=l.role_id and  usname=#{usname} and upwd=#{upwd}
+		select * from role r join law_user l on r.role_id=l.role_id and upwd=#{upwd}  and usname=#{usname} and law_user_status='Y'
+	</select>
+	<select id="emaillogin" parameterType="User" resultType="User">
+		select * from role r join law_user l on r.role_id=l.role_id and upwd=#{upwd}  and uemail=#{usname} and law_user_status='Y'
 	</select>
 </mapper>
