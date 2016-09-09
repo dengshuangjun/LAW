@@ -170,6 +170,7 @@ a:hover{
 }
 #content .information .information_left div span{
 	font-weight: bold;
+	color:#1A519C;
 }
 #content .information .information_left div span a{
 	font-size: 12px;
@@ -214,7 +215,7 @@ a:hover{
 	padding:10px;
 	background: #def;
 }
-.content_mid .left span , .content_mid .right span{
+.content_mid .left span, .content_mid .right span{
 	font-size:20px;
 	font-weight:bolder;
 	margin:10px;
@@ -223,6 +224,7 @@ a:hover{
 	display:inline-block;
 	width:300px;
 	padding:5px;
+	color:#1A519C;
 }
 .content_mid .left ol li{
 	font-size:16px;
@@ -273,7 +275,7 @@ a:hover{
 	clear:both;
 	width:1200px;
 }
-.content_footer  span{
+.content_footer span{
 	font-size:16px;
 	font-weight:bolder;
 	margin:10px;
@@ -282,6 +284,7 @@ a:hover{
 	display:inline-block;
 	width:1150px;
 	padding:5px;
+	color:#1A519C;
 }
 .content_footer table{
 	width:1200px;
@@ -366,6 +369,7 @@ a:hover{
 	width: 1200px;
 	height: 100px;
 	margin:0 auto;
+	color:#1A519C;
 }
 #aboutMe p{
 	margin-top:14px;

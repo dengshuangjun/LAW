@@ -169,6 +169,7 @@ a:hover{
 }
 #content .information .information_left div span{
 	font-weight: bold;
+	color:#DB9A29;
 }
 #content .information .information_left div span a{
 	font-size: 12px;
@@ -221,6 +222,7 @@ a:hover{
 	display:inline-block;
 	width:300px;
 	padding:5px;
+	color:#DB9A29;
 }
 .content_mid .left ol li{
 	font-size:16px;
@@ -280,6 +282,7 @@ a:hover{
 	display:inline-block;
 	width:1150px;
 	padding:5px;
+	color:#DB9A29;
 }
 .content_footer table{
 	width:1200px;
@@ -364,6 +367,7 @@ a:hover{
 	width: 1200px;
 	height: 100px;
 	margin:0 auto;
+	color:#DB9A29;
 }
 #aboutMe p{
 	margin-top:14px;
