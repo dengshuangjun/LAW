@@ -9,9 +9,12 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+
+import org.apache.logging.log4j.LogManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
 import com.yc.law.entity.Footer;
 
 public class FooterDomXml {
@@ -91,9 +94,9 @@ public class FooterDomXml {
 			e.getElementsByTagName("email").item(0).getFirstChild().setNodeValue(b.getEmail());
 			//7.输出xml
 			if(docToXml(doc,fileName)){
-				System.out.println("尾部信息修改成功");
+				LogManager.getLogger().debug("尾部信息修改成功");
 			}else{
-				System.out.println("尾部信息修改失败");
+				LogManager.getLogger().debug("尾部信息修改失败");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
