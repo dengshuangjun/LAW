@@ -103,4 +103,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateAdminInfoWithoutUpwd">
 		update law_user set usname=#{1} , usex=#{2} , uemail=#{3}, tel=#{4} , area=#{5} , birthday=to_date(#{6},'yyyy-mm-dd') where usid=#{0}
 	</update>
+	
+	<select id="checkUname" parameterType="String" resultType="Integer">
+		select usid from law_user where usname=#{uname}
+	</select>
 </mapper>

@@ -43,16 +43,15 @@
 	height: 30px;
 }
 
-.code{
+.code {
 	font-family: serif;
 	font-style: italic;
-	color:red;
-	corder:0;
-	padding:2px 3px;
-	letter-spacing:3px;
+	color: red;
+	corder: 0;
+	padding: 2px 3px;
+	letter-spacing: 3px;
 	font-weight: bolder;
 }
-
 </style>
 
 <div
@@ -95,7 +94,11 @@
 			<tr>
 				<td>用户名</td>
 				<td><input id="usname" name="usname" type="text"
-					value="${user.usname}"></input></td>
+					value="${user.usname}" onblur="checkUsname()" /></td>
+			</tr>
+			<tr id="nameResultOut" style="display: none;">
+				<td></td>
+				<td><span id="nameResult" style="color: red">&nbsp;</span></td>
 			</tr>
 			<tr>
 				<td>用户性别</td>
@@ -111,11 +114,14 @@
 			</tr>
 			<tr>
 				<td>修改密码</td>
-				<td><input id="upwd" name="upwd" type="password"><span style="margin-left:18px;font-size:12px;">*可不填</span></td>
+				<td><input id="upwd" name="upwd" type="password"><span
+					style="margin-left: 18px; font-size: 12px;">*可不填</span></td>
 			</tr>
 			<tr>
 				<td>重复密码</td>
-				<td><input id="upwdagain" name="upwd" type="password" onblur="checkpwdagain()"><span style="margin-left:18px;font-size:12px;">*可不填</span></td>
+				<td><input id="upwdagain" name="upwd" type="password"
+					onblur="checkpwdagain()" /><span
+					style="margin-left: 18px; font-size: 12px;">*可不填</span></td>
 			</tr>
 			<tr id="checkPwdOut" style="display: none;">
 				<td></td>
@@ -151,8 +157,10 @@
 			</tr>
 			<tr>
 				<td>验证码</td>
-				<td><input id="input1" type="text" onblur="checkCodeInfo()" style="margin-top:10px;"/><br />
-					<input type="text" id="checkCode" class="code" style="width:50px;margin-top:10px;" /> <a href="javascript:createCode()">看不清楚</a></td>
+				<td><input id="input1" type="text" onblur="checkCodeInfo()"
+					style="margin-top: 10px;" /><br /> <input type="text"
+					id="checkCode" class="code" style="width: 50px; margin-top: 10px;" />
+					<a href="javascript:createCode()">看不清楚</a></td>
 			</tr>
 			<tr id="codeResultOut" style="display: none;">
 				<td></td>
@@ -170,76 +178,156 @@
 	</form>
 </div>
 <script type="text/javascript">
-	var checkPwd=true;
-	var checkBirthday=true;
-	var checkEmail=true;
-	var checkCodes=true;
-	
+	var checkPwd = true;
+	var checkBirthday = true;
+	var checkEmail = true;
+	var checkCodes = true;
+	var checkUname=true;
+
 	var code;//在全局  定义验证码
-	
-	$(function(){
+
+	$(function() {
 		createCode();
 	});
-	
-	function createCode(){
-		code="";
-		var codeLength=4;//验证码的长度
-		var checkCodeNode=document.getElementById("checkCode");
+
+	function createCode() {
+		code = "";
+		var codeLength = 4;//验证码的长度
+		var checkCodeNode = document.getElementById("checkCode");
 		checkCodeNode.value = "";
-		var selectChar=new Array(1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f','g','h','i','j','k','m','n','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','M','N','P','Q','R','S','T','U','V','W','X','Y','Z');
-		
-		for(var i=0;i<codeLength;i++){
-			var charIndex = Math.floor(Math.random()*60);
+		var selectChar = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c',
+				'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'q',
+				'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C',
+				'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'M', 'N', 'P', 'Q',
+				'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+
+		for (var i = 0; i < codeLength; i++) {
+			var charIndex = Math.floor(Math.random() * 60);
 			code += selectChar[charIndex];
 		}
-		if(code.length!=codeLength){
+		if (code.length != codeLength) {
 			createCode();
 		}
-		checkCodeNode.value=code;
-	}
-	
-	function checkCodeInfo(){
-		checkCodes=true;
-		$('#codeResultOut').hide();
-		var inputCode=document.getElementById("input1").value.toUpperCase();
-		var codeToUpperCase=code.toUpperCase();
-		if(inputCode.length <=0 ){
-			checkCodes=false;
-			$('#codeResultOut').show();
-			$("#codeResult").html("请输入验证码...").css("color", "#F00");
-		}else if(inputCode != codeToUpperCase){
-			checkCodes=false;
-			createCode();
-			$('#codeResultOut').show();
-	        $("#codeResult").html("验证码输入错误...").css("color", "#F00");
-	        $("#input1").val("");
-		}else{
-			$('#codeResultOut').show();
-	        $("#codeResult").html("验证码输入正确...").css("color", "#0F0");
-		}
-	}
-	
-	//密码查重 
-	function checkpwdagain(){
-		checkPwd=true;
-		$('#checkPwdOut').hide();
-		var newPwd=$("#upwd").val();
-		var newPwdagain=$("#upwdagain").val();
-		if (newPwd == newPwdagain && newPwd != "" && newPwd != null) {
-			$('#checkPwdOut').show();
-	        $("#checkPwd").html("密码重复确认正确...").css("color", "#0F0");
-	    } else {
-	    	$('#checkPwdOut').show();
-	        $("#checkPwd").html("密码不一致请重新输入...").css("color", "#F00");
-	        $("#upwdagain").val("");
-	        checkPwd = false;
-	    }
+		checkCodeNode.value = code;
 	}
 
+	function checkCodeInfo() {
+		checkCodes = true;
+		$('#codeResultOut').hide();
+		var inputCode = document.getElementById("input1").value.toUpperCase();
+		var codeToUpperCase = code.toUpperCase();
+		if (inputCode.length <= 0) {
+			checkCodes = false;
+			$('#codeResultOut').show();
+			$("#codeResult").html("请输入验证码...").css("color", "#F00");
+		} else if (inputCode != codeToUpperCase) {
+			checkCodes = false;
+			createCode();
+			$('#codeResultOut').show();
+			$("#codeResult").html("验证码输入错误...").css("color", "#F00");
+			$("#input1").val("");
+		} else {
+			$('#codeResultOut').show();
+			$("#codeResult").html("验证码输入正确...").css("color", "#0F0");
+		}
+	}
+
+	//密码查重 
+	function checkpwdagain() {
+		checkPwd = true;
+		$('#checkPwdOut').hide();
+		var newPwd = $("#upwd").val();
+		var newPwdagain = $("#upwdagain").val();
+		if (newPwd == newPwdagain && newPwd != "" && newPwd != null) {
+			$('#checkPwdOut').show();
+			$("#checkPwd").html("密码重复确认正确...").css("color", "#0F0");
+		} else {
+			$('#checkPwdOut').show();
+			$("#checkPwd").html("密码不一致请重新输入...").css("color", "#F00");
+			$("#upwdagain").val("");
+			checkPwd = false;
+		}
+	}
+	
+	function checkUsname() {
+		checkUname = true;
+		$('#nameResultOut').hide();
+		var uname = $("#usname").val();
+		var usid = $("#usids").text()
+		$.post("back/checkUname", {
+			uname : uname
+		}, function(data) {
+			if (usid == data) {
+				return;
+			}
+			if (data > 0) {
+				checkUname = false;
+				$('#nameResultOut').show();
+				$('#nameResult').text("该用户名已被注册...").css("color", "#F00");
+				$("#usname").val("");
+			}
+		});
+	}
+
+	
+
+	function onSelect(date) {
+		checkBirthday = true;
+		$('#birthdayResultOut').hide();
+		if (date > new Date()) {
+			$('#birthdayResultOut').show();
+			$('#birthday').datebox('setValue', '');
+			$('#birthdayResult').text('出生日期不能大于今天');
+			checkBirthday = false;
+		} else {
+			$('#birthdayResultOut').hide();
+			var y = date.getFullYear();
+			var m = date.getMonth() + 1;
+			var d = date.getDate()
+			$('#birthdayResult').text('您选择的日期为：' + myformatter(date));
+		}
+	}
+
+	function myformatter(date) {
+		var y = date.getFullYear();
+		var m = date.getMonth() + 1;
+		var d = date.getDate();
+		return y + '-' + (m < 10 ? ('0' + m) : m) + '-'
+				+ (d < 10 ? ('0' + d) : d);
+	}
+
+	function checkuemail() {
+		checkEmail = true;
+		$('#uemailResultOut').hide();
+		var uemail = $("#uemail").val();
+		var usid = $("#usids").text()
+		var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+		if (uemail.match(reg)) {
+			$.post("back/checkUemail", {
+				uemail : uemail
+			}, function(data) {
+				if (usid == data) {
+					return;
+				}
+				if (data > 0) {
+					checkEmail = false;
+					$('#uemailResultOut').show();
+					$('#uemailResult').text("该邮箱已被注册...").css("color", "#F00");
+					$("#uemail").val("");
+				}
+			});
+		} else {
+			checkEmail = false;
+			$('#uemailResultOut').show();
+			$('#uemailResult').text("邮箱格式不正确...").css("color", "#F00");
+			$("#uemail").val("");
+		}
+	}
+	
 	function updateAdminInfo() {
-		if(checkPwd && checkBirthday && checkEmail && checkCode){
-			var newPwd=$("#upwd").val();
-			if (newPwd!=null && newPwd!="") {
+		if (checkPwd && checkBirthday && checkEmail && checkCode && checkUname) {
+			var newPwd = $("#upwd").val();
+			if (newPwd != null && newPwd != "") {
 				$.post("back/updateAdminInfo", {
 					usid : $("#usids").text(),
 					usname : $("#usname").val(),
@@ -262,7 +350,7 @@
 						$.messager.alert('错误提示', '用户信息修改失败。。。\n' + e, 'error');
 					}
 				});
-			}else{
+			} else {
 				$.post("back/updateAdminInfoWithoutUpwd", {
 					usid : $("#usids").text(),
 					usname : $("#usname").val(),
@@ -285,60 +373,8 @@
 					}
 				});
 			}
-		}else{
+		} else {
 			$.messager.alert('错误提示', '请填写正确修改信息再提交...\n', 'error');
-		}
-	}
-
-	function onSelect(date) {
-		checkBirthday=true;
-		$('#birthdayResultOut').hide();
-		if (date > new Date()) {
-			$('#birthdayResultOut').show();
-			$('#birthday').datebox('setValue', '');
-			$('#birthdayResult').text('出生日期不能大于今天');
-			checkBirthday=false;
-		} else {
-			$('#birthdayResultOut').hide();
-			var y = date.getFullYear();
-			var m = date.getMonth() + 1;
-			var d = date.getDate()
-			$('#birthdayResult').text('您选择的日期为：' + myformatter(date));
-		}
-	}
-	
-	function myformatter(date){
-		var y = date.getFullYear();
-		var m = date.getMonth()+1;
-		var d = date.getDate();
-		return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-	}
-
-	function checkuemail() {
-		checkEmail=true;
-		$('#uemailResultOut').hide();
-		var uemail = $("#uemail").val();
-		var usid = $("#usids").text()
-		var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
-		if (uemail.match(reg)) {
-			$.post("back/checkUemail", {
-				uemail : uemail
-			}, function(data) {
-				if (usid == data) {
-					return;
-				}
-				if (data > 0) {
-					checkEmail=false;
-					$('#uemailResultOut').show();
-					$('#uemailResult').text("该邮箱已被注册...").css("color", "#F00");
-					$("#uemail").val("");
-				}
-			});
-		} else {
-			checkEmail=false;
-			$('#uemailResultOut').show();
-			$('#uemailResult').text("邮箱格式不正确...").css("color", "#F00");
-			$("#uemail").val("");
 		}
 	}
 </script>

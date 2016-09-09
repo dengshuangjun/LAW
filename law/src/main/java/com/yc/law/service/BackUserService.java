@@ -35,4 +35,6 @@ public interface BackUserService {
 
 	int updateAdminInfoWithoutUpwd(int usid, String usname, String usex, String uemail, String tel, String area,
 			String birthday);
+
+	Integer checkUname(String uname);
 }
