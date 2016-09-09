@@ -37,21 +37,30 @@ $(document).ready(function() {
 					}
 					//加载友情链接的图片
 					$.post("/law/friendUrl/findFriConn",function(data){
-						if(data!=null && ""!=data){
-							var str="<tr>";
-							for(var i=0;i<(data.length-4);i++){
-								str+="<td><a href="+data[i].conn_address+"><img src='../"+data[i].conn_pic+"' title="+data[i].conn_name+"></a></td>"
+					if(data!=null && ""!=data){
+						var str="<tr>";
+						if(data.length<6){
+							for(var i=0,j=data.length;i<j;i++){
+								str+="<td><a href='"+data[i].conn_address+"'><img src='../"+data[i].conn_pic+"' title="+data[i].conn_name+"></a></td>"
 							}
 							str+="</tr><tr>";
-							for(var i=4;i<data.length;i++){
-								str+="<td><a href="+data[i].conn_address+"><img src='../"+data[i].conn_pic+"' title="+data[i].conn_name+"></a></td>";
-							}
-							str+="</tr>";
-							$("#friConnEight").html(str);
 						}
+						if(data.length>=6){
+							for(var i=0;i<5;i++){
+								str+="<td><a href='"+data[i].conn_address+"'><img src='../"+data[i].conn_pic+"' title="+data[i].conn_name+"></a></td>"
+							}
+							str+="</tr><tr>";
+							for(var i=5;i<data.length;i++){
+								str+="<td><a href='"+data[i].conn_address+"'><img src='../"+data[i].conn_pic+"' title="+data[i].conn_name+"></a></td>";
+							}
+						}
+						str+="</tr>";
+						$("#friConnEight").html(str);
+					}
 					},'json');
 				});
 			});
 		}
 	});
 });
+
