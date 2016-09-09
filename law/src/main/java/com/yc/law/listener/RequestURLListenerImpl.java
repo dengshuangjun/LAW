@@ -1,6 +1,7 @@
 package com.yc.law.listener;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -26,8 +27,15 @@ public class RequestURLListenerImpl implements Filter {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		User user=(User)request.getSession().getAttribute("user");
+		PrintWriter out = response.getWriter();
 		if(user==null||user.getUsid()==0){
-			request.getRequestDispatcher("back/login.jsp").forward(arg0, arg1);
+			out.print("<script>"
+					+ "$.messager.confirm('提示信息','登陆超时...',function(r){  "
+					+ "	    if (r){  "
+					+ "	       location.href='back/login.jsp'"  
+					+ "	    }  "
+					+ "	}); "
+					+ "</script>");
 			return;
 		}
 		arg2.doFilter(arg0, arg1);

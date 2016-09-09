@@ -177,3 +177,10 @@ $(function() {
 		}
 	});
 });
+function backLoginOut(usid){
+	$.post("back/backLoginOut",{usid:usid},function(data){
+		if(data){
+			location.href="/law/back/login";
+		}
+	},"json");
+}

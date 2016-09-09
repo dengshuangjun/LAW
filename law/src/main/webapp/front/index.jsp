@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="css/CssReset.css">
 <link rel="stylesheet" type="text/css" id="cssLink">
 <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
-
+<script type="text/javascript" src="js/readCss.js"></script>
 </head>
 <body>
 	<!--S=页面-->
@@ -307,8 +307,7 @@
 	<!--E=关于我们-->
 	<script src="js/radio.js" type="text/javascript"></script>
 	<script src="js/time.js" type="text/javascript"></script>
-	<script type="text/javascript" src="js/readCss.js"></script>
-	
-	
+		
+
 </body>
 </html>

@@ -260,4 +260,11 @@ public class BackUserHandler {
 			return 0;
 		}
 	}
+	@RequestMapping("/backLoginOut")
+	@ResponseBody
+	public boolean backLoginOut(User user,ModelMap map){
+		map.remove("user");
+		return true;	
+	}
 }
+

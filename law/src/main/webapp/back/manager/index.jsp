@@ -27,6 +27,7 @@
 	width: 80px;
 	height:100px;
 	}
+	
 </style>
 </head>
 <body class="easyui-layout">
@@ -35,9 +36,13 @@
 		<img src="back/images/logo_.png" height="60px;" width="60px;"
 			style="display: inline-block; float: left;" /> <span
 			style="line-height: 60px; height: 60px; text-align: center; display: inline; float: left; font-size: 25px; padding-left: 20px;">法律智慧网_后台管理系统</span>
-		<div
-			style="height: 60px; float: right; padding: 0 20px; min-width: 200px;">
-			<span style="font-size: 20px; line-height: 60px;">欢迎您:${user.usname}！！！</span>
+		<div style="height: 60px; float: right; padding: 0 20px; min-width: 200px;">
+			<span id="welco" style="font-size: 20px; line-height: 60px;">欢迎您:</span>
+				<a href="javascript:void(0)" id="mb" class="easyui-menubutton"   
+		        data-options="menu:'#mm'">${user.usname}</a>  
+				<div id="mm">  
+				    <div data-options="iconCls:'icon-undo'" onclick="backLoginOut(${user.usid})">注销</div>  
+		   	 	</div>
 		</div>
 	</div>
 
