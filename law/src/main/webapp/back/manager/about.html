@@ -1,1 +1,52 @@
-关于我们
+<!-- 关于我们 -->
+<div id="AboutUs" class="easyui-layout" style="width:100%;height:100%;">  
+    <div data-options="region:'north',title:'展示信息',split:true" style="height:100%;width:100%;"></div>  
+    <div data-options="region:'center',title:'留言反馈',fit:true">
+    	<div id="aboutUs_content" class="easyui-tabs" data-options="fit:true">  
+		  	<table id="showAbInfo"></table>
+		</div>
+    </div>  
+</div>  
+
+<script>
+aboutUsObj = $('#showAbInfo').datagrid({
+	url : 'messages/findMessages',
+	fitColumns : true,//true将自动扩展/收缩columns大小适应grid的宽度,防止水平滚动.
+	striped : true,//显示条纹所在行
+	loadMsg : "数据加载中...",//当从远程服务器加载数据的时候,显示的提示消息.
+	pagination : true,//分页
+	fit : true,//满屏
+	pageNumber : 1,//初始页码
+	pageSize : 10,//分页大小
+	pageList : [ 10, 20, 30, 40, 50 ],//设置属性
+	sortName : 'mtime',//定义那个列可以排序.
+	sortOrder : 'desc',
+	remoteSort : false,//定义是否远程排序.对数据库进行操作
+	columns : [ [{
+		field : 'mid',
+		title : '留言id',
+		width : 60,
+		align : 'center'
+	}, {
+		field : 'mip',
+		title : '留言ip',
+		width : 120,
+		align : 'center'
+	}, {
+		field : 'memail',
+		title : '邮箱地址',
+		width : 240,
+		align : 'center'
+	}, {
+		field : 'mcontent',
+		title : '留言内容',
+		width : 400,
+		align : 'center',
+	}, {
+		field : 'mtime',
+		title : '留言时间',
+		width : 100,
+		align : 'center',
+	} ] ]
+});
+</script>
