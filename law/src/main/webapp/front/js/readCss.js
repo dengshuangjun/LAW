@@ -1,8 +1,6 @@
 /**
  * 每次主页面加载，就读取最新的样式信息
  */
-
-$(document).ready(function() {
 	$.ajax({
 		url: "../xml/style.xml",
 		dataType: 'xml',
@@ -62,5 +60,4 @@ $(document).ready(function() {
 			});
 		}
 	});
-});
 

@@ -3,9 +3,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <table id="Type_data"></table>
 <script type="text/javascript">
-var TypeObj;//æ´ä¸ªtableå¯¹è±¡
-var Type_editRowIng=undefined;//æ­£å¨è¢«ç¼è¾çè¡
-var Type_editRowStatus;//è¢«ç¼è¾è¡çç¶æ
+var TypeObj;
+var Type_editRowIng=undefined;
+var Type_editRowStatus;
 userObj=$('#Type_data').datagrid({
 	url:'backs/getTypeByPage',
 	fitColumns:true,
@@ -21,7 +21,7 @@ userObj=$('#Type_data').datagrid({
 	columns:[[  
 	           {field:'ntid',sortable:true,align:'center',checkbox:true}, 
 	           {field:'ntname',title:'类型名',width:200,align:'center'},  
-	           {field:'status',title:'是否可用¨',width:60,align:'center',
+	           {field:'status',title:'是否可用',width:60,align:'center',
 	        	   formatter: function(value,row,index){
 		        		  var valueStr= '<select id="userstate'+row.ntid+'" class="easyui-combobox" name="userstate" style="width:40px;"  disabled="none"  onchange="setvalue(this.value)">';
 							if(value=='N'){
@@ -32,10 +32,17 @@ userObj=$('#Type_data').datagrid({
 							return valueStr;
 						}      
 	           },
-	           {field:'usid',title:'上次修改者id¨',width:200,align:'center'},
-	           {field:'usname',title:'上次修改者¨',width:200,align:'center'},
-	           {field:'note',title:'备注信息¨',width:400,align:'center'}
-	           ]]
-	
+	           {field:'usid',title:'上次修改者id',width:200,align:'center'},
+	           {field:'usname',title:'上次修改者',width:200,align:'center'},
+	           {field:'note',title:'备注信息',width:400,align:'center'}
+	   ]],
+        toolbar:[{
+        	text:'添加',
+          	iconCls:"icon-add",
+          	handler:function(){
+          		
+      		}
+        }],
+
 });
 </script>
