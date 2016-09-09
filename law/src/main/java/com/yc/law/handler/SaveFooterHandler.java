@@ -22,7 +22,7 @@ public class SaveFooterHandler {
 		try {
 			FooterDomXml fdx = new FooterDomXml();
 			String paths=System.getProperty("evan.webapp");
-			paths+="xml/footer.xml";
+			paths+="xml/style.xml";
 			Footer footer = fdx.getFootInfo(paths);
 			JSONArray json=JSONArray.fromObject(footer);//将集合数据变成json集合
 			jb = new JSONObject();
@@ -40,7 +40,7 @@ public class SaveFooterHandler {
 		try {
 			FooterDomXml fdx = new FooterDomXml();
 			String paths=System.getProperty("evan.webapp");
-			paths+="xml/footer.xml";
+			paths+="xml/style.xml";
 			fdx.update(footer, paths);
 		} catch (Exception e) {
 			LogManager.getLogger().error("修改节点信息失败。");
