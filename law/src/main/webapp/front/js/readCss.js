@@ -24,7 +24,6 @@ $(document).ready(function() {
 		}
 	});
 });
-
 $.ajax({
 	url: "../xml/footer.xml",
 	dataType: 'xml',

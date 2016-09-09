@@ -9,6 +9,7 @@ function show(id) {
 	} else {
 		index = index % 5 + 1;
 	}
+	
 	// 设置图片
 	document.getElementById('pic').style.backgroundImage = 'url(images/lunbo'
 			+ index + '.jpg)';
