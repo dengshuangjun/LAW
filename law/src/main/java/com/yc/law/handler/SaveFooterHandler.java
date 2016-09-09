@@ -34,6 +34,20 @@ public class SaveFooterHandler {
 		}
 	}
 	
+	@RequestMapping("/findCurrFooter")
+	@ResponseBody
+	public Footer readCurrCss() {
+		try {
+			FooterDomXml dom = new FooterDomXml();
+			String paths=System.getProperty("evan.webapp");
+			paths+="xml/style.xml";
+			return dom.getFootInfo(paths);
+		} catch (Exception e) {
+			LogManager.getLogger().error("读取尾部信息失败。");
+			return null;
+		}
+	}
+	
 	@RequestMapping("/updateFooter")
 	@ResponseBody
 	public int updateFooter(Footer footer){

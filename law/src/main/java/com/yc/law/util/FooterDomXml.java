@@ -38,10 +38,11 @@ public class FooterDomXml {
 			footer.setInfo(e.getElementsByTagName("info").item(0).getFirstChild().getNodeValue().trim());
 			footer.setPhone(e.getElementsByTagName("phone").item(0).getFirstChild().getNodeValue().trim());
 			footer.setEmail(e.getElementsByTagName("email").item(0).getFirstChild().getNodeValue().trim());
+			return footer;
 		} catch (Exception e) {
-			e.printStackTrace();
+			LogManager.getLogger().error("解析尾部信息出错。");
+			return null;
 		}
-		return footer;
 	}
 
 	/**

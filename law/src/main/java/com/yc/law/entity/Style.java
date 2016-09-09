@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Style implements Serializable{
 
 	/**
-	 * 
+	 * 前台样式实体类
 	 */
 	private static final long serialVersionUID = 4198313657792041213L;
 	
