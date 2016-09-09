@@ -1,5 +1,7 @@
 package com.yc.law.interceptor;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,8 +15,12 @@ public class MyFrontInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
+		System.out.println(request.getRequestURI());
 		if(request.getRequestURI().toString().contains("/front/zhuxiao")){
 			request.getSession().removeAttribute("fuser");
+		}else if(request.getRequestURI().toString().contains("/back/backLoginOut")){
+			
+			request.getSession().removeAttribute("user");
 		}
 		return true;
 	}
