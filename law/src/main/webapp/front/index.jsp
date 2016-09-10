@@ -30,7 +30,7 @@
 				<c:if test="${fuser.usid==null||fuser.usid==''}">
 						<li><a href="load.html">登录</a>| <a href="submit.html">免费注册</a>|
 				</c:if> 
-					<a href="javascript:void(0)" onclick="userCenter(${fuser.usid})">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
+					<a href="javascript:void(0)" onclick="userCenter(${fuser.usid})">会员中心</a>| <a href="###">收藏本站</a>| <a href="javascript:void(0)" onclick="aboutUs(${fuser.usid})">关于我们</a>
 				</li>
 			</ul>
 		</div>

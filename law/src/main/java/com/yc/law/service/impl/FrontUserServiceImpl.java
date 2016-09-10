@@ -38,7 +38,6 @@ public class FrontUserServiceImpl implements FrontUserService {
 
 	@Override
 	public User login(User user) {
-		System.out.println(user);
 		try {
 			user.setUpwd(Encrypt.md5AndSha(user.getUpwd()));
 			return frontUserMapper.login(user);
