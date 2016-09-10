@@ -19,6 +19,8 @@
 <script src="js/aboutUs/modernizr.custom.js"></script>
 <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/readCss.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=67jMQ5DmYTe1TLMBKFUTcZAR"></script>
+
 </head>
 <body>
 	<!--S=页面-->
@@ -111,8 +113,8 @@
 							<div class="gn-scroller">
 								<ul class="gn-menu">
 	                            	<li><a class="gn-icon gn-icon-article" href="javascript:void(0)" onclick="showUsInfo()">关于我们</a></li>
-									<li><a class="gn-icon gn-icon-help">留言反馈</a></li>
-	                                <li><a class="gn-icon gn-icon-pictures">公司地址</a></li>
+									<li><a class="gn-icon gn-icon-help" href="javascript:void(0)" onclick="leaveMsg()">留言反馈</a></li>
+	                                <li><a class="gn-icon gn-icon-pictures" href="javascript:void(0)" onclick="showMap()">公司地址</a></li>
 								</ul>
 							</div><!-- /gn-scroller -->
 						</nav>
@@ -121,8 +123,9 @@
 				</ul>
 				<header>
 					<div id="lala" style="height:600px;width:1120px;margin-left:80px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;">
-	                	<jsp:include page='aboutus/info.jsp'></jsp:include> 
-	                	<!-- <iframe style="height:100%;width:100%;" src="aboutus/info.jsp"></iframe> -->
+	                	<div style="" id="usInfo_show"></div>
+	                	<div style="" id="leaveMsg_fd"></div>
+	                	<div style="" id="allmap"></div>
 	                </div>
 				</header>
 			</div><!-- /container -->
@@ -176,9 +179,38 @@
 	<script src="js/aboutUs/gnmenu.js"></script>
 	<script>
 		new gnMenu( document.getElementById( 'gn-menu' ) );
+		showMap();
 		function showUsInfo(){
-			alert($("jsp:include"));
-			$("jsp:include").attr("page","index.jsp");
+			$("#allmap").attr("style","display:none");
+			$("#leaveMsg_fd").attr("style","display:none");
+			$("#usInfo_show").attr("style","display:block");
+		}
+		
+		function leaveMsg(){
+			$("#usInfo_show").attr("style","display:none");
+			$("#allmap").attr("style","display:none");
+			$("#leaveMsg_fd").attr("style","display:block");
+		}
+		
+		function showMap(){
+			$("#usInfo_show").attr("style","display:none");
+			$("#leaveMsg_fd").attr("style","display:none");
+			$("#allmap").attr("style","display:block");
+		  	// 百度地图API功能
+			var map = new BMap.Map("allmap");
+			var point = new BMap.Point(116.331398,39.897445);
+			map.centerAndZoom(point,12);
+			// 创建地址解析器实例
+			var myGeo = new BMap.Geocoder();
+			// 将地址解析结果显示在地图上,并调整地图视野
+			myGeo.getPoint("衡阳市珠晖区衡花路16号", function(point){
+				if (point) {
+					map.centerAndZoom(point, 16);
+					map.addOverlay(new BMap.Marker(point));
+				}else{
+					alert("您选择地址没有解析到结果!");
+				}
+			}, "湖南省");
 		}
 	</script>
 </body>

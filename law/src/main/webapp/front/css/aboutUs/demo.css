@@ -126,6 +126,13 @@
 }
 
 /*新加的*/
+#allmap,#usInfo_show,#leaveMsg_fd{
+	height:100%;
+	width:100%;
+}
+
 #allmap{
 	z-index:-1 !important;
+	overflow: hidden;
+	margin:0;
 }

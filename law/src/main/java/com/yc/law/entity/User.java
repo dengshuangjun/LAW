@@ -202,7 +202,10 @@ public class User implements Serializable {
 				+ ", tel=" + tel + ", law_user_status=" + law_user_status
 				+ ", law_user_status_explain=" + law_user_status_explain
 				+ ", area=" + area + ", register_time=" + register_time
-				+ ", birthday=" + birthday + ", code=" + code + "]";
+				+ ", birthday=" + birthday + ", code=" + code + ", emailCode="
+				+ emailCode + ", receiveUrl=" + receiveUrl + "]";
 	}
+
+	
 
 }
