@@ -13,6 +13,10 @@
 <link rel="shortcut icon" href="images/logo_ .png">
 <link rel="stylesheet" type="text/css" href="css/CssReset.css">
 <link rel="stylesheet" type="text/css" id="cssLink">
+<link rel="stylesheet" type="text/css" href="css/aboutUs/normalize.css" />
+<link rel="stylesheet" type="text/css" href="css/aboutUs/demo.css" />
+<link rel="stylesheet" type="text/css" href="css/aboutUs/component.css" />
+<script src="js/aboutUs/modernizr.custom.js"></script>
 <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/readCss.js"></script>
 </head>
@@ -98,7 +102,30 @@
 	<div id="content">
 		<!-- 关于我们主体部分 -->
 		<div class="content_showInfo">
-			
+			<!-- 导航插件 -->
+			<div class="container">
+				<ul id="gn-menu" class="gn-menu-main">
+					<li class="gn-trigger">
+						<a class="gn-icon gn-icon-menu"><span>Menu</span></a>
+						<nav class="gn-menu-wrapper">
+							<div class="gn-scroller">
+								<ul class="gn-menu">
+	                            	<li><a class="gn-icon gn-icon-article" href="javascript:void(0)" onclick="showUsInfo()">关于我们</a></li>
+									<li><a class="gn-icon gn-icon-help">留言反馈</a></li>
+	                                <li><a class="gn-icon gn-icon-pictures">公司地址</a></li>
+								</ul>
+							</div><!-- /gn-scroller -->
+						</nav>
+					</li>
+	                <li></li>
+				</ul>
+				<header>
+					<div id="lala" style="height:600px;width:1120px;margin-left:80px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;">
+	                	<jsp:include page='aboutus/info.jsp'></jsp:include> 
+	                	<!-- <iframe style="height:100%;width:100%;" src="aboutus/info.jsp"></iframe> -->
+	                </div>
+				</header>
+			</div><!-- /container -->
 		</div>
 		<div class="content_footer">
 			<span>友情链接</span>
@@ -145,5 +172,14 @@
 	</div>
 	<!--E=关于我们-->
 	<script src="js/time.js" type="text/javascript"></script>
+	<script src="js/aboutUs/classie.js"></script>
+	<script src="js/aboutUs/gnmenu.js"></script>
+	<script>
+		new gnMenu( document.getElementById( 'gn-menu' ) );
+		function showUsInfo(){
+			alert($("jsp:include"));
+			$("jsp:include").attr("page","index.jsp");
+		}
+	</script>
 </body>
 </html>
