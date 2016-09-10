@@ -16,11 +16,19 @@
 <link rel="stylesheet" type="text/css" href="css/aboutUs/normalize.css" />
 <link rel="stylesheet" type="text/css" href="css/aboutUs/demo.css" />
 <link rel="stylesheet" type="text/css" href="css/aboutUs/component.css" />
+<link href="css/aboutUs/animate.css" rel="stylesheet">
 <script src="js/aboutUs/modernizr.custom.js"></script>
 <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/readCss.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=67jMQ5DmYTe1TLMBKFUTcZAR"></script>
+<style type="text/css">
 
+.text1,.text2,.text3 {visibility:hidden;font-family: "华文楷体"}
+.text1,.text2 {color:#fff;color:#fff;}
+.text1 {text-align:center;font-size:30px;text-shadow:0.025em 0.025em 0.025em rgba(56,125,149, 0.8);}
+.text2 {font-size:18px;line-height:24px;text-shadow:0.1em 0.1em 0.1em rgba(56,125,149, 0.2)}
+.text3 {text-align:center;font-size:36px;color:#900}
+</style>
 </head>
 <body>
 	<!--S=页面-->
@@ -123,7 +131,11 @@
 				</ul>
 				<header>
 					<div id="lala" style="height:600px;width:1120px;margin-left:80px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;">
-	                	<div style="" id="usInfo_show"></div>
+	                	<div style="" id="usInfo_show">
+								<p class="text1">关于我们</p>
+								<p class="text2">发电机房哈地方哈萨克的合法士大夫发奥克发斯蒂芬哈萨克的金凤凰卡死的合法就开始的恢复快兰...的发生离开的灿撒旦飞洒看地方噶十多个发生地方噶是极好的感动烂阿斯顿发生地方哈傻傻的...开啥地方哈萨克的发送卡地方噶十多个发斯蒂芬发和</p>
+								<p class="text3">WELCOME</p>
+	                	</div>
 	                	<div style="" id="leaveMsg_fd"></div>
 	                	<div style="" id="allmap"></div>
 	                </div>
@@ -177,13 +189,25 @@
 	<script src="js/time.js" type="text/javascript"></script>
 	<script src="js/aboutUs/classie.js"></script>
 	<script src="js/aboutUs/gnmenu.js"></script>
+	<script src="js/aboutUs/jquery.lettering.js"></script>
+	<script src="js/aboutUs/jquery.textillate.js"></script>
 	<script>
 		new gnMenu( document.getElementById( 'gn-menu' ) );
-		showMap();
+		showUsInfo();
 		function showUsInfo(){
 			$("#allmap").attr("style","display:none");
 			$("#leaveMsg_fd").attr("style","display:none");
 			$("#usInfo_show").attr("style","display:block");
+			$('.text1').textillate({ in: { effect: 'rollIn' } });
+			$('.text2').textillate({
+				initialDelay: 1000, 	//设置动画开始时间
+				in: { effect: 'flipInX'	//设置动画名称
+				}
+			});
+			$('.text3').textillate({
+				initialDelay: 9000,
+				in: { effect: 'bounceInDown' }
+			});
 		}
 		
 		function leaveMsg(){

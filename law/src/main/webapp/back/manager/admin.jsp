@@ -325,6 +325,7 @@
 	}
 	
 	function updateAdminInfo() {
+		var newPwdagain = $("#upwdagain").val();
 		if (checkPwd && checkBirthday && checkEmail && checkCode && checkUname) {
 			var newPwd = $("#upwd").val();
 			if (newPwd != null && newPwd != "") {
@@ -350,11 +351,14 @@
 						$.messager.alert('错误提示', '用户信息修改失败。。。\n' + e, 'error');
 					}
 				});
-			} else {
+			}else if(newPwd != null && newPwd != "" && newPwdagain ==null && newPwdagain ==""){
+				alert("请重复新密码!");
+				return;
+			}else {
 				$.post("back/updateAdminInfoWithoutUpwd", {
 					usid : $("#usids").text(),
 					usname : $("#usname").val(),
-					usex : $("#usex").val(),
+					usex : $("input[type=radio]:checked").val(),
 					uemail : $("#uemail").val(),
 					tel : $("#tel").val(),
 					area : $("#area").val(),

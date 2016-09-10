@@ -56,6 +56,38 @@ public class FrontUserServiceImpl implements FrontUserService {
 		}
 	}
 
+	@Override
+	public String findRoleName(int roleId) {
+		return frontUserMapper.findRoleName(roleId);
+	}
+
+	@Override
+	public Integer checkCenterUname(String uname) {
+		return frontUserMapper.checkCenterUname(uname);
+	}
+
+	@Override
+	public Integer checkTel(String tel) {
+		return frontUserMapper.checkTel(tel);
+	}
+
+	@Override
+	public int updateBaseInfo(String uname, String tel, int usid,String usex) {
+		return frontUserMapper.updateBaseInfo(uname,tel,usid,usex);
+	}
+
+	@Override
+	public int checkNowPwd(String nowPwd, int usid) {
+		nowPwd=Encrypt.md5AndSha(nowPwd);
+		return frontUserMapper.checkNowPwd(nowPwd,usid);
+	}
+
+	@Override
+	public int updatePwd(String newPwd, String usid) {
+		newPwd=Encrypt.md5AndSha(newPwd);
+		return frontUserMapper.updatePwd(newPwd,usid);
+	}
+
 	
 
 }
