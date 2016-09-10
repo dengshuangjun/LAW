@@ -4,20 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.yc.law.entity.FriendUrl;
 import com.yc.law.entity.UploadFriendUrl;
 import com.yc.law.service.FriendUrlService;

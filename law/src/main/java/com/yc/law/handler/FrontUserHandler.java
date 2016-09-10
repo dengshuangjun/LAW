@@ -143,14 +143,22 @@ public class FrontUserHandler {
 	@RequestMapping("/frontLogin")
 	public String login(User fuser,ModelMap map){
 			User nameLoginUser=frontUserService.login(fuser);
+			String url = fuser.getreceiveUrl();
 			if(nameLoginUser!=null){
 				fuser=nameLoginUser;
 				map.addAttribute("fuser", fuser);
+				
+				if(url!=null&&url!=""){
+					return "redirect:/front/"+url+".jsp";
+				}
 				return "redirect:/front/index.jsp";
 			}else{
 				fuser=frontUserService.emaillogin(fuser);
 				if(fuser!=null){
 					map.addAttribute("fuser", fuser);
+					if(url!=null&&url!=""){
+						return "redirect:/front/"+url+".jsp";
+					}
 					return "redirect:/front/index.jsp";
 				}else{
 					return "forward:/front/load.html";

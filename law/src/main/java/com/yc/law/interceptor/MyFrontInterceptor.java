@@ -1,14 +1,9 @@
 package com.yc.law.interceptor;
 
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-
 
 public class MyFrontInterceptor implements HandlerInterceptor{
 
