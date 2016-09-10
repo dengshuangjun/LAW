@@ -266,5 +266,16 @@ public class BackUserHandler {
 		map.remove("user");
 		return true;	
 	}
+	
+	@RequestMapping("/checkUname")
+	@ResponseBody
+	public int checkUname(@RequestParam("uname") String uname){
+		Integer result=backUserService.checkUname(uname);
+		if( result!=null){
+			return result;
+		}else{
+			return 0;
+		}
+	}
 }
 
