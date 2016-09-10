@@ -22,6 +22,9 @@ aboutUsObj = $('#showAbInfo').datagrid({
 	sortName : 'mtime',//定义那个列可以排序.
 	sortOrder : 'desc',
 	remoteSort : false,//定义是否远程排序.对数据库进行操作
+	onSelect: function (rowIndex, rowData) {
+		$("#showAbInfo").datagrid("unselectRow", rowIndex);
+	},//点击不选中当前行      
 	columns : [ [{
 		field : 'mid',
 		title : '留言id',
