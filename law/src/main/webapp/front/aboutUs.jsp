@@ -53,7 +53,7 @@
 	<div id="nav">
 		<div class="nav_page">
 			<ul>
-				<li><a href="#">首页</a></li>
+				<li><a href="index.jsp">首页</a></li>
 				<li><a href="wave/wave.jsp">智慧电波</a>
 					<ul class="ull">
 						<li><a href="wave/wave.jsp">校园动态</a></li>
@@ -96,7 +96,10 @@
 	<!--E=导航-->
 	<!--S=内容-->
 	<div id="content">
-		
+		<!-- 关于我们主体部分 -->
+		<div class="content_showInfo">
+			
+		</div>
 		<div class="content_footer">
 			<span>友情链接</span>
 			<table id="friConnEight"></table>
@@ -141,9 +144,6 @@
 		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015&nbsp;&nbsp; 制作单位：源辰信息有限公司</p>
 	</div>
 	<!--E=关于我们-->
-	<script src="js/radio.js" type="text/javascript"></script>
 	<script src="js/time.js" type="text/javascript"></script>
-		
-
 </body>
 </html>
