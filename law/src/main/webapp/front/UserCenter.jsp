@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <title>法律智慧网</title>
 <meta name="keywords"
 	content="法律智慧网,法律咨询,法律咨询网,法律在线,法律知识,法律援助,律师在线,中国法律,中法网">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="css/userCenter/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/userCenter/howzhi.css">
 <link rel="stylesheet" type="text/css" href="css/userCenter/main.css">
-<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.js" ></script>
 <script type="text/javascript" src="js/readCss.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/userCenter/top.js"></script>
@@ -158,10 +158,11 @@
 
 						<form id="user-profile-form" class="form-horizontal" method="post"
 							novalidate="novalidate" data-widget-cid="widget-0" style="margin-left:300px;">
-
+							<input id="usid" type="hidden" value="${fuser.usid}" />
 							<div class="form-group">
 								<label class="col-md-2 control-label">昵称</label>
-								<input class="showInfo" type="text" name="usname"/>
+								<input id="usname" class="showInfo" type="text" name="usname" value="${fuser.usname }" onblur="checkUsname()"/>
+								<span id="usnameResult" style="display:none;"></span>
 							</div>
 
 							<div class="form-group">
@@ -169,27 +170,19 @@
 								<div class="col-md-7 controls radios">
 									<div id="profile_gender">
 										<c:choose>
-											<c:when test="">
-												<input type="radio" id="profile_gender_0" name="gender"
-													required="required" value="男">
-												<label for="profile_gender_0" class="required">男</label>
-												<input type="radio" id="profile_gender_1" name="gender"
-													required="required" value="女">
-												<label for="profile_gender_1" class="required">女</label>
-											</c:when>
-											<c:when test="">
-												<input type="radio" id="profile_gender_0" name="gender"
+											<c:when test="${fuser.usex=='男' }">
+												<input type="radio" name="usex" name="gender"
 													required="required" value="男" checked="checked">
 												<label for="profile_gender_0" class="required">男</label>
-												<input type="radio" id="profile_gender_1" name="gender"
+												<input type="radio" name="usex" name="gender"
 													required="required" value="女">
 												<label for="profile_gender_1" class="required">女</label>
 											</c:when>
 											<c:otherwise>
-												<input type="radio" id="profile_gender_0" name="gender"
+												<input type="radio" name="usex" name="gender"
 													required="required" value="男">
 												<label for="profile_gender_0" class="required">男</label>
-												<input type="radio" id="profile_gender_1" name="gender"
+												<input type="radio" name="usex" name="gender"
 													required="required" value="女" checked="checked">
 												<label for="profile_gender_1" class="required">女</label>
 											</c:otherwise>
@@ -200,27 +193,41 @@
 
 							<div class="form-group">
 								<label class="showInfos">本站角色</label>
-								<span class="showInfos">会员</span>
+								<input id="role_id" type="hidden" value="${fuser.role_id}" />
+								<span id="role_name" class="showInfos"></span>
 							</div>
 
 							<div class="form-group">
 								<label class="showInfos">账号状态</label>
-								<span class="showInfos">可用</span>
+								<c:if test="${fuser.law_user_status=='Y' }">
+									<span class="showInfos">可用</span>
+								</c:if>
+								<c:if test="${fuser.law_user_status=='N' }">
+									<span class="showInfos">不可用</span>
+								</c:if>
 							</div>
 							
 							<div class="form-group">
 								<label class="showInfos">状态说明</label>
-								<span class="showInfos">正常使用</span>
+								<c:choose>
+									<c:when test="${not empty fuser.law_user_status_explain }">
+										<span class="showInfos">${fuser.law_user_status_explain }</span>
+									</c:when>
+									<c:otherwise>
+										<span class="showInfos">正常使用</span>
+									</c:otherwise>
+								</c:choose>
 							</div>
-							
 							<div class="form-group">
 								<label class="col-md-2 control-label" for="introdution">电话</label>
-								<input class="showInfo" type="text" name="tel" />
+								<input id="tel" class="showInfo" type="text" name="tel" value="${fuser.tel }" onblur="checkTelInfo()"/>
+								<span id="telResult" style="display:none;"></span>
 							</div>
 							<div class="row">
 								<div class="col-md-7 col-md-offset-2">
 									<button id="profile-save-btn" data-submiting-text="正在保存"
-										type="button" class="btn btn-primary">保存</button>
+										type="button" class="btn btn-primary" onclick="saveBaseInfo()">保存</button>
+									<span id="updateBaseInfoResult" style="display:none;"></span>
 								</div>
 							</div>
 						</form>

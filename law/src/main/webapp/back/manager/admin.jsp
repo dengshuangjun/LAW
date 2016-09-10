@@ -354,7 +354,7 @@
 				$.post("back/updateAdminInfoWithoutUpwd", {
 					usid : $("#usids").text(),
 					usname : $("#usname").val(),
-					usex : $("#usex").val(),
+					usex : $("input[type=radio]:checked").val(),
 					uemail : $("#uemail").val(),
 					tel : $("#tel").val(),
 					area : $("#area").val(),

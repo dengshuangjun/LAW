@@ -1,10 +1,13 @@
 package com.yc.law.handler;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -138,12 +142,12 @@ public class FrontUserHandler {
 	}
 	@RequestMapping("/frontLogin")
 	public String login(User fuser,ModelMap map){
-		System.out.println(fuser);
 			User nameLoginUser=frontUserService.login(fuser);
+			String url = fuser.getreceiveUrl();
 			if(nameLoginUser!=null){
 				fuser=nameLoginUser;
 				map.addAttribute("fuser", fuser);
-				String url = fuser.getreceiveUrl();
+				
 				if(url!=null&&url!=""){
 					return "redirect:/front/"+url+".jsp";
 				}
@@ -152,6 +156,9 @@ public class FrontUserHandler {
 				fuser=frontUserService.emaillogin(fuser);
 				if(fuser!=null){
 					map.addAttribute("fuser", fuser);
+					if(url!=null&&url!=""){
+						return "redirect:/front/"+url+".jsp";
+					}
 					return "redirect:/front/index.jsp";
 				}else{
 					return "forward:/front/load.html";
@@ -163,6 +170,46 @@ public class FrontUserHandler {
 	public boolean zhuxiao(User fuser,ModelMap map){
 		map.remove("fuser");
 		return true;
+	}
+	
+	@RequestMapping("findRoleName")
+	public void findRoleName(@RequestParam("roleId") String roleId,PrintWriter out){
+		out.println(frontUserService.findRoleName(Integer.parseInt(roleId)));
+		out.flush();
+		out.close();
+	}
+	
+	@RequestMapping("/checkUname")
+	@ResponseBody
+	public int checkUname(@RequestParam("uname") String uname){
+		Integer result=frontUserService.checkCenterUname(uname);
+		if( result!=null){
+			return result;
+		}
+		return 0;
+	}
+	
+	@RequestMapping("/checkTel")
+	@ResponseBody
+	public int checkTel(@RequestParam("tel") String tel){
+		Integer result=frontUserService.checkTel(tel);
+		if( result!=null){
+			return result;
+		}
+		return 0;
+	}
+	
+	@RequestMapping("/updateBaseInfo")
+	@ResponseBody
+	public int updateBaseInfo(@RequestParam("tel") String tel,
+							  @RequestParam("usid") String usid,
+							  @RequestParam("uname") String uname,
+							  @RequestParam("usex") String usex,
+							  @ModelAttribute("fuser") User user){
+		user.setTel(tel);
+		user.setUsname(uname);
+		user.setUsex(usex);
+		return frontUserService.updateBaseInfo(uname,tel,Integer.parseInt(usid),usex);
 	}
 }
 	
