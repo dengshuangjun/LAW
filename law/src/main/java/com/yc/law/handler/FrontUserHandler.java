@@ -138,6 +138,7 @@ public class FrontUserHandler {
 	}
 	@RequestMapping("/frontLogin")
 	public String login(User fuser,ModelMap map){
+		System.out.println(fuser);
 			User nameLoginUser=frontUserService.login(fuser);
 			if(nameLoginUser!=null){
 				fuser=nameLoginUser;
