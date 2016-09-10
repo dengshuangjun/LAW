@@ -87,5 +87,10 @@ public class BackUserServiceImpl implements BackUserService {
 		return backUserMapper.updateAdminInfoWithoutUpwd(usid,usname,usex,uemail,tel,area,birthday);
 	}
 
+	@Override
+	public Integer checkUname(String uname) {
+		return backUserMapper.checkUname(uname);
+	}
+
 	
 }

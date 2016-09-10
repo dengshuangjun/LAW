@@ -252,7 +252,7 @@ public class BackUserHandler {
 	
 	@RequestMapping("/checkUemail")
 	@ResponseBody
-	public int backLogin(@RequestParam("uemail") String uemail){
+	public int checkUemail(@RequestParam("uemail") String uemail){
 		Integer result=backUserService.checkUemail(uemail);
 		if( result!=null){
 			return result;
@@ -265,6 +265,17 @@ public class BackUserHandler {
 	public boolean backLoginOut(User user,ModelMap map){
 		map.remove("user");
 		return true;	
+	}
+	
+	@RequestMapping("/checkUname")
+	@ResponseBody
+	public int checkUname(@RequestParam("uname") String uname){
+		Integer result=backUserService.checkUname(uname);
+		if( result!=null){
+			return result;
+		}else{
+			return 0;
+		}
 	}
 }
 
