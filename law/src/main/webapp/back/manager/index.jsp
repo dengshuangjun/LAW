@@ -12,6 +12,12 @@
 <link rel="stylesheet" type="text/css" href="back/css/demo.css">
 <link rel="stylesheet" type="text/css" href="back/css/theme.css">
 <link rel="stylesheet" type="text/css" href="back/css/mainFivePic.css">
+<style type="text/css">
+	#userPhoto img{
+	width: 80px;
+	height:100px;
+	}
+</style>
 <script type="text/javascript" src="back/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="back/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="back/js/easyui-lang-zh_CN.js"></script>
@@ -22,14 +28,11 @@
 <script type="text/javascript" src="back/js/showpic.js"></script>
 <script type="text/javascript" src="back/js/showfivepic.js"></script>
 <script type="text/javascript" src="back/js/ajaxfileupload.js"></script>
-<style type="text/css">
-	#userPhoto img{
-	width: 80px;
-	height:100px;
-	}
-	
-</style>
+<script type="text/javascript" src="back/js/index.js"></script>
+
+
 </head>
+<input id="usid" type="hidden" value="${user.usid }"/>
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false"
 		style="height: 60px; background: #B3DFDA; padding-left: 10px">
@@ -46,8 +49,7 @@
 		</div>
 	</div>
 
-	<div data-options="region:'west',split:true,title:'菜单'"
-		style="width: 170px;">
+	<div data-options="region:'west',split:true,title:'菜单'" style="width: 160px;">
 		<div class="easyui-accordion" style="width: 100%; height: 100%;">
 			<div title="数据字典" data-options="iconCls:'icon-ok'"
 				style="overflow: auto; padding-left: 10px;">
@@ -84,7 +86,7 @@
 			<div title="留言管理" data-options="iconCls:'icon-ok'"
 				style="padding-left: 10px;">
 				<ul class="easyui-tree">
-					<li>留言回复</li>
+					<li>留言展示</li>
 					<li>评论审核</li>
 				</ul>
 			</div>
@@ -103,6 +105,5 @@
 			<!-- 树具体内容的显示区域 -->
 		</div>
 	</div>
-	<script type="text/javascript" src="back/js/index.js"></script>
 </body>
 </html>

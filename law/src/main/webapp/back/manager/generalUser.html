@@ -115,6 +115,7 @@ userObj=$('#generalUser_data').datagrid({
 		   						str+="<img src='../../"+pics[i]+"' width='90px' height='90px'/>&nbsp;";
 		   					}
 		   					return str;
+
 		   				} else {
 		   					return ;
 		   				}
@@ -222,7 +223,7 @@ userObj=$('#generalUser_data').datagrid({
         			editRowIng=undefined;
           		}else{
           			rows.law_user_status=editRowStatus;
-          			$.post("back/updateGeneralUser",rows,function(data){
+          			$.post("backs/updateGeneralUser",rows,function(data){
           				if(data){
           					$.messager.show({
           						title:'成功提示',

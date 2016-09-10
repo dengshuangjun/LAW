@@ -88,19 +88,7 @@ public class BackUserHandler {
 		}
 		return map;
 	}
-	/**
-	 * 修改用户状态
-	 * @param user
-	 * @return
-	 */
-	@RequestMapping("/updateGeneralUser")
-	@ResponseBody
-	public boolean updateGeneralUser(User user){
-		if(backUserService.updateGeneralUser(user)>0){
-			return true;
-		}
-		return false;
-	}
+
 	
 	@RequestMapping("/getRoleInfo")
 	@ResponseBody

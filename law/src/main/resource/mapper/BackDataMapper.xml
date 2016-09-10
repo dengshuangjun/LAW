@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<result column="status" property="status"/>
 			<result column="usid" property="usid"/>
 			<result column="usname" property="usname"/>
+			<result column="note" property="note"/>
 		</collection>
 	</resultMap>
 	<select id="getTypeByPage" parameterType="TypePage" resultMap="TypePageMap">
@@ -22,4 +23,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 (select ntid,ntname,status,n.usid,l.usname,n.spare_A note from newsType n left join law_user l on n.usid=l.usid) a where #{page}*#{rows}>=rownum) nn where rn>(#{page}-1)*#{rows} 
 		
 	</select>
+	<insert id="addTypes" parameterType="Type">
+		insert into newsType values(seq_newsType_id.Nextval,#{ntname},#{status},#{usid},#{note},null,null)
+	</insert>
+	
+	<update id="delTypes" parameterType="int">
+		delete from newsType where ntid in
+		<foreach collection="list" open="(" close=")" separator="," item="ntids">#{ntids}</foreach>
+	
+	</update>
+	<update id="updateType" parameterType="Type">
+		update newsType set ntname=#{ntname},status=#{status},usid=#{usid},spare_A=#{note} where ntid=#{ntid}
+	</update>
+	<update id="updateGeneralUserStatus" parameterType="User">
+		update law_user set law_user_status=#{law_user_status},law_user_status_explain=#{law_user_status_explain} where usid=#{usid}
+	</update>
+	
 </mapper>
