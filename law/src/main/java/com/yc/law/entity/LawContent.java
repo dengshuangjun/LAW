@@ -8,6 +8,7 @@ public class LawContent implements Serializable{
 	private static final long serialVersionUID = 669124896184909264L;
 	private int nid;
 	private String ntname;
+	private String partid;
 	private String partName;
 	private String title;
 	private String ndate;
@@ -37,6 +38,12 @@ public class LawContent implements Serializable{
 	}
 	public void setNtname(String ntname) {
 		this.ntname = ntname;
+	}
+	public String getPartid() {
+		return partid;
+	}
+	public void setPartid(String partid) {
+		this.partid = partid;
 	}
 	public String getPartName() {
 		return partName;
@@ -146,19 +153,19 @@ public class LawContent implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
 	@Override
 	public String toString() {
-		return "LawContent [nid=" + nid + ", ntname=" + ntname + ", partName="
-				+ partName + ", title=" + title + ", ndate=" + ndate
-				+ ", weight=" + weight + ", content=" + content + ", picFile="
-				+ picFile + ", picpath=" + picpath + ", vedioFile=" + vedioFile
-				+ ", vediopath=" + vediopath + ", voiceFile=" + voiceFile
-				+ ", voicepath=" + voicepath + ", views=" + views + ", author="
-				+ author + ", flag=" + flag + ", news_files=" + news_files
-				+ ", news_file=" + news_file + ", usname=" + usname
-				+ ", status=" + status + "]";
+		return "LawContent [nid=" + nid + ", ntname=" + ntname + ", partid="
+				+ partid + ", partName=" + partName + ", title=" + title
+				+ ", ndate=" + ndate + ", weight=" + weight + ", content="
+				+ content + ", picFile=" + picFile + ", picpath=" + picpath
+				+ ", vedioFile=" + vedioFile + ", vediopath=" + vediopath
+				+ ", voiceFile=" + voiceFile + ", voicepath=" + voicepath
+				+ ", views=" + views + ", author=" + author + ", flag=" + flag
+				+ ", news_files=" + news_files + ", news_file=" + news_file
+				+ ", usname=" + usname + ", status=" + status + "]";
 	}
+	
 	
 	
 }

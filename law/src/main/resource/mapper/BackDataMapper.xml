@@ -46,6 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<id column="nid" property="nid"/>
 			<result column="ntname" property="ntname"/>
 			<result column="partName" property="partName"/>
+			<result column="partid" property="partid"/>
 			<result column="title" property="title"/>
 			<result column="ndate" property="ndate"/>
 			<result column="weight" property="weight"/>
@@ -69,4 +70,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         left join law_user l on l.usid=n.usid 
         left join newsType nt on nt.ntid=n.nitid)a where #{page}*#{rows}>=rownum and partid in (1001,1002,1003)) nn where rn>(#{page}-1)*#{rows}
 	</select>
+	
+	<select id="findMaxWeightFromNews" parameterType="int" resultType="int">
+		select max(weight) from news where partid=#{0} and nid!=#{1} 
+	</select>
+	<update id="setTop" parameterType="int">
+		update news set weight=#{1} where nid=#{0}
+	</update>
+	<update id="setDown" parameterType="int" >
+		update news set weight=weight-1 where nid=#{0}
+	</update>
 </mapper>

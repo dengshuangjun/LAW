@@ -21,4 +21,10 @@ public interface BackDataService {
 
 	LawContentPage getWavesByPage(LawContentPage lawContentPage);
 
+	int findMaxWeightFromNews(int partid,int nid);
+
+	int setTop(int nid, int i);
+
+	int setDown(int nid);
+
 }

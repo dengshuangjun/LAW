@@ -30,5 +30,12 @@ public class BackDataServiceImplTest {
 		System.out.println(lawContentPage);
 		assertNotNull(lawContentPage);
 	}
+	@Test
+	public void test1() {
+		
+		int lawContentPage = backDataService.setDown(1021);
+		System.out.println(lawContentPage);
+		assertEquals(lawContentPage,1);
+	}
 
 }

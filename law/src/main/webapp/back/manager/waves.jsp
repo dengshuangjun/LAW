@@ -33,9 +33,9 @@ wavesObj=$('#waves_data').datagrid({
 		{field:'weight',title:'文章权重',width:300,align:'center',sortable:true,
 			formatter: function(value,row,index){
 				var str="";
-				str+=value+"<a href='javascript:setWavesWeight("+row.nid+",1,"+row.weight+")' style='margin-left:4px;'>置顶</a>"+
-				"<a href='javascript:setWavesWeight("+row.nid+",2,"+row.weight+")' style='margin-left:4px;'>上移</a>"+
-				"<a href='javascript:setWavesWeight("+row.nid+",3,"+row.weight+")' style='margin-left:4px;'>下移</a>"
+				str+=value+"<a href='javascript:setWavesWeight("+row.nid+",1,"+row.weight+","+row.partid+")' style='margin-left:4px;'>置顶</a>"+
+				"<a href='javascript:setWavesWeight("+row.nid+",2,"+row.weight+","+row.partid+")' style='margin-left:4px;'>上移</a>"+
+				"<a href='javascript:setWavesWeight("+row.nid+",3,"+row.weight+","+row.partid+")' style='margin-left:4px;'>下移</a>"
 				return str; 
 			}	
 		},
@@ -105,9 +105,39 @@ wavesObj=$('#waves_data').datagrid({
 	    	}	
 		}  ]]
 	});
-function setWavesWeight(nid,val,weight){
-	if(val==1){
-		
+function setWavesWeight(nid,val,weight,partid){
+	if(val==1){//置顶
+		$.post("backs/setTop",{nid:nid,weight:weight,partid:partid},function(data){
+			messageHandel("置顶",data);
+		},"json");
+	}else if(val==2){//上移
+		$.post("backs/setUp",{nid:nid,weight:weight,partid:partid},function(data){
+			messageHandel("上移",data);
+		},"json");
+	}else{//下移
+		if(weight==0){
+			$.messager.alert('提示信息','亲,权重最低为0..','info');
+			return;
+		}
+		$.post("backs/setDown",{nid:nid},function(data){
+			messageHandel("下移",data);
+		},"json");
+	}
+}
+
+function messageHandel(action,data){
+	if(data==1){
+		$.messager.show({
+			title:'成功提示',
+			msg:'权重'+action+'成功',
+			timeout:3000,
+			showType:'slide'
+		});
+		$('#waves_data').datagrid('reload');
+	}else if(data==2){
+		$.messager.alert('温馨提示','所属版块'+action+'已到最佳','info');
+	}else{
+		$.messager.alert('错误提示','操作失败...','error');
 	}
 }
 </script>	

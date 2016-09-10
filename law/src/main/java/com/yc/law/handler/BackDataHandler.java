@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yc.law.entity.LawContentPage;
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
@@ -88,5 +90,64 @@ public class BackDataHandler {
 		map.put("total", lawContentPage.getTotal());
 		map.put("rows", lawContentPage.getLawContents());
 		return map;
+	}
+	/**
+	 * 置顶
+	 * @return
+	 */
+	@RequestMapping("setTop")
+	@ResponseBody
+	public int setTop(int nid,int weight,int partid){
+		int maxWeight=backDataService.findMaxWeightFromNews(partid,nid);
+		if(maxWeight!=0){
+			if(maxWeight<weight){
+				return 2;
+			}else if(backDataService.setTop(nid,maxWeight+1)>0){
+				return 1;
+			}else{
+				return 0;
+			}
+		}else{
+			return 2;
+		}
+		
+	}
+	/**
+	 * 上移
+	 * @return
+	 */
+	@RequestMapping("setUp")
+	@ResponseBody
+	public int setUp(int nid,int weight,int partid){
+		int maxWeight=backDataService.findMaxWeightFromNews(partid,nid);
+		if(maxWeight!=0){
+			if(maxWeight<weight){
+				return 2;
+			}else if(backDataService.setTop(nid,weight+1)>0){
+				return 1;
+			}else{
+				return 0;
+			}
+		}else{
+			return 2;
+		}
+	}
+	/**
+	 * 下移
+	 */
+	@RequestMapping("setDown")
+	@ResponseBody
+	public int setDown(int nid){
+		System.out.println(nid);
+		try {
+			if(backDataService.setDown(nid)>0){
+				return 1;
+			}else{
+				return 3;
+			}
+		} catch (Exception e) {
+			return 3;
+		}
+		
 	}
 }
