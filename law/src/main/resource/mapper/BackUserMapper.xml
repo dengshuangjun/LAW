@@ -42,10 +42,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on law_user.role_id=role.role_id) n where #{page}*#{rows}>=rownum)nn where rn>#{rows}*(#{page}-1)		
 	</select>
 	
-	<update id="updateGeneralUserStatus" parameterType="User">
-		update law_user set law_user_status=#{law_user_status},law_user_status_explain=#{law_user_status_explain} where usid=#{usid}
-	</update>
-	
 	<select id="getRoleInfo" resultType="User">
 		select role_id,role_name from role where role_statue='Y'
 	</select>

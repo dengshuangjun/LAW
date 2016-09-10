@@ -35,4 +35,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateType" parameterType="Type">
 		update newsType set ntname=#{ntname},status=#{status},usid=#{usid},spare_A=#{note} where ntid=#{ntid}
 	</update>
+	<update id="updateGeneralUserStatus" parameterType="User">
+		update law_user set law_user_status=#{law_user_status},law_user_status_explain=#{law_user_status_explain} where usid=#{usid}
+	</update>
+	
 </mapper>

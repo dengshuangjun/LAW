@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
+import com.yc.law.entity.User;
 import com.yc.law.mapper.BackDataMapper;
 import com.yc.law.service.BackDataService;
 @Service("backDataService")
@@ -40,6 +41,11 @@ public class BackDataServiceImpl implements BackDataService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int updateGeneralUser(User user) {
+		return backDataMapper.updateGeneralUserStatus(user);
 	}
 
 
