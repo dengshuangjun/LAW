@@ -27,7 +27,7 @@
 
 .container > header span {
 	display: block;
-	font-size: 55%;
+	/* font-size: 55%; */
 	color: #74818e;
 	padding: 0 0 0.6em 0.1em;
 }
@@ -135,4 +135,9 @@
 	z-index:-1 !important;
 	overflow: hidden;
 	margin:0;
+}
+
+#usInfo_show{
+	position:relative;
+	z-index:-1;
 }
