@@ -1,58 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>个人中心</title>
+<meta charset="UTF-8">
+<title>法律智慧网</title>
+<meta name="keywords"
+	content="法律智慧网,法律咨询,法律咨询网,法律在线,法律知识,法律援助,律师在线,中国法律,中法网">
+<meta name="description"
+	content="法律智慧网是一家在线法律服务门户网站平台，律师在线解答法律咨询，为您提供一站式、便捷、高效的法律服务！">
 <link rel="shortcut icon" href="images/logo_ .png">
-<link rel="stylesheet" type="text/css" id="devIndexCss">
-<link rel="stylesheet" type="text/css" id="devArtCss">
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/offcanvas.css" rel="stylesheet">
-<link href="css/carousel.css" rel="stylesheet">
-<link href="css/theme.css" rel="stylesheet">
-<link href="css/photo.css" rel="stylesheet">
-<link href="css/sim-prev-anim_photo.css" rel="stylesheet">
-<script src="js/jquery-1.9.1.js" charset="utf-8"></script>
-<script src="js/tiebaUser.js" charset="utf-8"></script>
-<script src="js/time.js"></script>
-<script src="js/showpic.js"></script>
-<script src="js/ajaxfileupload.js"></script>
+<link rel="stylesheet" type="text/css" href="css/CssReset.css">
+<link rel="stylesheet" type="text/css" id="cssLink">
+<link rel="stylesheet" type="text/css" href="css/userCenter/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/userCenter/howzhi.css">
+<link rel="stylesheet" type="text/css" href="css/userCenter/main.css">
+<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/readCss.js"></script>
-</head>
-<style>
-* {
-	margin: 0 auto;
-	padding: 0;
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/userCenter/top.js"></script>
+<script type="text/javascript" src="js/userCenter/info.js"></script>
+<style type="text/css">
+#profile-save-btn {
+	margin-top: 20px;
+	margin-left: 10px;
 }
 
-li {
-	list-style: none;
+#unload {
+	background: #15c288 none repeat scroll 0 0;
+	border: 1px solid #15c288;
+	color: #fff !important;
 }
 
-li a {
-	text-decoration: none;
+.form-group {
+	margin-top: 14px;
+	margin-left: 35px;
 }
 
-.content {
-	width: 1000px;
-	height: 1330px;
-	font-family: "华文楷体";
-	background-color: #FFF;
-	border: 1px solid #CCC;
+.sidenav .list-group .list-group-item{
+	height:50px;
+}
+
+.showInfo{
+	margin-top:7px;
+	border:1px solid blue;
+	border-radius:3px;
 }
 </style>
+</head>
 <body>
-<a>aaaa${friEightConns}</a>
+	<!--S=页面-->
 	<div id="top">
 		<div id="top_page">
-			<span style="">今天是<span id="nowtime"></span></span>
+			<span>今天是<span id="nowtime"></span></span>
 			<ul>
-				<li><a href="load.html">登录</a>| <a href="submit.html">注册</a>| <a
-					href="javascript:void(0)" onclick="userCenter()">会员中心</a>| <a
-					href="###">收藏本站</a>| <a href="###">关于我们</a></li>
+				<li>
+				<c:if test="${fuser.usid!=null&&fuser.usid!=''}">
+						<a>欢迎您</a>: <a>${fuser.usname }</a>|
+						<button onclick="zhuxiao()">注销</button>|
+				</c:if> 
+				<c:if test="${fuser.usid==null||fuser.usid==''}">
+						<li><a href="load.html">登录</a>| <a href="submit.html">免费注册</a>|
+				</c:if> 
+					<a href="UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -74,14 +86,14 @@ li a {
 	<div id="nav">
 		<div class="nav_page">
 			<ul>
-				<li><a href="index.jsp">首页</a></li>
+				<li><a href="#">首页</a></li>
 				<li><a href="wave/wave.jsp">智慧电波</a>
 					<ul class="ull">
 						<li><a href="wave/wave.jsp">校园动态</a></li>
 						<li><a href="wave/wave2.jsp">社会聚焦</a></li>
 						<li><a href="wave/wave3.jsp">新闻调查</a></li>
 					</ul></li>
-				<li><a href="art.jsp">智慧艺苑</a>
+				<li><a href="art/art.jsp">智慧艺苑</a>
 					<ul class="ull">
 						<li><a href="art/art.jsp">法治视频</a></li>
 						<li><a href="art/art2.jsp">法治动漫</a></li>
@@ -110,76 +122,244 @@ li a {
 						<li><a href="assis/assis2.jsp">法律e点通</a></li>
 						<li><a href="assis/assis3.jsp">法理探索</a></li>
 					</ul></li>
-				<li><a href="tieba.jsp">法律智慧贴吧</a></li>
+				<li><a href="tieba/tieba.jsp">法律智慧贴吧</a></li>
 			</ul>
 		</div>
 	</div>
-	<div id="con_bg">
-		<div class="content" style="height: 950px;">
-			<div id="posite">
-				<span>您现在所在的位置>><a href="tieba.jsp">法律智慧贴吧</a>>>贴吧用户中心
-				</span>
-			</div>
-			<div id="top_img">
-				<img src="images/pic_1.jpg" width="1000px" height="200px" />
-			</div>
-			<div class="col-xs-12 col-sm-9" style="margin-left: 155px;">
-				<div class="alert alert-success">
-					<strong><h3>基本资料</h3></strong> 你可以在这里修改个人信息哦~
-				</div>
-				<div class="panel panel-success">
-					<div class="panel-heading">
-						<h3 class="panel-title" style="display: inline;">基本资料</h3>
-					</div>
-					<div class="panel-body">
-						<ul class="list-group">
-							<li class="list-group-item"><strong>头像修改：</strong>
-								<div id="pic">
-											<img src="images/man.png" class="img-thumbnail" alt="头像"
-												width="100px" height="100px;" id="NewPic">
-								</div>
-								<span
-								style="display: inline; margin-left: 500px; margin-bottom: 50px;"><input
-									type="file" id="user_pic" accept="image/*"
-									onchange="previewMultipleImage(this,'user_pic')"
-									multiple="multiple" name="picpath" /></span></li>
-							<li class="list-group-item"><strong>用户名：</strong><input
-								type="text" placeholder="用户名" onblur="checkuname()"
-								style="width: 200px; border: #999 solid 1px; border-radius: 3px;"
-								value="${userCenter.usname }" id="uname"> <span
-								id="checkname"></span></li>
-							<li class="list-group-item"><strong>旧密码：</strong><input
-								type="password" placeholder="旧密码"
-								style="width: 200px; border: #999 solid 1px; border-radius: 3px;"
-								onblur="checkpwd('${userCenter.upwd}')" id="OldUpwd"> <span
-								id="OldMsg"></span></li>
+	
+	<div class="container" id="content-container">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="sidenav">
+					<ul class="list-group">
+						<li class="list-group-heading"  style="height:50px;font-size:20px;line-height:50px;margin-left:15px;">个人设置</li>
 
-							<li class="list-group-item"><strong>新密码：</strong><input
-								type="password" placeholder="新密码"
-								style="width: 200px; border: #999 solid 1px; border-radius: 3px;"
-								id="NewUpwd" onblur="checkzcpwd()"> <span id="NewMsg"></span>
-							</li>
-							<li class="list-group-item"><strong>联系方式：</strong><input
-								type="text" placeholder="手机" onblur="checkTel()"
-								style="width: 200px; border: #999 solid 1px; border-radius: 3px;"
-								value="${userCenter.tel }" id="NewTel"> <span
-								id="TelMsg"></span></li>
-							<p style="text-align: center; margin: 20px auto;">
-								<button type="button" class="btn btn-success"
-									onclick="save(${userCenter.usid })">保存更改</button>
-							</p>
-						</ul>
-					</div>
-					<!--content结束-->
+						<li class="list-group-item"><a href="javascript:void(0)"
+							id="cc"><i class="glyphicon glyphicon-user"></i> 基础信息</a></li>
+						<li class="list-group-item "><a href="javascript:void(0)"><i
+								class="glyphicon glyphicon-picture"></i> 头像设置</a></li>
+						<li class="list-group-item "><a href="javascript:void(0)"><i
+								class="glyphicon glyphicon-lock"></i> 安全设置</a></li>
+						<li class="list-group-item "><a href="javascript:void(0)"><i
+								class="glyphicon glyphicon-envelope"></i> 邮箱设置</a></li>
+					</ul>
 				</div>
 			</div>
+			<!--  --------------基础信息-------------------------------------------------------------------- -->
+			<div class="col-md-9" id="baseinfo" style="display: block;">
+				<div id="info"></div>
+				<div class="panel panel-default panel-col">
+					<div class="panel-heading">基础信息</div>
+					<div class="panel-body">
+
+						<form id="user-profile-form" class="form-horizontal" method="post"
+							novalidate="novalidate" data-widget-cid="widget-0" style="margin-left:300px;">
+
+							<div class="form-group">
+								<label class="col-md-2 control-label">昵称</label>
+								<input class="showInfo" type="text" name="usname"/>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-2 control-label">性别</label>
+								<div class="col-md-7 controls radios">
+									<div id="profile_gender">
+										<c:choose>
+											<c:when test="">
+												<input type="radio" id="profile_gender_0" name="gender"
+													required="required" value="男">
+												<label for="profile_gender_0" class="required">男</label>
+												<input type="radio" id="profile_gender_1" name="gender"
+													required="required" value="女">
+												<label for="profile_gender_1" class="required">女</label>
+											</c:when>
+											<c:when test="">
+												<input type="radio" id="profile_gender_0" name="gender"
+													required="required" value="男" checked="checked">
+												<label for="profile_gender_0" class="required">男</label>
+												<input type="radio" id="profile_gender_1" name="gender"
+													required="required" value="女">
+												<label for="profile_gender_1" class="required">女</label>
+											</c:when>
+											<c:otherwise>
+												<input type="radio" id="profile_gender_0" name="gender"
+													required="required" value="男">
+												<label for="profile_gender_0" class="required">男</label>
+												<input type="radio" id="profile_gender_1" name="gender"
+													required="required" value="女" checked="checked">
+												<label for="profile_gender_1" class="required">女</label>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-2 control-label">本站角色</label>
+								<span stylr="padding-top:10px;">会员</span>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="introdution">账号状态</label>
+								<span>可用</span>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="introdution">状态说明</label>
+								<span>正常使用</span>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-md-2 control-label" for="introdution">电话</label>
+								<input class="showInfo" type="text" name="tel" />
+							</div>
+							<div class="row">
+								<div class="col-md-7 col-md-offset-2">
+									<button id="profile-save-btn" data-submiting-text="正在保存"
+										type="button" class="btn btn-primary">保存</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+			<!--  --------------基础信息-------------------------------------------------------------------- -->
+
+			<!--  --------------更换头像-------------------------------------------------------------------- -->
+			<div class="col-md-9" id="touxiang" style="display: none">
+				<div class="panel panel-default panel-col">
+					<div class="panel-heading">头像</div>
+					<div class="panel-body">
+
+						<form id="settings-avatar-form" class="form-horizontal"
+							method="post"
+							<%-- action="${pageContext.request.contextPath}/userinfo/editPhoto" --%>
+							enctype="multipart/form-data">
+
+							<div class="form-group">
+								<div class="col-md-2 control-label">
+									<b>当前头像</b>
+								</div>
+								<div class="controls col-md-8 controls" id="showimg">
+									<input name="userid" value=""
+										style="display: none;" />
+									<c:choose>
+										<c:when test="">
+											<img id="imgPrc" src="images/avatar.png"
+												style="width: 200px; height: 180px;">
+										</c:when>
+										<c:when test=""></c:when>
+									</c:choose>
+									<c:if test="">
+										<img id="imgPrc" src=""
+											style="width: 200px; height: 180px;">
+									</c:if>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-2 control-label"></div>
+								<div class="controls col-md-8 controls">
+									<p class="help-block">
+										你可以上传JPG、GIF或PNG格式的文件，文件大小不能超过<strong>2M</strong>。
+									</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-2 control-label"></div>
+								<div class="controls col-md-8 controls">
+									<div id="updateImg">
+										<input type="file" name="items_pic" id="unload"
+											style="border: none;" onchange="preImg(this.id);">
+									</div>
+									<!-- accept="image/*"   class="webuploader-element-invisible"-->
+									<button class="btn btn-primary" type="submit"
+										id="profile-save-btn2" style="margin-top: 20px;">保存</button>
+									<button class="btn btn-primary" type="button"
+										id="profile-edit-btn"
+										style="margin-top: 20px; margin-left: 10px;">取消</button>
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<!--  --------------更改头像------------------------------------------------------------------- -->
+
+			<!--  --------------安全设置------------------------------------------------------------------ -->
+			<div class="col-md-9" id="update" style="display: none;">
+
+				<div class="panel panel-default panel-col">
+					<div class="panel-heading">安全设置</div>
+					<div class="panel-body">
+						<ul class="breadcrumb">
+							<li><a href="http://www.howzhi.com/settings/security">安全设置</a></li>
+							<li class="active">登录密码修改</li>
+						</ul>
+						<form data-widget-cid="widget-0" novalidate="novalidate"
+							id="settings-password-form" class="form-horizontal" method="post">
+							<div class="form-group">
+								<div class="col-md-2 control-label">
+									<label for="form_currentPassword" class="required">当前密码</label>
+								</div>
+
+								<div class="controls col-md-8 controls">
+									<input data-explain="" data-widget-cid="widget-1"
+										id="form_currentPassword" name="form[currentPassword]"
+										required="required" class="form-control" type="password">
+									<div class="help-block" style="display: none;">请输入当前密码</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-2 control-label">
+									<label for="form_newPassword" class="required">新密码</label>
+								</div>
+								<div class="controls col-md-8 controls">
+									<input data-explain="" data-widget-cid="widget-2"
+										id="form_newPassword" name="form[newPassword]"
+										required="required" class="form-control" type="password">
+									<div class="help-block" style="display: none;">请输入新密码</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-2 control-label">
+									<label for="form_confirmPassword" class="required">确认密码</label>
+								</div>
+								<div class="controls col-md-8 controls">
+									<input data-explain="" data-widget-cid="widget-3"
+										id="form_confirmPassword" name="form[confirmPassword]"
+										required="required" class="form-control" type="password">
+									<div class="help-block" style="display: none;">请输入确认密码</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-2 control-label"></div>
+								<div class="controls col-md-8 controls">
+									<input id="form__token" name="form[_token]"
+										value="e9ebfb386adef9aa744408549e5c164aeca9f16d" type="hidden">
+									<button id="password-save-btn4" data-submiting-text="正在保存"
+										type="button" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+
+							<input name="_csrf_token"
+								value="46cef15361d5499f163cc1430d5ed1e4bc9ee1e7" type="hidden">
+						</form>
+					</div>
+				</div>
+			</div>
+			<!--  --------------安全设置------------------------------------------------------------------ -->
 		</div>
 	</div>
-	<!--bg_con结束-->
-	<div class="content_footer">
-		<span>友情链接</span>
-		<table id="friConnEight"></table>
-	</div>
+
 	<!--E=内容-->
 	<!--S=友情链接-->
 	<div id="link">
@@ -214,21 +394,11 @@ li a {
 	<!--S=关于我们-->
 	<div id="aboutMe">
 		<p></p>
-		<p>本网站所刊登的各种新闻、信息和专题专栏资料、均为法律智慧网版权所有、未经协议授权，禁止下载使用！</p>
-		<p>业务信箱： 电话：010-110120023 传真：010-63394466</p>
-		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015 制作单位：源辰信息有限公司</p>
+		<p id="footInfo"></p>
+		<p>业务信箱：电话： <span id="footPho"> </span>&nbsp;&nbsp;邮箱：<span id="footMail"></span></p>
+		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015&nbsp;&nbsp; 制作单位：源辰信息有限公司</p>
 	</div>
+	<!--E=关于我们-->
+	<script src="js/time.js" type="text/javascript"></script>
 </body>
-<script type="text/javascript">
-	function showMenu(id) {
-		document.getElementById(id).style.display = "block";
-	}
-
-	function hideMenu(id) {
-		document.getElementById(id).style.display = "none";
-	}
-	
-	
-</script>
 </html>
-
