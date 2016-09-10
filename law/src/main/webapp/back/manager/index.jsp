@@ -86,7 +86,7 @@
 			<div title="留言管理" data-options="iconCls:'icon-ok'"
 				style="padding-left: 10px;">
 				<ul class="easyui-tree">
-					<li>留言回复</li>
+					<li>留言展示</li>
 					<li>评论审核</li>
 				</ul>
 			</div>
