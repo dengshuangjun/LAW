@@ -32,22 +32,11 @@ function zhuxiao(){
 		 location.reload() ;
 	},"json");
 }
-/*
+
 function aboutUs(usid){
 	if(usid!=null){
-		$.post("", {
-			op : "findUserById",
-			usid : usid
-		}, function(data) {
-			if (data) {
-				location.href="aboutUs.jsp";
-			}
-		});
+		location.href="aboutUs.jsp";
 	}else{
-	$.post("", {
-			op : "findUserById",
-			usid : usid
-		}, 
-		location.href="submit.html？纷纷";
+		location.href="load.html?aboutUs";
 	}
-}*/
+}
