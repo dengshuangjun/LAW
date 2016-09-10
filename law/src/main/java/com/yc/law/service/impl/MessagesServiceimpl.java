@@ -1,11 +1,8 @@
 package com.yc.law.service.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import com.yc.law.entity.LeaveMsg;
 import com.yc.law.mapper.MessageMapper;
 import com.yc.law.service.MessagesService;
