@@ -76,6 +76,18 @@ public class FrontUserServiceImpl implements FrontUserService {
 		return frontUserMapper.updateBaseInfo(uname,tel,usid,usex);
 	}
 
+	@Override
+	public int checkNowPwd(String nowPwd, int usid) {
+		nowPwd=Encrypt.md5AndSha(nowPwd);
+		return frontUserMapper.checkNowPwd(nowPwd,usid);
+	}
+
+	@Override
+	public int updatePwd(String newPwd, String usid) {
+		newPwd=Encrypt.md5AndSha(newPwd);
+		return frontUserMapper.updatePwd(newPwd,usid);
+	}
+
 	
 
 }

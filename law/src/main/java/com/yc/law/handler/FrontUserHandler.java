@@ -211,5 +211,17 @@ public class FrontUserHandler {
 		user.setUsex(usex);
 		return frontUserService.updateBaseInfo(uname,tel,Integer.parseInt(usid),usex);
 	}
+	
+	@RequestMapping("/checkNowPwd")
+	@ResponseBody
+	public int checkNowPwd(@RequestParam("nowPwd") String nowPwd,@RequestParam("usid") String usid){
+		return frontUserService.checkNowPwd(nowPwd,Integer.parseInt(usid));
+	}
+	
+	@RequestMapping("/updatePwd")
+	@ResponseBody
+	public int updatePwd(@RequestParam("newPwd") String newPwd,@RequestParam("usid") String usid){
+		return frontUserService.updatePwd(newPwd,usid);
+	}
 }
 	

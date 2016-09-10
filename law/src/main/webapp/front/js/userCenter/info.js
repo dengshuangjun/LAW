@@ -1,6 +1,8 @@
 //个人中心的js
 var checkUname = true;
 var checkTel = true;
+var checkNowPwd = true;
+var checkConfirmPwd = true;
 $(function() {
 	var roleId=$("#role_id").val();
 	$.post("findRoleName", {
@@ -86,6 +88,71 @@ function saveBaseInfo(){
 				alert("对不起，更新失败，请重新再试...");
 			}
 		});
+	}else{
+		alert("对不起，请完善你的信息再提交...");
+	}
+}
+
+function checkNowPwdInfo(){
+	checkNowPwd=true;
+	var nowPwd=$("#form_currentPassword").val();
+	var usid = $("#usid").val();
+	$.post("checkNowPwd",{nowPwd:nowPwd,usid:usid},function(data){
+		if(data>0){
+			$('#checkNowPwdResult').show();
+			$('#checkNowPwdResult').text("当前密码输入正确...").css("color", "#0F0");
+		}else{
+			checkNowPwd=false;
+			$('#checkNowPwdResult').show();
+			$('#checkNowPwdResult').text("当前密码输入错误...").css("color", "#F00");
+		}
+	});
+}
+
+function checkConfirmPwdInfo(){
+	checkConfirmPwd=true;
+	var newPwd=$("#form_newPassword").val();
+	var confirmNewPwd=$("#form_confirmPassword").val();
+	if (newPwd == confirmNewPwd && newPwd != "" && newPwd != null) {
+		$('#checkConfirmPwdResult').show();
+		$("#checkConfirmPwdResult").text("密码重复确认正确...").css("color", "#0F0");
+	} else {
+		$('#checkConfirmPwdResult').show();
+		$("#checkConfirmPwdResult").text("密码不一致请重新输入...").css("color", "#F00");
+		$("#checkConfirmPwdResult").val("");
+		checkConfirmPwd = false;
+	}
+}
+
+function updatePwd(){
+	var newPwd=$("#form_newPassword").val();
+	var usid = $("#usid").val();
+	var nowPwd=$("#form_currentPassword").val();
+	var confirmNewPwd=$("#form_confirmPassword").val();
+	if(nowPwd == null || nowPwd==''){
+		alert("请填写当前密码");
+		return;
+	}else if(newPwd == null || newPwd == ''){
+		alert("请填写新密码");
+		return;
+	}else if(confirmNewPwd == null || confirmNewPwd == ''){
+		alert("请重复新密码");
+		return;
+	}
+	if(checkNowPwd && checkConfirmPwd){
+		$.post("updatePwd",{newPwd:newPwd,usid:usid},function(data){
+			if(data>0){
+				$('#updatePwdResult').show();
+				$('#updatePwdResult').text("更新成功...").css("color", "#0F0");
+				$('#form_currentPassword').val('');
+				$('#form_newPassword').val('');
+				$('#form_confirmPassword').val('');
+				$('#checkConfirmPwdResult').hide();
+				$('#checkNowPwdResult').hide();
+			}else{
+				alert("对不起，更新失败，请重新再试...");
+			}
+		})
 	}else{
 		alert("对不起，请完善你的信息再提交...");
 	}

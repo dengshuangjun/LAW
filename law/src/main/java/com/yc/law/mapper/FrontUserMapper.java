@@ -23,4 +23,8 @@ public interface FrontUserMapper {
 
 	int updateBaseInfo(String uname, String tel, int usid,String usex);
 
+	int checkNowPwd(String nowPwd, int usid);
+
+	int updatePwd(String newPwd, String usid);
+
 }

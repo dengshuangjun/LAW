@@ -321,9 +321,9 @@
 
 								<div class="controls col-md-8 controls">
 									<input data-explain="" data-widget-cid="widget-1"
-										id="form_currentPassword" name="form[currentPassword]"
-										required="required" class="form-control" type="password">
-									<div class="help-block" style="display: none;">请输入当前密码</div>
+										id="form_currentPassword" name="upwd"
+										required="required" class="form-control" type="password" onblur="checkNowPwdInfo()">
+									<span id="checkNowPwdResult" style="display:none;"></span>
 								</div>
 							</div>
 
@@ -335,7 +335,6 @@
 									<input data-explain="" data-widget-cid="widget-2"
 										id="form_newPassword" name="form[newPassword]"
 										required="required" class="form-control" type="password">
-									<div class="help-block" style="display: none;">请输入新密码</div>
 								</div>
 							</div>
 
@@ -346,8 +345,8 @@
 								<div class="controls col-md-8 controls">
 									<input data-explain="" data-widget-cid="widget-3"
 										id="form_confirmPassword" name="form[confirmPassword]"
-										required="required" class="form-control" type="password">
-									<div class="help-block" style="display: none;">请输入确认密码</div>
+										required="required" class="form-control" type="password"  onblur="checkConfirmPwdInfo()">
+									<span id="checkConfirmPwdResult" style="display:none;"></span>
 								</div>
 							</div>
 
@@ -357,12 +356,11 @@
 									<input id="form__token" name="form[_token]"
 										value="e9ebfb386adef9aa744408549e5c164aeca9f16d" type="hidden">
 									<button id="password-save-btn4" data-submiting-text="正在保存"
-										type="button" class="btn btn-primary">提交</button>
+										type="button" class="btn btn-primary" onclick="updatePwd()">提交</button>
+									<span id="updatePwdResult" style="display:none;"></span>
 								</div>
 							</div>
 
-							<input name="_csrf_token"
-								value="46cef15361d5499f163cc1430d5ed1e4bc9ee1e7" type="hidden">
 						</form>
 					</div>
 				</div>

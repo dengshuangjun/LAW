@@ -41,4 +41,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateBaseInfo">
 		update law_user set tel=#{1},usname=#{0},usex=#{3} where usid=#{2}
 	</update>
+	
+	<select id="checkNowPwd" resultType="Integer">
+		select count(1) from law_user where usid=#{1} and upwd=#{0}
+	</select>
+	
+	<update id="updatePwd">
+		update law_user set upwd=#{0} where usid=#{1}
+	</update>
 </mapper>
