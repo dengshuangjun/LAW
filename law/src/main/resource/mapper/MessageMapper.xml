@@ -4,5 +4,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 使用映射接口的方式， 命名空间的值必须与映射接口的全限定名一致 -->
 <mapper namespace="com.yc.law.mapper.MessageMapper">
+	<select id="findMessageByPage" resultType="LeaveMsg">
+		select * from 
+		(select a.*,rownum rn from
+		(select mid,mip,memail,mcontent,to_char(mtime,'yyyy-MM-dd HH24:mm:ss') mtime from message m order by mtime desc) a  
+		where (#{0} * #{1}) >= rownum)
+		where rn> ( #{0} - 1 ) * #{1}
+	</select>
 	
+	<select id="findAllMessageCount" resultType="int">
+		select count(1) from message
+	</select>
+	
+	<select id="findMessageInfo" resultType="LeaveMsg" parameterType="int">
+		select mcontent from message where mid=#{0}
+	</select>
 </mapper>

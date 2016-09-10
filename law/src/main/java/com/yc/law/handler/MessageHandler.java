@@ -5,11 +5,13 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.yc.law.entity.LeaveMsg;
 import com.yc.law.service.MessagesService;
 
@@ -29,5 +31,18 @@ public class MessageHandler {
 		jb.put("rows", json);
 		jb.put("total", messagesService.findAllMessageCount());
 		return jb;
+	}
+	
+	@RequestMapping("/showMore")
+	@ResponseBody
+	public LeaveMsg showMore(@RequestParam("mid") int mid) {
+		LeaveMsg lm=null;
+		try {
+			lm = messagesService.findMessageInfo(mid);
+			return lm;
+		} catch (Exception e) {
+			LogManager.getLogger().error("展示更多失败。",e);
+		}
+		return lm;
 	}
 }

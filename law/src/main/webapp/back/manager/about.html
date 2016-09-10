@@ -1,14 +1,6 @@
 <!-- 关于我们 -->
-<!-- <div id="AboutUs" class="easyui-layout" style="width:100%;height:100%;">  
-    <div data-options="region:'north',title:'展示信息',split:true" style="height:100%;width:100%;"></div>  
-    <div data-options="region:'center',title:'留言反馈',fit:true">
-    	<div id="aboutUs_content" class="easyui-tabs" data-options="fit:true">  
-		  	<table id="showAbInfo"></table>
-		</div>
-    </div>  
-</div>   -->
-<div id="AboutUs" class="easyui-accordion" style="width:100%;height:100%;">  
-    <div title="展示信息">  
+<div id="AboutUs" class="easyui-accordion" data-options="selected:false" style="width:100%;height:100%;">  
+    <div title="展示信息" >  
     </div>  
     <div title="留言反馈">  
     	<table id="showAbInfo"></table>
@@ -48,13 +40,28 @@ aboutUsObj = $('#showAbInfo').datagrid({
 	}, {
 		field : 'mcontent',
 		title : '留言内容',
-		width : 400,
+		width : 320,
 		align : 'center',
+		formatter: function(value,row,index){
+			var str="";
+			str+="<a href='javascript:void(0)' onclick='showMoreInfo("+row.mid+")'>详细</a>";
+			return value.substring(0,21)+'...'+str; 
+		}
 	}, {
 		field : 'mtime',
 		title : '留言时间',
-		width : 100,
-		align : 'center',
-	} ] ]
+		width : 120,
+		sortable:true,
+		align : 'center'
+	} ] ],
+	selectOnCheck:false
 });
+
+//查看更多 
+function showMoreInfo(mid){
+	$.post("messages/showMore?mid="+mid,function(data){
+		//console.info(aboutUsObj.onSelect);
+		$.messager.alert('详细内容',data.mcontent,'info');
+	});
+}
 </script>
