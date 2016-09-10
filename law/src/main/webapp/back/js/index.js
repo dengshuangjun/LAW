@@ -140,12 +140,12 @@ $(function() {
 					});
 				}
 				
-			}else if(text=='留言回复'){
-				if(tabs.tabs('exists','留言回复')){
-					tabs.tabs('select',"留言回复");
+			}else if(text=='留言展示'){
+				if(tabs.tabs('exists','留言展示')){
+					tabs.tabs('select',"留言展示");
 				}else{
 					$('#center_content').tabs('add',{  
-					    title:'留言回复',  
+					    title:'留言展示',  
 					    closable:true, 
 					    href:'back/manager/message.html'
 					});

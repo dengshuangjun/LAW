@@ -55,6 +55,7 @@
             <span class="span">用户登录</span><span class="span2"><a href="submit.html">用户注册</a></span>
         </div>
         <form action="/law/front/frontLogin" method="post" onsubmit="return checkLogin()">
+      		<input type="hidden" id="receiveUrl"/>
         	<p>用户名:</p>
     		<input id="usname" name="usname"  type="text" placeholder="请输入用户名/邮箱/">  
     		<span id='unamep' style="font-size: 12px"></span>
@@ -64,5 +65,10 @@
             <input type="submit" value="登录"  class="btn" id="btn"/>
         </form> 
     </div>
+    <script>
+    	var thisURL = document.URL;    
+    	var  getval =thisURL.split('?')[1]; 
+    	$("#receiveUrl").val(getval);
+    </script>
 </body>
 </html>
