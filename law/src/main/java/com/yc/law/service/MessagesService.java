@@ -1,8 +1,6 @@
 package com.yc.law.service;
 
 import java.util.List;
-
-import com.yc.law.entity.FriendUrl;
 import com.yc.law.entity.LeaveMsg;
 
 public interface MessagesService {
@@ -19,6 +17,13 @@ public interface MessagesService {
 	 * 计算留言总数
 	 * @return
 	 */
-	Object findAllMessageCount();
+	int findAllMessageCount();
+
+	/**
+	 * 查找更多留言
+	 * @param mid
+	 * @return
+	 */
+	LeaveMsg findMessageInfo(int mid);
 
 }

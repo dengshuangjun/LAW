@@ -1,37 +1,29 @@
 package com.yc.law.mapper;
 
 import java.util.List;
+import com.yc.law.entity.LeaveMsg;
 
-import com.yc.law.entity.Role;
-import com.yc.law.entity.UploadUser;
-import com.yc.law.entity.User;
-import com.yc.law.entity.UserPage;
 
 public interface MessageMapper {
 
-	User findBackUserByNP(User user);
+	/**
+	 * 分页查找留言
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	List<LeaveMsg> findMessageByPage(int page, int rows);
 
-	void insertInitAdmin(User user);
-
-	int findInitAdmin(String uname);
-
-	List<User> findGeneralUser();
-
-	int addGeneralUser(UploadUser uploadUser);
-
-
-	UserPage findGeneralAllByPage(UserPage users);
-
-	int updateGeneralUserStatus(User  user);
-
-	int updateAdminInfo(int usid, String usname, String usex, String upwd,String uemail, String tel, String area, String birthday);
+	/**
+	 * 计算留言总数
+	 * @return
+	 */
+	int findAllMessageCount();
 	
-	List<Role> getRoleInfo();
-
-	int delUsers(List<Integer> usids);
-
-	Integer checkUemail(String uemail);
-
-	int updateAdminInfoWithoutUpwd(int usid, String usname, String usex, String uemail, String tel, String area,
-			String birthday);
+	/**
+	 * 查找更多留言
+	 * @param mid
+	 * @return
+	 */
+	LeaveMsg findMessageInfo(int mid);
 }
