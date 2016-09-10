@@ -252,7 +252,7 @@ public class BackUserHandler {
 	
 	@RequestMapping("/checkUemail")
 	@ResponseBody
-	public int backLogin(@RequestParam("uemail") String uemail){
+	public int checkUemail(@RequestParam("uemail") String uemail){
 		Integer result=backUserService.checkUemail(uemail);
 		if( result!=null){
 			return result;

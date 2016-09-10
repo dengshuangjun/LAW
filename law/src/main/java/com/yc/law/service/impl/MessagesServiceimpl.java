@@ -1,13 +1,11 @@
 package com.yc.law.service.impl;
 
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
-import com.yc.law.entity.FriendUrl;
 import com.yc.law.entity.LeaveMsg;
 import com.yc.law.service.MessagesService;
-@Service
+
+@Service("messagesService")
 public class MessagesServiceimpl implements MessagesService{
 
 	@Override

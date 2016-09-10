@@ -71,10 +71,37 @@ public class StyleDomXml {
 			if(docToXml(doc,fileName)){
 				LogManager.getLogger().debug("前台样式修改成功。");
 			}else{
-				LogManager.getLogger().debug("前台样式修改失败。");
+				LogManager.getLogger().error("前台样式修改失败。");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 查找结点
+	 */
+	public Style find(String fileName) {
+		try {
+			//1.dom解析工厂
+			DocumentBuilderFactory factory=DocumentBuilderFactory.newInstance();
+			//2.解析器
+			DocumentBuilder builder=factory.newDocumentBuilder();
+			//3.xml放到解析器
+			Document doc=builder.parse(new File(fileName));
+			//4.开始解析
+			NodeList nl=doc.getElementsByTagName("style");
+			//5.找到Style name  (这里不需要)
+			Element e=(Element) nl.item(0);//e代表的是Style這個結點
+			//6.查找值
+			Style style = new Style();
+			style.setMain( e.getElementsByTagName("main").item(0).getFirstChild().getNodeValue() );
+			style.setDevMain( e.getElementsByTagName("devMain").item(0).getFirstChild().getNodeValue() );
+			style.setDev( e.getElementsByTagName("dev").item(0).getFirstChild().getNodeValue() );
+			return style;
+		} catch (Exception e) {
+			LogManager.getLogger().error("解析样式xml出错。");
+		}
+		return null;
 	}
 }
