@@ -25,4 +25,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="emaillogin" parameterType="User" resultType="User">
 		select * from role r join law_user l on r.role_id=l.role_id and upwd=#{upwd}  and uemail=#{usname} and law_user_status='Y'
 	</select>
+	
+	<select id="findRoleName" parameterType="int" resultType="String">
+		select role_name from role where role_id=#{role_id}
+	</select>
+	
+	<select id="checkCenterUname" parameterType="String" resultType="Integer">
+		select usid from law_user where usname=#{uname}
+	</select>
+	
+	<select id="checkTel" parameterType="String" resultType="Integer">
+		select usid from law_user where tel=#{tel}
+	</select>
+	
+	<update id="updateBaseInfo">
+		update law_user set tel=#{1},usname=#{0},usex=#{3} where usid=#{2}
+	</update>
 </mapper>

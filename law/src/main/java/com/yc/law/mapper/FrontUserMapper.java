@@ -15,4 +15,12 @@ public interface FrontUserMapper {
 
 	User emaillogin(User user);
 
+	String findRoleName(int roleId);
+
+	Integer checkCenterUname(String uname);
+
+	Integer checkTel(String tel);
+
+	int updateBaseInfo(String uname, String tel, int usid,String usex);
+
 }
