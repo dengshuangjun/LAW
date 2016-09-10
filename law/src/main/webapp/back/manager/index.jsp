@@ -35,7 +35,7 @@
 <input id="usid" type="hidden" value="${user.usid }"/>
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false"
-		style="height: 60px; background: #B3DFDA; padding-left: 10px">
+		style="height: 60px; background: #b4c5df ; padding-left: 10px">
 		<img src="back/images/logo_.png" height="60px;" width="60px;"
 			style="display: inline-block; float: left;" /> <span
 			style="line-height: 60px; height: 60px; text-align: center; display: inline; float: left; font-size: 25px; padding-left: 20px;">法律智慧网_后台管理系统</span>
