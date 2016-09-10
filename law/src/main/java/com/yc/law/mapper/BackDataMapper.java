@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
+import com.yc.law.entity.User;
 
 public interface BackDataMapper {
 
@@ -15,4 +16,6 @@ public interface BackDataMapper {
 
 	int updateType(Type type);
 	
+	int updateGeneralUserStatus(User  user);
+
 }

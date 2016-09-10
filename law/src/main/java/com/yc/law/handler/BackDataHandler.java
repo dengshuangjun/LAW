@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
+import com.yc.law.entity.User;
 import com.yc.law.service.BackDataService;
 
 @Controller
@@ -66,5 +67,18 @@ public class BackDataHandler {
 	@ResponseBody
 	public boolean updateType(Type type){//Type [ntid=1025, ntname=民事, status=N, usid=1002, usname=admin, note=]
 		return backDataService.updateType(type);
+	}
+	/**
+	 * 修改用户状态
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/updateGeneralUser")
+	@ResponseBody
+	public boolean updateGeneralUser(User users){
+		if(backDataService.updateGeneralUser(users)>0){
+			return true;
+		}
+		return false;
 	}
 }

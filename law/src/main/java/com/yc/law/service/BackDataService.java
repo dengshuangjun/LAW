@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
+import com.yc.law.entity.User;
 
 public interface BackDataService {
 
@@ -15,4 +16,6 @@ public interface BackDataService {
 
 	boolean updateType(Type type);
 	
+	int updateGeneralUser(User user);
+
 }
