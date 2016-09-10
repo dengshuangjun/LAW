@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.yc.law.entity.LawContentPage;
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
 import com.yc.law.entity.User;
@@ -80,5 +79,14 @@ public class BackDataHandler {
 			return true;
 		}
 		return false;
+	}
+	@RequestMapping("getWavesByPage")
+	@ResponseBody
+	public Map<String,Object> getWavesByPage(LawContentPage lawContentPage){
+		lawContentPage=backDataService.getWavesByPage(lawContentPage);
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("total", lawContentPage.getTotal());
+		map.put("rows", lawContentPage.getLawContents());
+		return map;
 	}
 }

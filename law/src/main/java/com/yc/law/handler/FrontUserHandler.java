@@ -142,6 +142,10 @@ public class FrontUserHandler {
 			if(nameLoginUser!=null){
 				fuser=nameLoginUser;
 				map.addAttribute("fuser", fuser);
+				String url = fuser.getreceiveUrl();
+				if(url!=null&&url!=""){
+					return "redirect:/front/"+url+".jsp";
+				}
 				return "redirect:/front/index.jsp";
 			}else{
 				fuser=frontUserService.emaillogin(fuser);

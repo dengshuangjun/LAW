@@ -38,5 +38,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateGeneralUserStatus" parameterType="User">
 		update law_user set law_user_status=#{law_user_status},law_user_status_explain=#{law_user_status_explain} where usid=#{usid}
 	</update>
+	<resultMap type="LawContentPage" id="LawContentPageMap">
+		<id column="page" property="page"/>
+		<result column="rowss" property="rows"/>
+		<result column="total" property="total"/>
+		<collection property="lawContents" column="nid" ofType="LawContent">
+			<id column="nid" property="nid"/>
+			<result column="ntname" property="ntname"/>
+			<result column="partName" property="partName"/>
+			<result column="title" property="title"/>
+			<result column="ndate" property="ndate"/>
+			<result column="weight" property="weight"/>
+			<result column="picpath" property="picpath"/>
+			<result column="vediopath" property="vediopath"/>
+			<result column="voicepath" property="voicepath"/>
+			<result column="views" property="views"/>
+			<result column="author" property="author"/>
+			<result column="flag" property="flag"/>
+			<result column="news_file" property="news_file"/>
+			<result column="usname" property="usname"/>
+			<result column="status" property="status"/>
+		</collection>
+	</resultMap>
 	
+	 <select id="getWavesByPage" parameterType="LawContentPage" resultMap="LawContentPageMap">
+		select ${page} page,${rows} rowss,(select count(1) from news) total,nn.* from 
+		(select rownum rn ,a.* from
+		(select p.partname,n.nid,n.title,to_char(n.ndate,'yyyy-MM-dd hh24:mm:ss') ndate,n.weight,n.picpath,n.vediopath,n.voicepath,n.views,n.author,n.flag,n.news_file,n.status,l.usname,nt.ntname 
+		from part p right join news n on p.partid=n.partid 
+        left join law_user l on l.usid=n.usid 
+        left join newsType nt on nt.ntid=n.nitid)a where #{page}*#{rows}>=rownum) nn where rn>(#{page}-1)*#{rows}
+	</select>
 </mapper>
