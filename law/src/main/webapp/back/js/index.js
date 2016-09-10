@@ -70,7 +70,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'智慧电波',  
 					    closable:true, 
-					    href:'back/manager/waves.html'
+					    href:'back/manager/waves.jsp'
 					});
 				}
 				

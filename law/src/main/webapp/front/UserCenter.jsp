@@ -47,6 +47,10 @@
 	border:1px solid blue;
 	border-radius:3px;
 }
+
+.showInfos{
+	margin-left:20px;
+}
 </style>
 </head>
 <body>
@@ -86,7 +90,7 @@
 	<div id="nav">
 		<div class="nav_page">
 			<ul>
-				<li><a href="#">首页</a></li>
+				<li><a href="index.jsp">首页</a></li>
 				<li><a href="wave/wave.jsp">智慧电波</a>
 					<ul class="ull">
 						<li><a href="wave/wave.jsp">校园动态</a></li>
@@ -195,18 +199,18 @@
 							</div>
 
 							<div class="form-group">
-								<label class="col-md-2 control-label">本站角色</label>
-								<span stylr="padding-top:10px;">会员</span>
+								<label class="showInfos">本站角色</label>
+								<span class="showInfos">会员</span>
 							</div>
 
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="introdution">账号状态</label>
-								<span>可用</span>
+								<label class="showInfos">账号状态</label>
+								<span class="showInfos">可用</span>
 							</div>
 							
 							<div class="form-group">
-								<label class="col-md-2 control-label" for="introdution">状态说明</label>
-								<span>正常使用</span>
+								<label class="showInfos">状态说明</label>
+								<span class="showInfos">正常使用</span>
 							</div>
 							
 							<div class="form-group">

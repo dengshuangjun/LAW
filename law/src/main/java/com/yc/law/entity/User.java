@@ -20,6 +20,7 @@ public class User implements Serializable {
 	private String birthday;
 	private int code;//用于存放验证码
 	private int emailCode;
+	private String receiveUrl;
 	public User() {
 
 	}
@@ -183,6 +184,15 @@ public class User implements Serializable {
 			return false;
 		}
 	}
+	
+
+	public String getreceiveUrl() {
+		return receiveUrl;
+	}
+
+	public void setreceiveUrl(String receiveUrl) {
+		this.receiveUrl = receiveUrl;
+	}
 
 	@Override
 	public String toString() {
@@ -195,119 +205,4 @@ public class User implements Serializable {
 				+ ", birthday=" + birthday + ", code=" + code + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((area == null) ? 0 : area.hashCode());
-		result = prime * result
-				+ ((birthday == null) ? 0 : birthday.hashCode());
-		result = prime * result
-				+ ((law_user_status == null) ? 0 : law_user_status.hashCode());
-		result = prime
-				* result
-				+ ((law_user_status_explain == null) ? 0
-						: law_user_status_explain.hashCode());
-		result = prime * result + ((picpath == null) ? 0 : picpath.hashCode());
-		result = prime * result
-				+ ((register_time == null) ? 0 : register_time.hashCode());
-		result = prime * result + role_id;
-		result = prime * result
-				+ ((role_name == null) ? 0 : role_name.hashCode());
-		result = prime * result + ((tel == null) ? 0 : tel.hashCode());
-		result = prime * result + ((uemail == null) ? 0 : uemail.hashCode());
-		result = prime * result + ((upwd == null) ? 0 : upwd.hashCode());
-		result = prime * result + ((usex == null) ? 0 : usex.hashCode());
-		result = prime * result + usid;
-		result = prime * result + ((usname == null) ? 0 : usname.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (area == null) {
-			if (other.area != null)
-				return false;
-		} else if (!area.equals(other.area))
-			return false;
-		if (birthday == null) {
-			if (other.birthday != null)
-				return false;
-		} else if (!birthday.equals(other.birthday))
-			return false;
-		if (law_user_status == null) {
-			if (other.law_user_status != null)
-				return false;
-		} else if (!law_user_status.equals(other.law_user_status))
-			return false;
-		if (law_user_status_explain == null) {
-			if (other.law_user_status_explain != null)
-				return false;
-		} else if (!law_user_status_explain
-				.equals(other.law_user_status_explain))
-			return false;
-		if (picpath == null) {
-			if (other.picpath != null)
-				return false;
-		} else if (!picpath.equals(other.picpath))
-			return false;
-		if (register_time == null) {
-			if (other.register_time != null)
-				return false;
-		} else if (!register_time.equals(other.register_time))
-			return false;
-		if (role_id != other.role_id)
-			return false;
-		if (role_name == null) {
-			if (other.role_name != null)
-				return false;
-		} else if (!role_name.equals(other.role_name))
-			return false;
-		if (tel == null) {
-			if (other.tel != null)
-				return false;
-		} else if (!tel.equals(other.tel))
-			return false;
-		if (uemail == null) {
-			if (other.uemail != null)
-				return false;
-		} else if (!uemail.equals(other.uemail))
-			return false;
-		if (upwd == null) {
-			if (other.upwd != null)
-				return false;
-		} else if (!upwd.equals(other.upwd))
-			return false;
-		if (usex == null) {
-			if (other.usex != null)
-				return false;
-		} else if (!usex.equals(other.usex))
-			return false;
-		if (usid != other.usid)
-			return false;
-		if (usname == null) {
-			if (other.usname != null)
-				return false;
-		} else if (!usname.equals(other.usname))
-			return false;
-		return true;
-	}
-
-	/**
-	 * 判断当前是否存在用户
-	 */
-	public boolean getCurrUsid() {
-		if (this.usid != 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }
