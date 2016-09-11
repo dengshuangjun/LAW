@@ -12,8 +12,8 @@
 	<link rel="shortcut icon" href="../images/logo_ .png">
 	<link rel="stylesheet" type="text/css" href="../css/CssReset.css">
 	<link rel="stylesheet" type="text/css" href="../css/model.css">
-	<link rel="stylesheet" type="text/css" id="devIndexCss">
-	<link rel="stylesheet" type="text/css" id="devArtCss">
+	<link rel="stylesheet" type="text/css" href="../css/defaultindex.css" id="devIndexCss">
+	<link rel="stylesheet" type="text/css" href="../css/artDefualt.css" id="devArtCss">
     <style>
 		.content .right span{
 			text-align: center;
