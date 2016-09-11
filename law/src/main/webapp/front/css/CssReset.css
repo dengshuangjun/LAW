@@ -35,6 +35,6 @@ input,textarea,select{
 	font-weight:inherit;
 	*font-size:100%;/*ie*/
 }
-input{
+/* input{
 	border:none;
-}
+} */

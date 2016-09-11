@@ -139,15 +139,28 @@
 	                		</div>
 	                	</div>
 	                	<div style="" id="leaveMsg_fd">
-	                		
-	                		<c:choose>
-	                			<c:when test="${not empty fuser.usid} ">
-	                				
-	                			</c:when>
-	                			<c:otherwise>
-	                				
-	                			</c:otherwise>
-	                		</c:choose>
+	                		<div style="height:400px;width:600px">
+	                			<fieldset style="padding:20px;">
+	                				<legend style="color:#999;text-shadow: 0.025em 0.025em 0.025em rgba(115,134,148, 0.8);font-size:16px;">留言反馈</legend>
+		                			<form style="text-align:left;">
+			                			<span style="width:120px;">请输入您的邮箱：</span>
+			                			<input type="text" name="memail" style="border:1px #ccc solid;width:180px;height:30px;"/><br/><br/>
+			                			<span>请留言：</span><br/>
+			                			<textarea rows="10" cols="100" style="resize:none;border:1px solid #999;" name="mcontent">
+			                				
+			                			</textarea><br/><br/>
+			                			<input type="submit" value="留言" />
+			                		</form>
+			                		<c:choose>
+			                			<c:when test="${not empty fuser.usid} ">
+			                				
+			                			</c:when>
+			                			<c:otherwise>
+			                				
+			                			</c:otherwise>
+			                		</c:choose>
+		                		</fieldset>
+	                		</div>
 	                	</div>
 	                	<div style="" id="allmap"></div>
 	                </div>
@@ -205,7 +218,7 @@
 	<script src="js/aboutUs/jquery.textillate.js"></script>
 	<script>
 		new gnMenu( document.getElementById( 'gn-menu' ) );
-		showUsInfo();
+		leaveMsg();
 		function showUsInfo(){
 			$("#allmap").attr("style","display:none");
 			$("#leaveMsg_fd").attr("style","display:none");
@@ -213,7 +226,7 @@
 			//读取文件中的文字，再开始动画
 			$.post("/law/aboutUs/readFile",function(data){
 				if(data!=null){
-					//$(".text2").html(data.info);
+					$(".text2").html(data.info);
 					$('.text1').textillate({ in: { effect: 'rollIn' } });
 					$('.text2').textillate({
 						initialDelay: 1000, 	//设置动画开始时间
