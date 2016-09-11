@@ -49,4 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updatePwd">
 		update law_user set upwd=#{0} where usid=#{1}
 	</update>
+	
+	<update id="updateFrontPic">
+		update law_user set picpath=#{1} where usid=#{0}
+	</update>
 </mapper>

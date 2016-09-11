@@ -1,5 +1,8 @@
 package com.yc.law.service;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.yc.law.entity.UploadUser;
 import com.yc.law.entity.User;
 
 public interface FrontUserService {
@@ -26,5 +29,6 @@ public interface FrontUserService {
 
 	int updatePwd(String newPwd, String usid);
 
+	int updateFrontPic(String usid, String picName);
 
 }

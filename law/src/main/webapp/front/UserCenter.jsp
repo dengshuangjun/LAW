@@ -21,6 +21,7 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/userCenter/top.js"></script>
 <script type="text/javascript" src="js/userCenter/info.js"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <style type="text/css">
 #profile-save-btn {
 	margin-top: 20px;
@@ -266,7 +267,6 @@
 
 						<form id="settings-avatar-form" class="form-horizontal"
 							method="post"
-							<%-- action="${pageContext.request.contextPath}/userinfo/editPhoto" --%>
 							enctype="multipart/form-data">
 
 							<div class="form-group">
@@ -274,19 +274,16 @@
 									<b>当前头像</b>
 								</div>
 								<div class="controls col-md-8 controls" id="showimg">
-									<input name="userid" value=""
-										style="display: none;" />
 									<c:choose>
-										<c:when test="">
-											<img id="imgPrc" src="images/avatar.png"
+										<c:when test="${not empty fuser.picpath }">
+											<img id="imgPrc" src="../${fuser.picpath }"
 												style="width: 200px; height: 180px;">
 										</c:when>
-										<c:when test=""></c:when>
+										<c:otherwise>
+											<img id="imgPrc" src="images/avatar.png"
+												style="width: 200px; height: 180px;">
+										</c:otherwise>
 									</c:choose>
-									<c:if test="">
-										<img id="imgPrc" src=""
-											style="width: 200px; height: 180px;">
-									</c:if>
 								</div>
 							</div>
 
@@ -303,20 +300,17 @@
 								<div class="col-md-2 control-label"></div>
 								<div class="controls col-md-8 controls">
 									<div id="updateImg">
-										<input type="file" name="items_pic" id="unload"
-											style="border: none;" onchange="preImg(this.id);">
+										<input type="file" name="imageFile" id="imageFile"
+											style="border: none;" onchange="preImg(this.id)">
 									</div>
-									<!-- accept="image/*"   class="webuploader-element-invisible"-->
-									<button class="btn btn-primary" type="submit"
-										id="profile-save-btn2" style="margin-top: 20px;">保存</button>
+									<button id="profile-save-btn" data-submiting-text="正在保存"
+										type="button" class="btn btn-primary" onclick="savePicInfo()">保存</button>
 									<button class="btn btn-primary" type="button"
 										id="profile-edit-btn"
-										style="margin-top: 20px; margin-left: 10px;">取消</button>
+										style="margin-top: 20px; margin-left: 10px;" onclick="dropPicInfo()">取消</button>
 								</div>
 							</div>
-
 						</form>
-
 					</div>
 				</div>
 			</div>
