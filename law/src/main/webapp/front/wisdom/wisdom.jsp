@@ -28,9 +28,15 @@
 		<div id="top_page">
 			<span>今天是<span id="nowtime"></span></span>
 			<ul>
-				<li><a href="../load.html">登录</a>| <a href="../submit.html">注册</a>| <a
-					href="javascript:void(0)" onclick="userCenter()">会员中心</a>| <a
-					href="###">收藏本站</a>| <a href="###">关于我们</a></li>
+				<li>
+				<c:if test="${user.usid!=null&&user.usid!=''}">
+						<a>欢迎！！</a>： <a>${user.usname }</a>|
+				</c:if> 
+				<c:if test="${user.usid==null||user.usid==''}">
+						<li><a href="../load.html">登录</a>| <a href="../submit.html">免费注册</a>|
+				</c:if> 
+					<a href="../UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
+				</li>
 			</ul>
 		</div>
 	</div>
