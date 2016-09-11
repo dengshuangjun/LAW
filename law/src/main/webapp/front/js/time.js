@@ -13,20 +13,7 @@ window.onload=function(){
 	document.getElementById('nowtime').innerHTML=date;
 }
 
-function userCenter(usid){
-	if(usid!=null){
-		$.post("../../userServlet", {
-			op : "findUserById",
-			usid : usid
-		}, function(data) {
-			if (data) {
-				location.href="../tieba/tiebaUser.jsp";
-			}
-		});
-	}else{
-		alert("请先登陆!");
-	}
-}
+
 function zhuxiao(){
 	$.post("/law/front/zhuxiao",function(data){
 		 location.reload() ;

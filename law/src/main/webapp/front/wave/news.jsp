@@ -12,8 +12,8 @@
 	<link rel="shortcut icon" href="../images/logo_ .png">
 	<link rel="stylesheet" type="text/css" href="../css/CssReset.css">
 	<link rel="stylesheet" type="text/css" href="../css/model.css">
-	<link rel="stylesheet" type="text/css" id="devIndexCss">
-	<link rel="stylesheet" type="text/css" id="devArtCss">
+	<link rel="stylesheet" type="text/css" href="../css/defaultindex.css" id="devIndexCss">
+	<link rel="stylesheet" type="text/css" href="../css/artDefualt.css" id="devArtCss">
     <style>
 		.content .right span{
 			text-align: center;
@@ -45,7 +45,7 @@
 				<c:if test="${user.usid==null||user.usid==''}">
 						<li><a href="../load.html">登录</a>| <a href="../submit.html">免费注册</a>|
 				</c:if> 
-					<a href="javascript:void(0)" onclick="userCenter(${user.usid})">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
+					<a href="../UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
 				</li>
 			</ul>
     </div>

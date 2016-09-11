@@ -12,8 +12,8 @@
 	<link rel="stylesheet" type="text/css" href="../css/CssReset.css">
 	<link rel="stylesheet" type="text/css" href="../css/model.css">
 	<link rel="stylesheet" type="text/css" href="../css/pageCode.css"/>
-	<link rel="stylesheet" type="text/css" id="devIndexCss">
-	<link rel="stylesheet" type="text/css" id="devArtCss">
+	<link rel="stylesheet" type="text/css" href="../css/defaultindex.css" id="devIndexCss">
+	<link rel="stylesheet" type="text/css" href="../css/artDefualt.css" id="devArtCss">
 	<script src="../js/time.js"></script>
 </head>
 
@@ -23,7 +23,7 @@
 			<span style="">今天是<span id="nowtime"></span></span>
 			<ul>
 			<li><a href="../load.html">登录</a>| <a href="../submit.html">注册</a>| <a
-					href="javascript:void(0)" onclick="userCenter()">会员中心</a>| <a
+					href="../UserCenter.jsp">会员中心</a>| <a
 					href="###">收藏本站</a>| <a href="###">关于我们</a></li>
 			</ul>
 		</div>

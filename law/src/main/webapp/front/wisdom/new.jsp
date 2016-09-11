@@ -12,8 +12,8 @@
 	content="法律智慧网是一家在线法律服务门户网站平台，律师在线解答法律咨询，为您提供一站式、便捷、高效的法律服务！">
 <link rel="shortcut icon" href="../images/logo_ .png">
 <link rel="stylesheet" type="text/css" href="../css/CssReset.css">
-<link rel="stylesheet" type="text/css" id="devIndexCss">
-<link rel="stylesheet" type="text/css" id="devArtCss">
+<link rel="stylesheet" type="text/css" href="../css/defaultindex.css" id="devIndexCss">
+<link rel="stylesheet" type="text/css" href="../css/artDefualt.css" id="devArtCss">
 <link rel="stylesheet" type="text/css" href="../css/model.css">
 <script src="../js/jquery-1.9.1.js" type="text/javascript"></script>
 <script src="../js/time.js"></script>
@@ -42,8 +42,14 @@
 		<div id="top_page">
 			<span>今天是<span id="nowtime"></span></span>
 			<ul>
-				<li><a href="../load.html">登录</a>| <a href="../submit.html">免费注册</a>|
-					<a href="javascript:void(0)" onclick="userCenter(${user.usid})">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
+				<li>
+				<c:if test="${user.usid!=null&&user.usid!=''}">
+						<a>欢迎！！</a>： <a>${user.usname }</a>|
+				</c:if> 
+				<c:if test="${user.usid==null||user.usid==''}">
+						<li><a href="../load.html">登录</a>| <a href="../submit.html">免费注册</a>|
+				</c:if> 
+					<a href="../UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="###">关于我们</a>
 				</li>
 			</ul>
 		</div>

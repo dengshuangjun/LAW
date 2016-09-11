@@ -132,7 +132,28 @@
 		</div>
 	</div>
 	
-	<div class="container" id="content-container">
+	<div class="container" id="content-container" style="min-height:200px;">
+	<c:if test="${fuser.usid==0||fuser.usid==null}">
+		
+		<p style="margin: 40px auto; font-size: 30px;">您还没有登陆,剩余<b id="timeOut">10</b>秒钟跳转到登陆页面...如果不跳转请点击<a href="load.html" style="font-size: 30px;color: navy;">登陆</a></p>
+		<script type="text/javascript">
+		var time=10;
+		var InterValObj;
+		$(function(){
+			InterValObj=window.setInterval(timeIng, 1000);
+		});
+		function timeIng(){
+			if(time>0){
+				time=time-1;
+				$("#timeOut").html(time);
+			}else{
+		        window.clearInterval(InterValObj);//停止计时器
+				location.href="load.html";
+			}
+		}
+	</script>
+	</c:if>
+	<c:if test="${fuser.usid!=0&&fuser.usid!=null}">
 		<div class="row">
 			<div class="col-md-3">
 				<div class="sidenav">
@@ -361,6 +382,7 @@
 			</div>
 			<!--  --------------安全设置------------------------------------------------------------------ -->
 		</div>
+		</c:if>
 	</div>
 
 	<!--E=内容-->
@@ -403,5 +425,6 @@
 	</div>
 	<!--E=关于我们-->
 	<script src="js/time.js" type="text/javascript"></script>
+	
 </body>
 </html>
