@@ -14,8 +14,8 @@
 <link rel="stylesheet" type="text/css" href="../css/CssReset.css">
 <link rel="stylesheet" type="text/css" href="../css/model.css">
 <link rel="stylesheet" type="text/css" href="../css/wavePageCode.css">
-<link rel="stylesheet" type="text/css" id="devIndexCss">
-<link rel="stylesheet" type="text/css" id="devArtCss">
+<link rel="stylesheet" type="text/css" href="../css/defaultindex.css" id="devIndexCss">
+<link rel="stylesheet" type="text/css" href="../css/artDefualt.css" id="devArtCss">
 <script src="../js/time.js"></script>
 <script src="../js/jquery-1.9.1.js"></script>
 
