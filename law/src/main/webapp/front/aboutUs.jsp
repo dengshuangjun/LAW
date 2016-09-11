@@ -44,7 +44,7 @@
 				<c:if test="${fuser.usid==null||fuser.usid==''}">
 						<li><a href="load.html">登录</a>| <a href="submit.html">免费注册</a>|
 				</c:if> 
-					<a href="UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="javascript:void(0)" onclick="aboutUs(${fuser.usid})">关于我们</a>
+					<a href="UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="javascript:void(0)" onclick="aboutUs()">关于我们</a>
 				</li>
 			</ul>
 		</div>
@@ -138,7 +138,17 @@
 								<p class="text3">WELCOME</p>
 	                		</div>
 	                	</div>
-	                	<div style="" id="leaveMsg_fd"></div>
+	                	<div style="" id="leaveMsg_fd">
+	                		
+	                		<c:choose>
+	                			<c:when test="${not empty fuser.usid} ">
+	                				
+	                			</c:when>
+	                			<c:otherwise>
+	                				
+	                			</c:otherwise>
+	                		</c:choose>
+	                	</div>
 	                	<div style="" id="allmap"></div>
 	                </div>
 				</header>
@@ -203,7 +213,7 @@
 			//读取文件中的文字，再开始动画
 			$.post("/law/aboutUs/readFile",function(data){
 				if(data!=null){
-					$(".text2").html(data.info);
+					//$(".text2").html(data.info);
 					$('.text1').textillate({ in: { effect: 'rollIn' } });
 					$('.text2').textillate({
 						initialDelay: 1000, 	//设置动画开始时间
@@ -211,7 +221,7 @@
 						}
 					});
 					$('.text3').textillate({
-						initialDelay: 9000,
+						initialDelay: 15000,
 						in: { effect: 'bounceInDown' }
 					});
 				}
@@ -228,21 +238,22 @@
 			$("#usInfo_show").attr("style","display:none");
 			$("#leaveMsg_fd").attr("style","display:none");
 			$("#allmap").attr("style","display:block");
-		  	// 百度地图API功能
-			var map = new BMap.Map("allmap");
-			var point = new BMap.Point(116.331398,39.897445);
-			map.centerAndZoom(point,12);
-			// 创建地址解析器实例
-			var myGeo = new BMap.Geocoder();
-			// 将地址解析结果显示在地图上,并调整地图视野
-			myGeo.getPoint("衡阳市珠晖区衡花路16号", function(point){
-				if (point) {
-					map.centerAndZoom(point, 16);
-					map.addOverlay(new BMap.Marker(point));
-				}else{
-					alert("您选择地址没有解析到结果!");
-				}
-			}, "湖南省");
+			
+		  		// 百度地图API功能
+				var map = new BMap.Map("allmap");
+				var point = new BMap.Point(116.331398,39.897445);
+				map.centerAndZoom(point,12);
+				// 创建地址解析器实例
+				var myGeo = new BMap.Geocoder();
+				// 将地址解析结果显示在地图上,并调整地图视野
+				myGeo.getPoint("衡阳市珠晖区衡花路16号", function(point){
+					if (point) {
+						map.centerAndZoom(point, 16);
+						map.addOverlay(new BMap.Marker(point));
+					}else{
+						alert("您选择地址没有解析到结果!");
+					}
+				}, "湖南省");
 		}
 	</script>
 </body>

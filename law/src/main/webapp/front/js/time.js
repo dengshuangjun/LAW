@@ -20,10 +20,6 @@ function zhuxiao(){
 	},"json");
 }
 
-function aboutUs(usid){
-	if(usid!=null){
-		location.href="aboutUs.jsp";
-	}else{
-		location.href="load.html?aboutUs";
-	}
+function aboutUs(){
+	location.href="aboutUs.jsp";
 }
