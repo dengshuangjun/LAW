@@ -1,5 +1,6 @@
 package com.yc.law.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,21 @@ public class BackDataServiceImpl implements BackDataService {
 	public int setDown(int nid) {
 		return backDataMapper.setDown(nid);
 		
+	}
+
+	@Override
+	public boolean delNews(String nids) {
+		List<Integer> list=new ArrayList<Integer>();
+		String[] strs = nids.split(",");
+		int j=strs.length;
+		for(int i=0;i<j;i++){
+			list.add(Integer.parseInt(strs[i]));
+		}
+		if(backDataMapper.delNews(list)==j){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 

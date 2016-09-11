@@ -65,7 +65,7 @@ TypeObj=$('#Type_data').datagrid({
           	iconCls:"icon-remove",
           	handler:function(){
           		var rows=TypeObj.datagrid("getSelections");
-          		if(rows!=undefined){
+          		if(rows!=undefined&&rows!=''){
           			$.messager.confirm('信息确认','您确定要删除选定的数据吗?', function(r){
           				if (r){
           					var nids="";
@@ -81,7 +81,7 @@ TypeObj=$('#Type_data').datagrid({
 										timeout:2000,
 										showType:'slide'
 									});
-									rows=null;
+									rows=undefined;
 									TypeObj.datagrid("reload");//刷新表格
 								}else{
 									$.messager.alert('失败提示','删除失败','error');

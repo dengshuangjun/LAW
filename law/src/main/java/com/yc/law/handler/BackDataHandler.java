@@ -85,6 +85,7 @@ public class BackDataHandler {
 	@RequestMapping("getWavesByPage")
 	@ResponseBody
 	public Map<String,Object> getWavesByPage(LawContentPage lawContentPage){
+		System.out.println(lawContentPage);
 		lawContentPage=backDataService.getWavesByPage(lawContentPage);
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("total", lawContentPage.getTotal());
@@ -148,6 +149,12 @@ public class BackDataHandler {
 		} catch (Exception e) {
 			return 3;
 		}
+		
+	}
+	@RequestMapping("delNews")
+	@ResponseBody
+	public boolean delNews(String nids){
+		return backDataService.delNews(nids);
 		
 	}
 }

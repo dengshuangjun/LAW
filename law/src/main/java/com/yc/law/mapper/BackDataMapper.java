@@ -27,4 +27,6 @@ public interface BackDataMapper {
 
 	int setDown(int nid);
 
+	int delNews(List<Integer> nids);
+
 }

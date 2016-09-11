@@ -8,6 +8,7 @@ public class LawContentPage implements Serializable{
 	private int page;
 	private int rows;
 	private int total;
+	private List<Integer> partid;
 	private List<LawContent> lawContents;
 	public int getPage() {
 		return page;
@@ -27,6 +28,12 @@ public class LawContentPage implements Serializable{
 	public void setTotal(int total) {
 		this.total = total;
 	}
+	public List<Integer> getPartid() {
+		return partid;
+	}
+	public void setPartid(List<Integer> partid) {
+		this.partid = partid;
+	}
 	public List<LawContent> getLawContents() {
 		return lawContents;
 	}
@@ -36,7 +43,9 @@ public class LawContentPage implements Serializable{
 	@Override
 	public String toString() {
 		return "LawContentPage [page=" + page + ", rows=" + rows + ", total="
-				+ total + ", lawContents=" + lawContents + "]";
+				+ total + ", partid=" + partid + ", lawContents=" + lawContents
+				+ "]";
 	}
+	
 	
 }
