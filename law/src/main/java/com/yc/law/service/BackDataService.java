@@ -27,4 +27,6 @@ public interface BackDataService {
 
 	int setDown(int nid);
 
+	boolean delNews(String nids);
+
 }

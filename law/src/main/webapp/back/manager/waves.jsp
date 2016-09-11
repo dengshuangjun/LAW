@@ -1,10 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <table id="waves_data"></table>
+<div id="waves_data_add" data-options="iconCls:'icon-add',modal:true,closed:true,fit:true">
+	在这里显示增加内容的信息
+
+</div>  
+<div id="waves_bar" style="padding:5px;height:auto">
+		<div>
+			按日期搜索从：<input class="easyui-datebox" style="width:100px">
+			到: <input class="easyui-datebox" style="width:100px">
+			所属版块: 
+			<select class="easyui-combobox" panelHeight="auto" style="width:100px">
+				<option value=''>全部</option>
+				<option value="1001">校园动态</option>
+				<option value="1002">社会聚焦</option>
+				<option value="1003">新闻调查</option>
+			</select>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+			<div style="float: right; margin-right: 20px;">
+			<a href="javascript:void(0)" onclick="addWavsNews()" class="easyui-linkbutton"  iconCls="icon-add">添加</a>
+			<a href="javascript:void(0)" onclick="delWaves()" class="easyui-linkbutton" iconCls="icon-remove">删除</a>
+		</div>
+		</div>
+		
+	</div>
 <script type="text/javascript">
+var partid="1001,1002,1003";
 var wavesObj;
 wavesObj=$('#waves_data').datagrid({
 	url:'backs/getWavesByPage',
+	queryParams: {
+		partid: partid
+	},
 	fitColumns:true,
 	fit:true,
 	striped:true,
@@ -15,16 +42,16 @@ wavesObj=$('#waves_data').datagrid({
 	pageList:[10,20,30,40,50],
 	remoteSort:false,
 	sortName:'weight',
+	toolbar:"#waves_bar",
 	columns:[[
 		{field:'nid',sortable:true,align:'center',checkbox:true},
 		{field:'ntname',title:'所属类型',width:200,align:'center',
 			formatter:function(value,rowData,index){
-				if(value==''||value==null){
+				if(value==''||value==undefined){
 					return "未指定类型";
 				}else{
 					return value;
 				}
-	    		
 	    	}	
 		},
 		{field:'partName',title:'所属版块',width:180,align:'center'},
@@ -104,7 +131,12 @@ wavesObj=$('#waves_data').datagrid({
 	    		return "<a href='javascript:newMore("+rowData.nid+")'>详细</a>";
 	    	}	
 		}  ]]
+
+	
 	});
+function addWavsNews(){
+		$('#waves_data_add').dialog({title:"添加",closed:false,modal:true,});
+}
 function setWavesWeight(nid,val,weight,partid){
 	if(val==1){//置顶
 		$.post("backs/setTop",{nid:nid,weight:weight,partid:partid},function(data){
@@ -125,6 +157,9 @@ function setWavesWeight(nid,val,weight,partid){
 	}
 }
 
+function searchWavesAuto(){
+	alert("a");
+} 
 function messageHandel(action,data){
 	if(data==1){
 		$.messager.show({
@@ -140,4 +175,34 @@ function messageHandel(action,data){
 		$.messager.alert('错误提示','操作失败...','error');
 	}
 }
+function delWaves(){
+	var rows=wavesObj.datagrid("getSelections");
+		if(rows!=undefined&&rows!=''){
+			$.messager.confirm('信息确认','您确定要删除选定的数据吗?', function(r){
+				if (r){
+					var nids="";
+				for(var i=0;i<rows.length-1;i++){
+					nids+=rows[i].nid+",";
+				}
+				nids+=rows[rows.length-1].nid;
+				$.post("backs/delNews",{nids:nids},function(data){
+					if(data){
+						$.messager.show({
+							title:'成功提示',
+							msg:'删除成功',
+							timeout:2000,
+							showType:'slide'
+						});
+						rows=undefined;
+						wavesObj.datagrid("reload");//刷新表格
+					}else{
+						$.messager.alert('失败提示','删除失败','error');
+					}
+				});
+				}
+			});
+		}else{
+			$.messager.alert('温馨提示','请选择要删除的数据...','info');
+		}
+	}
 </script>	
