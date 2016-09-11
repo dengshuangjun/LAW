@@ -1,6 +1,9 @@
 package com.yc.law.handler;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -9,6 +12,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -20,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.yc.law.entity.UploadUser;
 import com.yc.law.entity.User;
 import com.yc.law.service.FrontUserService;
 @Controller
@@ -223,5 +229,63 @@ public class FrontUserHandler {
 	public int updatePwd(@RequestParam("newPwd") String newPwd,@RequestParam("usid") String usid){
 		return frontUserService.updatePwd(newPwd,usid);
 	}
+	
+	@RequestMapping(value = "/updatePic", method = RequestMethod.POST)
+	@ResponseBody
+	public int addGeneralUser(@RequestParam("usid") String usid,
+							  @RequestParam("imageFile") MultipartFile imageFile,
+							  @ModelAttribute("fuser") User user){
+		String picName =null;
+		if (!imageFile.isEmpty()) {
+			String paths=System.getProperty("evan.webapp");//获取项目在服务器中的绝对路径，我的图片是存在服务器的webapp的pics目录下面，这个需要一个配置
+			System.out.println("=====>>>>"+paths);
+			paths=paths.substring(0,paths.lastIndexOf("\\"));
+			String realPath =paths.substring(0,paths.lastIndexOf("\\"))+ "\\pics";//获取到服务器存放文件的目录
+			picName ="../pics/"+picSting()+new Date().getTime()+
+					imageFile.getOriginalFilename().substring(imageFile.getOriginalFilename().indexOf("."));
+			//图片名字的生成，getOriginalFilename获取上传图片的名字然后截取后缀
+			try {
+				FileUtils.copyInputStreamToFile(imageFile.getInputStream(), new File(realPath, picName));
+				user.setPicpath(picName);//将图片名字存放到上传对象
+				if(frontUserService.updateFrontPic(usid,picName)>0){
+					return 1;
+				}else{
+					return 2;
+				}
+			} catch (IOException e) {
+				return 3;//表示上传的文件不合法
+			}
+		}else{
+			if(frontUserService.updateFrontPic(usid,picName)>0){
+				return 1;
+			}else{
+				return 2;
+			}
+		}
+	}
+	
+	/**
+	 * 生成含有字母的验证码
+	 * @return
+	 */
+	public String picSting(){
+		Random ra = new Random();
+		int num1;
+		StringBuffer sbf2 = new StringBuffer();
+		while (sbf2.length() < 8) {
+			if(ra.nextInt(3)==0){
+				num1=ra.nextInt(10);
+				sbf2.append(num1);
+			}else if(ra.nextInt(3)==1){
+				num1=ra.nextInt(26)+97;
+				sbf2.append((char)num1);
+			}else{
+				num1=ra.nextInt(26)+65;
+				sbf2.append((char)num1);
+			}
+		}
+		return sbf2.toString();
+	}
+
 }
 	

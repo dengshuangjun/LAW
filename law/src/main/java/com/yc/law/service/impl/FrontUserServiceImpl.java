@@ -2,7 +2,9 @@ package com.yc.law.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.yc.law.entity.UploadUser;
 import com.yc.law.entity.User;
 import com.yc.law.mapper.FrontUserMapper;
 import com.yc.law.service.FrontUserService;
@@ -88,6 +90,8 @@ public class FrontUserServiceImpl implements FrontUserService {
 		return frontUserMapper.updatePwd(newPwd,usid);
 	}
 
-	
-
+	@Override
+	public int updateFrontPic(String usid, String picName) {
+		return frontUserMapper.updateFrontPic(usid,picName);
+	}
 }

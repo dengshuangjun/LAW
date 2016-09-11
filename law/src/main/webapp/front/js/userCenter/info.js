@@ -158,7 +158,54 @@ function updatePwd(){
 	}
 }
 
+function preImg(sourceId) {  
+    if (typeof FileReader === 'undefined') {  
+        alert('对不起，您的浏览器不适合文件上传，请更换浏览器再试...');  
+        return;  
+    }  
+    var reader = new FileReader();  
+  
+    reader.onload = function(e) {  
+        var img = document.getElementById("imgPrc");  
+        img.src = this.result;  
+    }  
+    reader.readAsDataURL(document.getElementById(sourceId).files[0]);  
+} 
 
+function dropPicInfo(){
+	var str='<img id="imgPrc" src="images/avatar.png" style="width:200px;height:180px;">';
+	var str2='<input type="file" accept="image/*" class="webuploader-element-invisible" name="file" id="unload" style="border: none;"onchange="preImg(this.id);">';
+	$('#showimg').html('').append($(str));
+	$('#updateImg').html('').append($(str2));
+}
+
+function savePicInfo(){
+	var usid = $("#usid").val();
+	alert("开始保存头像");
+	alert(usid);
+	alert( $("#imageFile").val())
+	$.ajaxFileUpload({
+		url:"updatePic",//发送的处理类地址
+		secureuri:false,
+		fileElementId:"imageFile",//图片文件的id
+		dataType:"json",//数据类型
+		data:{
+			usid:usid
+		},//发送的json数据
+		success:function(data){//成功的回调函数
+			if(data==1){
+				alert("头像更新成功...");
+			}else if(data==2){
+				alert('添加头像失败，请重新再试...');
+			}else if(data==3){
+				alert('添加头像失败，请重新再试...');
+			}
+		},
+		error:function(data){//失败的回调函数
+			alert('添加头像失败，请重新再试...');
+		}
+	});
+}
 
 
 
