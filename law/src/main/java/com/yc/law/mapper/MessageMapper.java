@@ -26,4 +26,11 @@ public interface MessageMapper {
 	 * @return
 	 */
 	LeaveMsg findMessageInfo(int mid);
+	
+	/**
+	 * 前台插入留言
+	 * @param leaveMsg
+	 * @return
+	 */
+	int insertMsg(LeaveMsg leaveMsg);
 }
