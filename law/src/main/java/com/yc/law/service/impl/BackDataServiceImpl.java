@@ -1,10 +1,12 @@
 package com.yc.law.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yc.law.entity.EasyType;
 import com.yc.law.entity.LawContentPage;
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
@@ -68,6 +70,43 @@ public class BackDataServiceImpl implements BackDataService {
 	public int setDown(int nid) {
 		return backDataMapper.setDown(nid);
 		
+	}
+
+	@Override
+	public boolean delNews(String nids) {
+		List<Integer> list=new ArrayList<Integer>();
+		String[] strs = nids.split(",");
+		int j=strs.length;
+		for(int i=0;i<j;i++){
+			list.add(Integer.parseInt(strs[i]));
+		}
+		if(backDataMapper.delNews(list)==j){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean changeNewsFlag(String flag, int nid) {
+		if(backDataMapper.changeNewsFlag(flag,nid)>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean changeNewsStatus(String status, int nid) {
+		if(backDataMapper.changeNewsStatus(status,nid)>0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<EasyType> getNewsTypeName() {
+		
+		return backDataMapper.getNewsTypeName();
 	}
 
 

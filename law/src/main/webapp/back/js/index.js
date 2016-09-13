@@ -81,7 +81,7 @@ $(function() {
 					$('#center_content').tabs('add',{  
 					    title:'智慧艺苑',  
 					    closable:true, 
-					    href:'back/manager/art.html'
+					    href:'back/manager/art.jsp'
 					});
 				}
 				

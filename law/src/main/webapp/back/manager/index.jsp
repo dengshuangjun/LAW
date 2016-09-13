@@ -97,7 +97,7 @@
 		data-options="region:'east',split:true,collapsed:true,title:'帮助信息'"
 		style="width: 100px; padding: 10px;"></div>
 	<div data-options="region:'south',border:false"
-		style="height: 50px; background: #A9FACD; padding: 10px;">
+		style="height: 50px; background: #b4c5df; padding: 10px;">
 		<p style="text-align: center;">&copy;版权所有：法律智慧网 2016 制作单位：源辰信息有限公司</p>
 	</div>
 	<div data-options="region:'center',title:'操作'">

@@ -152,7 +152,7 @@ public class FrontUserHandler {
 				map.addAttribute("fuser", fuser);
 				
 				if(url!=null&&url!=""){
-					return "redirect:/front/"+url+".jsp";
+					return "redirect:/"+url+".jsp";
 				}
 				return "redirect:/front/index.jsp";
 			}else{

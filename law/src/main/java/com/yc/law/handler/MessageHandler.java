@@ -45,4 +45,20 @@ public class MessageHandler {
 		}
 		return lm;
 	}
+	
+	@RequestMapping("/insertMsg")
+	@ResponseBody
+	public boolean  insertMsg(LeaveMsg leaveMsg) {
+		System.out.println(leaveMsg);
+		try {
+			int result = messagesService.insertMsg(leaveMsg);
+			if(result==1){
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			LogManager.getLogger().error("插入留言失败。",e);
+			return false;
+		}
+	}
 }

@@ -12,21 +12,20 @@
 	content="法律智慧网是一家在线法律服务门户网站平台，律师在线解答法律咨询，为您提供一站式、便捷、高效的法律服务！">
 <link rel="shortcut icon" href="images/logo_ .png">
 <link rel="stylesheet" type="text/css" href="css/CssReset.css">
-<link rel="stylesheet" type="text/css" id="cssLink">
 <link rel="stylesheet" type="text/css" href="css/aboutUs/normalize.css" />
 <link rel="stylesheet" type="text/css" href="css/aboutUs/demo.css" />
 <link rel="stylesheet" type="text/css" href="css/aboutUs/component.css" />
 <link href="css/aboutUs/animate.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/defaultindex.css" id="cssLink">
 <script src="js/aboutUs/modernizr.custom.js"></script>
 <script src="js/jquery-1.9.1.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/readCss.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=67jMQ5DmYTe1TLMBKFUTcZAR"></script>
 <style type="text/css">
 
 .text1,.text2,.text3 {visibility:hidden;font-family: "华文楷体"}
 .text1,.text2 {color:#fff;color:#fff;}
 .text1 {text-align:center;font-size:30px;text-shadow:0.025em 0.025em 0.025em rgba(56,125,149, 0.8);}
-.text2 {font-size:18px;line-height:24px;text-shadow:0.1em 0.1em 0.1em rgba(56,125,149, 0.2)}
+.text2 {font-size:18px;line-height:20px;text-shadow:0.1em 0.1em 0.1em rgba(56,125,149, 0.2)}
 .text3 {text-align:center;font-size:36px;color:#900}
 </style>
 </head>
@@ -44,7 +43,7 @@
 				<c:if test="${fuser.usid==null||fuser.usid==''}">
 						<li><a href="load.html">登录</a>| <a href="submit.html">免费注册</a>|
 				</c:if> 
-					<a href="UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="javascript:void(0)" onclick="aboutUs(${fuser.usid})">关于我们</a>
+					<a href="UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="javascript:void(0)" onclick="aboutUs()">关于我们</a>
 				</li>
 			</ul>
 		</div>
@@ -130,13 +129,31 @@
 	                <li></li>
 				</ul>
 				<header>
-					<div id="lala" style="height:600px;width:1120px;margin-left:80px;border-right:1px solid #ccc;border-bottom:1px solid #ccc;">
+					<div id="lala" style="height:600px;width:1120px;margin-left:80px;border-right:1px solid #ccc;border-bottom:1px solid #ccc; text-align: center;">
 	                	<div style="" id="usInfo_show">
-								<p class="text1">关于我们</p>
-								<p class="text2">发电机房哈地方哈萨克的合法士大夫发奥克发斯蒂芬哈萨克的金凤凰卡死的合法就开始的恢复快兰...的发生离开的灿撒旦飞洒看地方噶十多个发生地方噶是极好的感动烂阿斯顿发生地方哈傻傻的...开啥地方哈萨克的发送卡地方噶十多个发斯蒂芬发和</p>
+	                		<div style="height:100%;width:80%;">
+	                			<p class="text1">关于我们</p>
+								<p class="text2"></p>
 								<p class="text3">WELCOME</p>
+	                		</div>
 	                	</div>
-	                	<div style="" id="leaveMsg_fd"></div>
+	                	<div style="" id="leaveMsg_fd">
+	                		<div style="height:400px;width:600px">
+	                			<fieldset style="padding:20px;">
+	                				<legend style="color:#999;text-shadow: 0.025em 0.025em 0.025em rgba(115,134,148, 0.8);font-size:16px;">留言反馈</legend>
+		                			<form style="text-align:left;">
+			                			<span style="width:120px;">请输入您的邮箱：</span>
+			                			<input type="text" id="memail" name="memail" onblur="checklmemail()" style="border:1px #ccc solid;width:180px;height:30px;"/>
+			                			<span id="errorMsg1" style="color:red;"></span>
+			                			<br/><br/>
+			                			<span>请留言：</span><span id="s2" style="float: right;">欢迎您将宝贵的意见告知我们。</span><br/>
+			                			<textarea rows="10" cols="100" style="resize:none;border:1px solid #999;word-wrap:break-word;line-height:18px;overflow-y:auto;overflow-x:hidden;outline:none;" id="mcontent" name="mcontent"></textarea><br/><br/>
+			                			<input type="button" onclick="checkMsginfo()" value="留言" style="width:70px;height:30px;background-color: #ccc;"/>
+			                			<span id="errorMsg2" style="color:red;"></span>
+			                		</form>
+		                		</fieldset>
+	                		</div>
+	                	</div>
 	                	<div style="" id="allmap"></div>
 	                </div>
 				</header>
@@ -192,21 +209,34 @@
 	<script src="js/aboutUs/jquery.lettering.js"></script>
 	<script src="js/aboutUs/jquery.textillate.js"></script>
 	<script>
+		var checkEmail=false;
+		var checkVal=false;
+	
+		//清空
+		$("#mcontent").val("");
+		$("#memail").val("");
+		
 		new gnMenu( document.getElementById( 'gn-menu' ) );
-		showUsInfo();
+		leaveMsg();
 		function showUsInfo(){
 			$("#allmap").attr("style","display:none");
 			$("#leaveMsg_fd").attr("style","display:none");
 			$("#usInfo_show").attr("style","display:block");
-			$('.text1').textillate({ in: { effect: 'rollIn' } });
-			$('.text2').textillate({
-				initialDelay: 1000, 	//设置动画开始时间
-				in: { effect: 'flipInX'	//设置动画名称
+			//读取文件中的文字，再开始动画
+			$.post("/law/aboutUs/readFile",function(data){
+				if(data!=null){
+					$(".text2").html(data.info);
+					$('.text1').textillate({ in: { effect: 'rollIn' } });
+					$('.text2').textillate({
+						initialDelay: 1000, 	//设置动画开始时间
+						in: { effect: 'flipInX'	//设置动画名称
+						}
+					});
+					$('.text3').textillate({
+						initialDelay: 15000,
+						in: { effect: 'bounceInDown' }
+					});
 				}
-			});
-			$('.text3').textillate({
-				initialDelay: 9000,
-				in: { effect: 'bounceInDown' }
 			});
 		}
 		
@@ -220,22 +250,93 @@
 			$("#usInfo_show").attr("style","display:none");
 			$("#leaveMsg_fd").attr("style","display:none");
 			$("#allmap").attr("style","display:block");
-		  	// 百度地图API功能
-			var map = new BMap.Map("allmap");
-			var point = new BMap.Point(116.331398,39.897445);
-			map.centerAndZoom(point,12);
-			// 创建地址解析器实例
-			var myGeo = new BMap.Geocoder();
-			// 将地址解析结果显示在地图上,并调整地图视野
-			myGeo.getPoint("衡阳市珠晖区衡花路16号", function(point){
-				if (point) {
-					map.centerAndZoom(point, 16);
-					map.addOverlay(new BMap.Marker(point));
-				}else{
-					alert("您选择地址没有解析到结果!");
-				}
-			}, "湖南省");
+			
+		  		// 百度地图API功能
+				var map = new BMap.Map("allmap");
+				var point = new BMap.Point(116.331398,39.897445);
+				map.centerAndZoom(point,12);
+				// 创建地址解析器实例
+				var myGeo = new BMap.Geocoder();
+				// 将地址解析结果显示在地图上,并调整地图视野
+				myGeo.getPoint("衡阳市珠晖区衡花路16号", function(point){
+					if (point) {
+						map.centerAndZoom(point, 16);
+						map.addOverlay(new BMap.Marker(point));
+					}else{
+						alert("您选择地址没有解析到结果!");
+					}
+				}, "湖南省");
+		}
+		
+		function checklmemail() {
+		    var zcemail = $("#memail").val();
+		    var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+		    if (!zcemail.match(reg)) {
+		    	checkEmail=false;
+		        $("#errorMsg1").html("邮箱格式不合法...");
+		        $("#memail").val("");
+		    } else {
+		    	$("#errorMsg1").html("");
+		    	checkEmail=true;
+		    }
+		}
+		
+		var txt=document.getElementById("mcontent");
+		var str=0;
+		
+		//键盘监听事件
+		txt.addEventListener("keyup",function(){
+			str=txt.value;
+			if(str.length>250){
+				document.getElementById("s2").innerHTML="已经超出了"+(str.length-250)+"个字";
+				$("#errorMsg2").html("");
+				checkVal=false;
+			}else{
+				document.getElementById("s2").innerHTML="您还可以输入"+(250-str.length)+"个字";
+				$("#errorMsg2").html("");
+				checkVal=true;
+			}
+		});
+		
+		//获得焦点事件
+		txt.addEventListener("focus",function(){
+			str=txt.value;
+			document.getElementById("s2").innerHTML="您还可以输入"+(250-str.length)+"个字";
+		});
+		
+		//失去焦点事件
+		txt.addEventListener("blur",function(){
+			str=txt.value;
+			document.getElementById("s2").innerHTML="欢迎您将宝贵的意见告知我们。";
+			if(str.length<250){
+				checkVal=true;
+			}
+		});
+		
+		function checkMsginfo(){
+			if(str==0){
+				$("#errorMsg2").html("留言不能为空");
+			}else if(!checkVal || !checkEmail){
+				$("#errorMsg2").html("请您完善好信息再提交，谢谢配合~");
+			}else{
+				var mip;
+				//获取用户IP
+				/* $.getScript('http://fw.qq.com/ipaddress',function(){
+					mip = IPData[0]; 
+					alert(mip);
+				}); */
+				$.getJSON("http://jsonip.appspot.com?callback=?", function (data) {
+				    alert("Your ip: " + data.ip);
+				    mip = data.ip;
+				});
+				var memail=$("#memail").val();
+				var mcontent=$("#mcontent").val();
+				$.post("/law/messages/insertMsg",{memail:memail,mcontent:mcontent},function(data){
+					alert(data);
+				},"json");
+			}
 		}
 	</script>
+	<script type="text/javascript" src="js/readCss.js"></script>
 </body>
 </html>

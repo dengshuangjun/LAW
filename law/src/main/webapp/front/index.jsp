@@ -13,8 +13,6 @@
 <link rel="shortcut icon" href="images/logo_ .png">
 <link rel="stylesheet" type="text/css" href="css/CssReset.css">
 <link rel="stylesheet" type="text/css" href="css/defaultindex.css" id="cssLink">
-<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
-<script type="text/javascript" src="js/readCss.js"></script>
 </head>
 <body>
 	<!--S=页面-->
@@ -30,7 +28,7 @@
 				<c:if test="${fuser.usid==null||fuser.usid==''}">
 						<li><a href="load.html">登录</a>| <a href="submit.html">免费注册</a>|
 				</c:if> 
-					<a href="UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="javascript:void(0)" onclick="aboutUs(${fuser.usid})">关于我们</a>
+					<a href="UserCenter.jsp">会员中心</a>| <a href="###">收藏本站</a>| <a href="javascript:void(0)" onclick="aboutUs()">关于我们</a>
 				</li>
 			</ul>
 		</div>
@@ -305,8 +303,10 @@
 		<p>&copy;版权所有：法律智慧网 www.hnit.com 2012-2015&nbsp;&nbsp; 制作单位：源辰信息有限公司</p>
 	</div>
 	<!--E=关于我们-->
+	<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/readCss.js"></script>
 	<script src="js/radio.js" type="text/javascript"></script>
 	<script src="js/time.js" type="text/javascript"></script>
-
+	<script type="text/javascript" src="js/readCss.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.yc.law.service;
 
 import java.util.List;
 
+import com.yc.law.entity.EasyType;
 import com.yc.law.entity.LawContentPage;
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
@@ -26,5 +27,13 @@ public interface BackDataService {
 	int setTop(int nid, int i);
 
 	int setDown(int nid);
+
+	boolean delNews(String nids);
+
+	boolean changeNewsFlag(String flag, int nid);
+
+	boolean changeNewsStatus(String status, int nid);
+
+	List<EasyType> getNewsTypeName();
 
 }

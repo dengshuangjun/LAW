@@ -33,7 +33,7 @@
 		words : function() {
 
 			return this.each(function() {
-				injector($(this), ' ', 'word', ' ');
+				injector($(this), '', 'word', '');
 				injector($(this), '...', 'word', '<br/>');
 			});
 
