@@ -324,11 +324,11 @@
 				/* $.getScript('http://fw.qq.com/ipaddress',function(){
 					mip = IPData[0]; 
 					alert(mip);
-				}); */
+				}); 
 				$.getJSON("http://jsonip.appspot.com?callback=?", function (data) {
 				    alert("Your ip: " + data.ip);
 				    mip = data.ip;
-				});
+				});*/
 				var memail=$("#memail").val();
 				var mcontent=$("#mcontent").val();
 				$.post("/law/messages/insertMsg",{memail:memail,mcontent:mcontent},function(data){
