@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yc.law.entity.EasyType;
 import com.yc.law.entity.LawContentPage;
 import com.yc.law.entity.Type;
 import com.yc.law.entity.TypePage;
@@ -156,5 +157,35 @@ public class BackDataHandler {
 	public boolean delNews(String nids){
 		return backDataService.delNews(nids);
 		
+	}
+	/**
+	 * 更改新闻非注册人员是否可见
+	 * @return
+	 */
+	@RequestMapping("changeNewsFlag")
+	@ResponseBody
+	public boolean changeNewsFlag(String flag,int nid){
+		return backDataService.changeNewsFlag(flag,nid);
+	}
+	/**
+	 * 更改新闻的可见性
+	 * @param status
+	 * @param nid
+	 * @return
+	 */
+	@RequestMapping("changeNewsStatus")
+	@ResponseBody
+	public boolean changeNewsStatus(String status,int nid){
+		return backDataService.changeNewsStatus(status,nid);
+	}
+	@RequestMapping("getNewsTypeName")
+	@ResponseBody
+	public List<EasyType> getNewsTypeName(){
+		List<EasyType> list = backDataService.getNewsTypeName();
+		EasyType et=new EasyType(0,"其它类型");
+		EasyType et1=new EasyType(-1,"全部");
+		list.add(0,et);
+		list.add(0,et1);
+		return list;
 	}
 }

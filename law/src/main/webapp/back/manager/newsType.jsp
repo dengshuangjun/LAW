@@ -128,6 +128,7 @@ function removeit(){
 	$('#Type_data').datagrid('cancelEdit', Type_editRowIng)
 			.datagrid('deleteRow', Type_editRowIng);
 	Type_editRowIng = undefined;
+	$('#Type_data').datagrid('reload');
 }
 //选择是否的时候设定值
 function setvalue(b){
