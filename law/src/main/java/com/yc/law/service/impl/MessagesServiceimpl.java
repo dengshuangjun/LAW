@@ -26,5 +26,10 @@ public class MessagesServiceimpl implements MessagesService{
 	public LeaveMsg findMessageInfo(int mid) {
 		return messageMapper.findMessageInfo(mid);
 	}
+
+	@Override
+	public int insertMsg(LeaveMsg leaveMsg) {
+		return messageMapper.insertMsg(leaveMsg);
+	}
 	
 }
