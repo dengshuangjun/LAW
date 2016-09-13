@@ -244,6 +244,7 @@ public class BackUserHandler {
 			return 0;
 		}
 	}
+	
 	@RequestMapping("/backLoginOut")
 	@ResponseBody
 	public boolean backLoginOut(User user,ModelMap map){

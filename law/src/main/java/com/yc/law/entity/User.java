@@ -176,7 +176,7 @@ public class User implements Serializable {
 		this.emailCode = emailCode;
 	}
 	
-	
+
 	public boolean getCheckCodeStatus(){
 		if(this.code==this.emailCode){
 			return true;

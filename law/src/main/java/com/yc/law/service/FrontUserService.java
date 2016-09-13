@@ -31,4 +31,8 @@ public interface FrontUserService {
 
 	int updateFrontPic(String usid, String picName);
 
+	Integer checkUemail(String uemail);
+
+	int updateNewEmail(String uemail, int usid);
+
 }

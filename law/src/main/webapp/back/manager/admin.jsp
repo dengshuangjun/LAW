@@ -300,7 +300,7 @@
 		checkEmail = true;
 		$('#uemailResultOut').hide();
 		var uemail = $("#uemail").val();
-		var usid = $("#usids").text()
+		var usid = $("#usids").text();
 		var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
 		if (uemail.match(reg)) {
 			$.post("back/checkUemail", {

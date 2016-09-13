@@ -53,4 +53,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateFrontPic">
 		update law_user set picpath=#{1} where usid=#{0}
 	</update>
+	
+	<select id="checkUemail" parameterType="String" resultType="Integer">
+		select usid from law_user where uemail=#{uemail}
+	</select>
+	
+	<update id="updateNewEmail">
+		update law_user set uemail=#{0} where usid=#{1}
+	</update>
 </mapper>

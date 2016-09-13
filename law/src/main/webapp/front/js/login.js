@@ -116,7 +116,6 @@ function checkzcpwdagain() {
 }
 
 //验证邮箱
-
 function checkzcemail() {
     var zcemail = $("#zcemail").val();
     var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
@@ -146,7 +145,7 @@ function checkzccode(){
 	var reg = /^([a-zA-Z0-9_-])/;
 	if(zccode.match(reg)){
 		checkCode=true;
-		 $("#zccodep").html("验证码格式正确").css("color", "#0F0");
+		 $("#zccode").html("验证码格式正确").css("color", "#0F0");
 	}else{
 		checkCode=false;
 	    $("#zccodep").html("验证码格式不正确").css("color", "#F00");

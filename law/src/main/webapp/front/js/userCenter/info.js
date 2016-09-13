@@ -3,6 +3,8 @@ var checkUname = true;
 var checkTel = true;
 var checkNowPwd = true;
 var checkConfirmPwd = true;
+var checkEmail = true;
+var checkCode=true;
 $(function() {
 	var roleId=$("#role_id").val();
 	$.post("findRoleName", {
@@ -10,22 +12,31 @@ $(function() {
 	}, function(data) {
 		$("#role_name").html(data);
 	});
-	
+
 	$(".list-group-item a").bind("click", function() {
 		var str = this.innerText;
 		if (str.trim() == "基础信息") {
 			$("#baseinfo")[0].style.display = "block";
 			$("#touxiang")[0].style.display = "none";
 			$("#update")[0].style.display = "none";
+			$("#mail")[0].style.display = "none";
 		} else if (str.trim() == "头像设置") {
 			$("#touxiang")[0].style.display = "block";
 			$("#baseinfo")[0].style.display = "none";
 			$("#update")[0].style.display = "none";
+			$("#mail")[0].style.display = "none";
 		} else if (str.trim() == "安全设置") {
 			$("#update")[0].style.display = "block";
 			$("#baseinfo")[0].style.display = "none";
 			$("#touxiang")[0].style.display = "none";
-		}
+			$("#mail")[0].style.display = "none";
+		}  else if (str.trim() == "邮箱设置") {
+			$("#mail")[0].style.display = "block";
+			$("#update")[0].style.display = "none";
+			$("#baseinfo")[0].style.display = "none";
+			$("#touxiang")[0].style.display = "none";
+
+		} 
 	});
 });
 
@@ -159,17 +170,17 @@ function updatePwd(){
 }
 
 function preImg(sourceId) {  
-    if (typeof FileReader === 'undefined') {  
-        alert('对不起，您的浏览器不适合文件上传，请更换浏览器再试...');  
-        return;  
-    }  
-    var reader = new FileReader();  
-  
-    reader.onload = function(e) {  
-        var img = document.getElementById("imgPrc");  
-        img.src = this.result;  
-    }  
-    reader.readAsDataURL(document.getElementById(sourceId).files[0]);  
+	if (typeof FileReader === 'undefined') {  
+		alert('对不起，您的浏览器不适合文件上传，请更换浏览器再试...');  
+		return;  
+	}  
+	var reader = new FileReader();  
+
+	reader.onload = function(e) {  
+		var img = document.getElementById("imgPrc");  
+		img.src = this.result;  
+	}  
+	reader.readAsDataURL(document.getElementById(sourceId).files[0]);  
 } 
 
 function dropPicInfo(){
@@ -181,9 +192,6 @@ function dropPicInfo(){
 
 function savePicInfo(){
 	var usid = $("#usid").val();
-	alert("开始保存头像");
-	alert(usid);
-	alert( $("#imageFile").val())
 	$.ajaxFileUpload({
 		url:"updatePic",//发送的处理类地址
 		secureuri:false,
@@ -205,6 +213,128 @@ function savePicInfo(){
 			alert('添加头像失败，请重新再试...');
 		}
 	});
+}
+
+function checkNewEmail(){
+	checkEmail = true;
+	$('#checkEmail').hide();
+	var uemail = $("#newEmail").val();
+	var usid = $("#usids").text();
+	var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+	if (uemail!=null && uemail!='' && uemail.match(reg)) {
+		$.post("checkNewEmail", {
+			uemail : uemail
+		}, function(data) {
+			if (usid == data) {
+				return;
+			}
+			if (data > 0) {
+				checkEmail = false;
+				$('#checkEmail').show();
+				$('#checkEmail').text("该邮箱已被注册...").css("color", "#F00");
+				$("#newEmail").val("");
+			}
+		});
+	} else {
+		checkEmail = false;
+		$('#checkEmail').show();
+		$('#checkEmail').text("邮箱格式不正确...").css("color", "#F00");
+		$("#newEmail").val("");
+	}
+}
+
+$("#checkNewCode").removeAttr("disabled");//启用按钮
+var InterValObj; //timer变量，控制时间
+var count = 120; //间隔函数，1秒执行
+var curCount;//当前剩余秒数
+function getCode(){
+	var uemail = $("#newEmail").val();
+	if(uemail==null || uemail==''){
+		alert("请填写您要修改的邮箱信息...");
+		return;
+	}else{
+		if(checkEmail){
+			curCount=count;
+			$("#checkNewCode").attr("disabled", "true");//点击获取验证码之后使按钮不启用
+			$.post("SendUpdateEmailCode",{uemail:uemail},function(data){
+				if(data>0){
+					$("#showTime").val(curCount + "s");
+					InterValObj = window.setInterval(SetRemainTime, 1000);
+				}else{
+					alert("邮件验证失败，请重新再试...");
+				}
+			});
+		}else{
+			alert("邮件格式不正确，请重新再试...");
+		}
+	}
+}
+
+function SetRemainTime(){
+	if (curCount == 0) {                
+		window.clearInterval(InterValObj);//停止计时器
+		$("#checkNewCode").removeAttr("disabled");//启用按钮
+		$.post("moveEmailCode",function(data){
+			if(data>0){
+				checkCode=false;
+				$("#showTime").html("验证码超时...").css("color", "#F00");
+				$("#checkNewCode").val("重新发送验证码");
+			}
+		});
+	}else {
+		curCount--;
+		$("#checkNewCode").val(curCount + "s");
+	}
+}
+
+function StopRemainTime(){
+	window.clearInterval(InterValObj);//停止计时器
+	$("#checkNewCode").removeAttr("disabled");//启用按钮
+	$.post("moveEmailCode",function(data){
+		if(data>0){
+			checkCode=false;
+			$("#checkNewCode").val("获取验证码");
+		}
+	});
+}
+
+function checkCodeInfo(){
+	var code=$.trim($("#newCode").val());//获取到验证码
+	var reg = /^([a-zA-Z0-9_-])/;
+	if(code.match(reg)){
+		checkCode=true;
+	}else{
+		checkCode=false;
+		$("#checkNewCode").html("验证码格式不正确").css("color", "#F00");
+		$("#newCode").val("");
+	}
+}
+
+
+function updateNewEmail(){
+	var uemail = $("#newEmail").val();
+	var usid = $("#currentUser").val();
+	var code = $.trim($("#newCode").val());;
+	if(checkCode){
+		alert(uemail);
+		alert(usid);
+		alert(code);
+		$.post("updateNewEmail",{uemail:uemail,usid:usid,code:code},function(data){
+			if(data==0){
+				alert("验证码输入错误，请重新再试...");
+			}else if(data==1){
+				StopRemainTime();
+				$('#updateNewEmailResult').text("更新邮箱成功").css("color", "#0F0");
+				$('#updateNewEmailResult').show();
+				$('#currentEmail').html(uemail);
+				$("#newCode").val("");
+			}else if(data==2){
+				alert("更新错误，请重新再试...");
+			}else{
+				alert("更新错误，请重新再试...");
+			}
+		})
+	}
 }
 
 

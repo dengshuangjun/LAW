@@ -52,6 +52,21 @@
 .showInfos{
 	margin-left:20px;
 }
+
+#newCode{
+	width:160px;
+	height:30px;
+	border:1px solid #ccc;
+	border-radius:3px;
+}
+
+#checkNewCode{
+	width:80px;
+	height:30px;
+	background-color:#15c288;
+	color: white;
+}
+
 </style>
 </head>
 <body>
@@ -314,7 +329,6 @@
 					</div>
 				</div>
 			</div>
-
 			<!--  --------------更改头像------------------------------------------------------------------- -->
 
 			<!--  --------------安全设置------------------------------------------------------------------ -->
@@ -375,12 +389,55 @@
 									<span id="updatePwdResult" style="display:none;"></span>
 								</div>
 							</div>
-
 						</form>
 					</div>
 				</div>
 			</div>
 			<!--  --------------安全设置------------------------------------------------------------------ -->
+		
+			<!--  --------------邮箱设置------------------------------------------------------------------ -->
+			<div class="col-md-9" id="mail" style="display: none;">
+				<div class="panel panel-default panel-col">
+					<div class="panel-heading">邮箱设置</div>
+					<div class="panel-body">
+						<ul class="breadcrumb">
+							<li><a href="http://www.howzhi.com/settings/security">邮箱设置</a></li>
+							<li class="active">用户邮箱修改</li>
+						</ul>
+						<form data-widget-cid="widget-0" novalidate="novalidate"
+							id="settings-password-form" class="form-horizontal" method="post">
+							<input id="currentUser" type="hidden" value="${fuser.usid }">
+							<div class="form-group">
+								<label class="col-md-2 control-label">当前邮箱</label>
+								<span id="currentEmail" id="role_name" class="showInfos">${fuser.uemail }</span>
+							</div>
+							
+							<div class="form-group">
+								<div class="col-md-2 control-label">
+									<label class="required">需要修改的邮箱</label>
+								</div>
+								<div class="controls col-md-8 controls">
+									<input	id="newEmail" required="required" class="form-control" type="email"  onblur="checkNewEmail()">
+									<span id="checkEmail" style="display:none;"></span>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-2 control-label"></div>
+								<div class="controls col-md-8 controls">
+									<input id="newCode" type="text" onblur="checkCodeInfo()" placeholder="请输入验证码" />
+									<input id="checkNewCode" type="button" onclick="getCode()" value="获取验证码" />
+									<span id="codeResult" style="display:none;"></span>
+									<span style="color: red; font-size: 12px;" id="showTime"></span>
+									<span id="updateNewEmailResult" style="display:none;"></span><br /><br />
+									<button id="password-save-btn4" data-submiting-text="正在保存"
+										type="button" class="btn btn-primary" onclick="updateNewEmail()">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 		</c:if>
 	</div>

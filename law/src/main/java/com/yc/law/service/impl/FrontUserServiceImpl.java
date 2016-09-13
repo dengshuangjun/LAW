@@ -23,7 +23,6 @@ public class FrontUserServiceImpl implements FrontUserService {
 
 	@Override
 	public int checkEmail(String zcemail) {
-
 		return frontUserMapper.emailCheck(zcemail);
 	}
 
@@ -93,5 +92,15 @@ public class FrontUserServiceImpl implements FrontUserService {
 	@Override
 	public int updateFrontPic(String usid, String picName) {
 		return frontUserMapper.updateFrontPic(usid,picName);
+	}
+
+	@Override
+	public Integer checkUemail(String uemail) {
+		return frontUserMapper.checkUemail(uemail);
+	}
+
+	@Override
+	public int updateNewEmail(String uemail, int usid) {
+		return frontUserMapper.updateNewEmail(uemail,usid);
 	}
 }
