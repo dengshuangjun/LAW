@@ -74,11 +74,9 @@ public class FrontUserHandler {
 		map.addAttribute("fuser", fuser);
 		if(sendRegisterCode("法律智慧网注册验证码",sendContent,"studymail_test@163.com", zcemail)){
 			return 1;
-
 		}else{
 			return 0;
 		}
-		
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.POST)
@@ -121,7 +119,6 @@ public class FrontUserHandler {
 			if (sbf1.indexOf(String.valueOf(num)) < 0) {
 				sbf1.append(num);
 			}
-
 		}
 		return sbf1.toString();
 	}
@@ -238,7 +235,6 @@ public class FrontUserHandler {
 		String picName =null;
 		if (!imageFile.isEmpty()) {
 			String paths=System.getProperty("evan.webapp");//获取项目在服务器中的绝对路径，我的图片是存在服务器的webapp的pics目录下面，这个需要一个配置
-			System.out.println("=====>>>>"+paths);
 			paths=paths.substring(0,paths.lastIndexOf("\\"));
 			String realPath =paths.substring(0,paths.lastIndexOf("\\"))+ "\\pics";//获取到服务器存放文件的目录
 			picName ="../pics/"+picSting()+new Date().getTime()+
@@ -286,6 +282,48 @@ public class FrontUserHandler {
 		}
 		return sbf2.toString();
 	}
-
+	
+	@RequestMapping("/checkNewEmail")
+	@ResponseBody
+	public int checkUemail(@RequestParam("uemail") String uemail){
+		Integer result=frontUserService.checkUemail(uemail);
+		if( result!=null){
+			return result;
+		}else{
+			return 0;
+		}
+	}
+	
+	@RequestMapping(value="/SendUpdateEmailCode",method=RequestMethod.POST)
+	@ResponseBody
+	public int SendUpdateEmailCode(@ModelAttribute("fuser") User fuser,
+								   @RequestParam("uemail")String uemail){
+		String sendContent=getRandomCode();
+		fuser.setEmailCode(Integer.parseInt(sendContent));
+		if(sendRegisterCode("法律智慧网更改邮箱验证码",sendContent,"studymail_test@163.com", uemail)){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+	
+	@RequestMapping(value="/updateNewEmail",method=RequestMethod.POST)
+	@ResponseBody
+	public int updateNewEmail(@ModelAttribute("fuser") User fuser,
+							  @RequestParam("uemail") String uemail,
+							  @RequestParam("usid") String usid,
+							  @RequestParam("code") String code){
+		fuser.setCode(Integer.parseInt(code));//将用户输入的验证码存入实体类
+		if(!fuser.getCheckCodeStatus()){
+			return 0;//表示用户输入的验证码不对
+		}else{
+			if(frontUserService.updateNewEmail(uemail,Integer.parseInt(usid))>0){
+				fuser.setUemail(uemail);
+				return 1;
+			}else{
+				return 2;//表示更新失败
+			}
+		}
+	}
 }
 	

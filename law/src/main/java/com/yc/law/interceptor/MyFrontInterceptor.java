@@ -2,8 +2,12 @@ package com.yc.law.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.yc.law.util.FindIP;
 
 public class MyFrontInterceptor implements HandlerInterceptor{
 
@@ -20,11 +24,8 @@ public class MyFrontInterceptor implements HandlerInterceptor{
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request,
-			HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void postHandle(HttpServletRequest request,HttpServletResponse response, Object handler,ModelAndView modelAndView) throws Exception {
+		//modelAndView.addObject("currIp", FindIP.findRealIp(request));
 	}
 
 	@Override

@@ -21,6 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertMsg">
-		insert into message(mid,mip,memail,mcontent,mtime) values(seq_message_id.nextval,#{mip},#{memail},#{mcontent},to_char(#{mtime},'yyyy-MM-dd HH24:mm:ss'))
+		insert into message(mid,memail,mcontent,mtime,mip) values(seq_message_id.nextval,#{memail},#{mcontent},to_date(#{mtime},'yyyy-mm-dd hh24:mi:ss'),#{mip})
 	</insert>
 </mapper>
