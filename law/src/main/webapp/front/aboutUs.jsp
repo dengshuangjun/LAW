@@ -320,19 +320,13 @@
 				$("#errorMsg2").html("请您完善好信息再提交，谢谢配合~");
 			}else{
 				var mip;
-				//获取用户IP
-				/* $.getScript('http://fw.qq.com/ipaddress',function(){
-					mip = IPData[0]; 
-					alert(mip);
-				}); 
-				$.getJSON("http://jsonip.appspot.com?callback=?", function (data) {
-				    alert("Your ip: " + data.ip);
-				    mip = data.ip;
-				});*/
 				var memail=$("#memail").val();
 				var mcontent=$("#mcontent").val();
 				$.post("/law/messages/insertMsg",{memail:memail,mcontent:mcontent},function(data){
-					alert(data);
+					//清空
+					$("#mcontent").val("");
+					$("#memail").val("");
+					alert("留言成功！感谢您的留言。");
 				},"json");
 			}
 		}
