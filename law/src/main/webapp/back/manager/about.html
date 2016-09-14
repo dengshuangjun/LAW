@@ -1,6 +1,49 @@
 <!-- 关于我们 -->
-<table id="AboutUs"></table>
+
+
+<div style="margin:0 auto;">
+	<div>
+		<script id="changeUsinfo" type="text/plain" style="width:800px;height:260px;display:block;"></script>
+	</div>
+	<a href="javascript:changeUsinfoFile()"  class="easyui-linkbutton" data-options="iconCls:'icon-edit'" >修改</a>
+	<span style="color:red;margin-left:10px;">想要在前台换行显示，需要在换行的后面加上三个英文的"..."</span>
+</div>
 
 <script type="text/javascript">
+	//实例化编辑器
+	var upUe=UE.getEditor('changeUsinfo');
+	$(function(){
+		
+		readCurInfo();
+	});
+	 
+	function readCurInfo(){
+		var str="";
+		$.post("aboutUs/readFile",function(data){
+			if(data.info != null){
+				var strs= data.info.split("...");
+				for(var i =0;i<strs.length-1;i++){
+					str+="<p>"+strs[i]+"...</p>";
+				}
+				str+="<p>"+strs[i]+"</p>";
+				upUe.setContent(str);
+			}else{
+				alert("没有数据");
+			}
+		});
+	} 
 	
+	function changeUsinfoFile(){
+		if(upUe.getContentLength(true)>380){
+			$.messager.alert('修改提示','不能超过字数...','error');
+		}else{
+			var value = upUe.getContentTxt();
+			$.post("aboutUs/writeInfile",{value:value},function(data){
+				if(data){
+					readCurInfo();
+					$.messager.alert('修改提示','成功修改文本...','info');
+				}
+			});
+		}
+	} 
 </script>
