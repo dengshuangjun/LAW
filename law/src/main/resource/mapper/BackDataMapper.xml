@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getTypeByPage" parameterType="TypePage" resultMap="TypePageMap">
 		select ${page} page,${rows} rowss,(select count(1) from newsType) total,nn.* from
 (select rownum rn,a.* from 
-(select ntid,ntname,status,n.usid,l.usname,n.spare_A note from newsType n left join law_user l on n.usid=l.usid) a where #{page}*#{rows}>=rownum) nn where rn>(#{page}-1)*#{rows} 
+(select ntid,ntname,status,n.usid,l.usname,n.spare_A note from newsType n left join law_user l on n.usid=l.usid ) a where #{page}*#{rows}>=rownum) nn where rn>(#{page}-1)*#{rows} 
 		
 	</select>
 	<insert id="addTypes" parameterType="Type">
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select n.partid,p.partname,n.nid,n.title,to_char(n.ndate,'yyyy-MM-dd hh24:mm:ss') ndate,n.weight,n.picpath,n.vediopath,n.voicepath,n.views,n.author,n.flag,n.news_file,n.status,l.usname,nt.ntname 
 		from part p right join news n on p.partid=n.partid 
         left join law_user l on l.usid=n.usid 
-        left join newsType nt on nt.ntid=n.nitid order by ndate desc)a where #{page}*#{rows}>=rownum and partid in 
+        left join newsType nt on nt.ntid=n.nitid order by ndate desc,ndate asc)a where #{page}*#{rows}>=rownum and partid in 
         <foreach collection="partid" open="(" close=")" separator="," item="partid">#{partid}</foreach>) nn where rn>(#{page}-1)*#{rows}
 	</select>
 	

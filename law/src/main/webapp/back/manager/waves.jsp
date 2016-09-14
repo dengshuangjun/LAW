@@ -1,16 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <table id="waves_data"></table>
-<div id="waves_data_add" data-options="iconCls:'icon-add',modal:true,closed:true,fit:true">
-	在这里显示增加内容的信息
-
+<!-- -------- 添加模块begin------ -->
+<div id="waves_data_add" data-options="iconCls:'icon-add',modal:true,closed:true,fit:true" style="padding:20px;">
+	<div style="text-align: center">
+		所属类型: 
+		<select id="wavesNtnameAdd" class="wavesNtname" panelHeight="auto" style="width:100px">
+			<option value='-1'>全部</option>
+		</select>
+		所属版块: 
+		<select id="wavesPartNameAdd" class="easyui-combobox" panelHeight="auto" style="width:100px">
+			<option value="1001">校园动态</option>
+			<option value="1002">社会聚焦</option>
+			<option value="1003">新闻调查</option>
+		</select>
+		标题：<input id="wavesTitleAdd" class="easyui-textbox" type="text" name="title" />
+		作者：<input id="wavesAuthorAdd" class="easyui-textbox" type="text" name="title" />
+		权重：<input id="WavesWeightAdd" class="easyui-numberspinner" style="width:80px;" value="0" required="required" data-options="min:0,max:100,editable:false"/>  
+		登陆才可见：<select id="wavesFlagAdd" class="easyui-combobox" style="width:50px;" panelHeight="auto" >
+					<option value='Y'>是</option>
+					<option value='N'>否</option>
+				</select>
+	</div>
+	<script id="wavesEditor" type="text/plain" style="width:1024px;height:500px;text-align: center; margin: 20px auto;"></script>
+	<p style="text-align: center;">
+	<input type="button" id="submitWavesBtn" value="提交上传"/>
+	</p> 
 </div>  
+<!-- -------- 添加模块end------ -->
+<!----------------- 搜索模块begin ----------------->
 <div id="waves_bar" style="padding:5px;height:auto">
 		<div>
 			按日期搜索从：<input id="wavesData1" class="easyui-datebox" style="width:100px">
 			到: <input id="wavesData2" class="easyui-datebox" style="width:100px">
 			所属类型: 
-			<select id="wavesNtname" panelHeight="auto" style="width:100px">
+			<select id="wavesNtname" class="wavesNtname" panelHeight="auto" style="width:100px">
 				<option value='-1'>全部</option>
 			</select>
 			所属版块: 
@@ -30,7 +54,10 @@
 		</div>
 		
 	</div>
+	<!----------------- 搜索模块end ----------------->
 <script type="text/javascript">
+ 
+//显示模块开始---------------------------------------
 var partid="1001,1002,1003";
 var wavesObj;
 wavesObj=$('#waves_data').datagrid({
@@ -143,14 +170,23 @@ wavesObj=$('#waves_data').datagrid({
 	
 	});
 	//加载类型
-$('#wavesNtname').combobox({  
+$('.wavesNtname').combobox({  
     url:'backs/getNewsTypeName',  
     valueField:'ntid',  
     textField:'ntname'  
-}); 
+});
+//显示模块end--------------------------------------------	
+//打开添加面板
 function addWavsNews(){
+		var ue=UE.getEditor('wavesEditor')
 		$('#waves_data_add').dialog({title:"添加",closed:false,modal:true,});
+		$('#submitWavesBtn').bind('click', function(){  
+		        alert('easyui'); 
+		        alert( ue.getContent());
+		        return;
+		}); 
 }
+//更新权重
 function setWavesWeight(nid,val,weight,partid){
 	if(val==1){//置顶
 		$.post("backs/setTop",{nid:nid,weight:weight,partid:partid},function(data){
@@ -170,7 +206,7 @@ function setWavesWeight(nid,val,weight,partid){
 		},"json");
 	}
 }
-
+//搜索
 function searchWavesAuto(){
 	 var data1=$('#wavesData1').datebox('getValue');
 	var data2=$('#wavesData2').datebox('getValue');
@@ -182,6 +218,7 @@ function searchWavesAuto(){
 
 
 } 
+//重置搜索表单
 function resetWaves(){
 	$('#wavesData1').datebox('setValue','');
 	$('#wavesData2').datebox('setValue','');
@@ -191,6 +228,7 @@ function resetWaves(){
 	$('#wavesPartName').combobox('setText','全部');
 	$('#wavesTitle').textbox('setValue','');
 }
+//权重消息提示封装函数
 function messageHandler(action,data){
 	if(data==1){
 		$.messager.show({
@@ -208,6 +246,7 @@ function messageHandler(action,data){
 		$.messager.alert('错误提示','操作失败...','error');
 	}
 }
+//删除选中
 function delWaves(){
 	var rows=wavesObj.datagrid("getSelections");
 		if(rows!=undefined&&rows!=''){
@@ -240,6 +279,7 @@ function delWaves(){
 			$.messager.alert('温馨提示','请选择要删除的数据...','info');
 		}
 	}
+	//更新是否登陆可见
 	function changeNewsFlag(flag,nid){
 		$.post("backs/changeNewsFlag",{flag:flag,nid:nid},function(data){
 			if(data){
@@ -257,6 +297,7 @@ function delWaves(){
 			}
 		},"json");
 	}
+	//更新是否前台显示
 	function changeNewsStatus(status,nid){
 		$.post("backs/changeNewsStatus",{status:status,nid:nid},function(data){
 			if(data){
