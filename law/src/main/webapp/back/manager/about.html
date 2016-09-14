@@ -13,7 +13,6 @@
 	//实例化编辑器
 	var upUe=UE.getEditor('changeUsinfo');
 	$(function(){
-		
 		readCurInfo();
 	});
 	 
@@ -35,13 +34,13 @@
 	
 	function changeUsinfoFile(){
 		if(upUe.getContentLength(true)>380){
-			$.messager.alert('修改提示','不能超过字数...','error');
+			alert('不能超过字数...');
 		}else{
 			var value = upUe.getContentTxt();
 			$.post("aboutUs/writeInfile",{value:value},function(data){
 				if(data){
 					readCurInfo();
-					$.messager.alert('修改提示','成功修改文本...','info');
+					alert('成功修改文本...');
 				}
 			});
 		}
