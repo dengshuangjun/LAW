@@ -241,6 +241,8 @@
 		}
 		
 		function leaveMsg(){
+			$("#mcontent").val("");
+			$("#memail").val("");
 			$("#usInfo_show").attr("style","display:none");
 			$("#allmap").attr("style","display:none");
 			$("#leaveMsg_fd").attr("style","display:block");

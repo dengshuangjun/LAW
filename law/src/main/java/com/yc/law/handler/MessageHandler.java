@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.apache.ibatis.logging.Log;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -74,5 +75,17 @@ public class MessageHandler {
 			LogManager.getLogger().error("插入留言失败。",e);
 			return false;
 		}
+	}
+	
+	@RequestMapping("/delMsg")
+	@ResponseBody
+	public boolean delMsg(@RequestParam("mids") String mids) {
+		boolean result=false;
+		try {
+			result = messagesService.delMsg(mids);
+		} catch (Exception e) {
+			LogManager.getLogger().error("删除留言失败",e);
+		}
+		return result;
 	}
 }

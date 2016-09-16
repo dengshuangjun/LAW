@@ -2,6 +2,9 @@
 <table id="showAbInfo"></table>
 
 <script>
+var editRow=undefined; //记录当期正在编辑的行
+var aboutUsObj;
+
 aboutUsObj = $('#showAbInfo').datagrid({
 	url : 'messages/findMessages',
 	fitColumns : true,//true将自动扩展/收缩columns大小适应grid的宽度,防止水平滚动.
@@ -15,10 +18,16 @@ aboutUsObj = $('#showAbInfo').datagrid({
 	sortName : 'mtime',//定义那个列可以排序.
 	sortOrder : 'desc',
 	remoteSort : false,//定义是否远程排序.对数据库进行操作
-	onSelect: function (rowIndex, rowData) {
+	/* onSelect: function (rowIndex, rowData) {
 		$("#showAbInfo").datagrid("unselectRow", rowIndex);
-	},//点击不选中当前行      
+	},//点击不选中当前行       */
 	columns : [ [{
+		field : 'midd',
+		title : '',
+		width : 20,
+		align : 'center',
+		checkbox:true
+	},{
 		field : 'mid',
 		title : '留言id',
 		width : 60,
@@ -50,7 +59,52 @@ aboutUsObj = $('#showAbInfo').datagrid({
 		sortable:true,
 		align : 'center'
 	} ] ],
-	selectOnCheck:false
+	//selectOnCheck:false,
+	toolbar:[{
+		text:"删除",
+		iconCls:"icon-remove",
+		handler:function(){
+			//获取选中的行   可以删除多行
+			var rows=aboutUsObj.datagrid("getChecked");
+			if(rows.length>=1){
+				$.messager.confirm('信息确认','您确定要删除选中的留言吗？',function(rs){  
+				    if (rs){  
+				        var mids="";
+				        for(var i=0;i<rows.length-1;i++){
+				        	mids+=rows[i].mid+",";
+				        }
+				        mids+=rows[i].mid;
+				        //发请求到数据库删除
+				        $.post("messages/delMsg",{mids:mids},function(data){
+				        	if(data>0){
+				        		$.messager.show({
+									title:'成功提示',
+									msg:'用户留言删除成功！！！',
+									timeout:2000,
+									showType:'slide'
+								});
+				        		rows=null;
+				        		aboutUsObj.datagrid("reload");//刷新表格
+				        	}else{
+				        		$.messager.alert('失败提示','用户留言删除失败！！！','error');
+				        	}
+				        });
+				    }else{
+				    	return;
+				    }
+				});
+				
+			}else{
+				$.messager.alert('友情提示','请至少选择一行数据进行删除操作','error');
+			}
+		}
+	},{
+		text:"撤销",
+		iconCls:"icon-redo",
+		handler:function(){
+			aboutUsObj.datagrid("rejectChanges");//回滚所有数据
+		}
+	}]
 });
 
 //查看更多 

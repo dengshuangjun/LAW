@@ -23,4 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertMsg">
 		insert into message(mid,memail,mcontent,mtime,mip) values(seq_message_id.nextval,#{memail},#{mcontent},to_date(#{mtime},'yyyy-mm-dd hh24:mi:ss'),#{mip})
 	</insert>
+	
+	<update id="delMsg" parameterType="String">
+		delete from message where mid in
+		<foreach collection="list" open="(" close=")" separator="," item="mids">#{mids}</foreach>
+	</update>
 </mapper>

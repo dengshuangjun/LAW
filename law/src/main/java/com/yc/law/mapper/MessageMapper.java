@@ -1,6 +1,7 @@
 package com.yc.law.mapper;
 
 import java.util.List;
+
 import com.yc.law.entity.LeaveMsg;
 
 
@@ -33,4 +34,11 @@ public interface MessageMapper {
 	 * @return
 	 */
 	int insertMsg(LeaveMsg leaveMsg);
+	
+	/**
+	 * 后台删除留言
+	 * @param mids
+	 * @return
+	 */
+	int delMsg(List<String> mids);
 }

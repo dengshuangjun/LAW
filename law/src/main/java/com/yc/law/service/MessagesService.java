@@ -1,6 +1,7 @@
 package com.yc.law.service;
 
 import java.util.List;
+
 import com.yc.law.entity.LeaveMsg;
 
 public interface MessagesService {
@@ -32,5 +33,12 @@ public interface MessagesService {
 	 * @return
 	 */
 	int insertMsg(LeaveMsg leaveMsg);
+
+	/**
+	 * 后台删除留言
+	 * @param mids
+	 * @return
+	 */
+	boolean delMsg(String mids);
 
 }
