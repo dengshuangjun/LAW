@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 使用映射接口的方式， 命名空间的值必须与映射接口的全限定名一致 -->
+<mapper namespace="com.yc.law.mapper.FriConnMapping">
+	<select id="findUrlByPage" resultType="FriendUrl"> 
+		select * from 
+		(select a.*,rownum rn from
+		(select conn_id,conn_name,conn_address,conn_pic,conn_weight,status from connection c order by conn_weight desc) a  
+		where (#{0} * #{1}) >= rownum)
+		where rn> ( #{0} - 1 ) * #{1}
+	</select>
+	
+	<select id="findFriWeight" resultType="FriendUrl"> 
+		select max(conn_weight) maxWeight,min(conn_weight) minWeight from CONNECTION
+	</select>
+	
+	<update id="setWeight">
+		update CONNECTION set conn_weight=#{0} where conn_id=#{1}
+	</update>
+	
+	<update id="setStatus">
+		update CONNECTION set status=#{0} where conn_id=#{1}
+	</update>
+	
+	<select id="findAllUrlCount" resultType="int">
+		select count(1) from CONNECTION
+	</select>
+	
+	<insert id="addFriendUrl" parameterType="UploadFriendUrl">
+		insert into connection(conn_id,conn_name,conn_address,conn_pic,conn_weight,status) values(seq_conn_id.nextval,#{conn_name},#{conn_address},#{conn_pic},#{conn_weight},#{status})
+	</insert>
+	
+	<update id="updateFriConn" parameterType="UploadFriendUrl">
+		update connection set conn_name=#{conn_name},conn_address=#{conn_address},conn_weight=#{conn_weight},status=#{status},conn_pic=#{conn_pic}
+		where conn_id=#{conn_id}
+	</update>
+	
+	<update id="updateFriConnNopic" parameterType="FriendUrl">
+		update connection set conn_name=#{conn_name},conn_address=#{conn_address},conn_weight=#{conn_weight},status=#{status}
+		where conn_id=#{conn_id}
+	</update>
+
+	<select id="findEightFriConn" resultType="FriendUrl">
+		select * from 
+		(select a.*,rownum rn from
+		(select conn_id,conn_name,conn_address,conn_pic 
+		from connection c where status='Y' and conn_pic is not null order by conn_weight desc) a  
+		where 10 >= rownum)
+		where rn>0
+	</select>
+</mapper>

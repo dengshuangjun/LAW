@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SpriteFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" CssFileName="../images" ImageName="img" IsPhone="false" SpriteImgFileType="Png" xmlns="CssSprite">
+  <SpriteList>
+    <Sprite Path="在线客服.png" LocationX="102" LocationY="29" />
+    <Sprite Path="微博.png" LocationX="102" LocationY="0" />
+    <Sprite Path="1468935225.png" LocationX="0" LocationY="0" />
+    <Sprite Path="phone.png" LocationX="194" LocationY="0" />
+  </SpriteList>
+</SpriteFile>

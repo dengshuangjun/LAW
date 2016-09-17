@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 使用映射接口的方式， 命名空间的值必须与映射接口的全限定名一致 -->
+<mapper namespace="com.yc.law.mapper.BackUserMapper">
+	<select id="findBackUserByNP"  parameterType="User" resultType="User">
+		select * from role r join law_user l on r.role_id=l.role_id and  usname=#{usname} and upwd=#{upwd} and role_name='管理员'
+	</select>
+	<select id="findInitAdmin" parameterType="String" resultType="int">
+		select count(1) from law_user where  role_id in  (select role_id from role where role_name='管理员') and  usname='admin'
+	</select>
+	<insert id="insertInitAdmin" parameterType="User">
+		<selectKey order="BEFORE" keyColumn="currval" keyProperty="role_id" resultType="int">select role_id from role where role_name='管理员'</selectKey>
+		insert into law_user(usid,usname,upwd,role_id) values(seq_law_user_id.nextval,#{usname},#{upwd},#{role_id})
+	</insert>
+	
+	<resultMap type="UserPage" id="UserPageMap">
+		<id column="page" property="page"/>
+		<result column="rowss" property="rows"/>
+		<result column="total" property="total"/>
+		<collection property="users" column="usid" ofType="User">
+			<id column="usid" property="usid"/>
+			<result column="usname" property="usname"/>
+			<result column="usex" property="usex"/>
+			<result column="uemail" property="uemail"/>
+			<result column="role_name" property="role_name"/>
+			<result column="picpath" property="picpath"/>
+			<result column="tel" property="tel"/>
+			<result column="law_user_status" property="law_user_status"/>
+			<result column="law_user_status_explain" property="law_user_status_explain"/>
+			<result column="area" property="area"/>
+			<result column="register_time" property="register_time"/>
+			<result column="birthday" property="birthday"/>
+		</collection>
+	</resultMap>
+	<select id="findGeneralAllByPage" parameterType="UserPage" resultMap="UserPageMap">
+		select ${page} page,${rows} rowss,(select count(1) from law_user) total,nn.* from
+		(select rownum rn,n.* from (select  usid,usname,usex,uemail,role_name,picpath,tel,law_user_status,
+		law_user_status_explain,area,to_char(register_time,'yyyy-MM-dd hh24:mi:ss') register_time,
+		to_char(birthday,'yyyy-MM-dd') birthday from law_user join role
+		on law_user.role_id=role.role_id) n where #{page}*#{rows}>=rownum)nn where rn>#{rows}*(#{page}-1)		
+	</select>
+	
+	<select id="getRoleInfo" resultType="User">
+		select role_id,role_name from role where role_statue='Y'
+	</select>
+	
+	<insert id="addGeneralUser" parameterType="UploadUser">
+		<selectKey keyColumn="currval" keyProperty="usid" resultType="int" order="BEFORE">
+			select seq_law_user_id.nextval currval from dual
+		</selectKey>
+		insert into law_user(usid,usname,usex,upwd,uemail,role_id
+		<if test="picpath!=null">
+			,picpath
+		</if>
+		<if test="tel!=null">
+			,tel
+		</if>
+		<if test="law_user_status_explain!=null">
+			,law_user_status_explain
+		</if>
+		<if test="area!=null">
+			,area
+		</if>
+		<if test="birthday!=null">
+			,birthday
+		</if>) 
+			values(#{usid},#{usname},#{usex},#{upwd},#{uemail},#{role_id}
+		<if test="picpath!=null">
+			,#{picpath}
+		</if>
+		<if test="tel!=null">
+			,#{tel}
+		</if>
+		<if test="law_user_status_explain!=null">
+			,#{law_user_status_explain}
+		</if>
+		<if test="area!=null">
+			,#{area}
+		</if>
+		<if test="birthday!=null">
+			,to_date(#{birthday},'yyyy-MM-dd')
+		</if>)
+	</insert>
+	<update id="delUsers" parameterType="int" >
+		delete from law_user where usid in
+		<foreach collection="list" open="(" close=")" separator="," item="usids">#{usids}</foreach>
+	</update>
+	
+	<update id="updateAdminInfo">
+		update law_user set usname=#{1} , usex=#{2} , upwd=#{3} ,uemail=#{4}, tel=#{5} , area=#{6} , birthday=to_date(#{7},'yyyy-mm-dd') where usid=#{0}
+	</update>
+	
+	<select id="checkUemail" parameterType="String" resultType="Integer">
+		select usid from law_user where uemail=#{uemail}
+	</select>
+	
+	<update id="updateAdminInfoWithoutUpwd">
+		update law_user set usname=#{1} , usex=#{2} , uemail=#{3}, tel=#{4} , area=#{5} , birthday=to_date(#{6},'yyyy-mm-dd') where usid=#{0}
+	</update>
+	
+	<select id="checkUname" parameterType="String" resultType="Integer">
+		select usid from law_user where usname=#{uname}
+	</select>
+</mapper>

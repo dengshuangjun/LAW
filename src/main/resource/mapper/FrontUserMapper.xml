@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 使用映射接口的方式， 命名空间的值必须与映射接口的全限定名一致 -->
+<mapper namespace="com.yc.law.mapper.FrontUserMapper">
+	<select id="usnameCheck" parameterType="String" resultType="int">
+		select count(1) from law_user where usname=#{uname}
+	</select>
+	
+	<select id="emailCheck" parameterType="String" resultType="int">
+		select count(1) from law_user where uemail=#{zcemail}
+	</select>
+	
+	<insert id="register" parameterType="User">
+		<selectKey keyColumn="currval" keyProperty="role_id" resultType="int" order="BEFORE">
+			select role_id from role where role_name='用户'
+		</selectKey>
+		insert into law_user(usid,usname,upwd,uemail,role_id,register_time) 
+		values(seq_law_user_id.nextval,#{usname},#{upwd},#{uemail},#{role_id},sysdate)
+	</insert>
+	<select id="login" parameterType="User" resultType="User">
+		select * from role r join law_user l on r.role_id=l.role_id and upwd=#{upwd}  and usname=#{usname} and law_user_status='Y'
+	</select>
+	<select id="emaillogin" parameterType="User" resultType="User">
+		select * from role r join law_user l on r.role_id=l.role_id and upwd=#{upwd}  and uemail=#{usname} and law_user_status='Y'
+	</select>
+	
+	<select id="findRoleName" parameterType="int" resultType="String">
+		select role_name from role where role_id=#{role_id}
+	</select>
+	
+	<select id="checkCenterUname" parameterType="String" resultType="Integer">
+		select usid from law_user where usname=#{uname}
+	</select>
+	
+	<select id="checkTel" parameterType="String" resultType="Integer">
+		select usid from law_user where tel=#{tel}
+	</select>
+	
+	<update id="updateBaseInfo">
+		update law_user set tel=#{1},usname=#{0},usex=#{3} where usid=#{2}
+	</update>
+	
+	<select id="checkNowPwd" resultType="Integer">
+		select count(1) from law_user where usid=#{1} and upwd=#{0}
+	</select>
+	
+	<update id="updatePwd">
+		update law_user set upwd=#{0} where usid=#{1}
+	</update>
+	
+	<update id="updateFrontPic">
+		update law_user set picpath=#{1} where usid=#{0}
+	</update>
+	
+	<select id="checkUemail" parameterType="String" resultType="Integer">
+		select usid from law_user where uemail=#{uemail}
+	</select>
+	
+	<update id="updateNewEmail">
+		update law_user set uemail=#{0} where usid=#{1}
+	</update>
+</mapper>

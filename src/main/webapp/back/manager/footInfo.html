@@ -1,0 +1,127 @@
+<!-- 修改尾部信息  -->
+<table id="changeFooter"></table>
+
+<script>
+	var obj;
+	var editRow = undefined;//记录正在被编辑的行
+	var currentOP;//记录是什么操作
+	var flag;
+
+	changeFooter = $('#changeFooter').datagrid({
+		url : 'footer/findInfo',
+		fitColumns : true,//true将自动扩展/收缩columns大小适应grid的宽度,防止水平滚动.
+		striped : true,//显示条纹所在行
+		loadMsg : "数据加载中...",//当从远程服务器加载数据的时候,显示的提示消息.
+		fit : true,//满屏
+		remoteSort : false,//定义是否远程排序.对数据库进行操作
+		columns : [ [{
+			field : 'inf',
+			title : '',
+			width : 60,
+			align : 'center',
+			checkbox : true
+		}, {
+			field : 'info',
+			title : '尾部信息',
+			width : 300,
+			align : 'center',
+			editor : {
+				type : "text",
+				options : {
+					requires : true
+				}
+			}
+		}, {
+			field : 'phone',
+			title : '联系电话',
+			width : 120,
+			align : 'center',
+			editor : {
+				type : "text",
+				options : {
+					requires : true
+				}
+			}
+		}, {
+			field : 'email',
+			title : '联系邮箱',
+			width : 120,
+			align : 'center',
+			editor : {
+				type : "text",
+				options : {
+					requires : true
+				}
+			}
+		} ] ],
+		toolbar:[{
+		text:"修改",
+		iconCls:"icon-edit",
+		handler:function(){
+			flag="修改";
+			var rows=changeFooter.datagrid("getChecked")[0];
+			if(rows!=undefined){
+				if(editRow!=undefined){//说明有行正在被编辑
+					changeFooter.datagrid("rejectChanges");//回滚所有数据
+					changeFooter.datagrid("endEdit",editRow);//关闭正在被编辑的行
+					editRow=undefined;
+				}else{
+					//获取当前行索引
+					var index=changeFooter.datagrid('getRowIndex',rows);
+					changeFooter.datagrid('updateRow',{index:index,row:rows});
+					changeFooter.datagrid('beginEdit',index);
+					editRow=index;//记录当前被编辑的行
+				}
+			}else{
+				$.messager.show({
+					title:'温馨提示',
+					msg:'请选中您要修改的数据...',
+					timeout:2000,
+					showType:'slide'
+				});
+			}
+		}
+	},{
+		text:"保存",
+		iconCls:"icon-save",
+		handler:function(){
+			//先关闭编辑
+			changeFooter.datagrid("endEdit",editRow);
+			
+			//获取正在被编辑的数据
+			var rows=changeFooter.datagrid("getChanges")[0];//只有一行在添加   添加修改删除之类的操作都可以获取到
+			if(rows==undefined){//说明没有数据需要保存
+				changeFooter.datagrid("rejectChanges");//回滚所有数据
+				changeFooter.datagrid("endEdit",0);//关闭正在被编辑的行
+				editRow=undefined;
+			}else{
+				//保存到xml
+				$.post("footer/updateFooter",rows,function(data){
+					if(data>0){//添加成功
+						$.messager.show({
+							title:'成功提示',
+							msg:'尾部信息'+flag+'成功！！！刷新前台页面可查看最新信息。',
+							timeout:5000,
+							showType:'slide'
+						});
+						rows=null;
+						changeFooter.datagrid("reload");//刷新表格
+						editRow=undefined;
+						changeFooter.datagrid("endEdit",0);//关闭正在被编辑的行
+					}else{
+						$.messager.alert('失败提示','尾部信息'+flag+'失败！！！','error');
+					}
+				});
+			}
+		}
+	},{
+		text:"撤销",
+		iconCls:"icon-redo",
+		handler:function(){
+			changeFooter.datagrid("rejectChanges");//回滚所有数据
+			changeFooter.datagrid("endEdit",editRow);//关闭正在被编辑的行
+			editRow=undefined;
+		}
+	}] 
+	});
+</script>
