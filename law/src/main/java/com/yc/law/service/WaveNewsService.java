@@ -10,4 +10,6 @@ public interface WaveNewsService {
 
 	List<LawContent> findWaveNewsByPage(int pageNo, int pageSize, int partId);
 
+	LawContent findWaveContentByNid(int nid);
+
 }

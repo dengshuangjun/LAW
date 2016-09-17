@@ -136,23 +136,23 @@
 		</div>
 		<div class="right">
 			<div class="right_top">
-				<span>${waveContent.title}</span>
+				<span>${waveNewsContent.title}</span>
            		<div class="ppp">
-           			<c:if test="${waveContent.vediopath!=''&&waveContent.vediopath!=null}">
+           			<c:if test="${waveNewsContent.vediopath!=''&&waveNewsContent.vediopath!=null}">
 						<video width="600" height="300" controls autoplay>
-							<source src="../../${waveContent.vediopath}" type="video/mp4">
+							<source src="../../${waveNewsContent.vediopath}" type="video/mp4">
 							<object data="" width="600" height="300"></object>
 						</video>
 						<hr />
 					</c:if>
-					<c:if test="${waveContent.picpath!=null&&waveContent.picpath!=''&&waveContent.picpath!='vedio'}">
-						<c:forEach items="${waveContent.picpath.split(',') }" var="item"
+					<c:if test="${waveNewsContent.picpath!=null&&waveNewsContent.picpath!=''&&waveNewsContent.picpath!='vedio'}">
+						<c:forEach items="${waveNewsContent.picpath.split(',') }" var="item"
 							varStatus="s">
 							<li><img src="../../${item} " width="600" 
-								alt="${waveContent.title}"></li>
+								alt="${waveNewsContent.title}"></li>
 						</c:forEach>
 					</c:if>
-					<p>${waveContent.content}</p>
+					<p>${waveNewsContent.content}</p>
 				</div>
 			</div>
 			<div class="right_low">
@@ -163,7 +163,7 @@
 				<div class="right_low_right">
 						<form id="formID">
 							<input type="hidden" name="usid" value="${user.usid}"/>
-							 <input type="hidden" name="nid" value="${waveContent.nid }"/>
+							 <input type="hidden" name="nid" value="${waveNewsContent.nid }"/>
 							<textarea  name="mcontent"
 								style="width: 260px; height: 100px; margin-left: 20px; margin-top: 20px; resize: none;"></textarea>
 							<br /> <label style="margin-left: 20px; margin-top: 20px;">还可以输入150个字</label>

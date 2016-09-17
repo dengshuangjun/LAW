@@ -121,17 +121,7 @@
 					<div class="newsbox">
 						<div class="new_left">
 							<ul>
-								<li><a href="javascript:newsMore(1150)">生活设施不安全致害学生的侵权案件</a></li>
-								<c:set var="count" value="0"></c:set>
-                				<c:forEach items="${frontwave1}" var="item" varStatus="s">
-	                				<li><a href="javascript:newsMore(${item.nid})">${item.title }</a></li>
-	                				<c:set var="count" value="${count+1}"></c:set>
-		                			<c:choose>
-		                				<c:when test="${count%6==0}">
-											<li class="space"></li>
-										</c:when>
-		                			</c:choose>
-                				</c:forEach>
+								<!-- 这里存查出来的新闻 -->
 							</ul>
 							<div class="tcdPageCode"></div>
 						</div>

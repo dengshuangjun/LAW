@@ -9,6 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="findWaveNewsByPage" resultType="LawContent">
-		select * from (select rownum rn,a.* from (select * from news where partid = #{2} order by weight desc,ndate desc) a where #{0} * #{1} >= rownum) where rn> + (#{0} - 1)* #{1}
+		select * from (select rownum rn,a.* from (select * from news where partid = #{2} and flag='Y' order by weight desc,ndate desc) a where #{0} * #{1} >= rownum) where rn> + (#{0} - 1)* #{1}
+	</select>
+	
+	<select id="findWaveContentByNid" parameterType="int" resultType="LawContent">
+		select nid,nitid,title,to_char(ndate,'yyyy-MM-dd') ndate,weight,content,picpath,vediopath,voicepath,views,author,news_file,status from news where nid=#{nid} and status='Y'
 	</select>
 </mapper>

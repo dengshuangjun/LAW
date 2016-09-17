@@ -26,4 +26,9 @@ public class WaveNewsServiceImpl implements WaveNewsService {
 		return waveNewsMapper.findWaveNewsByPage(pageNo,pageSize,partId);
 	}
 
+	@Override
+	public LawContent findWaveContentByNid(int nid) {
+		return waveNewsMapper.findWaveContentByNid(nid);
+	}
+
 }
