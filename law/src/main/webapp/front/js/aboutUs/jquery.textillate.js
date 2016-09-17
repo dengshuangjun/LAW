@@ -1,4 +1,4 @@
-    /*!
+/*!
  * texillate.js
  * http://jschr.github.com/textillate
  * MIT licensed
