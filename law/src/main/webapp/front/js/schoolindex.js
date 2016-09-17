@@ -12,5 +12,4 @@ $(function(){
 });
 function showMore(nid){
 		location.href="showMore.jsp";
-	
 }

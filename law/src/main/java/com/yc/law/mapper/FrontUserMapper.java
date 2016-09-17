@@ -1,10 +1,7 @@
 package com.yc.law.mapper;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.yc.law.entity.UploadUser;
 import com.yc.law.entity.User;
-
 
 public interface FrontUserMapper {
 
