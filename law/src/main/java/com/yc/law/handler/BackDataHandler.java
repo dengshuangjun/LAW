@@ -35,7 +35,6 @@ public class BackDataHandler {
 	@RequestMapping("addTypes")
 	@ResponseBody
 	public boolean addTypes(Type type){
-		System.out.println(type);
 		return backDataService.addTypes(type);
 	}
 	@RequestMapping("delTypes")
@@ -86,7 +85,6 @@ public class BackDataHandler {
 	@RequestMapping("getWavesByPage")
 	@ResponseBody
 	public Map<String,Object> getWavesByPage(LawContentPage lawContentPage){
-		System.out.println(lawContentPage);
 		lawContentPage=backDataService.getWavesByPage(lawContentPage);
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("total", lawContentPage.getTotal());
@@ -140,7 +138,6 @@ public class BackDataHandler {
 	@RequestMapping("setDown")
 	@ResponseBody
 	public int setDown(int nid){
-		System.out.println(nid);
 		try {
 			if(backDataService.setDown(nid)>0){
 				return 1;
