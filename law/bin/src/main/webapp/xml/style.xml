@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<styles>
+	<style>
+		<!-- 主页的样式 -->
+		<main>css/index.css</main>
+		<!-- 各分页的样式 -->
+		<devMain>../css/index.css</devMain>
+		<dev>../css/art.css</dev>
+	</style>
+</styles>
+
